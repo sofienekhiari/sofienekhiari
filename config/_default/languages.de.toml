@@ -1,0 +1,19 @@
+languageCode = "de"
+languageName = "German"
+displayName = ":de:"
+isoCode = "de"
+weight = 2
+rtl = false
+
+title = "Sofiene Khiari"
+
+[author]
+name = "Sofiene Khiari"
+image = "profile_picture.jpg"
+headline = "Pharmazeut & Softwareentwickler"
+links = [
+    { github = "https://github.com/sofienekhiari"},
+    { linkedin = "https://www.linkedin.com/in/khiarisofiene"},
+    { medium = "https://medium.com/@sofienekhiari" },
+    { email = "mailto:sofiene.khiari@stud.unibas.ch" },
+]

@@ -1,0 +1,5 @@
+Je suis un pharmacien passionné qui poursuit actuellement un MSc en Sciences du Médicament à l'Université de Bâle et participe à des projets captivants au sein du groupe de Pharmacie Numérique, où je peux combiner ma passion pour les domaines fascinants de la Chimie, des Sciences Pharmaceutiques et des Sciences de l'Informatique.
+
+En tant que fervent défenseur des Logiciels Libres et de la Science Ouverte, je m'engage à contribuer à la communauté et à encourager l'esprit de collaboration. Ma collection d'articles courts est composée de conseils, d'astuces et d'actualités liés à l'Informatique, avec un accent particulier sur la Pharmacie Numérique.
+
+Animé par le désir de faire la différence, je me consacre au développement de technologies pharmaceutiques révolutionnaires axées sur les coûts et l'accessibilité de la Recherche et du Développement.

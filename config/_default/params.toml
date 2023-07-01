@@ -1,0 +1,36 @@
+colorScheme = "slate"
+enableSearch = true
+enableCodeCopy = true
+
+[header]
+layout = "hybrid"
+
+[footer]
+showThemeAttribution = false
+showAppearanceSwitcher = true
+
+[homepage]
+layout = "profile"
+showRecent = false
+
+[article]
+showDate = false
+showAuthor = false
+showBreadcrumbs = false
+showDraftLabel = false
+showEdit = false
+editAppendPath = true
+showHeadingAnchors = false
+showPagination = false
+showReadingTime = false
+
+[list]
+showBreadcrumbs = false
+showSummary = false
+groupByYear = false
+
+[taxonomy]
+showTermCount = true
+
+[sitemap]
+excludedKinds = ["taxonomy", "term"]

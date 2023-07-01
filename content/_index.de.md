@@ -1,0 +1,5 @@
+Ich bin ein engagierter Pharmazeut, der derzeit einen MSc-Abschluss in Drug Sciences an der Universität Basel absolviert und in fesselnde Projekte der Computational Pharmacy Group involviert ist, in denen ich meine Liebe zu den faszinierenden Gebieten der Chemie, der pharmazeutischen Wissenschaften und der Computerwissenschaften verbinden kann.
+
+Als starker Befürworter von Open Source Software und Open Science engagiere ich mich für die Gemeinschaft und fördere den Geist der Zusammenarbeit. Ich kuratiere eine Sammlung kurzer Artikel, in denen ich interessante Tipps, Tricks und Neuigkeiten aus dem Bereich der Informatik mit besonderem Schwerpunkt auf der Computational Pharmacy veröffentliche.
+
+Angetrieben von dem Wunsch, einen Unterschied zu bewirken, bemühe ich mich um die Entwicklung bahnbrechender pharmazeutischer Technologien mit Schwerpunkt auf Forschungs- und Entwicklungskosten und Zugänglichkeit.
