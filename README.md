@@ -4,4 +4,4 @@ I’m a driven pharmacist currently pursuing a MSc degree in Drug Sciences at th
 
 As a staunch advocate of Open Source Software and Open Science, I’m committed to contributing to the community and fostering a spirit of collaboration. Driven by a desire to make a difference, I strive to develop groundbreaking pharmaceutical technologies with a focus on Research and Development costs and accessibility.
 
-Visit 🌍 [sofienekhiari.ch](https://sofienekhiari.ch) to know more about who I am and what I do.
+Visit 🌍 [sofk.ch](https://sofk.ch) to know more about who I am and what I do.
