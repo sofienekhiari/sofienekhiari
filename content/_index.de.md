@@ -1,5 +1,0 @@
-Ich bin ein engagierter Pharmazeut, der zur Zeit einen 📚 [MSc-Abschluss in Drug Sciences](https://pharma.unibas.ch/en/education/msc-drug-sciences/) an der 🎓 [Universität Basel](https://www.unibas.ch/de) macht. Meine Begeisterung zu den faszinierenden Gebieten der Chemie, der pharmazeutischen Wissenschaften und der Computerwissenschaften verbinde ich mit fesselnden Projekten in der 🧑‍💻 [Computational Pharmacy Group](https://pharma.unibas.ch/en/research/research-groups/computational-pharmacy/).
-
-Als starker Befürworter von Open Source Software und Open Science engagiere ich mich für die Allgemeinheit und fördere den Geist der Zusammenarbeit. Ich kuratiere eine 📝 [Sammlung von Kurzartikeln](/de/posts/), in denen ich interessante Tipps, Tricks und Neuigkeiten aus dem Bereich der Informatik mit besonderem Schwerpunkt auf der Computational Pharmacy veröffentliche.
-
-Angetrieben von dem Wunsch, einen Unterschied zu bewirken, bemühe ich mich um die Entwicklung bahnbrechender pharmazeutischer Technologien mit Fokus auf Forschungs- und Entwicklungskosten sowie allgemeine Zugänglichkeit.

@@ -1,2 +1,6 @@
 # Hugo build files
 resources/
+public/
+
+# Old website
+old_website/

@@ -2,6 +2,17 @@ colorScheme = "slate"
 enableSearch = true
 enableCodeCopy = true
 
+[author]
+name = "Sofiene Khiari"
+image = "profile_picture.jpg"
+headline = "Pharmacist & Software Developer"
+links = [
+    { github = "https://github.com/sofienekhiari"},
+    { linkedin = "https://www.linkedin.com/in/khiarisofiene"},
+    { medium = "https://medium.com/@sofienekhiari" },
+    { email = "mailto:sofiene.khiari@stud.unibas.ch" },
+]
+
 [header]
 layout = "hybrid"
 
