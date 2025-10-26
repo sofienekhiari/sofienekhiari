@@ -402,6 +402,7 @@ This page provides an overview of the tools and technologies I have utilized thr
 ## Development Methodologies
 
 - **Behavior-driven development** - Software development approach focusing on behavior specifications
+- **Spec-driven development** - Development methodology where specifications drive implementation and testing
 - **Test-driven development** - Software development process where tests are written before code
 
 ---
