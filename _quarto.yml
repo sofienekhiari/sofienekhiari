@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "!hugo_website/"
+
+website:
+  title: "Sofiene Khiari"
+  navbar:
+    left:
+      - text: "Blog"
+        href: blog.qmd
+      - text: "Publications"
+        href: publications.qmd
+      - text: "Uses"
+        href: uses.qmd
+  page-footer:
+    center: "© 2025 Sofiene Khiari"
+    right:
+      - icon: envelope
+        href: mailto:sofiene.khiari@unibas.ch
+        aria-label: Email
+
+format:
+  html:
+    theme: lux
+    css: styles.css
+    toc: true

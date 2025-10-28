@@ -1,0 +1,13 @@
+---
+title: "Research publications and preprints"
+---
+
+---
+
+##### Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking
+
+Sofiene Khiari, Matthew R. Masters, Amr H. Mahmoud, Markus A. Lill
+<br>ArXiv (preprint) | September 16, 2025 | DOI: [10.48550/arXiv.2509.12915](https://doi.org/10.48550/arXiv.2509.12915)
+<br>_Molecular Docking, Deep Learning, Protein-Ligand Complexes, Synthetic Data, Computational Chemistry, Drug Discovery_
+
+---

@@ -1,2 +1,7 @@
 # Ignore older versions of the website
 hugo_website/
+
+# Quarto output directories
+/.quarto/
+
+**/*.quarto_ipynb
