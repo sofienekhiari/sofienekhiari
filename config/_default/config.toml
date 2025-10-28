@@ -1,7 +1,0 @@
-baseURL = "https://sofk.ch/"
-title = "Sofiene Khiari"
-languageCode = "en"
-summaryLength = 0
-
-[outputs]
-  home = ["HTML", "RSS", "JSON"]

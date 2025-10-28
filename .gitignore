@@ -1,6 +1,2 @@
-# Hugo build files
-resources/
-public/
-
-# Old website
-old_website/
+# Ignore older versions of the website
+hugo_website/
