@@ -2,6 +2,9 @@
 hugo_website/
 
 # Quarto output directories
-/.quarto/
+.quarto/
+_site/
 
 **/*.quarto_ipynb
+
+/.quarto/
