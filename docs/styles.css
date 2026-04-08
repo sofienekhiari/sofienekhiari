@@ -255,17 +255,54 @@ strong { color: var(--color-text); font-weight: 600; }
 }
 .hero-bio a:hover { text-decoration-color: var(--color-accent); }
 
-.social-links { display: flex; justify-content: center; gap: var(--space-md); margin-top: var(--space-2xl); flex-wrap: wrap; }
 
-.social-link {
-  display: inline-flex; align-items: center; gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-lg); color: var(--color-text-muted);
-  border: 1px solid var(--color-border); border-radius: var(--radius-full);
-  font-size: 0.9rem; font-weight: 450; text-decoration: none;
-  transition: all var(--transition-fast);
+/* ── Connect Section ───────────────────────────────────── */
+.connect-section {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
 }
-.social-link:hover { color: var(--color-accent); border-color: var(--color-accent); background: var(--color-accent-soft); transform: translateY(-1px); }
-.social-link i { font-size: 1.1rem; }
+
+.connect-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-xl);
+  color: var(--color-text);
+}
+
+.connect-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.connect-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-xl);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 450;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 4px var(--color-shadow);
+}
+
+.connect-link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--color-shadow-lg);
+}
+
+.connect-link i {
+  font-size: 1.15rem;
+}
 
 /* ── Git Log Timeline ──────────────────────────────────── */
 .git-log {
@@ -772,8 +809,8 @@ strong { color: var(--color-text); font-weight: 600; }
 
   .hero-avatar { width: 140px; height: 140px; }
 
-  .social-links { gap: var(--space-sm); }
-  .social-link { padding: var(--space-sm) var(--space-md); font-size: 0.85rem; }
+  .connect-links { gap: var(--space-sm); }
+  .connect-link { padding: var(--space-sm) var(--space-md); font-size: 0.85rem; }
 
   .git-log { padding-left: 36px; }
   .git-commit[data-lane="0"] .git-node { left: -36px; }
