@@ -1,8 +1,5 @@
-# Quarto output directories
-/.quarto/
-/_site/
-
-**/*.quarto_ipynb
-
-# MacOs specific files
+# macOS
 .DS_Store
+
+# Editor
+.vscode/
