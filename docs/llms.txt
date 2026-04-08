@@ -1,0 +1,22 @@
+# Sofiene Khiari
+
+> Personal website of Sofiene Khiari — Pharmacist & Software Developer. PhD researcher in the Computational Pharmacy Group at the University of Basel. Specialises in deep learning for drug discovery, molecular docking, and full-stack web development.
+
+## About
+
+- [Sofiene Khiari — Homepage](https://sofk.ch): Personal website with bio, experience timeline, publications, and technical skills. Sofiene is a pharmacist pursuing a PhD at the University of Basel, working on deep learning methods for molecular docking and drug discovery. Advocate for open source software and open science.
+
+## Research
+
+- [Publications](https://sofk.ch#publications): Research publications and preprints in computational pharmacy, molecular docking, deep learning, and drug discovery.
+
+## Professional
+
+- [Experience](https://sofk.ch#experience): Full professional and academic timeline. PhD researcher in Computational Pharmacy at the University of Basel (2023–present), MSc Drug Sciences at the University of Basel (2021–2023), freelance full-stack developer (2020–2023), Pharmaciae Doctor from the University of Monastir, Tunisia (2010–2019), with pharmacy internships at the National Center for Bone Marrow Transplantation and pharmaceutical industry.
+- [Skills & Tools](https://sofk.ch#skills): Technical skills including Python, PyTorch, React, Next.js, TypeScript, Node.js, FastAPI, PostgreSQL, Docker, and many more.
+
+## Contact
+
+- Email: research@sofk.ch
+- GitHub: https://github.com/sofienekhiari
+- LinkedIn: https://www.linkedin.com/in/khiarisofiene

@@ -3,41 +3,79 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sofiene Khiari</title>
-  <meta name="description" content="Pharmacist & Software Developer — PhD researcher in Computational Pharmacy at the University of Basel.">
-  <meta property="og:title" content="Sofiene Khiari">
-  <meta property="og:description" content="Pharmacist & Software Developer — PhD researcher in Computational Pharmacy at the University of Basel.">
+  <title>Sofiene Khiari — Pharmacist &amp; Software Developer</title>
+  <meta name="description" content="Sofiene Khiari — Pharmacist & Software Developer. PhD researcher in Computational Pharmacy at the University of Basel. Open source advocate, drug discovery, deep learning.">
+  <meta property="og:title" content="Sofiene Khiari — Pharmacist & Software Developer">
+  <meta property="og:description" content="PhD researcher in Computational Pharmacy at the University of Basel. Open source, drug discovery, deep learning.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sofk.ch">
   <link rel="stylesheet" href="assets/bootstrap-icons.css">
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sofiene Khiari",
+    "url": "https://sofk.ch",
+    "jobTitle": "PhD Researcher & Software Developer",
+    "description": "Pharmacist and software developer pursuing a PhD in the Computational Pharmacy Group at the University of Basel, working at the intersection of pharmaceutical sciences and computer science.",
+    "email": "research@sofk.ch",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Computational Pharmacy Group, University of Basel",
+      "url": "https://pharma.unibas.ch/en/research/research-groups/computational-pharmacy/"
+    },
+    "alumniOf": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "University of Basel",
+        "url": "https://www.unibas.ch/en.html"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "University of Monastir"
+      }
+    ],
+    "sameAs": [
+      "https://github.com/sofienekhiari",
+      "https://www.linkedin.com/in/khiarisofiene"
+    ],
+    "knowsAbout": [
+      "Computational Pharmacy", "Drug Discovery", "Deep Learning", "Molecular Docking",
+      "Large Language Models", "AI-Assisted Drug Discovery", "Python", "PyTorch", "Machine Learning",
+      "React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "FastAPI",
+      "Docker", "Linux", "High-Performance Computing", "Full-Stack Web Development",
+      "Open Source Software"
+    ],
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "Pharmacist"
+    }
+  }
+  </script>
 </head>
 
 <body>
 
   <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="./index.html" class="nav-brand">Sofiene Khiari</a>
-      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'); document.getElementById('nav-menu').classList.toggle('open')">
-        <i class="bi bi-list"></i>
-      </button>
+      <a href="#about" class="nav-brand">Sofiene Khiari</a>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false"><i class="bi bi-list"></i></button>
       <ul class="nav-links" id="nav-menu">
-        <li><a href="./publications.html">Publications</a></li>
-        <li><a href="./uses.html">Uses</a></li>
-        <li>
-          <button class="theme-toggle theme-toggle-desktop" aria-label="Toggle dark mode" onclick="toggleTheme()">
-            <i class="bi bi-moon"></i>
-          </button>
-        </li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><button class="theme-toggle theme-toggle-desktop" aria-label="Toggle dark mode"><i class="bi bi-moon"></i></button></li>
       </ul>
-      <button class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode" onclick="toggleTheme()">
-        <i class="bi bi-moon"></i>
-      </button>
+      <button class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode"><i class="bi bi-moon"></i></button>
     </div>
   </nav>
 
-  <main class="page-content">
-    <section class="hero">
+  <main>
+
+    <!-- ════════ ABOUT ════════ -->
+    <section id="about" class="section hero">
       <img src="images/profile_picture.jpg" alt="Sofiene Khiari" class="hero-avatar animate-in">
       <h1 class="animate-in">Sofiene Khiari</h1>
       <p class="hero-tagline animate-in">Pharmacist &amp; Software Developer</p>
@@ -49,20 +87,464 @@
       </div>
       <div class="social-links animate-in">
         <a href="https://github.com/sofienekhiari" class="social-link" target="_blank" rel="noopener">
-          <i class="bi bi-github"></i>
-          <span>GitHub</span>
+          <i class="bi bi-github"></i><span>GitHub</span>
         </a>
         <a href="https://www.linkedin.com/in/khiarisofiene" class="social-link" target="_blank" rel="noopener">
-          <i class="bi bi-linkedin"></i>
-          <span>LinkedIn</span>
+          <i class="bi bi-linkedin"></i><span>LinkedIn</span>
         </a>
         <a href="mailto:research@sofk.ch" class="social-link">
-          <i class="bi bi-envelope"></i>
-          <span>Email</span>
+          <i class="bi bi-envelope"></i><span>Email</span>
         </a>
       </div>
     </section>
+
+    <!-- ════════ EXPERIENCE (git-log with branching) ════════ -->
+    <section id="experience" class="section">
+      <div class="section-inner wide">
+        <h2 class="section-title reveal">Experience</h2>
+        <p class="section-subtitle reveal" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-subtle)">$ git log --oneline --graph --all</p>
+
+        <div class="git-status reveal">
+          <p class="git-status-title">Changes not yet committed:</p>
+          <p class="git-status-entry"><span class="git-status-label">(working)</span> <span class="git-status-msg">build: Obtain Doctor of Philosophy diploma</span></p>
+        </div>
+
+        <div class="git-log" role="list">
+          <div class="git-line-main"></div>
+
+          <!-- ── WIP: PhD (pulsing, no line above) ── -->
+          <article class="git-commit git-wip" data-lane="0" data-detail="detail-phd">
+            <div class="git-node"></div>
+            <div class="git-row">
+              <code class="git-hash">&middot;&middot;&middot;&middot;&middot;&middot;&middot;</code>
+              <span class="git-msg"><span class="git-prefix">build:</span> Obtain Doctor of Philosophy diploma</span>
+            </div>
+          </article>
+
+          <!-- ── Committed history ── -->
+          <article class="git-commit git-academic" data-lane="0" data-detail="detail-msc">
+            <div class="git-node"></div>
+            <div class="git-row">
+              <code class="git-hash">8b2e4f1</code>
+              <span class="git-msg"><span class="git-prefix">build:</span> Obtain MSc Drug Sciences diploma</span>
+            </div>
+          </article>
+
+          <article class="git-commit git-academic" data-lane="0" data-detail="detail-pharmd">
+            <div class="git-node"></div>
+            <div class="git-row">
+              <code class="git-hash">5c9a3d2</code>
+              <span class="git-msg"><span class="git-prefix">build:</span> Obtain Pharmaciae Doctor diploma</span>
+            </div>
+          </article>
+
+          <!-- ── Merge connector ── -->
+          <div class="git-connector git-merge-connector"></div>
+
+          <!-- ── Branch: professional internships & traineeships ── -->
+          <div class="git-branch-group">
+            <div class="git-line-branch"></div>
+
+            <article class="git-commit git-professional" data-lane="1" data-detail="detail-intern-bone">
+              <div class="git-node"></div>
+              <div class="git-row">
+                <code class="git-hash">7f1b8e3</code>
+                <span class="git-msg"><span class="git-prefix">feat:</span> Complete internship at Bone Marrow Transplantation Center</span>
+              </div>
+            </article>
+
+            <article class="git-commit git-professional" data-lane="1" data-detail="detail-intern-pharmacy">
+              <div class="git-node"></div>
+              <div class="git-row">
+                <code class="git-hash">2d6c4a9</code>
+                <span class="git-msg"><span class="git-prefix">feat:</span> Complete internship at local pharmacy</span>
+              </div>
+            </article>
+
+            <article class="git-commit git-professional" data-lane="1" data-detail="detail-intern-said">
+              <div class="git-node"></div>
+              <div class="git-row">
+                <code class="git-hash">9e3f7b1</code>
+                <span class="git-msg"><span class="git-prefix">feat:</span> Complete internship at Sa&iuml;d pharmaceutical industry</span>
+              </div>
+            </article>
+
+            <article class="git-commit git-professional" data-lane="1" data-detail="detail-nursing">
+              <div class="git-node"></div>
+              <div class="git-row">
+                <code class="git-hash">4a8d2c6</code>
+                <span class="git-msg"><span class="git-prefix">spike:</span> Complete training at Mongi-Slim Hospital</span>
+              </div>
+            </article>
+
+            <article class="git-commit git-professional" data-lane="1" data-detail="detail-trainee">
+              <div class="git-node"></div>
+              <div class="git-row">
+                <code class="git-hash">1b5e9f4</code>
+                <span class="git-msg"><span class="git-prefix">spike:</span> Complete training at local pharmacy</span>
+              </div>
+            </article>
+          </div>
+
+          <!-- ── Fork connector ── -->
+          <div class="git-connector git-fork-connector"></div>
+
+          <!-- ── Pre-branch: earliest academic ── -->
+          <article class="git-commit git-academic" data-lane="0" data-detail="detail-bac">
+            <div class="git-node"></div>
+            <div class="git-row">
+              <code class="git-hash">3f7b2e5</code>
+              <span class="git-msg"><span class="git-prefix">init:</span> Obtain Baccalaur&eacute;at diploma</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Git-log detail dialogs -->
+    <dialog id="detail-phd" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>build: Obtain Doctor of Philosophy diploma</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>status: working (uncommitted)</code><br><code>started: January 2025</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>University of Basel, Switzerland — Computational Pharmacy Group</strong></p>
+        <p>Developing LLM-based Agentic AI systems for researchers working in computer-based drug design to help with decision making in lead selection, under the supervision of Prof. Markus A. Lill.</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-msc" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>build: Obtain MSc Drug Sciences diploma</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 8b2e4f1</code><br><code>Date: September 2021 — December 2024</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>University of Basel, Switzerland</strong></p>
+        <p>Master of Science in Drug Sciences. Field: Pharmaceutical Sciences. Conferred by the Faculty of Science, 12 December 2024.</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-pharmd" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>build: Obtain Pharmaciae Doctor diploma</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 5c9a3d2</code><br><code>Date: September 2010 — February 2019</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>University of Monastir, Tunisia</strong></p>
+        <p>Field: Pharmacy. Minor: Industrial Pharmacy. Degree: Pharmaciae Doctor.</p>
+        <p>Thesis (September 2018 — February 2019): "Comparison between two disinfectants used in the production of cytotoxic drugs in a cytotoxic safety station."</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-intern-bone" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>feat: Complete internship at Bone Marrow Transplantation Center</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 7f1b8e3</code><br><code>Date: March 2018 — August 2018</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>National Center for Bone Marrow Transplantation, Tunisia</strong></p>
+        <p>Management of drugs and medical products, pharmaceutical analysis and validation of prescriptions, securing the drug circuit, prevention of drug iatrogenesis, therapeutic education, preparation of cancer drugs (magistral preparations), pharmacovigilance and material monitoring, and clinical studies.</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-intern-pharmacy" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>feat: Complete internship at local pharmacy</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 2d6c4a9</code><br><code>Date: December 2017 — February 2018</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>Local pharmacy, Tunisia</strong></p>
+        <p>Medication dispensing and patient counselling.</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-intern-said" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>feat: Complete internship at Sa&iuml;d pharmaceutical industry</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 9e3f7b1</code><br><code>Date: September 2017 — November 2017</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>Sa&iuml;d pharmaceutical industry, Tunisia</strong></p>
+        <p>Overview of the work basics in all departments of the pharmaceutical industry. Creation of an Excel matrix to optimize the evaluation of elementary impurities during the production of medicines according to the guideline ICH Q3D STEP 4.</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-nursing" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>spike: Complete training at Mongi-Slim Hospital</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 4a8d2c6</code><br><code>Date: August 2016</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>Mongi-Slim Hospital, Marsa, Tunisia</strong></p>
+        <p>Overview of nursing work in a clinical anaesthesia department.</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-trainee" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>spike: Complete training at local pharmacy</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 1b5e9f4</code><br><code>Date: August 2013</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>Local pharmacy, Tunisia</strong></p>
+        <p>Overview of the work in a local pharmacy.</p>
+      </div>
+    </dialog>
+
+    <dialog id="detail-bac" class="site-dialog git-detail-dialog">
+      <div class="dialog-header"><h2>init: Obtain Baccalaur&eacute;at diploma</h2><button class="dialog-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></div>
+      <div class="dialog-body">
+        <div class="git-detail-meta"><code>commit 3f7b2e5</code><br><code>Date: September 2006 — July 2010</code><br><code>Author: Sofiene Khiari &lt;research@sofk.ch&gt;</code></div>
+        <p><strong>Lyc&eacute;e pilote Bourguiba de Tunis, Tunisia</strong></p>
+        <p>Grade: 17.37/20 (5.2/6). Equivalent to the Swiss Matura.</p>
+      </div>
+    </dialog>
+
+    <!-- ════════ PUBLICATIONS ════════ -->
+    <section id="publications" class="section section-alt">
+      <div class="section-inner">
+        <h2 class="section-title reveal">Publications</h2>
+        <p class="section-subtitle reveal">Research publications and preprints</p>
+
+        <div class="publications-list">
+          <article class="pub-card reveal">
+            <h3><a href="https://doi.org/10.48550/arXiv.2509.12915">Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking</a></h3>
+            <div class="pub-meta">
+              <span class="authors">Sofiene Khiari, Matthew R. Masters, Amr H. Mahmoud, Markus A. Lill</span><br>
+              <span class="pub-venue">ArXiv (preprint)</span> &middot; <time datetime="2025-09">September 2025</time>
+            </div>
+            <div class="pub-tags">
+              <span class="pub-tag">Molecular Docking</span>
+              <span class="pub-tag">Deep Learning</span>
+              <span class="pub-tag">Protein-Ligand</span>
+              <span class="pub-tag">Synthetic Data</span>
+              <span class="pub-tag">Drug Discovery</span>
+            </div>
+            <div class="pub-doi">
+              DOI: <a href="https://doi.org/10.48550/arXiv.2509.12915">10.48550/arXiv.2509.12915</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ SKILLS & TOOLS ════════ -->
+    <section id="skills" class="section">
+      <div class="section-inner">
+        <h2 class="section-title reveal">Skills &amp; Tools</h2>
+        <p class="section-subtitle reveal">Technologies I use across research, development, and creative work.</p>
+
+        <div class="skill-tags reveal">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">Deep Learning</span>
+          <span class="skill-tag">LLMs</span>
+          <span class="skill-tag">Molecular Docking</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Linux / HPC</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">AI Agents</span>
+        </div>
+
+        <button class="btn-outline reveal" data-open-dialog="dialog-uses">
+          <i class="bi bi-grid-3x3-gap"></i> View all tools &amp; technologies
+        </button>
+      </div>
+    </section>
+
   </main>
+
+  <!-- ════════ DIALOG: Full Tools & Technologies ════════ -->
+  <dialog id="dialog-uses" class="site-dialog">
+    <div class="dialog-header">
+      <h2>Tools &amp; Technologies</h2>
+      <button class="dialog-close" aria-label="Close">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="dialog-body">
+      <div class="uses-grid">
+
+        <section class="uses-category">
+          <h3>Programming Languages</h3>
+          <ul>
+            <li><strong>Bash</strong> — Shell scripting &amp; automation</li>
+            <li><strong>C / C++</strong> — Systems &amp; scientific computing</li>
+            <li><strong>CSS</strong> — Web design &amp; layout</li>
+            <li><strong>Go</strong> — Compiled language for efficiency</li>
+            <li><strong>HTML</strong> — Web content structure</li>
+            <li><strong>JavaScript / TypeScript</strong> — Web applications</li>
+            <li><strong>Python</strong> — Data science, ML, web &amp; automation</li>
+            <li><strong>Rust</strong> — Safety-focused systems programming</li>
+            <li><strong>SQL</strong> — Database querying</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>AI &amp; Machine Learning</h3>
+          <ul>
+            <li><strong>PyTorch</strong> — Deep learning framework</li>
+            <li><strong>PyTorch Lightning</strong> — Scalable ML training</li>
+            <li><strong>scikit-learn</strong> — Classical ML</li>
+            <li><strong>Hugging Face</strong> — Models &amp; datasets</li>
+            <li><strong>Weights &amp; Biases</strong> — Experiment tracking</li>
+            <li><strong>Google Colab</strong> — Cloud notebooks</li>
+            <li><strong>Jupyter</strong> — Interactive computing</li>
+            <li><strong>OpenAI API</strong> — Language model APIs</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Data Science &amp; Visualization</h3>
+          <ul>
+            <li><strong>NumPy</strong> — Numerical computing</li>
+            <li><strong>Pandas</strong> — Data manipulation</li>
+            <li><strong>SciPy</strong> — Scientific computing</li>
+            <li><strong>Matplotlib</strong> — Plotting</li>
+            <li><strong>Seaborn</strong> — Statistical visualization</li>
+            <li><strong>Plotly</strong> — Interactive charts</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Frontend</h3>
+          <ul>
+            <li><strong>React</strong> — Component-based UI</li>
+            <li><strong>Next.js</strong> — React SSR &amp; SSG</li>
+            <li><strong>Vue.js</strong> — Progressive framework</li>
+            <li><strong>Nuxt</strong> — Vue SSR &amp; SSG</li>
+            <li><strong>TailwindCSS</strong> — Utility-first CSS</li>
+            <li><strong>Bootstrap</strong> — Responsive framework</li>
+            <li><strong>Material UI</strong> — React components</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Backend</h3>
+          <ul>
+            <li><strong>Node.js</strong> — JavaScript runtime</li>
+            <li><strong>Express.js</strong> — Node web framework</li>
+            <li><strong>FastAPI</strong> — Modern Python APIs</li>
+            <li><strong>Django</strong> — Full-stack Python</li>
+            <li><strong>Flask</strong> — Lightweight Python web</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Databases</h3>
+          <ul>
+            <li><strong>PostgreSQL</strong> — Relational database</li>
+            <li><strong>SQLite</strong> — Lightweight file-based DB</li>
+            <li><strong>MongoDB</strong> — Document database</li>
+            <li><strong>Redis</strong> — In-memory cache &amp; store</li>
+            <li><strong>Neo4j</strong> — Graph database</li>
+            <li><strong>Supabase</strong> — Open-source BaaS</li>
+            <li><strong>Firebase</strong> — Realtime DB &amp; Firestore</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Cloud &amp; DevOps</h3>
+          <ul>
+            <li><strong>Vercel</strong> — Frontend deployment</li>
+            <li><strong>Netlify</strong> — Web app hosting</li>
+            <li><strong>Docker</strong> — Containerization</li>
+            <li><strong>GitHub Actions</strong> — CI/CD workflows</li>
+            <li><strong>Nginx</strong> — Web server &amp; reverse proxy</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Mobile &amp; Desktop</h3>
+          <ul>
+            <li><strong>React Native</strong> — Cross-platform mobile</li>
+            <li><strong>Electron</strong> — Desktop apps with web tech</li>
+            <li><strong>Qt</strong> — Cross-platform applications</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Editor &amp; Terminal</h3>
+          <ul>
+            <li><strong>Cursor</strong> — AI-powered editor</li>
+            <li><strong>VS Code</strong> — Extensible code editor</li>
+            <li><strong>Neovim / Vim</strong> — Terminal editors</li>
+            <li><strong>Warp</strong> — Modern terminal</li>
+            <li><strong>Zsh</strong> — Shell</li>
+            <li><strong>Tmux</strong> — Terminal multiplexer</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>AI Assistants</h3>
+          <ul>
+            <li><strong>Anthropic Claude</strong> — AI assistant</li>
+            <li><strong>ChatGPT</strong> — Conversational AI</li>
+            <li><strong>GitHub Copilot</strong> — AI pair programming</li>
+            <li><strong>Cursor AI</strong> — AI coding assistant</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Dev Tools</h3>
+          <ul>
+            <li><strong>Git</strong> — Version control</li>
+            <li><strong>GitHub / GitLab</strong> — Code collaboration</li>
+            <li><strong>Postman</strong> — API development</li>
+            <li><strong>Prettier / Black</strong> — Code formatting</li>
+            <li><strong>Pylint</strong> — Python linting</li>
+            <li><strong>CMake</strong> — Build system</li>
+            <li><strong>SQLAlchemy</strong> — Python ORM</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Design &amp; Prototyping</h3>
+          <ul>
+            <li><strong>Figma</strong> — UI/UX design &amp; prototyping</li>
+            <li><strong>Canva</strong> — Graphic design</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Productivity</h3>
+          <ul>
+            <li><strong>Notion</strong> — Notes &amp; docs</li>
+            <li><strong>Obsidian</strong> — Knowledge base</li>
+            <li><strong>Linear</strong> — Project tracking</li>
+            <li><strong>Todoist</strong> — Task management</li>
+            <li><strong>Google Calendar</strong> — Scheduling</li>
+            <li><strong>Miro</strong> — Collaborative whiteboard</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Creative</h3>
+          <ul>
+            <li><strong>Logic Pro</strong> — Music production</li>
+            <li><strong>GarageBand</strong> — Audio workstation</li>
+            <li><strong>OBS Studio</strong> — Video recording &amp; streaming</li>
+            <li><strong>iMovie</strong> — Video editing</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Hardware</h3>
+          <ul>
+            <li><strong>MacBook Pro</strong> — Primary laptop</li>
+            <li><strong>MacBook Air</strong> — Portable laptop</li>
+            <li><strong>External Monitor</strong> — Extended display</li>
+            <li><strong>Headphones</strong> — Audio</li>
+          </ul>
+        </section>
+
+        <section class="uses-category">
+          <h3>Methodologies</h3>
+          <ul>
+            <li><strong>Test-driven development</strong></li>
+            <li><strong>Behavior-driven development</strong></li>
+            <li><strong>Spec-driven development</strong></li>
+            <li><strong>Scrum &amp; Kanban</strong></li>
+            <li><strong>Microservices</strong></li>
+            <li><strong>REST API design</strong></li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -75,32 +557,6 @@
     </div>
   </footer>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateThemeIcon(next);
-    }
-
-    function updateThemeIcon(theme) {
-      document.querySelectorAll('.theme-toggle i').forEach(function(icon) {
-        icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
-      });
-    }
-
-    (function() {
-      var saved = localStorage.getItem('theme');
-      if (saved) {
-        document.documentElement.setAttribute('data-theme', saved);
-        updateThemeIcon(saved);
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        updateThemeIcon('dark');
-      }
-    })();
-  </script>
 
 </body>
 </html>
