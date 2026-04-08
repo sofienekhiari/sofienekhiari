@@ -2,84 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Research publications and preprints – Sofiene Khiari</title>
-
-  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-  <script src="site_libs/quarto-nav/headroom.min.js"></script>
-  <script src="site_libs/quarto-html/quarto.js" type="module"></script>
-  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
-  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-  <link href="site_libs/bootstrap/bootstrap-26827f95213357c060b998e0666f8ebe.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications – Sofiene Khiari</title>
+  <meta name="description" content="Research publications and preprints by Sofiene Khiari.">
+  <meta property="og:title" content="Publications – Sofiene Khiari">
+  <meta property="og:description" content="Research publications and preprints by Sofiene Khiari.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofk.ch/publications.html">
+  <link rel="stylesheet" href="assets/bootstrap-icons.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body>
 
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-        <div class="navbar-brand-container mx-auto">
-          <a class="navbar-brand" href="./index.html">
-            <span class="navbar-title">Sofiene Khiari</span>
-          </a>
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="./index.html" class="nav-brand">Sofiene Khiari</a>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'); document.getElementById('nav-menu').classList.toggle('open')">
+        <i class="bi bi-list"></i>
+      </button>
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="./publications.html" class="active">Publications</a></li>
+        <li><a href="./uses.html">Uses</a></li>
+        <li>
+          <button class="theme-toggle theme-toggle-desktop" aria-label="Toggle dark mode" onclick="toggleTheme()">
+            <i class="bi bi-moon"></i>
+          </button>
+        </li>
+      </ul>
+      <button class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode" onclick="toggleTheme()">
+        <i class="bi bi-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="section-header animate-in">
+      <h1>Publications</h1>
+      <p>Research publications and preprints</p>
+    </div>
+
+    <div class="publications-list">
+      <article class="pub-card animate-in">
+        <h3><a href="https://doi.org/10.48550/arXiv.2509.12915">Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking</a></h3>
+        <div class="pub-meta">
+          <span class="authors">Sofiene Khiari, Matthew R. Masters, Amr H. Mahmoud, Markus A. Lill</span><br>
+          <span class="pub-venue">ArXiv (preprint)</span> &middot; September 2025
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav navbar-nav-scroll me-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="./publications.html" aria-current="page">
-                <span class="menu-text">Publications</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./uses.html">
-                <span class="menu-text">Uses</span>
-              </a>
-            </li>
-          </ul>
+        <div class="pub-tags">
+          <span class="pub-tag">Molecular Docking</span>
+          <span class="pub-tag">Deep Learning</span>
+          <span class="pub-tag">Protein-Ligand</span>
+          <span class="pub-tag">Synthetic Data</span>
+          <span class="pub-tag">Drug Discovery</span>
         </div>
-        <div class="quarto-navbar-tools"></div>
-      </div>
-    </nav>
-  </header>
-
-  <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-    <main class="content" id="quarto-document-content">
-      <header id="title-block-header" class="quarto-title-block default">
-        <div class="quarto-title">
-          <h1 class="title">Research publications and preprints</h1>
+        <div class="pub-doi">
+          DOI: <a href="https://doi.org/10.48550/arXiv.2509.12915">10.48550/arXiv.2509.12915</a>
         </div>
-      </header>
+      </article>
+    </div>
+  </main>
 
-      <hr>
-      <section id="synthetic-protein-ligand-complex-generation-for-deep-molecular-docking" class="level5">
-        <h5>Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking</h5>
-        <p>Sofiene Khiari, Matthew R. Masters, Amr H. Mahmoud, Markus A. Lill <br>ArXiv (preprint) | September 16, 2025 | DOI: <a href="https://doi.org/10.48550/arXiv.2509.12915">10.48550/arXiv.2509.12915</a> <br><em>Molecular Docking, Deep Learning, Protein-Ligand Complexes, Synthetic Data, Computational Chemistry, Drug Discovery</em></p>
-        <hr>
-      </section>
-    </main>
-  </div>
-
-  <footer class="footer">
-    <div class="nav-footer">
-      <div class="nav-footer-left">&nbsp;</div>
-      <div class="nav-footer-center">
-        <p>© 2025 Sofiene Khiari</p>
-      </div>
-      <div class="nav-footer-right">
-        <ul class="footer-items list-unstyled">
-          <li class="nav-item compact">
-            <a class="nav-link" href="mailto:research@sofk.ch">
-              <i class="bi bi-envelope" role="img" aria-label="Email"></i>
-            </a>
-          </li>
-        </ul>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2025 Sofiene Khiari</span>
+      <div class="footer-links">
+        <a href="https://github.com/sofienekhiari" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/khiarisofiene" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:research@sofk.ch" aria-label="Email"><i class="bi bi-envelope"></i></a>
       </div>
     </div>
   </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+      document.querySelectorAll('.theme-toggle i').forEach(function(icon) {
+        icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
+      });
+    }
+
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        updateThemeIcon(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        updateThemeIcon('dark');
+      }
+    })();
+  </script>
 
 </body>
 </html>

@@ -2,102 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sofiene Khiari</title>
-
-  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-  <script src="site_libs/quarto-nav/headroom.min.js"></script>
-  <script src="site_libs/quarto-html/quarto.js" type="module"></script>
-  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
-  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-  <link href="site_libs/bootstrap/bootstrap-26827f95213357c060b998e0666f8ebe.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+  <meta name="description" content="Pharmacist & Software Developer — PhD researcher in Computational Pharmacy at the University of Basel.">
+  <meta property="og:title" content="Sofiene Khiari">
+  <meta property="og:description" content="Pharmacist & Software Developer — PhD researcher in Computational Pharmacy at the University of Basel.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofk.ch">
+  <link rel="stylesheet" href="assets/bootstrap-icons.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body>
 
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-        <div class="navbar-brand-container mx-auto">
-          <a class="navbar-brand" href="./index.html">
-            <span class="navbar-title">Sofiene Khiari</span>
-          </a>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav navbar-nav-scroll me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="./publications.html">
-                <span class="menu-text">Publications</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./uses.html">
-                <span class="menu-text">Uses</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="quarto-navbar-tools"></div>
-      </div>
-    </nav>
-  </header>
-
-  <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-    <div class="quarto-about-jolla">
-      <img src="images/profile_picture.jpg" class="about-image round" style="height: 15em; width: 15em;">
-      <header id="title-block-header" class="quarto-title-block default">
-        <div class="quarto-title">
-          <h1 class="title">Sofiene Khiari</h1>
-        </div>
-      </header>
-      <main class="content" id="quarto-document-content">
-        <section id="pharmacist-software-developer" class="level5">
-          <h5>Pharmacist &amp; Software Developer</h5>
-          <p>I'm a driven pharmacist currently pursuing a PhD in the 🧑‍💻 <a href="https://pharma.unibas.ch/en/research/research-groups/computational-pharmacy/">Computational Pharmacy Group</a> at the 🎓 <a href="https://www.unibas.ch/en.html">University of Basel</a>, where I blend my passion for Pharmaceutical Sciences and Computer Sciences to push the boundaries of what's possible in drug discovery.</p>
-          <p>As a staunch advocate of Open Source Software and Open Science, I'm committed to contributing to the community and fostering a spirit of collaboration. I believe that the future of pharmaceutical innovation lies at the intersection of cutting-edge computational methods and traditional pharmaceutical expertise—a space where I thrive.</p>
-          <p>Driven by a desire to make a tangible difference, I strive to develop groundbreaking pharmaceutical technologies that don't just advance the science, but do so with a keen focus on Research and Development costs and accessibility. My work is guided by a simple yet powerful principle: transformative solutions should be within reach for those who need them most.</p>
-          <p>Whether you're interested in collaboration, innovation, or exploring how computational approaches can revolutionize pharmaceutical research, I'd love to connect.</p>
-        </section>
-      </main>
-      <hr class="about-sep">
-      <div class="about-links">
-        <a href="https://github.com/sofienekhiari" class="about-link">
-          <i class="bi bi-github"></i>
-          <span class="about-link-text">Github</span>
-        </a>
-        <a href="https://www.linkedin.com/in/khiarisofiene" class="about-link">
-          <i class="bi bi-linkedin"></i>
-          <span class="about-link-text">LinkedIn</span>
-        </a>
-        <a href="mailto:research@sofk.ch" class="about-link">
-          <i class="bi bi-envelope"></i>
-          <span class="about-link-text">Email</span>
-        </a>
-      </div>
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="./index.html" class="nav-brand">Sofiene Khiari</a>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'); document.getElementById('nav-menu').classList.toggle('open')">
+        <i class="bi bi-list"></i>
+      </button>
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="./publications.html">Publications</a></li>
+        <li><a href="./uses.html">Uses</a></li>
+        <li>
+          <button class="theme-toggle theme-toggle-desktop" aria-label="Toggle dark mode" onclick="toggleTheme()">
+            <i class="bi bi-moon"></i>
+          </button>
+        </li>
+      </ul>
+      <button class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode" onclick="toggleTheme()">
+        <i class="bi bi-moon"></i>
+      </button>
     </div>
-  </div>
+  </nav>
 
-  <footer class="footer">
-    <div class="nav-footer">
-      <div class="nav-footer-left">&nbsp;</div>
-      <div class="nav-footer-center">
-        <p>© 2025 Sofiene Khiari</p>
+  <main class="page-content">
+    <section class="hero">
+      <img src="images/profile_picture.jpg" alt="Sofiene Khiari" class="hero-avatar animate-in">
+      <h1 class="animate-in">Sofiene Khiari</h1>
+      <p class="hero-tagline animate-in">Pharmacist &amp; Software Developer</p>
+      <div class="hero-bio animate-in">
+        <p>I'm a driven pharmacist currently pursuing a PhD in the <a href="https://pharma.unibas.ch/en/research/research-groups/computational-pharmacy/">Computational Pharmacy Group</a> at the <a href="https://www.unibas.ch/en.html">University of Basel</a>, where I blend my passion for Pharmaceutical Sciences and Computer Sciences to push the boundaries of what's possible in drug discovery.</p>
+        <p>As a staunch advocate of Open Source Software and Open Science, I'm committed to contributing to the community and fostering a spirit of collaboration. I believe that the future of pharmaceutical innovation lies at the intersection of cutting-edge computational methods and traditional pharmaceutical expertise — a space where I thrive.</p>
+        <p>Driven by a desire to make a tangible difference, I strive to develop groundbreaking pharmaceutical technologies that don't just advance the science, but do so with a keen focus on R&amp;D costs and accessibility. My work is guided by a simple yet powerful principle: transformative solutions should be within reach for those who need them most.</p>
+        <p>Whether you're interested in collaboration, innovation, or exploring how computational approaches can revolutionize pharmaceutical research, I'd love to connect.</p>
       </div>
-      <div class="nav-footer-right">
-        <ul class="footer-items list-unstyled">
-          <li class="nav-item compact">
-            <a class="nav-link" href="mailto:research@sofk.ch">
-              <i class="bi bi-envelope" role="img" aria-label="Email"></i>
-            </a>
-          </li>
-        </ul>
+      <div class="social-links animate-in">
+        <a href="https://github.com/sofienekhiari" class="social-link" target="_blank" rel="noopener">
+          <i class="bi bi-github"></i>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/khiarisofiene" class="social-link" target="_blank" rel="noopener">
+          <i class="bi bi-linkedin"></i>
+          <span>LinkedIn</span>
+        </a>
+        <a href="mailto:research@sofk.ch" class="social-link">
+          <i class="bi bi-envelope"></i>
+          <span>Email</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2025 Sofiene Khiari</span>
+      <div class="footer-links">
+        <a href="https://github.com/sofienekhiari" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/khiarisofiene" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:research@sofk.ch" aria-label="Email"><i class="bi bi-envelope"></i></a>
       </div>
     </div>
   </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+      document.querySelectorAll('.theme-toggle i').forEach(function(icon) {
+        icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
+      });
+    }
+
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        updateThemeIcon(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        updateThemeIcon('dark');
+      }
+    })();
+  </script>
 
 </body>
 </html>

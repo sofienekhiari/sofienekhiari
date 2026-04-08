@@ -2,651 +2,285 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Tools &amp; Technologies – Sofiene Khiari</title>
-
-  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-  <script src="site_libs/quarto-nav/headroom.min.js"></script>
-  <script src="site_libs/quarto-html/quarto.js" type="module"></script>
-  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
-  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-  <link href="site_libs/bootstrap/bootstrap-26827f95213357c060b998e0666f8ebe.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uses – Sofiene Khiari</title>
+  <meta name="description" content="Tools and technologies used by Sofiene Khiari for research, development, and creative work.">
+  <meta property="og:title" content="Uses – Sofiene Khiari">
+  <meta property="og:description" content="Tools and technologies used by Sofiene Khiari for research, development, and creative work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofk.ch/uses.html">
+  <link rel="stylesheet" href="assets/bootstrap-icons.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body>
 
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-        <div class="navbar-brand-container mx-auto">
-          <a class="navbar-brand" href="./index.html">
-            <span class="navbar-title">Sofiene Khiari</span>
-          </a>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav navbar-nav-scroll me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="./publications.html">
-                <span class="menu-text">Publications</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="./uses.html" aria-current="page">
-                <span class="menu-text">Uses</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="quarto-navbar-tools"></div>
-      </div>
-    </nav>
-  </header>
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="./index.html" class="nav-brand">Sofiene Khiari</a>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'); document.getElementById('nav-menu').classList.toggle('open')">
+        <i class="bi bi-list"></i>
+      </button>
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="./publications.html">Publications</a></li>
+        <li><a href="./uses.html" class="active">Uses</a></li>
+        <li>
+          <button class="theme-toggle theme-toggle-desktop" aria-label="Toggle dark mode" onclick="toggleTheme()">
+            <i class="bi bi-moon"></i>
+          </button>
+        </li>
+      </ul>
+      <button class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode" onclick="toggleTheme()">
+        <i class="bi bi-moon"></i>
+      </button>
+    </div>
+  </nav>
 
-  <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-      <nav id="TOC" role="doc-toc" class="toc-active">
-        <h2 id="toc-title">On this page</h2>
-        <ul>
-          <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link active" data-scroll-target="#programming-languages">Programming Languages</a></li>
-          <li><a href="#frontend-frameworks" id="toc-frontend-frameworks" class="nav-link" data-scroll-target="#frontend-frameworks">Frontend Frameworks</a></li>
-          <li><a href="#css-frameworks" id="toc-css-frameworks" class="nav-link" data-scroll-target="#css-frameworks">CSS Frameworks</a></li>
-          <li><a href="#backend-frameworks" id="toc-backend-frameworks" class="nav-link" data-scroll-target="#backend-frameworks">Backend Frameworks</a></li>
-          <li><a href="#mobile-development" id="toc-mobile-development" class="nav-link" data-scroll-target="#mobile-development">Mobile Development</a></li>
-          <li><a href="#desktop-development" id="toc-desktop-development" class="nav-link" data-scroll-target="#desktop-development">Desktop Development</a></li>
-          <li><a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases">Databases</a></li>
-          <li><a href="#database-tools" id="toc-database-tools" class="nav-link" data-scroll-target="#database-tools">Database Tools</a></li>
-          <li><a href="#cloud-platforms" id="toc-cloud-platforms" class="nav-link" data-scroll-target="#cloud-platforms">Cloud Platforms</a></li>
-          <li><a href="#serverless" id="toc-serverless" class="nav-link" data-scroll-target="#serverless">Serverless</a></li>
-          <li><a href="#devopsci-cd" id="toc-devopsci-cd" class="nav-link" data-scroll-target="#devopsci-cd">DevOps/CI-CD</a></li>
-          <li><a href="#code-editors" id="toc-code-editors" class="nav-link" data-scroll-target="#code-editors">Code Editors</a></li>
-          <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version Control</a></li>
-          <li><a href="#package-managers" id="toc-package-managers" class="nav-link" data-scroll-target="#package-managers">Package Managers</a></li>
-          <li><a href="#build-tools" id="toc-build-tools" class="nav-link" data-scroll-target="#build-tools">Build Tools</a></li>
-          <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
-          <li><a href="#lintingformatting" id="toc-lintingformatting" class="nav-link" data-scroll-target="#lintingformatting">Linting/Formatting</a></li>
-          <li><a href="#aiml" id="toc-aiml" class="nav-link" data-scroll-target="#aiml">AI/ML</a></li>
-          <li><a href="#data-science" id="toc-data-science" class="nav-link" data-scroll-target="#data-science">Data Science</a></li>
-          <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
-          <li><a href="#design-tools" id="toc-design-tools" class="nav-link" data-scroll-target="#design-tools">Design Tools</a></li>
-          <li><a href="#prototyping" id="toc-prototyping" class="nav-link" data-scroll-target="#prototyping">Prototyping</a></li>
-          <li><a href="#state-management" id="toc-state-management" class="nav-link" data-scroll-target="#state-management">State Management</a></li>
-          <li><a href="#cms" id="toc-cms" class="nav-link" data-scroll-target="#cms">CMS</a></li>
-          <li><a href="#static-site-generators" id="toc-static-site-generators" class="nav-link" data-scroll-target="#static-site-generators">Static Site Generators</a></li>
-          <li><a href="#operating-systems" id="toc-operating-systems" class="nav-link" data-scroll-target="#operating-systems">Operating Systems</a></li>
-          <li><a href="#terminalshell" id="toc-terminalshell" class="nav-link" data-scroll-target="#terminalshell">Terminal/Shell</a></li>
-          <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
-          <li><a href="#project-management" id="toc-project-management" class="nav-link" data-scroll-target="#project-management">Project Management</a></li>
-          <li><a href="#task-management" id="toc-task-management" class="nav-link" data-scroll-target="#task-management">Task Management</a></li>
-          <li><a href="#note-taking" id="toc-note-taking" class="nav-link" data-scroll-target="#note-taking">Note Taking</a></li>
-          <li><a href="#communication" id="toc-communication" class="nav-link" data-scroll-target="#communication">Communication</a></li>
-          <li><a href="#collaboration" id="toc-collaboration" class="nav-link" data-scroll-target="#collaboration">Collaboration</a></li>
-          <li><a href="#calendar" id="toc-calendar" class="nav-link" data-scroll-target="#calendar">Calendar</a></li>
-          <li><a href="#time-tracking" id="toc-time-tracking" class="nav-link" data-scroll-target="#time-tracking">Time Tracking</a></li>
-          <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
-          <li><a href="#monitoringanalytics" id="toc-monitoringanalytics" class="nav-link" data-scroll-target="#monitoringanalytics">Monitoring/Analytics</a></li>
-          <li><a href="#email-services" id="toc-email-services" class="nav-link" data-scroll-target="#email-services">Email Services</a></li>
-          <li><a href="#forms" id="toc-forms" class="nav-link" data-scroll-target="#forms">Forms</a></li>
-          <li><a href="#api-tools" id="toc-api-tools" class="nav-link" data-scroll-target="#api-tools">API Tools</a></li>
-          <li><a href="#networking" id="toc-networking" class="nav-link" data-scroll-target="#networking">Networking</a></li>
-          <li><a href="#web-servers" id="toc-web-servers" class="nav-link" data-scroll-target="#web-servers">Web Servers</a></li>
-          <li><a href="#music-production" id="toc-music-production" class="nav-link" data-scroll-target="#music-production">Music Production</a></li>
-          <li><a href="#video-editing" id="toc-video-editing" class="nav-link" data-scroll-target="#video-editing">Video Editing</a></li>
-          <li><a href="#browsers" id="toc-browsers" class="nav-link" data-scroll-target="#browsers">Browsers</a></li>
-          <li><a href="#hardware" id="toc-hardware" class="nav-link" data-scroll-target="#hardware">Hardware</a></li>
-          <li><a href="#development-methodologies" id="toc-development-methodologies" class="nav-link" data-scroll-target="#development-methodologies">Development Methodologies</a></li>
-          <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous">Miscellaneous</a></li>
-        </ul>
-      </nav>
+  <main class="page-content wide">
+    <div class="section-header animate-in">
+      <h1>Tools &amp; Technologies</h1>
+      <p>An overview of the tools and technologies I use across my PhD research, personal projects, and freelance full-stack web development work.</p>
     </div>
 
-    <main class="content" id="quarto-document-content">
-      <header id="title-block-header" class="quarto-title-block default">
-        <div class="quarto-title">
-          <h1 class="title">Tools &amp; Technologies</h1>
-        </div>
-      </header>
+    <div class="uses-grid">
 
-      <p>This page provides an overview of the tools and technologies I have utilized throughout my PhD research, master's thesis, personal projects, and freelance full-stack web development work.</p>
-      <hr>
-
-      <section id="programming-languages" class="level2">
-        <h2 class="anchored" data-anchor-id="programming-languages">Programming Languages</h2>
+      <section class="uses-category reveal">
+        <h2>Programming Languages</h2>
         <ul>
-          <li><strong>Bash</strong> - Shell scripting language for automating tasks and system administration</li>
-          <li><strong>C</strong> - Low-level programming language for systems programming and performance-critical applications</li>
-          <li><strong>C++</strong> - Object-oriented programming language for high-performance applications and scientific computing</li>
-          <li><strong>CSS</strong> - Styling language for web page design and layout</li>
-          <li><strong>Go</strong> - Statically typed compiled language designed for simplicity and efficiency</li>
-          <li><strong>HTML</strong> - Markup language for structuring web content</li>
-          <li><strong>JavaScript</strong> - Programming language for interactive web applications</li>
-          <li><strong>Python</strong> - High-level programming language widely used for data science, web development, and automation</li>
-          <li><strong>Rust</strong> - Systems programming language focused on safety and performance</li>
-          <li><strong>SQL</strong> - Language for managing and querying relational databases</li>
-          <li><strong>TypeScript</strong> - Typed superset of JavaScript that compiles to plain JavaScript</li>
+          <li><strong>Bash</strong> — Shell scripting &amp; automation</li>
+          <li><strong>C / C++</strong> — Systems &amp; scientific computing</li>
+          <li><strong>CSS</strong> — Web design &amp; layout</li>
+          <li><strong>Go</strong> — Compiled language for efficiency</li>
+          <li><strong>HTML</strong> — Web content structure</li>
+          <li><strong>JavaScript / TypeScript</strong> — Web applications</li>
+          <li><strong>Python</strong> — Data science, ML, web &amp; automation</li>
+          <li><strong>Rust</strong> — Safety-focused systems programming</li>
+          <li><strong>SQL</strong> — Database querying</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="frontend-frameworks" class="level2">
-        <h2 class="anchored" data-anchor-id="frontend-frameworks">Frontend Frameworks</h2>
+      <section class="uses-category reveal">
+        <h2>AI &amp; Machine Learning</h2>
         <ul>
-          <li><strong>Next.js</strong> - React framework for server-side rendering and static site generation</li>
-          <li><strong>Nuxt</strong> - Vue.js framework for server-side rendering and static site generation</li>
-          <li><strong>React</strong> - JavaScript library for building user interfaces with reusable components</li>
-          <li><strong>Vue.js</strong> - Progressive JavaScript framework for building user interfaces</li>
+          <li><strong>PyTorch</strong> — Deep learning framework</li>
+          <li><strong>PyTorch Lightning</strong> — Scalable ML training</li>
+          <li><strong>scikit-learn</strong> — Classical ML</li>
+          <li><strong>Hugging Face</strong> — Models &amp; datasets</li>
+          <li><strong>Weights &amp; Biases</strong> — Experiment tracking</li>
+          <li><strong>Google Colab</strong> — Cloud notebooks</li>
+          <li><strong>Jupyter</strong> — Interactive computing</li>
+          <li><strong>OpenAI API</strong> — Language model APIs</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="css-frameworks" class="level2">
-        <h2 class="anchored" data-anchor-id="css-frameworks">CSS Frameworks</h2>
+      <section class="uses-category reveal">
+        <h2>Data Science &amp; Visualization</h2>
         <ul>
-          <li><strong>Bootstrap</strong> - Popular CSS framework for responsive web design</li>
-          <li><strong>Bulma</strong> - Modern CSS framework based on Flexbox</li>
-          <li><strong>Material UI</strong> - React component library implementing Google's Material Design</li>
-          <li><strong>TailwindCSS</strong> - Utility-first CSS framework for rapid UI development</li>
-          <li><strong>Vuetify</strong> - Material Design component framework for Vue.js</li>
+          <li><strong>NumPy</strong> — Numerical computing</li>
+          <li><strong>Pandas</strong> — Data manipulation</li>
+          <li><strong>SciPy</strong> — Scientific computing</li>
+          <li><strong>Matplotlib</strong> — Plotting</li>
+          <li><strong>Seaborn</strong> — Statistical visualization</li>
+          <li><strong>Plotly</strong> — Interactive charts</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="backend-frameworks" class="level2">
-        <h2 class="anchored" data-anchor-id="backend-frameworks">Backend Frameworks</h2>
+      <section class="uses-category reveal">
+        <h2>Frontend</h2>
         <ul>
-          <li><strong>Django</strong> - High-level Python web framework for rapid development</li>
-          <li><strong>Express.js</strong> - Minimal and flexible Node.js web application framework</li>
-          <li><strong>FastAPI</strong> - Modern Python web framework for building APIs with automatic documentation</li>
-          <li><strong>Flask</strong> - Lightweight Python web framework</li>
-          <li><strong>Node.js</strong> - JavaScript runtime built on Chrome's V8 engine for server-side programming</li>
+          <li><strong>React</strong> — Component-based UI</li>
+          <li><strong>Next.js</strong> — React SSR &amp; SSG</li>
+          <li><strong>Vue.js</strong> — Progressive framework</li>
+          <li><strong>Nuxt</strong> — Vue SSR &amp; SSG</li>
+          <li><strong>TailwindCSS</strong> — Utility-first CSS</li>
+          <li><strong>Bootstrap</strong> — Responsive framework</li>
+          <li><strong>Material UI</strong> — React components</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="mobile-development" class="level2">
-        <h2 class="anchored" data-anchor-id="mobile-development">Mobile Development</h2>
+      <section class="uses-category reveal">
+        <h2>Backend</h2>
         <ul>
-          <li><strong>React Native</strong> - Framework for building native mobile apps using React</li>
+          <li><strong>Node.js</strong> — JavaScript runtime</li>
+          <li><strong>Express.js</strong> — Node web framework</li>
+          <li><strong>FastAPI</strong> — Modern Python APIs</li>
+          <li><strong>Django</strong> — Full-stack Python</li>
+          <li><strong>Flask</strong> — Lightweight Python web</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="desktop-development" class="level2">
-        <h2 class="anchored" data-anchor-id="desktop-development">Desktop Development</h2>
+      <section class="uses-category reveal">
+        <h2>Databases</h2>
         <ul>
-          <li><strong>Electron</strong> - Framework for building cross-platform desktop apps with web technologies</li>
-          <li><strong>Qt</strong> - Cross-platform application framework for desktop and embedded systems</li>
+          <li><strong>PostgreSQL</strong> — Relational database</li>
+          <li><strong>SQLite</strong> — Lightweight file-based DB</li>
+          <li><strong>MongoDB</strong> — Document database</li>
+          <li><strong>Redis</strong> — In-memory cache &amp; store</li>
+          <li><strong>Neo4j</strong> — Graph database</li>
+          <li><strong>Supabase</strong> — Open-source BaaS</li>
+          <li><strong>Firebase</strong> — Realtime DB &amp; Firestore</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="databases" class="level2">
-        <h2 class="anchored" data-anchor-id="databases">Databases</h2>
+      <section class="uses-category reveal">
+        <h2>Cloud &amp; DevOps</h2>
         <ul>
-          <li><strong>Firebase Realtime Database</strong> - NoSQL cloud database for real-time data synchronization</li>
-          <li><strong>Firestore</strong> - Flexible, scalable NoSQL cloud database from Firebase</li>
-          <li><strong>MongoDB</strong> - Document-oriented NoSQL database</li>
-          <li><strong>Neo4j</strong> - Graph database management system</li>
-          <li><strong>PostgreSQL</strong> - Advanced open-source relational database</li>
-          <li><strong>Redis</strong> - In-memory data structure store used as database, cache, and message broker</li>
-          <li><strong>SQLite</strong> - Lightweight, file-based relational database</li>
-          <li><strong>Supabase</strong> - Open-source Firebase alternative with PostgreSQL database</li>
+          <li><strong>Vercel</strong> — Frontend deployment</li>
+          <li><strong>Netlify</strong> — Web app hosting</li>
+          <li><strong>Docker</strong> — Containerization</li>
+          <li><strong>GitHub Actions</strong> — CI/CD workflows</li>
+          <li><strong>Nginx</strong> — Web server &amp; reverse proxy</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="database-tools" class="level2">
-        <h2 class="anchored" data-anchor-id="database-tools">Database Tools</h2>
+      <section class="uses-category reveal">
+        <h2>Mobile &amp; Desktop</h2>
         <ul>
-          <li><strong>SQLAlchemy</strong> - Python SQL toolkit and Object-Relational Mapping library</li>
+          <li><strong>React Native</strong> — Cross-platform mobile</li>
+          <li><strong>Electron</strong> — Desktop apps with web tech</li>
+          <li><strong>Qt</strong> — Cross-platform applications</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="cloud-platforms" class="level2">
-        <h2 class="anchored" data-anchor-id="cloud-platforms">Cloud Platforms</h2>
+      <section class="uses-category reveal">
+        <h2>Editor &amp; Terminal</h2>
         <ul>
-          <li><strong>Netlify</strong> - Platform for deploying and hosting web applications</li>
-          <li><strong>Vercel</strong> - Cloud platform for static sites and serverless functions</li>
+          <li><strong>Cursor</strong> — AI-powered editor</li>
+          <li><strong>VS Code</strong> — Extensible code editor</li>
+          <li><strong>Neovim / Vim</strong> — Terminal editors</li>
+          <li><strong>Warp</strong> — Modern terminal</li>
+          <li><strong>Zsh</strong> — Shell</li>
+          <li><strong>Tmux</strong> — Terminal multiplexer</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="serverless" class="level2">
-        <h2 class="anchored" data-anchor-id="serverless">Serverless</h2>
+      <section class="uses-category reveal">
+        <h2>AI Assistants</h2>
         <ul>
-          <li><strong>Firebase</strong> - Google's mobile and web application development platform</li>
-          <li><strong>Netlify Functions</strong> - Serverless functions deployment on Netlify</li>
-          <li><strong>Supabase</strong> - Open-source Backend-as-a-Service platform</li>
-          <li><strong>Vercel Functions</strong> - Serverless functions on Vercel platform</li>
+          <li><strong>Anthropic Claude</strong> — AI assistant</li>
+          <li><strong>ChatGPT</strong> — Conversational AI</li>
+          <li><strong>GitHub Copilot</strong> — AI pair programming</li>
+          <li><strong>Cursor AI</strong> — AI coding assistant</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="devopsci-cd" class="level2">
-        <h2 class="anchored" data-anchor-id="devopsci-cd">DevOps/CI-CD</h2>
+      <section class="uses-category reveal">
+        <h2>Dev Tools</h2>
         <ul>
-          <li><strong>Docker</strong> - Platform for developing, shipping, and running applications in containers</li>
-          <li><strong>GitHub Actions</strong> - CI/CD platform integrated with GitHub for automating workflows</li>
+          <li><strong>Git</strong> — Version control</li>
+          <li><strong>GitHub / GitLab</strong> — Code collaboration</li>
+          <li><strong>Postman</strong> — API development</li>
+          <li><strong>Prettier / Black</strong> — Code formatting</li>
+          <li><strong>Pylint</strong> — Python linting</li>
+          <li><strong>CMake</strong> — Build system</li>
+          <li><strong>SQLAlchemy</strong> — Python ORM</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="code-editors" class="level2">
-        <h2 class="anchored" data-anchor-id="code-editors">Code Editors</h2>
+      <section class="uses-category reveal">
+        <h2>Design &amp; Prototyping</h2>
         <ul>
-          <li><strong>Atom</strong> - Hackable text editor developed by GitHub</li>
-          <li><strong>Cursor</strong> - AI-powered code editor</li>
-          <li><strong>Neovim</strong> - Hyperextensible Vim-based text editor</li>
-          <li><strong>Sublime Text</strong> - Sophisticated text editor for code, markup, and prose</li>
-          <li><strong>VS Code</strong> - Free, open-source code editor by Microsoft with extensive extensions</li>
-          <li><strong>Vim</strong> - Highly configurable text editor for efficient text editing</li>
+          <li><strong>Figma</strong> — UI/UX design &amp; prototyping</li>
+          <li><strong>Canva</strong> — Graphic design</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="version-control" class="level2">
-        <h2 class="anchored" data-anchor-id="version-control">Version Control</h2>
+      <section class="uses-category reveal">
+        <h2>Productivity</h2>
         <ul>
-          <li><strong>Git</strong> - Distributed version control system for tracking code changes</li>
-          <li><strong>GitHub</strong> - Web-based platform for version control and collaboration using Git</li>
-          <li><strong>GitLab</strong> - Web-based DevOps platform with Git repository management</li>
+          <li><strong>Notion</strong> — Notes &amp; docs</li>
+          <li><strong>Obsidian</strong> — Knowledge base</li>
+          <li><strong>Linear</strong> — Project tracking</li>
+          <li><strong>Todoist</strong> — Task management</li>
+          <li><strong>Google Calendar</strong> — Scheduling</li>
+          <li><strong>Miro</strong> — Collaborative whiteboard</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="package-managers" class="level2">
-        <h2 class="anchored" data-anchor-id="package-managers">Package Managers</h2>
+      <section class="uses-category reveal">
+        <h2>Creative</h2>
         <ul>
-          <li><strong>Cargo</strong> - Package manager for Rust programming language</li>
-          <li><strong>Homebrew</strong> - Package manager for macOS and Linux</li>
-          <li><strong>apt</strong> - Package management system for Debian-based Linux distributions</li>
-          <li><strong>conda</strong> - Package and environment manager for Python and other languages</li>
-          <li><strong>go mod</strong> - Dependency management system for Go</li>
-          <li><strong>npm</strong> - Package manager for JavaScript and Node.js</li>
-          <li><strong>pip</strong> - Package installer for Python</li>
-          <li><strong>pipenv</strong> - Python dependency management tool</li>
+          <li><strong>Logic Pro</strong> — Music production</li>
+          <li><strong>GarageBand</strong> — Audio workstation</li>
+          <li><strong>OBS Studio</strong> — Video recording &amp; streaming</li>
+          <li><strong>iMovie</strong> — Video editing</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="build-tools" class="level2">
-        <h2 class="anchored" data-anchor-id="build-tools">Build Tools</h2>
+      <section class="uses-category reveal">
+        <h2>Hardware</h2>
         <ul>
-          <li><strong>CMake</strong> - Cross-platform build system generator</li>
+          <li><strong>MacBook Pro</strong> — Primary laptop</li>
+          <li><strong>MacBook Air</strong> — Portable laptop</li>
+          <li><strong>External Monitor</strong> — Extended display</li>
+          <li><strong>Headphones</strong> — Audio</li>
         </ul>
-        <hr>
       </section>
 
-      <section id="testing" class="level2">
-        <h2 class="anchored" data-anchor-id="testing">Testing</h2>
+      <section class="uses-category reveal">
+        <h2>Methodologies</h2>
         <ul>
-          <li><strong>Selenium</strong> - Browser automation framework for testing web applications</li>
-          <li><strong>unittest</strong> - Unit testing framework built into Python</li>
+          <li><strong>Test-driven development</strong></li>
+          <li><strong>Behavior-driven development</strong></li>
+          <li><strong>Spec-driven development</strong></li>
+          <li><strong>Scrum &amp; Kanban</strong></li>
+          <li><strong>Microservices</strong></li>
+          <li><strong>REST API design</strong></li>
         </ul>
-        <hr>
       </section>
 
-      <section id="lintingformatting" class="level2">
-        <h2 class="anchored" data-anchor-id="lintingformatting">Linting/Formatting</h2>
-        <ul>
-          <li><strong>Black</strong> - Opinionated Python code formatter</li>
-          <li><strong>Prettier</strong> - Code formatter supporting multiple languages</li>
-          <li><strong>Pylint</strong> - Python code analysis tool</li>
-        </ul>
-        <hr>
-      </section>
+    </div>
+  </main>
 
-      <section id="aiml" class="level2">
-        <h2 class="anchored" data-anchor-id="aiml">AI/ML</h2>
-        <ul>
-          <li><strong>Anthropic Claude</strong> - AI assistant for various tasks</li>
-          <li><strong>ChatGPT</strong> - Conversational AI model by OpenAI</li>
-          <li><strong>Cursor AI</strong> - AI-powered coding assistant</li>
-          <li><strong>GitHub Copilot</strong> - AI pair programmer that suggests code completions</li>
-          <li><strong>Google Colab</strong> - Cloud-based Jupyter notebook environment</li>
-          <li><strong>Hugging Face</strong> - Platform for machine learning models and datasets</li>
-          <li><strong>Jupyter Notebook</strong> - Web application for creating and sharing computational documents</li>
-          <li><strong>OpenAI API</strong> - API for accessing OpenAI's language models</li>
-          <li><strong>PyTorch</strong> - Machine learning framework for Python</li>
-          <li><strong>PyTorch Lightning</strong> - High-level PyTorch framework for organizing ML code and scaling models</li>
-          <li><strong>Weights &amp; Biases</strong> - Platform for experiment tracking and model management</li>
-          <li><strong>scikit-learn</strong> - Machine learning library for Python</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="data-science" class="level2">
-        <h2 class="anchored" data-anchor-id="data-science">Data Science</h2>
-        <ul>
-          <li><strong>Jupyter</strong> - Interactive computing platform</li>
-          <li><strong>Matplotlib</strong> - Python plotting library for creating visualizations</li>
-          <li><strong>NumPy</strong> - Library for numerical computing in Python</li>
-          <li><strong>Pandas</strong> - Data manipulation and analysis library for Python</li>
-          <li><strong>Plotly</strong> - Interactive graphing library</li>
-          <li><strong>SciPy</strong> - Scientific computing library for Python</li>
-          <li><strong>Seaborn</strong> - Statistical data visualization library based on Matplotlib</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="visualization" class="level2">
-        <h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
-        <ul>
-          <li><strong>Plotly</strong> - Interactive visualization library for creating charts and graphs</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="design-tools" class="level2">
-        <h2 class="anchored" data-anchor-id="design-tools">Design Tools</h2>
-        <ul>
-          <li><strong>Canva</strong> - Online graphic design platform</li>
-          <li><strong>Figma</strong> - Collaborative interface design tool</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="prototyping" class="level2">
-        <h2 class="anchored" data-anchor-id="prototyping">Prototyping</h2>
-        <ul>
-          <li><strong>Figma</strong> - Design and prototyping tool for UI/UX</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="state-management" class="level2">
-        <h2 class="anchored" data-anchor-id="state-management">State Management</h2>
-        <ul>
-          <li><strong>Redux</strong> - Predictable state container for JavaScript apps</li>
-          <li><strong>Vuex</strong> - State management pattern and library for Vue.js</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="cms" class="level2">
-        <h2 class="anchored" data-anchor-id="cms">CMS</h2>
-        <ul>
-          <li><strong>WordPress</strong> - Open-source content management system</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="static-site-generators" class="level2">
-        <h2 class="anchored" data-anchor-id="static-site-generators">Static Site Generators</h2>
-        <ul>
-          <li><strong>Hugo</strong> - Fast static site generator written in Go</li>
-          <li><strong>Jekyll</strong> - Static site generator written in Ruby</li>
-          <li><strong>MkDocs</strong> - Static site generator for project documentation</li>
-          <li><strong>Next.js</strong> - React framework with static site generation capabilities</li>
-          <li><strong>Quarto</strong> - Open-source scientific and technical publishing system</li>
-          <li><strong>VuePress</strong> - Vue-powered static site generator</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="operating-systems" class="level2">
-        <h2 class="anchored" data-anchor-id="operating-systems">Operating Systems</h2>
-        <ul>
-          <li><strong>Linux</strong> - Open-source Unix-like operating system</li>
-          <li><strong>Ubuntu</strong> - Popular Linux distribution based on Debian</li>
-          <li><strong>macOS</strong> - Operating system for Apple computers</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="terminalshell" class="level2">
-        <h2 class="anchored" data-anchor-id="terminalshell">Terminal/Shell</h2>
-        <ul>
-          <li><strong>Bash</strong> - Unix shell and command language</li>
-          <li><strong>Tmux</strong> - Terminal multiplexer for managing multiple terminal sessions</li>
-          <li><strong>Warp</strong> - Modern terminal application with AI features</li>
-          <li><strong>Zsh</strong> - Extended Unix shell with additional features</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="documentation" class="level2">
-        <h2 class="anchored" data-anchor-id="documentation">Documentation</h2>
-        <ul>
-          <li><strong>Confluence</strong> - Team collaboration and documentation software</li>
-          <li><strong>GitBook</strong> - Modern documentation platform</li>
-          <li><strong>Markdown</strong> - Lightweight markup language for formatting text</li>
-          <li><strong>Notion</strong> - All-in-one workspace for notes and documentation</li>
-          <li><strong>Obsidian</strong> - Knowledge base and note-taking application</li>
-          <li><strong>Read the Docs</strong> - Documentation hosting platform</li>
-          <li><strong>Sphinx</strong> - Documentation generator for Python projects</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="project-management" class="level2">
-        <h2 class="anchored" data-anchor-id="project-management">Project Management</h2>
-        <ul>
-          <li><strong>Asana</strong> - Work management platform for teams</li>
-          <li><strong>ClickUp</strong> - Productivity and project management platform</li>
-          <li><strong>GitHub Projects</strong> - Project management tool integrated with GitHub</li>
-          <li><strong>Jira</strong> - Issue and project tracking software</li>
-          <li><strong>Notion</strong> - All-in-one workspace for project management</li>
-          <li><strong>Trello</strong> - Visual project management tool using boards and cards</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="task-management" class="level2">
-        <h2 class="anchored" data-anchor-id="task-management">Task Management</h2>
-        <ul>
-          <li><strong>Any.do</strong> - Task management and to-do list application</li>
-          <li><strong>Apple Reminders</strong> - Task management app for Apple devices</li>
-          <li><strong>Google Tasks</strong> - Simple task management integrated with Google services</li>
-          <li><strong>Microsoft To Do</strong> - Task management app by Microsoft</li>
-          <li><strong>TickTick</strong> - To-do list and task manager</li>
-          <li><strong>Todoist</strong> - Task management application</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="note-taking" class="level2">
-        <h2 class="anchored" data-anchor-id="note-taking">Note Taking</h2>
-        <ul>
-          <li><strong>Apple Notes</strong> - Note-taking app for Apple devices</li>
-          <li><strong>Bear</strong> - Markdown note-taking app for macOS and iOS</li>
-          <li><strong>Evernote</strong> - Note-taking and organization application</li>
-          <li><strong>Google Keep</strong> - Note-taking service by Google</li>
-          <li><strong>Notion</strong> - All-in-one workspace for notes</li>
-          <li><strong>Obsidian</strong> - Markdown-based knowledge base</li>
-          <li><strong>OneNote</strong> - Digital note-taking application by Microsoft</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="communication" class="level2">
-        <h2 class="anchored" data-anchor-id="communication">Communication</h2>
-        <ul>
-          <li><strong>Microsoft Teams</strong> - Collaboration platform combining chat, video meetings, and file storage</li>
-          <li><strong>WhatsApp</strong> - Instant messaging and voice/video call application</li>
-          <li><strong>Zoom</strong> - Video conferencing platform</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="collaboration" class="level2">
-        <h2 class="anchored" data-anchor-id="collaboration">Collaboration</h2>
-        <ul>
-          <li><strong>Miro</strong> - Online collaborative whiteboard platform</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="calendar" class="level2">
-        <h2 class="anchored" data-anchor-id="calendar">Calendar</h2>
-        <ul>
-          <li><strong>Google Calendar</strong> - Time management and scheduling service</li>
-          <li><strong>Outlook Calendar</strong> - Calendar and scheduling application by Microsoft</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="time-tracking" class="level2">
-        <h2 class="anchored" data-anchor-id="time-tracking">Time Tracking</h2>
-        <ul>
-          <li><strong>Clockify</strong> - Free time tracking software</li>
-          <li><strong>Timely</strong> - Automatic time tracking application</li>
-          <li><strong>Toggl</strong> - Time tracking tool for productivity</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="authentication" class="level2">
-        <h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
-        <ul>
-          <li><strong>Firebase Auth</strong> - Authentication service provided by Firebase</li>
-          <li><strong>Supabase Auth</strong> - Authentication system for Supabase platform</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="monitoringanalytics" class="level2">
-        <h2 class="anchored" data-anchor-id="monitoringanalytics">Monitoring/Analytics</h2>
-        <ul>
-          <li><strong>Google Analytics</strong> - Web analytics service for tracking website traffic</li>
-          <li><strong>Sentry</strong> - Error tracking and performance monitoring platform</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="email-services" class="level2">
-        <h2 class="anchored" data-anchor-id="email-services">Email Services</h2>
-        <ul>
-          <li><strong>Mailchimp</strong> - Email marketing platform</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="forms" class="level2">
-        <h2 class="anchored" data-anchor-id="forms">Forms</h2>
-        <ul>
-          <li><strong>Google Forms</strong> - Survey and form creation tool by Google</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="api-tools" class="level2">
-        <h2 class="anchored" data-anchor-id="api-tools">API Tools</h2>
-        <ul>
-          <li><strong>Postman</strong> - API development and testing platform</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="networking" class="level2">
-        <h2 class="anchored" data-anchor-id="networking">Networking</h2>
-        <ul>
-          <li><strong>Postman</strong> - API testing and development tool</li>
-          <li><strong>curl</strong> - Command-line tool for transferring data with URLs</li>
-          <li><strong>wget</strong> - Command-line utility for downloading files from the web</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="web-servers" class="level2">
-        <h2 class="anchored" data-anchor-id="web-servers">Web Servers</h2>
-        <ul>
-          <li><strong>Nginx</strong> - High-performance web server and reverse proxy</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="music-production" class="level2">
-        <h2 class="anchored" data-anchor-id="music-production">Music Production</h2>
-        <ul>
-          <li><strong>GarageBand</strong> - Digital audio workstation for macOS and iOS</li>
-          <li><strong>Logic Pro</strong> - Professional digital audio workstation by Apple</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="video-editing" class="level2">
-        <h2 class="anchored" data-anchor-id="video-editing">Video Editing</h2>
-        <ul>
-          <li><strong>OBS Studio</strong> - Open-source software for video recording and live streaming</li>
-          <li><strong>iMovie</strong> - Video editing software by Apple</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="browsers" class="level2">
-        <h2 class="anchored" data-anchor-id="browsers">Browsers</h2>
-        <ul>
-          <li><strong>Safari</strong> - Web browser developed by Apple</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="hardware" class="level2">
-        <h2 class="anchored" data-anchor-id="hardware">Hardware</h2>
-        <ul>
-          <li><strong>External Monitor</strong> - Additional display for extended workspace</li>
-          <li><strong>Headphones</strong> - Audio device for listening</li>
-          <li><strong>MacBook Air</strong> - Lightweight laptop by Apple</li>
-          <li><strong>MacBook Pro</strong> - Professional laptop by Apple</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="development-methodologies" class="level2">
-        <h2 class="anchored" data-anchor-id="development-methodologies">Development Methodologies</h2>
-        <ul>
-          <li><strong>Behavior-driven development</strong> - Software development approach focusing on behavior specifications</li>
-          <li><strong>Spec-driven development</strong> - Development methodology where specifications drive implementation and testing</li>
-          <li><strong>Test-driven development</strong> - Software development process where tests are written before code</li>
-        </ul>
-        <hr>
-      </section>
-
-      <section id="miscellaneous" class="level2">
-        <h2 class="anchored" data-anchor-id="miscellaneous">Miscellaneous</h2>
-        <ul>
-          <li><strong>Code Review</strong> - Systematic examination of source code</li>
-          <li><strong>Design Patterns</strong> - Reusable solutions to common software design problems</li>
-          <li><strong>JSON</strong> - Lightweight data interchange format</li>
-          <li><strong>Kanban</strong> - Visual workflow management method</li>
-          <li><strong>Microservices</strong> - Architectural style for building distributed applications</li>
-          <li><strong>Open Source</strong> - Software with source code publicly available</li>
-          <li><strong>REST API</strong> - Architectural style for designing networked applications</li>
-          <li><strong>RegEx</strong> - Sequence of characters defining search patterns</li>
-          <li><strong>Responsive Design</strong> - Web design approach for optimal viewing across devices</li>
-          <li><strong>SEO</strong> - Search Engine Optimization for improving website visibility</li>
-          <li><strong>Scrum</strong> - Agile framework for managing complex projects</li>
-          <li><strong>Serverless</strong> - Cloud computing execution model</li>
-          <li><strong>TOML</strong> - Configuration file format</li>
-          <li><strong>Tech Writing</strong> - Writing technical documentation and content</li>
-          <li><strong>YAML</strong> - Human-readable data serialization language</li>
-        </ul>
-      </section>
-    </main>
-  </div>
-
-  <footer class="footer">
-    <div class="nav-footer">
-      <div class="nav-footer-left">&nbsp;</div>
-      <div class="nav-footer-center">
-        <p>© 2025 Sofiene Khiari</p>
-      </div>
-      <div class="nav-footer-right">
-        <ul class="footer-items list-unstyled">
-          <li class="nav-item compact">
-            <a class="nav-link" href="mailto:research@sofk.ch">
-              <i class="bi bi-envelope" role="img" aria-label="Email"></i>
-            </a>
-          </li>
-        </ul>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2025 Sofiene Khiari</span>
+      <div class="footer-links">
+        <a href="https://github.com/sofienekhiari" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/khiarisofiene" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:research@sofk.ch" aria-label="Email"><i class="bi bi-envelope"></i></a>
       </div>
     </div>
   </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+      document.querySelectorAll('.theme-toggle i').forEach(function(icon) {
+        icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
+      });
+    }
+
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        updateThemeIcon(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        updateThemeIcon('dark');
+      }
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
 
 </body>
 </html>
