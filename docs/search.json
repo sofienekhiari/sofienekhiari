@@ -4,7 +4,7 @@
     "href": "uses.html",
     "title": "Tools & Technologies",
     "section": "",
-    "text": "This page provides an overview of the tools and technologies I have utilized throughout my PhD research, master’s thesis, personal projects, and freelance full-stack web development work."
+    "text": "This page provides an overview of the tools and technologies I have utilized throughout my PhD research, master\u2019s thesis, personal projects, and freelance full-stack web development work."
   },
   {
     "objectID": "uses.html#programming-languages",
@@ -25,14 +25,14 @@
     "href": "uses.html#css-frameworks",
     "title": "Tools & Technologies",
     "section": "CSS Frameworks",
-    "text": "CSS Frameworks\n\nBootstrap - Popular CSS framework for responsive web design\nBulma - Modern CSS framework based on Flexbox\nMaterial UI - React component library implementing Google’s Material Design\nTailwindCSS - Utility-first CSS framework for rapid UI development\nVuetify - Material Design component framework for Vue.js"
+    "text": "CSS Frameworks\n\nBootstrap - Popular CSS framework for responsive web design\nBulma - Modern CSS framework based on Flexbox\nMaterial UI - React component library implementing Google\u2019s Material Design\nTailwindCSS - Utility-first CSS framework for rapid UI development\nVuetify - Material Design component framework for Vue.js"
   },
   {
     "objectID": "uses.html#backend-frameworks",
     "href": "uses.html#backend-frameworks",
     "title": "Tools & Technologies",
     "section": "Backend Frameworks",
-    "text": "Backend Frameworks\n\nDjango - High-level Python web framework for rapid development\nExpress.js - Minimal and flexible Node.js web application framework\nFastAPI - Modern Python web framework for building APIs with automatic documentation\nFlask - Lightweight Python web framework\nNode.js - JavaScript runtime built on Chrome’s V8 engine for server-side programming"
+    "text": "Backend Frameworks\n\nDjango - High-level Python web framework for rapid development\nExpress.js - Minimal and flexible Node.js web application framework\nFastAPI - Modern Python web framework for building APIs with automatic documentation\nFlask - Lightweight Python web framework\nNode.js - JavaScript runtime built on Chrome\u2019s V8 engine for server-side programming"
   },
   {
     "objectID": "uses.html#mobile-development",
@@ -74,7 +74,7 @@
     "href": "uses.html#serverless",
     "title": "Tools & Technologies",
     "section": "Serverless",
-    "text": "Serverless\n\nFirebase - Google’s mobile and web application development platform\nNetlify Functions - Serverless functions deployment on Netlify\nSupabase - Open-source Backend-as-a-Service platform\nVercel Functions - Serverless functions on Vercel platform"
+    "text": "Serverless\n\nFirebase - Google\u2019s mobile and web application development platform\nNetlify Functions - Serverless functions deployment on Netlify\nSupabase - Open-source Backend-as-a-Service platform\nVercel Functions - Serverless functions on Vercel platform"
   },
   {
     "objectID": "uses.html#devopsci-cd",
@@ -130,7 +130,7 @@
     "href": "uses.html#aiml",
     "title": "Tools & Technologies",
     "section": "AI/ML",
-    "text": "AI/ML\n\nAnthropic Claude - AI assistant for various tasks\nChatGPT - Conversational AI model by OpenAI\nCursor AI - AI-powered coding assistant\nGitHub Copilot - AI pair programmer that suggests code completions\nGoogle Colab - Cloud-based Jupyter notebook environment\nHugging Face - Platform for machine learning models and datasets\nJupyter Notebook - Web application for creating and sharing computational documents\nOpenAI API - API for accessing OpenAI’s language models\nPyTorch - Machine learning framework for Python\nPyTorch Lightning - High-level PyTorch framework for organizing ML code and scaling models\nWeights & Biases - Platform for experiment tracking and model management\nscikit-learn - Machine learning library for Python"
+    "text": "AI/ML\n\nAnthropic Claude - AI assistant for various tasks\nChatGPT - Conversational AI model by OpenAI\nCursor AI - AI-powered coding assistant\nGitHub Copilot - AI pair programmer that suggests code completions\nGoogle Colab - Cloud-based Jupyter notebook environment\nHugging Face - Platform for machine learning models and datasets\nJupyter Notebook - Web application for creating and sharing computational documents\nOpenAI API - API for accessing OpenAI\u2019s language models\nPyTorch - Machine learning framework for Python\nPyTorch Lightning - High-level PyTorch framework for organizing ML code and scaling models\nWeights & Biases - Platform for experiment tracking and model management\nscikit-learn - Machine learning library for Python"
   },
   {
     "objectID": "uses.html#data-science",
@@ -347,14 +347,14 @@
     "href": "index.html",
     "title": "Sofiene Khiari",
     "section": "",
-    "text": "Pharmacist & Software Developer\nI’m a driven pharmacist currently pursuing a PhD in the 🧑‍💻 Computational Pharmacy Group at the 🎓 University of Basel, where I blend my passion for Pharmaceutical Sciences and Computer Sciences to push the boundaries of what’s possible in drug discovery.\nAs a staunch advocate of Open Source Software and Open Science, I’m committed to contributing to the community and fostering a spirit of collaboration. I believe that the future of pharmaceutical innovation lies at the intersection of cutting-edge computational methods and traditional pharmaceutical expertise—a space where I thrive.\nDriven by a desire to make a tangible difference, I strive to develop groundbreaking pharmaceutical technologies that don’t just advance the science, but do so with a keen focus on Research and Development costs and accessibility. My work is guided by a simple yet powerful principle: transformative solutions should be within reach for those who need them most.\nWhether you’re interested in collaboration, innovation, or exploring how computational approaches can revolutionize pharmaceutical research, I’d love to connect."
+    "text": "Pharmacist & Software Developer\nI\u2019m a driven pharmacist currently pursuing a PhD in the \ud83e\uddd1\u200d\ud83d\udcbb Computational Pharmacy Group at the \ud83c\udf93 University of Basel, where I blend my passion for Pharmaceutical Sciences and Computer Sciences to push the boundaries of what\u2019s possible in drug discovery.\nAs a staunch advocate of Open Source Software and Open Science, I\u2019m committed to contributing to the community and fostering a spirit of collaboration. I believe that the future of pharmaceutical innovation lies at the intersection of cutting-edge computational methods and traditional pharmaceutical expertise\u2014a space where I thrive.\nDriven by a desire to make a tangible difference, I strive to develop groundbreaking pharmaceutical technologies that don\u2019t just advance the science, but do so with a keen focus on Research and Development costs and accessibility. My work is guided by a simple yet powerful principle: transformative solutions should be within reach for those who need them most.\nWhether you\u2019re interested in collaboration, innovation, or exploring how computational approaches can revolutionize pharmaceutical research, I\u2019d love to connect."
   },
   {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Great content coming soon…\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "No matching items"
   },
   {
     "objectID": "publications.html",
@@ -362,5 +362,26 @@
     "title": "Research publications and preprints",
     "section": "",
     "text": "Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking\nSofiene Khiari, Matthew R. Masters, Amr H. Mahmoud, Markus A. Lill ArXiv (preprint) | September 16, 2025 | DOI: 10.48550/arXiv.2509.12915 Molecular Docking, Deep Learning, Protein-Ligand Complexes, Synthetic Data, Computational Chemistry, Drug Discovery"
+  },
+  {
+    "objectID": "prompts/learning-prompt-quarto.html",
+    "href": "prompts/learning-prompt-quarto.html",
+    "title": "Sofiene Khiari",
+    "section": "",
+    "text": "I am writing about [GENERAL TOPIC] and have created a detailed outline for a Quarto-based scientific article or blog post. Here is the relevant section I\u2019m currently working on:\n[PASTE YOUR LEARNING PLAN SECTION HERE]\n\nExample structure:\nPart 1: [Main Topic]\n  - Subtopic 1.1: [Specific concept]\n  - Subtopic 1.2: [Specific concept]\n  - Subtopic 1.3: [Specific concept]\n\nPart 2: [Main Topic]\n  - Subtopic 2.1: [Specific concept]\n  - ...\nI attached the blog post file so that you have an idea about the whole outline and what has or has not been generated yet."
+  },
+  {
+    "objectID": "prompts/learning-prompt-quarto.html#implementation-notes-for-using-this-template",
+    "href": "prompts/learning-prompt-quarto.html#implementation-notes-for-using-this-template",
+    "title": "Sofiene Khiari",
+    "section": "Implementation Notes for Using This Template",
+    "text": "Implementation Notes for Using This Template\n\nSetting Up Your Quarto Document\nYour final Quarto document should have this structure:\nYAML Header (in your .qmd file):\n---\ntitle: \"Your Article Title\"\nauthor: \"Your Name\"\ndate: today\nbibliography: references.bib\ncsl: nature.csl  # or your preferred citation style\nformat:\n  html:\n    toc: true\n    toc-depth: 3\n---\nBibliography File (references.bib): - Create a file named references.bib in the same directory as your .qmd file - Paste all BibTeX entries provided by the agent into this file\nCitation Style (optional): - Download a .csl file for your preferred citation style from the Zotero Style Repository - Place it in your project directory and reference it in the YAML header\n\n\nWorkflow:\n\nFill in the template placeholders with your learning plan and specific topic\nSubmit the complete prompt to your LLM agent (Perplexity Labs)\nReceive the generated Quarto markdown content\nCopy the markdown content into your .qmd file\nCopy the BibTeX entries into your references.bib file\nReview only the flagged citations manually\nRender your Quarto document with quarto render yourfile.qmd\nPublish to your Quarto website"
+  },
+  {
+    "objectID": "prompts/learning-prompt-quarto.html#notes-for-future-iterations",
+    "href": "prompts/learning-prompt-quarto.html#notes-for-future-iterations",
+    "title": "Sofiene Khiari",
+    "section": "Notes for Future Iterations",
+    "text": "Notes for Future Iterations\n\nDefault to 2-3 paragraphs; use 4 paragraphs for complex topics requiring more depth\nRequest specific figure types if you have preferences (e.g., \u201cprioritize schematic diagrams\u201d)\nSpecify citation style (CSL file) if you have a preference beyond the default Chicago style\nAdjust confidence score thresholds if you want stricter verification (e.g., only accept scores &gt; 0.8)\nCan request specific Quarto extensions or formatting conventions\nFor website publication, ensure all figures are properly licensed for web use"
   }
 ]

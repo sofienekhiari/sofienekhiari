@@ -7,5 +7,3 @@ listing:
   categories: true
 page-layout: full
 ---
-
-Great content coming soon...

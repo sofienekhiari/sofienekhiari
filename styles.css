@@ -1,3 +1,8 @@
 /* Custom CSS for your Quarto website */
 
 /* Add your custom styles here */
+strong,
+b {
+  font-weight: 900;
+  background-color: #fff8b3; /* soft yellow highlight for bold text */
+}
