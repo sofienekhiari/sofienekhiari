@@ -87,7 +87,8 @@ export const profile = {
   // these as plain monospace text rather than as labelled buttons.
   links: [
     // Email first, because it is the action most visitors actually want.
-    { label: "Email", href: "mailto:research@sofk.ch", display: "research@sofk.ch" },
+    // The university address rather than the personal domain, at his request.
+    { label: "Email", href: "mailto:sofiene.khiari@unibas.ch", display: "sofiene.khiari@unibas.ch" },
     // GitHub second: the code is the evidence for half of the tagline.
     { label: "GitHub", href: "https://github.com/sofienekhiari", display: "github.com/sofienekhiari" },
     // LinkedIn last, as the most conventional and least informative of the three.

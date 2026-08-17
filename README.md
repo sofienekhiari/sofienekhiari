@@ -17,7 +17,7 @@ Whether you're interested in collaboration, innovation, or exploring how computa
 
 ---
 
-- **Email** · [research@sofk.ch](mailto:research@sofk.ch)
+- **Email** · [sofiene.khiari@unibas.ch](mailto:sofiene.khiari@unibas.ch)
 - **GitHub** · [github.com/sofienekhiari](https://github.com/sofienekhiari)
 - **LinkedIn** · [linkedin.com/in/khiarisofiene](https://www.linkedin.com/in/khiarisofiene)
 

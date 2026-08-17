@@ -10,6 +10,7 @@
 
 ## Publications
 
+- [AgenticPosesRanker: An Agentic AI Framework for Physically Grounded Ranking of Protein-Ligand Docking Poses](https://doi.org/10.48550/arXiv.2605.03707): Sofiene Khiari, Amr H. Mahmoud, Markus A. Lill. arXiv, 2026, preprint.
 - [Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking](https://doi.org/10.48550/arXiv.2509.12915): Sofiene Khiari, Matthew R. Masters, Amr H. Mahmoud, Markus A. Lill. arXiv, 2025, preprint.
 
 ## Talks
@@ -18,6 +19,6 @@
 
 ## Contact
 
-- [Email](mailto:research@sofk.ch): research@sofk.ch
+- [Email](mailto:sofiene.khiari@unibas.ch): sofiene.khiari@unibas.ch
 - [GitHub](https://github.com/sofienekhiari): github.com/sofienekhiari
 - [LinkedIn](https://www.linkedin.com/in/khiarisofiene): linkedin.com/in/khiarisofiene
