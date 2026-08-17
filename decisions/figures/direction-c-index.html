@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Direction C - Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfbf9; --ink:#15161a; --muted:#565a61; --faint:#979da5;
+    --line:#e7e7e3; --hair:#f1f1ed;
+    --accent:#008080; --amber:#b7791f;
+    --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;
+       -webkit-font-smoothing:antialiased;line-height:1.55}
+  a{color:inherit;text-decoration:none}
+  .page{max-width:800px;margin:0 auto;padding:44px 40px 80px}
+
+  /* ── identity line ─────────────────────────── */
+  .id{display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+      padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .id .who{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .id h1{font-size:1.42rem;font-weight:600;letter-spacing:-.026em}
+  .id .role{font-size:.905rem;color:var(--accent);font-weight:500;letter-spacing:-.008em}
+  .id nav{display:flex;gap:18px}
+  .id nav a{font-size:.83rem;color:var(--muted)}
+  .id nav a.on{color:var(--ink);font-weight:500}
+  .id nav a:hover{color:var(--accent)}
+
+  /* ── bio ───────────────────────────────────── */
+  .bio{padding:20px 0 0;max-width:66ch}
+  .bio p{color:var(--muted);font-size:.95rem;line-height:1.68;margin-bottom:.6rem}
+  .bio p:last-child{margin-bottom:0}
+  .bio a{color:var(--accent);border-bottom:1px solid rgba(0,128,128,.2)}
+  .bio a:hover{border-color:var(--accent)}
+  .bio b{color:var(--ink);font-weight:550}
+
+  /* ── block heads ───────────────────────────── */
+  .bh{display:flex;align-items:baseline;justify-content:space-between;
+      margin:30px 0 0;padding-bottom:7px;border-bottom:1px solid var(--line)}
+  .bh h2{font-size:.925rem;font-weight:600;letter-spacing:-.012em}
+  .bh .cmd{font-family:var(--mono);font-size:.68rem;color:var(--faint)}
+
+  /* ── git log, dense ────────────────────────── */
+  .log{position:relative;padding-left:26px;margin-top:12px}
+  .spine{position:absolute;left:3px;top:9px;bottom:9px;width:1px;background:var(--line)}
+  .spine-b{position:absolute;left:17px;top:0;bottom:0;width:1px;background:var(--line)}
+  .r{position:relative;display:grid;grid-template-columns:62px 1fr auto;gap:12px;
+     padding:4px 0;align-items:baseline}
+  .r+.r{border-top:1px solid var(--hair)}
+  .node{position:absolute;left:-26px;top:11px;width:7px;height:7px;border-radius:50%;
+        background:var(--accent);box-shadow:0 0 0 3px var(--bg)}
+  .r.acad .node{background:var(--amber)}
+  .r.b1{padding-left:26px}
+  .r.b1 .node{left:-11px}
+  .r.wip .node{background:transparent;border:1.5px solid var(--accent);width:9px;height:9px;
+               left:-27px;top:10px}
+  .hash{font-family:var(--mono);font-size:.675rem;color:var(--faint)}
+  .msg{font-size:.885rem;letter-spacing:-.006em}
+  .pre{color:var(--accent);font-weight:600}
+  .r.acad .pre{color:var(--amber)}
+  .when{font-family:var(--mono);font-size:.675rem;color:var(--faint);white-space:nowrap}
+  .r:hover .msg{color:var(--accent)}
+  .blab{font-family:var(--mono);font-size:.64rem;color:var(--faint);padding:9px 0 3px 26px}
+
+  /* ── compact list rows ─────────────────────── */
+  .rows{margin-top:10px}
+  .rows a{display:grid;grid-template-columns:1fr auto;gap:16px;padding:9px 0;
+          align-items:baseline;border-bottom:1px solid var(--hair)}
+  .rows a:last-child{border-bottom:none}
+  .rows .t{font-size:.9rem;font-weight:500;letter-spacing:-.01em}
+  .rows .sub{display:block;font-size:.79rem;color:var(--faint);font-weight:400;margin-top:2px}
+  .rows .yr{font-family:var(--mono);font-size:.675rem;color:var(--faint)}
+  .rows a:hover .t{color:var(--accent)}
+  .more{display:inline-block;margin-top:11px;font-size:.8rem;color:var(--accent);
+        font-family:var(--mono)}
+  .more:hover{text-decoration:underline}
+
+  /* ── contact strip ─────────────────────────── */
+  .contact{margin-top:34px;padding-top:13px;border-top:1px solid var(--line);
+           display:flex;gap:20px;flex-wrap:wrap}
+  .contact a{font-family:var(--mono);font-size:.735rem;color:var(--muted)}
+  .contact a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="id">
+    <div class="who">
+      <h1>Sofiene Khiari</h1>
+      <span class="role">Pharmacist &amp; Software Developer</span>
+    </div>
+    <nav>
+      <a class="on" href="#">About</a>
+      <a href="#">Publications</a>
+      <a href="#">Talks</a>
+    </nav>
+  </header>
+
+  <section class="bio">
+    <p>Pharmacist pursuing a PhD in the <a href="#">Computational Pharmacy Group</a> at the <a href="#">University of Basel</a>, building LLM-based agentic systems for computer-aided drug design under Prof. Markus A. Lill.</p>
+    <p>Advocate of Open Source Software and Open Science. My work is guided by one principle: <b>transformative solutions should be within reach for those who need them most.</b></p>
+  </section>
+
+  <div class="bh">
+    <h2>Experience</h2>
+    <span class="cmd">git log --oneline --graph --all</span>
+  </div>
+
+  <div class="log">
+    <div class="spine"></div>
+
+    <div class="r wip">
+      <div class="node"></div>
+      <span class="hash">·······</span>
+      <span class="msg"><span class="pre">build:</span> Obtain Doctor of Philosophy diploma</span>
+      <span class="when">from Jan 2025</span>
+    </div>
+    <div class="r acad">
+      <div class="node"></div>
+      <span class="hash">8b2e4f1</span>
+      <span class="msg"><span class="pre">build:</span> Obtain MSc Drug Sciences diploma</span>
+      <span class="when">2021 to 2024</span>
+    </div>
+    <div class="r acad">
+      <div class="node"></div>
+      <span class="hash">5c9a3d2</span>
+      <span class="msg"><span class="pre">build:</span> Obtain Pharmaciae Doctor diploma</span>
+      <span class="when">2010 to 2019</span>
+    </div>
+
+    <div class="blab">└─ branch: professional</div>
+    <div style="position:relative">
+      <div class="spine-b"></div>
+      <div class="r b1">
+        <div class="node"></div>
+        <span class="hash">7f1b8e3</span>
+        <span class="msg"><span class="pre">feat:</span> Internship, Bone Marrow Transplantation Center</span>
+        <span class="when">2018</span>
+      </div>
+      <div class="r b1">
+        <div class="node"></div>
+        <span class="hash">2d6c4a9</span>
+        <span class="msg"><span class="pre">feat:</span> Internship, local pharmacy</span>
+        <span class="when">2017 to 2018</span>
+      </div>
+      <div class="r b1">
+        <div class="node"></div>
+        <span class="hash">9e3f7b1</span>
+        <span class="msg"><span class="pre">feat:</span> Internship, Saïd pharmaceutical industry</span>
+        <span class="when">2017</span>
+      </div>
+      <div class="r b1">
+        <div class="node"></div>
+        <span class="hash">4a8d2c6</span>
+        <span class="msg"><span class="pre">spike:</span> Training, Mongi-Slim Hospital</span>
+        <span class="when">2016</span>
+      </div>
+      <div class="r b1">
+        <div class="node"></div>
+        <span class="hash">1b5e9f4</span>
+        <span class="msg"><span class="pre">spike:</span> Training, local pharmacy</span>
+        <span class="when">2013</span>
+      </div>
+    </div>
+
+    <div class="r acad">
+      <div class="node"></div>
+      <span class="hash">3f7b2e5</span>
+      <span class="msg"><span class="pre">init:</span> Obtain Baccalauréat diploma</span>
+      <span class="when">2006 to 2010</span>
+    </div>
+  </div>
+
+  <div class="bh"><h2>Publications</h2></div>
+  <div class="rows">
+    <a href="#">
+      <span class="t">Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking
+        <span class="sub">Khiari, Masters, Mahmoud, Lill · ArXiv preprint · 10.48550/arXiv.2509.12915</span></span>
+      <span class="yr">2025</span>
+    </a>
+  </div>
+  <a class="more" href="#">all publications →</a>
+
+  <div class="bh"><h2>Talks</h2></div>
+  <div class="rows">
+    <a href="#">
+      <span class="t">Agentic AI for computer-aided drug design
+        <span class="sub">PhD Summer School, Neuchâtel · slides rewritten as a post</span></span>
+      <span class="yr">2026</span>
+    </a>
+  </div>
+  <a class="more" href="#">all talks →</a>
+
+  <div class="contact">
+    <a href="#">research@sofk.ch</a>
+    <a href="#">github.com/sofienekhiari</a>
+    <a href="#">linkedin.com/in/khiarisofiene</a>
+  </div>
+
+</div>
+</body>
+</html>

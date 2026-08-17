@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "1.0",
+  "id": "88908052-c183-44a5-8a0c-52aca02f1e49",
+  "kind": "round",
+  "meta": {
+    "eyebrow": "sofk.ch · Round 6 · 2026-08-17",
+    "title": "Words and marks I put on your site",
+    "dek": [
+      { "type": "text", "text": "The site is built and working. In building it I wrote prose that speaks in your voice about you, and drew a small mark that now represents you in a browser tab. Neither is engineering, and neither was mine to settle. One of them I have already pulled off the page rather than leave standing while you decide, because I could not support it." }
+    ],
+    "chips": ["3 decisions · D-26 to D-28", "content and identity, not code", "one claim already removed", "blank whys welcome"]
+  },
+  "content": [
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "Removed already", "heading": "A claim I should not have written" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "note", "heading": "Not on the ballot, because it was simply wrong" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The publications page ended with: \"A complete and continuously updated record is on GitHub, and new work appears here as it is released.\" I wrote that to stop a one-item page feeling thin. GitHub is a code host, not a publication record, so the sentence asserts something about you that is very likely false, on the page where a reader is most likely to check. It is removed and the page now simply ends after the entry." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "There is a real gap where it was: a reader who wants your full record has nowhere to go. If you have an ORCID, a Google Scholar profile or an institutional page, that is what belongs there. That is a fact I do not have rather than a decision, so it is not a card. Tell me the link and I will add it." }] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-26 · words in your voice", "heading": "Copy I wrote that speaks as you" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "What is actually at stake",
+            "heading": "Where the new sentences appear, and who reads them",
+            "sub": "the exact strings, so you can judge them rather than take my word",
+            "citations": [
+              { "authors": "Jeremy Howard", "year": 2024, "title": "The /llms.txt file", "venue": "llmstxt.org", "url": "https://llmstxt.org/" },
+              { "authors": "Google", "year": 2026, "title": "Control your snippets in Google Search results", "venue": "Google Search Central documentation", "url": "https://developers.google.com/search/docs/appearance/snippet" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Your bio was already written, and D-12 made it the single source, so none of it is mine. But three surfaces needed shorter text that did not exist, and I wrote it rather than stopping. These are not decorative: the summary is what a search engine is most likely to show as your snippet, and it is the blockquote an AI agent reads first from `llms.txt`." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The summary, currently in `profile.ts`: \"Pharmacist and software developer, pursuing a PhD in the Computational Pharmacy Group at the University of Basel. Works on deep learning and agentic AI for molecular docking and drug discovery, and advocates for open source software and open science.\"" }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The publications page subtitle: \"Preprints and papers in computational pharmacy, molecular docking and drug discovery.\" The talks page subtitle: \"Each talk is rewritten here as an article, so the argument survives without the room.\" And the talks empty state: \"Nothing published yet. Write-ups appear here after a talk is given, starting with the 2026 PhD Summer School.\"" }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Two of those carry a claim rather than a description. \"Works on deep learning and agentic AI\" compresses what you do into two labels. And the empty state announces a specific forthcoming talk, which commits you in public to publishing it." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-26",
+            "chip": "D-26",
+            "title": "Does my copy stay, or do you write it?",
+            "state": "Needs your ruling",
+            "context": "Four short strings, all currently live in the build. They read as you, to readers who cannot tell the difference. The summary in particular is the sentence most likely to be quoted back at you by a search engine or an AI answer.",
+            "need": "whether you are comfortable with words you did not write standing in your voice, or want to replace them.",
+            "ballot": [
+              { "value": "keep", "label": "keep — they are accurate enough, leave them" },
+              { "value": "summary", "label": "summary — you rewrite the summary, the rest stays" },
+              { "value": "all", "label": "all — you write all four, I use placeholders until then" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "keep", "title": "Keep all four as written" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Nothing changes. The strings above stay in the build." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "They are drawn from your own bio and your own description of the work, so they are unlikely to be wrong." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The site is finished rather than waiting on a writing task that competes with a retreat and two learning contracts." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You can change any of them later in one file with no rebuild of anything else." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The summary is the single most quoted sentence about you and it is not yours." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "\"Agentic AI\" and \"deep learning\" are my compression of your work, and you may describe it differently to a committee." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The empty state publicly commits you to publishing the Summer School write-up." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "summary", "title": "You rewrite the summary, the page subtitles stay" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "You supply the one sentence that describes you, and the three shorter page strings stay as they are." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Targets the only string with real reach for the cost of one sentence." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The page subtitles are descriptions of sections, not claims about you, so they carry far less." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "One sentence is a writing task you will actually finish." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Leaves the Summer School commitment in the empty state unexamined." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A self-summary in one sentence is genuinely hard, so it may sit unwritten." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "all", "title": "You write all four" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Every sentence on the site is yours. I mark the four with a visible placeholder until you supply them." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing on your professional site is written by something that is not you." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Forces the Summer School commitment to be a deliberate statement rather than a side effect." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The strictest reading of the principle that you own what is defensible." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Blocks the finished site on a writing task, and placeholders have a way of shipping." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Section subtitles are the kind of functional label that rarely rewards agonising." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-27 · a mark for you", "heading": "The favicon" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-27",
+            "chip": "D-27",
+            "title": "The favicon I drew",
+            "state": "Needs your ruling",
+            "context": "The old site had none: /favicon.ico returned a 404, which was one of the audit findings. I drew one rather than ship the browser's blank page icon. It is a teal rounded square with a white commit node sitting on a faint vertical line, so it is the timeline reduced to 32 pixels. That makes it a small visual identity for you, which is not a thing I should choose on my own.",
+            "need": "whether that mark represents you, or whether you would rather it were something else or nothing.",
+            "ballot": [
+              { "value": "node", "label": "node — keep the commit-node mark" },
+              { "value": "initials", "label": "initials — an SK monogram instead" },
+              { "value": "none", "label": "none — no favicon, as before" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "node", "title": "Keep the commit node" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A teal rounded square, a white dot on a faint spine: the smallest possible piece of the timeline." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "It refers to the signature element, so the tab icon and the page tell the same story." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Legible at 16 pixels, which most marks are not." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Uses only the accent D-05 preserved, so it adds no new identity." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A dot on a line is generic out of context, and a tab is out of context by definition." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It leans on the git metaphor, which not every visitor reads." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "I designed it, and a personal mark is a personal thing." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "initials", "title": "An SK monogram" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Your initials set in Inter, white on teal, as the tab icon." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Unambiguously yours, and identifiable in a row of tabs." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Uses the typeface the whole site is set in, so it needs no new decision." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The conventional answer for a personal site, and conventions work." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Two letters at 16 pixels are cramped and often illegible." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Says nothing about the work, where the node at least gestures at it." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "none", "title": "No favicon" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Remove it and let the browser show its default." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "No mark is better than a mark you do not like representing you." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing to maintain, and the site worked without one for years." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A missing favicon reads as an unfinished site, and it was a genuine audit finding." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The request still 404s in your server logs and in the browser console." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-28 · two dependencies", "heading": "How the fonts are delivered" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-28",
+            "chip": "D-28",
+            "title": "Font delivery: npm packages, vendored files, or the CDN?",
+            "state": "Needs your ruling",
+            "context": "D-05 fixed which typefaces, not how they arrive. I added two dependencies, @fontsource-variable/inter and @fontsource-variable/jetbrains-mono, which self-host the same faces. Library selection is on your gated list, so this is yours. The old site used an @import from the Google Fonts CDN inside its stylesheet, which serialises the font download behind the CSS and adds a third-party origin to every page load.",
+            "need": "whether you would rather manage fonts as versioned dependencies, as files you own outright, or not manage them at all.",
+            "ballot": [
+              { "value": "packages", "label": "packages — the two fontsource packages, as built" },
+              { "value": "vendored", "label": "vendored — commit the woff2 files directly" },
+              { "value": "cdn", "label": "cdn — back to the Google Fonts CDN" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "packages", "title": "Keep the two fontsource packages" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Pinned at 5.3.0, self-hosted, and the build emits only the subsets actually used." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Versioned and pinned like every other dependency, so updating is deliberate and visible." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Self-hosted, so no third-party origin and no render-blocking external request." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Variable builds cover the whole weight axis in one file per subset." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Two more dependencies on a site that would otherwise have three." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The site cannot be rebuilt without npm working, for the sake of two font files." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It emitted eleven woff2 subsets including Cyrillic and Vietnamese, which this site will never need." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "vendored", "title": "Commit the font files directly" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Two woff2 files in `public/fonts/`, latin subset only, with hand-written @font-face rules. No dependency." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Fewest files served: two, against the eleven subsets currently emitted." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The site can be rebuilt in ten years with no package registry involved." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Both faces are openly licensed, so vendoring them is entirely permitted." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Binary files in git with no version number, so updating means remembering where they came from." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Latin-only silently breaks if you ever write a name the subset does not cover." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Hand-written @font-face is one more thing to get subtly wrong." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "cdn", "title": "Back to the Google Fonts CDN" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A stylesheet link to fonts.googleapis.com, as the previous site had, with no local font files at all." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing to install, nothing to commit, nothing to update." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It is what the site did before and it worked." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Sends every visitor's IP address to a third party purely to render text." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "An external origin in the critical render path, and the site breaks if it is blocked or unreachable." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Sits awkwardly beside the open-source and open-science position in your own bio." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "Where things stand", "heading": "The site is built and working" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "good", "heading": "Everything else from rounds 1 to 5 is done and checked" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Three pages build, the Ledger layout works at both widths, all nine timeline entries are keyboard operable as native disclosures, the spine draws on scroll, the six documents are linked from their entries at their original URLs, `llms.txt` and the profile README both generate from the single bio source, and there is not one em-dash in any file or in any built page. I verified the no-JavaScript requirement by stripping every script from the built HTML and confirming the content is still there." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Nothing is committed. After this round the remaining thread is your D-18 note: whether a display typeface and a bolder register earn their place now that there is a real page to judge, which would supersede D-16." }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

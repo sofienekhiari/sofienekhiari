@@ -1,0 +1,59 @@
+{
+  "schema": "ldo-rounds/v1",
+  "rounds": {
+    "round-1": {
+      "round": "round-1",
+      "status": "consumed",
+      "revision": 1,
+      "def": "round-1.def.json",
+      "answers": "round-1.answers.json",
+      "title": "Foundations for the redesign",
+      "handedBackAt": "2026-08-17T10:51:00.592Z"
+    },
+    "round-2": {
+      "round": "round-2",
+      "status": "consumed",
+      "revision": 1,
+      "def": "round-2.def.json",
+      "answers": "round-2.answers.json",
+      "title": "The stack, and three things it unblocks",
+      "handedBackAt": "2026-08-17T11:01:40.711Z"
+    },
+    "round-3": {
+      "round": "round-3",
+      "status": "consumed",
+      "revision": 1,
+      "def": "round-3.def.json",
+      "answers": "round-3.answers.json",
+      "title": "The look, and how it gets built",
+      "handedBackAt": "2026-08-17T11:25:09.488Z"
+    },
+    "round-4": {
+      "round": "round-4",
+      "status": "consumed",
+      "revision": 1,
+      "def": "round-4.def.json",
+      "answers": "round-4.answers.json",
+      "title": "Two things that block the first commit",
+      "handedBackAt": "2026-08-17T12:42:10.846Z"
+    },
+    "round-5": {
+      "round": "round-5",
+      "status": "consumed",
+      "revision": 1,
+      "def": "round-5.def.json",
+      "answers": "round-5.answers.json",
+      "title": "Three choices I made in code before asking",
+      "handedBackAt": "2026-08-17T12:49:43.781Z"
+    },
+    "round-6": {
+      "round": "round-6",
+      "status": "consumed",
+      "revision": 1,
+      "def": "round-6.def.json",
+      "answers": "round-6.answers.json",
+      "title": "Words and marks I put on your site",
+      "handedBackAt": "2026-08-17T13:11:31.223Z"
+    }
+  }
+}

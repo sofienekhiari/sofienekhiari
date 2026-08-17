@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "id": "68b0b1c1-c27b-4911-915f-a699536ffe60",
+  "kind": "round",
+  "meta": {
+    "eyebrow": "sofk.ch · Round 4 · 2026-08-17",
+    "title": "Two things that block the first commit",
+    "dek": [
+      { "type": "text", "text": "Round 3 closed and I started building. Two gated choices surfaced immediately, and both block rather than wait: one because it decides how every component gets written, and one because I found something in `docs/` while working out what has to survive the rebuild. This round is deliberately short. Direction A, choreographed motion, prose talk posts and the split comment rule are all settled and none of that is reopened here." }
+    ],
+    "chips": ["2 decisions · D-21, D-22", "both block the build", "short by design", "blank whys welcome"]
+  },
+  "content": [
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-21 · styling", "heading": "How the CSS gets written" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "Why this was not settled by choosing Astro",
+            "sub": "and why it decides what every component looks like in source",
+            "citations": [
+              { "authors": "Astro", "year": 2026, "title": "Styling and CSS", "venue": "Astro documentation", "url": "https://docs.astro.build/en/guides/styling/" },
+              { "authors": "Tailwind Labs", "year": 2026, "title": "Styling with utility classes", "venue": "Tailwind CSS documentation", "url": "https://tailwindcss.com/docs/styling-with-utility-classes" },
+              { "authors": "Mozilla Contributors", "year": 2026, "title": "Using CSS custom properties (variables)", "venue": "MDN Web Docs", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "D-01 described Tailwind as available in each option rather than chosen, so picking Astro did not pick a styling approach. It matters more here than it usually would, because of two rulings that are already in force. D-05 preserved an identity that is currently expressed as CSS custom properties, a complete token set for light and dark that already exists and works. And D-20 exempted markup from the comment-every-line rule while keeping it in TypeScript, which means the styling approach decides how much of the code lives in the exempt region." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Astro supports both natively. A scoped `<style>` block in a component is automatically namespaced to that component, so plain CSS does not carry the usual risk of selectors leaking. Tailwind is an official integration and works fine. The real difference is where the design decisions end up living: in a stylesheet with named tokens, or in class attributes on the markup." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-21",
+            "chip": "D-21",
+            "title": "Tailwind, or plain CSS with your existing tokens?",
+            "state": "Needs your ruling",
+            "context": "Your design skill defaults to Tailwind, and you named it when you lifted the no-build rule. Against that, the site already has a working token system that D-05 told me to preserve, and the three mockups you just chose from were built in plain CSS with exactly those tokens. This decides how every component in the repository is written.",
+            "need": "whether you want the industry-standard utility workflow, or styling that keeps your design tokens as the single named source.",
+            "ballot": [
+              { "value": "tailwind", "label": "tailwind — Tailwind v4, tokens as its theme" },
+              { "value": "plaincss", "label": "plaincss — scoped CSS with the existing custom properties" },
+              { "value": "hybrid", "label": "hybrid — tokens in CSS, Tailwind for layout utilities" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "tailwind", "title": "Tailwind v4, with your palette configured as its theme" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Utility classes in the markup. Your teal and your type scale become Tailwind theme values so they stay named, and the existing stylesheet is retired." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "What your design skill assumes throughout, so its spacing, layout and dark-mode guidance applies without translation." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Already on your CV and widely used, so it is the more transferable thing to have in the repository." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing to name: you never invent another class name or wonder where a rule lives." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Unused CSS cannot accumulate, because only what appears in the markup is generated." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Puts nearly every design decision into the exempt markup region under D-20, so almost none of the site's visual logic carries a comment." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Long class strings make lines hard to read and push files towards your line budget faster." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Discards a token system that already exists, already handles light and dark, and that D-05 asked to preserve." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "One more build dependency to keep current on a site you touch a few times a year." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "plaincss", "title": "Scoped CSS, keeping the custom properties you already have" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "One global stylesheet carrying the tokens, plus a scoped `<style>` block per component. This is how the three mockups were built, including the one you chose." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Continuous with what exists: the tokens, the light and dark sets, and the mockup you picked all carry over directly." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Design decisions live in named, commentable CSS rather than in markup that D-20 exempts, so the reasoning stays documented." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "No styling dependency at all, which suits a site that must keep working untouched for long stretches." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Scroll-driven animation and view transitions, both now required by D-18, are plain CSS features and read more naturally here." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "You have to name things, and naming is where CSS codebases decay." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your design skill's concrete guidance is written in Tailwind classes, so I translate it each time." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Less transferable than Tailwind experience, and it is the older-fashioned choice." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Consistency depends on discipline rather than being enforced by a constrained set of utilities." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "hybrid", "title": "Tokens in CSS, Tailwind for layout and spacing only" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Colour, type and the identity stay in custom properties. Tailwind handles grid, flex, spacing and responsive breakpoints in the markup." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Splits along a real seam: identity is worth naming, layout usually is not." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps the preserved token system while getting Tailwind's genuinely good responsive layout ergonomics." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Direction A's asymmetric grid is the fiddliest part of the build and the part Tailwind helps most with." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Two systems means two places to look, and the boundary between them will erode." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your design skill says one system per project, and this is explicitly not that." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Carries Tailwind's dependency cost while using a fraction of it." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-22 · something I found", "heading": "Six documents are public and nothing links to them" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "note", "heading": "The facts, before the question" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "`docs/assets/documents/` holds six PDFs totalling about 4.6 MB, and every one of them is downloadable right now by anyone who knows or guesses the URL: `msc_drug_sciences_degree.pdf`, `msc_drug_sciences_degree_transcript.pdf`, the German and English MSc supplements, `pharm_d_degree_ar.pdf`, and its German translation." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Nothing on the site links to any of them. I grepped the page, `llms.txt` and the README and found no reference at all, so they are orphaned rather than published. That is worth knowing in both directions: nobody is finding them through your site, and equally nothing tells a visitor they exist." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Documents of this kind usually carry more than the qualification: a transcript typically lists every grade, and certificates often carry a matriculation number and a date of birth. I have not opened them, because they are yours and reading them is not needed to ask the question. You know what is in them." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-22",
+            "chip": "D-22",
+            "title": "What happens to the six PDFs?",
+            "state": "Needs your ruling",
+            "context": "The build overwrites `docs/`, so I have to know whether to carry these across into the new site's static assets. Doing nothing is not available: they either move with the rebuild or they stop being published. Note that removing them from the site does not remove them from git history, and anything already indexed may persist in caches for a while.",
+            "need": "whether these are documents you intend to publish, or files that ended up public without a decision.",
+            "ballot": [
+              { "value": "keep", "label": "keep — carry them over, still unlinked" },
+              { "value": "link", "label": "link — carry them over and actually link them" },
+              { "value": "remove", "label": "remove — drop them from the published site" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "keep", "title": "Carry them over exactly as they are" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The files move into the new site's static assets at the same paths, so existing URLs keep working, and nothing links to them." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "No URL breaks, which matters if you have ever sent one of these links to anybody." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You can point someone at a credential without email attachments." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Zero effort and nothing to reverse later." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps personal documents publicly retrievable as a side effect rather than as a decision." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A transcript with every grade on it is more than a credential check needs." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Unlinked public files are exactly what crawlers and scrapers pick up without anyone noticing." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "link", "title": "Carry them over and link them properly" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The degrees become part of the site: each timeline entry can offer its certificate, so the documents are published deliberately and visibly." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Verifiable credentials are genuinely useful on an academic page, and few people bother." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It fits the timeline, where each entry already opens into detail." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Turns an accident into a feature, and open verification suits your open-science position." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Deliberately publishing a full transcript is a larger disclosure than most people would choose." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Grades invite judgement on a page where the work should speak." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Linked files get indexed properly, so this materially increases their reach." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "remove", "title": "Drop them from the published site" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The PDFs do not move into the new site. They stay in git history and on your machine, and stop being served from sofk.ch." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing links to them, so removing them costs no visitor anything." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The rebuild is the natural moment, because carrying them over is the active choice now." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A credential can always be sent on request, which is how most people handle documents like these." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Any link you have shared previously stops working with no redirect." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Removing from the site does not remove them from git history, so it is a partial measure." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You may have put them there on purpose for an application and forgotten." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "Meanwhile", "heading": "What I am doing while this is open" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "info", "heading": "Work that does not depend on either card" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The Astro project scaffold, the content sources for the bio, publications and talks, and the deletion of the two legacy instruction files are all independent of these two questions, so I am doing them now rather than idling. The pages themselves wait on D-21, and the static assets wait on D-22." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Your note on D-18 is not forgotten: once direction A exists as a real page, the question of whether a display typeface and a bolder register earn their place comes back as a fresh decision that would supersede D-16, rather than being quietly reinterpreted." }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

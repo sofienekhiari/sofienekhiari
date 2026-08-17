@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "1.0",
+  "id": "e2dbe683-f541-41fb-9952-911b3ba18c19",
+  "kind": "round",
+  "meta": {
+    "eyebrow": "sofk.ch · Round 5 · 2026-08-17",
+    "title": "Three choices I made in code before asking",
+    "dek": [
+      { "type": "text", "text": "While round 4 was open I built the scaffold, and in doing so I made three choices that have a defensible why and should have reached you first. One of them I made worse by mentioning it in chat, which is the exact channel your rules forbid for a decision. Nothing is committed and nothing is published, so all three are cheap to reverse whichever way you rule. I have stopped building on top of them." }
+    ],
+    "chips": ["3 decisions · D-23 to D-25", "retroactive: already in code", "nothing committed", "blank whys welcome"]
+  },
+  "content": [
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-23 · your GitHub profile", "heading": "What the generated README looks like" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-23",
+            "chip": "D-23",
+            "title": "How much of the old README's character should survive?",
+            "state": "Needs your ruling",
+            "context": "D-12 ruled the bio is authored once and generated everywhere, and the bio therefore has to be stored as plain text to serve the hero, llms.txt and the README alike. Losing the inline links is a consequence of that and not a choice. Dropping the emoji and reshaping the document was my choice, and since this file is rendered on your public GitHub profile it is visibly yours rather than mine. The current generated version has a name heading, an italic role line, an affiliation line, the four bio paragraphs, a rule, a bulleted link list, and a pointer to sofk.ch.",
+            "need": "whether your GitHub profile should read as plain and typographic, or keep the friendlier voice it had.",
+            "ballot": [
+              { "value": "plain", "label": "plain — keep it as generated, no emoji" },
+              { "value": "emoji", "label": "emoji — restore the emoji and the warmer tone" },
+              { "value": "richlinks", "label": "richlinks — no emoji, but restore inline links in the prose" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "plain", "title": "Keep the plain generated version" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Name, role, affiliation, the bio, a link list, a pointer to the site. No decoration." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Matches the register of the site it now points at, so the two read as one person." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Simplest generator, so nothing about it can drift or break." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your design skill discourages emoji as decoration, and this is the same voice." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "GitHub profiles are a friendlier genre than a research site, and this may read as cold there." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The emoji were doing real scanning work, marking the group and the university at a glance." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It is a change to something you wrote deliberately, made as a side effect of a build step." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "emoji", "title": "Restore the emoji and the warmer tone" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The generator adds back the emoji markers and the conversational shape the hand-written README had, while still deriving the words from the single bio source." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing visible changes on your profile, so the rebuild costs you no personality." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Emoji are native to the GitHub profile genre in a way they are not on a website." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps a deliberate authored choice rather than letting tooling quietly overrule it." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The generator has to hold presentation rules that belong to one surface only, which complicates it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Two different voices for the same bio, depending on where it is read." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Emoji render inconsistently across platforms and are noise to a screen reader." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "richlinks", "title": "No emoji, but put the inline links back" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The plain shape stays, and the generator re-inserts links for the research group and the university inside the first paragraph, from a small explicit phrase-to-URL map." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Recovers the genuinely useful part of the old README without the decorative part." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Links in prose are read more than links in a list at the bottom." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The same map could later enrich the hero, so the work is not single-use." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Phrase matching is brittle: reword the bio and the link silently stops appearing." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Silent failure is the worst kind, and this one produces no error at all." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "More generator complexity than a profile README plausibly deserves." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-24 · the URLs", "heading": "The shape of every published address" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "Why this counts as a decision and not a setting",
+            "sub": "and why I got it wrong by writing the default down",
+            "citations": [
+              { "authors": "Tim Berners-Lee", "year": 1998, "title": "Cool URIs don't change", "venue": "W3C Style Guide", "url": "https://www.w3.org/Provider/Style/URI" },
+              { "authors": "Astro", "year": 2026, "title": "Configuration reference", "venue": "Astro documentation", "url": "https://docs.astro.build/en/reference/configuration-reference/" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "I set `build.format` to `directory` in the Astro config. I have since checked Astro's own defaults file, and `directory` is already the default, so what I actually did was write a framework default down and present it as configuration. Your boundary calls accepting a library default the most dangerous form of a silent decision, precisely because it leaves nothing in the diff that looks like a choice. This one at least left a line, which is how I caught it." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "It matters because URLs are the most permanent thing a site publishes. Every link anyone ever sends, every search result, every citation of your talks page depends on the address not moving. Changing it later means either breaking those links or maintaining redirects, and GitHub Pages gives you no redirect mechanism, so on this host the choice is close to irreversible in practice." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Concretely: `directory` publishes `/publications/index.html` and the address reads `sofk.ch/publications/`. `file` publishes `/publications.html` and the address reads `sofk.ch/publications.html`. The current site has no equivalent, since everything lived at one address with anchors, so nothing is being broken either way." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-24",
+            "chip": "D-24",
+            "title": "Clean directory URLs, or explicit .html files?",
+            "state": "Needs your ruling",
+            "context": "Already in the config as `directory`, which is also Astro's default. On GitHub Pages there is no redirect facility, so whichever shape ships is effectively permanent for any link that gets shared.",
+            "need": "whether your addresses should look like a modern site or be explicit about what they are.",
+            "ballot": [
+              { "value": "directory", "label": "directory — sofk.ch/publications/" },
+              { "value": "file", "label": "file — sofk.ch/publications.html" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "directory", "title": "Directory URLs, as currently configured" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "`sofk.ch/publications/`, `sofk.ch/talks/`, and a talk at `sofk.ch/talks/summer-school-2026/`." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Hides the implementation, so moving off Astro one day changes no address." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Reads better spoken aloud and written in a paper or on a slide." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nests naturally, which the Talks section needs as soon as it has entries." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Trailing slashes are a classic source of duplicate-address confusion." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Slightly more files on disk, since each page becomes its own folder." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "file", "title": "Explicit .html files" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "`sofk.ch/publications.html`, and a talk at `sofk.ch/talks/summer-school-2026.html`." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "No trailing-slash ambiguity at all: one address, one file." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The output folder maps one to one onto what is served, which is easy to reason about." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Honest about being a static site, which suits the open-source register." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Bakes the implementation into permanent addresses, which is what the W3C guidance warns against." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Reads as dated next to essentially every current site." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Uglier in a citation or on a slide, where these URLs will actually appear." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-25 · where publications live", "heading": "A typed array, or a content collection" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-25",
+            "chip": "D-25",
+            "title": "How is the publication list stored?",
+            "state": "Needs your ruling",
+            "context": "On-disk data format is explicitly on your gated list, and I picked one with a rationale, which is what makes it yours rather than mine. I wrote `src/data/publications.ts` as a typed array because a publication is metadata with no body text, unlike a talk, which D-19 turned into a written article and which therefore is a content collection. You said another publication is coming, so this decides what adding one looks like.",
+            "need": "whether you would rather add a publication by editing a TypeScript array, or by dropping in a file.",
+            "ballot": [
+              { "value": "array", "label": "array — typed TypeScript array, as written" },
+              { "value": "collection", "label": "collection — an Astro content collection like talks" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "array", "title": "Typed array in src/data/publications.ts" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "One file holding every publication as an object. Adding one means copying the block above it and editing the fields." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The whole list is visible in one screen, so ordering and consistency are obvious." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The type checker catches a missing or misspelled field immediately, in the editor." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Matches the data: a publication is fields, and a file with only frontmatter and no body is an odd artefact." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Falls under D-20's full comment rules, so each entry can carry its own why." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Editing TypeScript to add a paper is more intimidating than editing a small text file." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Inconsistent with talks, so the repository has two patterns for two similar lists." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A syntax slip breaks the build, where a bad frontmatter field would fail more legibly." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "collection", "title": "An Astro content collection, one file per publication" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "`src/content/publications/*.md`, each with frontmatter and optionally a short summary as its body. Same mechanism as talks." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "One pattern for both lists, so there is a single way to add anything to this site." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Adding a publication is creating a small file, which is the least intimidating possible edit." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The schema still validates every field, with clearer errors than a type mismatch." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Leaves room to write a paragraph about a paper later without restructuring anything." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A file per publication with no body is ceremony around a handful of fields." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The list is no longer visible in one place, so ordering is harder to see." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Markdown frontmatter is exempt markup under D-20, so the entries lose the comment discipline." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "Already settled", "heading": "What round 4 unblocked, and what I will do next" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "good", "heading": "D-21 and D-22 are in force" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Tailwind is the styling system, with your teal and your type scale configured as its theme so the identity D-05 preserved stays named rather than scattered. The six documents are carried over and linked properly: the MSc degree, its transcript and both supplements attach to the MSc entry, and the Pharm.D. certificate and its German translation attach to the Pharm.D. entry, so they become published credentials rather than files that happened to be reachable." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Once you hand this back I install Tailwind, build the three pages in direction A with the choreographed timeline, write the `CLAUDE.md` and the path-scoped rule from all twenty-five decisions, and run the first real build. Then, per your D-18 note, the display typeface and the bolder register come back as a fresh decision against something you can actually look at." }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

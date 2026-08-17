@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "round": "round-1",
+  "revision": 1,
+  "updated": "2026-08-17T10:51:00.593Z",
+  "handedBack": true,
+  "handedBackAt": "2026-08-17T10:51:00.592Z",
+  "answers": {
+    "D-01": {
+      "question": "Which framework and build stack?",
+      "choice": "needinfo",
+      "label": "I need more information to decide",
+      "other": "",
+      "why": "Which one of the option, or another option, would work best with the skills I currently have?",
+      "endorsed": false
+    },
+    "D-02": {
+      "question": "Commit the build output, or build in CI?",
+      "choice": "commit",
+      "label": "commit — build locally, commit the output to docs/",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-03": {
+      "question": "The page set",
+      "choice": "three",
+      "label": "three — Home (with experience), Publications, Talks",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-04": {
+      "question": "Who is this site primarily for?",
+      "choice": "both",
+      "label": "both — a general professional reader, neither optimised for",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-05": {
+      "question": "Preserve the current visual identity, or overhaul it?",
+      "choice": "preserve",
+      "label": "preserve — keep teal and the type, modernise around them",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-06": {
+      "question": "Keep the git-log experience timeline, evolve it, or retire it?",
+      "choice": "evolve",
+      "label": "evolve — keep the idea, redesign the execution",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-07": {
+      "question": "What is the non-negotiable floor for the new site?",
+      "choice": "full",
+      "label": "full — content readable with no JS, keyboard parity, reduced motion honoured",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-08": {
+      "question": "Where do the project instructions live?",
+      "choice": "rules",
+      "label": "rules — short CLAUDE.md plus path-scoped .claude/rules/",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-09": {
+      "question": "What happens to the Cursor rule and the Copilot instructions?",
+      "choice": "delete",
+      "label": "delete — remove both, Claude Code only",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-10": {
+      "question": "The freelance full-stack developer role",
+      "choice": "drop",
+      "label": "drop — remove the claim from llms.txt, it stays off the site",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-11": {
+      "question": "Which set of dates is correct?",
+      "choice": "page",
+      "label": "page — PhD from January 2025, MSc to December 2024",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-12": {
+      "question": "How does the bio stay consistent across three published places?",
+      "choice": "generate",
+      "label": "generate — one source file, the others built from it",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    }
+  },
+  "readback": {},
+  "claims": {},
+  "codeReview": {},
+  "outputReview": {},
+  "finalComments": ""
+}

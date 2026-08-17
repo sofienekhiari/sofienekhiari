@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0",
+  "round": "round-3",
+  "revision": 1,
+  "updated": "2026-08-17T11:25:09.488Z",
+  "handedBack": true,
+  "handedBackAt": "2026-08-17T11:25:09.488Z",
+  "answers": {
+    "D-17": {
+      "question": "Which direction?",
+      "choice": "a",
+      "label": "a — Ledger, sticky rail, medium density",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-18": {
+      "question": "What is the motion level?",
+      "choice": "choreo",
+      "label": "choreo — the above plus scroll-driven motion on the timeline",
+      "other": "",
+      "why": "Not sure about abandoning typeface and spectacle, leave those as possible options depending on the designs we end up using.",
+      "endorsed": false
+    },
+    "D-19": {
+      "question": "How does a talk become a post?",
+      "choice": "prose",
+      "label": "prose — rewritten as an article, figures only where needed",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-20": {
+      "question": "How do your code-generation standards apply in this repository?",
+      "choice": "split",
+      "label": "split — full rules in TypeScript, exempt markup only",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    }
+  },
+  "readback": {},
+  "claims": {},
+  "codeReview": {},
+  "outputReview": {},
+  "finalComments": ""
+}

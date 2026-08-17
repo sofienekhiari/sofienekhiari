@@ -1,0 +1,417 @@
+{
+  "schemaVersion": "1.0",
+  "id": "fa8e5f13-e173-4a6f-a4c9-f9f2343bf0ab",
+  "kind": "round",
+  "meta": {
+    "eyebrow": "sofk.ch · Round 2 · 2026-08-17",
+    "title": "The stack, and three things it unblocks",
+    "dek": [
+      { "type": "text", "text": "Round 1 settled eleven of twelve. You deferred D-01 and asked which option would work best with the skills you currently have, so I went and read them: what each one assumes, and which of them survive a change of framework. That answer is " },
+      { "type": "text", "text": "D-13", "marks": [{ "type": "strong" }] },
+      { "type": "text", "text": " below, and it is not the answer I expected to be writing, because two of your own round-1 rulings moved the technical balance while your skills point the other way. The other three cards are questions your rulings left genuinely open rather than new ideas of mine." }
+    ],
+    "chips": ["4 decisions · D-13 to D-16", "D-13 follows up D-01", "mockups come in round 3", "blank whys welcome"]
+  },
+  "content": [
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "Round 1", "heading": "What you settled, so this round stands on its own" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "good", "heading": "Eleven rulings now in force" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Build locally and commit the output to `docs/` (D-02). Three pages: a home page carrying bio and experience together, plus Publications and Talks (D-03). Written for a general professional reader, with neither audience optimised for (D-04). Preserve the visual identity: teal, Inter and JetBrains Mono stay (D-05). Keep the git-log timeline as an idea but rebuild its execution (D-06). Full progressive enhancement: every word readable with JavaScript off, keyboard parity, reduced motion honoured (D-07). A short `CLAUDE.md` plus path-scoped `.claude/rules/` (D-08). Delete both the Cursor rule and the Copilot instructions (D-09). Drop the freelance role from `llms.txt` rather than restoring it to the site (D-10). The page's dates are the correct ones, so the PhD began January 2025 and the MSc ran to December 2024 (D-11). One bio source, with the other surfaces generated from it (D-12)." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "All eleven came back as deliberate blanks, which the record marks as endorsements rather than gaps. Nothing below re-opens any of them." }] }
+          ]
+        },
+        {
+          "type": "box",
+          "attrs": { "variant": "note", "heading": "One consequence of those rulings, stated plainly" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "D-04, D-05 and D-07 each independently pull the design towards restraint: a general reader rather than a design-conscious one, an inherited palette and typeface rather than a fresh one, and a rule that content must work before any script runs. Your brief also asked to impress on sight. Those are reconcilable, but only in one particular way: the impression has to come from typographic and spatial craft rather than from spectacle or a bold new identity. That is a real constraint on round 3, and it is worth knowing now rather than being surprised by a quiet-looking mockup later. D-16 exists because it is the largest lever left inside it." }] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-13 · follow-up to D-01", "heading": "Which stack, given the skills you actually have" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "The answer you asked for",
+            "heading": "Which of your skills care about the framework, and which do not",
+            "sub": "measured by reading them, not by assuming",
+            "citations": [
+              { "authors": "Astro", "year": 2026, "title": "Framework components", "venue": "Astro documentation", "url": "https://docs.astro.build/en/guides/framework-components/" },
+              { "authors": "Astro", "year": 2026, "title": "@astrojs/react integration", "venue": "Astro documentation", "url": "https://docs.astro.build/en/guides/integrations-guide/react/" },
+              { "authors": "Tailwind Labs", "year": 2026, "title": "Install Tailwind CSS with Astro", "venue": "Tailwind CSS documentation", "url": "https://tailwindcss.com/docs/installation/framework-guides/astro" },
+              { "authors": "Vercel", "year": 2026, "title": "Next.js: Static Exports", "venue": "Next.js documentation", "url": "https://nextjs.org/docs/app/guides/static-exports" },
+              { "authors": "Eleventy", "year": 2026, "title": "Eleventy documentation", "venue": "11ty.dev", "url": "https://www.11ty.dev/docs/" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "You have six installed skills that touch web design. I counted what each one actually references. Only one of them is written against a framework at all: `design-taste-frontend`, with 39 mentions of React, 16 of Tailwind, 26 of GSAP and 9 of Motion, and every code skeleton in it is a React component. `frontend-design`, `web-design-guidelines` and `extract-design-system` mention no framework whatsoever, because they deal in design principles, an interface-guidelines review, and design tokens. `animation-vocabulary` is a naming glossary. `improve-animations` audits any codebase's motion and writes plans rather than code." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "So five of the six are framework-agnostic and work identically whichever option you pick. One prefers React. That is a much weaker pull than it first appears, and there is a second reason it is weaker: the bulk of what makes `design-taste-frontend` valuable is its list of machine-design tells, its layout discipline rules and its pre-flight checklist, and none of that is React-specific. What is React-specific is its stack section and its two scroll-animation skeletons." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "One skill I should flag as not applicable rather than let you assume it counts: `hyperframes-animation` is by far your largest animation skill, but it is written for HyperFrames compositions, a paused-timeline deterministic system, not for a website. It does not bear on this choice." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The part I did not anticipate is that your own rulings changed the technical picture. D-07 requires every word to be readable with JavaScript disabled. Next.js with a static export produces static HTML, but it ships the React runtime to the browser on every page regardless of whether anything on that page is interactive. Astro inverts that default: a component with no client directive renders to HTML and ships no JavaScript at all, and the documentation states it plainly, that framework components render on the server as static HTML to avoid sending unnecessary JavaScript. Meanwhile D-04 and D-05 lowered the motion ceiling, which is exactly what React plus Motion plus GSAP is for. So the strongest argument for the heaviest option got weaker in the same round that its accessibility floor got stricter." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The correction to what I told you in round 1: I framed Astro as needing your design skill translated. Having now checked, Astro officially supports React components through `@astrojs/react` and Tailwind through its own documented integration, so that skill's React and Tailwind guidance applies inside an Astro island unchanged. The translation is narrower than I implied, and it was the weakest part of the case I built for you." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-13",
+            "chip": "D-13",
+            "title": "Which framework and build stack? (asked again, with the skills answer)",
+            "state": "Needs your ruling",
+            "context": "D-01 · follow-up. You deferred, asking which option best fits your current skills. Short version: five of your six web-design skills do not care, one prefers React, and that one's React-specific parts are its smallest parts. Your own D-07 ruling now favours shipping less JavaScript, and your D-04 and D-05 rulings reduce the need for the motion machinery React buys. All three options below satisfy D-02, because all three build locally to committed static files.",
+            "need": "whether you want the stack your one framework-bound skill was written for, the one whose defaults match the accessibility floor you just chose, or the smallest tool that solves the shared-nav and Talks problems.",
+            "ballot": [
+              { "value": "astro", "label": "astro — Astro, React islands only where needed" },
+              { "value": "next", "label": "next — Next.js App Router, static export" },
+              { "value": "eleventy", "label": "eleventy — Eleventy, minimal JavaScript" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "astro", "title": "Astro, with React islands only where something is interactive" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Pages render to HTML at build time and ship no JavaScript unless a component is explicitly marked interactive. React, Tailwind and Motion are all available inside islands via official integrations. Talks become typed content collections." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Its default behaviour is the D-07 floor you just chose, rather than something to engineer towards." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your React and Tailwind skill guidance still applies, because both are officially supported inside islands." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Content collections give the Talks section a schema, so a malformed talk fails the build instead of rendering wrong." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Built for exactly this shape of site: a bio, a publication list and a set of written-up talks." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "One more tool in your stack, and the one option not already on your CV." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The islands boundary is a real concept, and misplacing it silently ships more JavaScript than you intended." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your design skill's stack section and scroll skeletons still need adapting, even though its design rules do not." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "next", "title": "Next.js App Router with output: 'export'" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "React Server Components, `next/font`, Tailwind and Motion, exported to static HTML. Talks become MDX routes." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The stack your one framework-bound skill was written against, so nothing in it needs adapting at all." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Already on your CV and in your skills list, so it stays maintainable by you rather than only by me." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Largest ecosystem of the three, and the most transferable thing to learn well." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Ships the React runtime on every page, including pages that are entirely text, which is in tension with D-07 even though it does not violate it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Static export switches off most of what Next.js exists for, so you carry its complexity for a fraction of its benefit." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Its main advantage is rich interactivity, and D-04 and D-05 just reduced how much of that this site wants." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "eleventy", "title": "Eleventy with Tailwind and hand-written JavaScript" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Templating and Markdown, no component runtime. It removes the duplication that multi-page HTML would create and nothing more." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Least machinery and least to break on a site you will touch a few times a year." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "No framework runtime reaches the visitor, which serves D-07 as directly as Astro does." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Closest to the hand-shaped HTML and CSS you already have, so the current work is not wasted." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nunjucks or Liquid templating teaches you nothing you can use elsewhere, unlike React." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Motion and the component patterns your design skill assumes are unavailable, so any richer interaction is hand-rolled." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "No typed content schema for Talks, so a malformed entry fails at render rather than at build." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-14 · the signature", "heading": "What \"evolve\" means for the timeline" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-14",
+            "chip": "D-14",
+            "title": "In the rebuilt timeline, what happens to the commit hashes?",
+            "state": "Needs your ruling",
+            "context": "You ruled D-06 as evolve: keep the git-log idea, rebuild the execution. That leaves the crux open, and it is the specific thing the case against D-06 raised. The seven-character hashes (8b2e4f1, 5c9a3d2 and the rest) are invented. They are also most of what makes the thing charming, and simultaneously the part that is decoration dressed as data on a page about research. D-04 said the reader is a general professional, not necessarily a git user.",
+            "need": "whether the costume stays complete, gets replaced by real information, or becomes something genuinely verifiable.",
+            "ballot": [
+              { "value": "keephashes", "label": "keephashes — invented hashes stay, they are the charm" },
+              { "value": "dates", "label": "dates — hashes become dates in the same monospace slot" },
+              { "value": "realrefs", "label": "realrefs — the slot carries something real and checkable" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "keephashes", "title": "Keep the invented hashes" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The monospace hash column stays exactly as it reads now. The evolution is purely visual: better type, better spacing, working keyboard access, an honest scroll behaviour." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The joke lands completely or not at all, and the hashes are what make it a git log rather than a list with a monospace font." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nobody reads a hash as a factual claim, any more than they read a decorative border as data." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps the one genuinely distinctive element intact while fixing everything that was actually broken." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Invented identifiers on a researcher's page are a bad look precisely because the page's currency is verifiable claims." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The hash occupies the slot where a date would tell the reader something they want, so it costs information to buy atmosphere." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A non-git reader sees seven random characters and learns nothing from them." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "dates", "title": "Replace the hashes with dates" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The monospace column carries the date instead, still typeset like a hash. The git framing survives in the graph, the branch, the prefixes and the uncommitted PhD." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The reader gets the fact they actually came for, in the position their eye already goes to." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The metaphor still reads, because the branching graph and the commit prefixes do most of that work, not the hashes." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing on the page is invented any more, which matters more now that D-11 has just corrected a date conflict." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A git log with dates where hashes belong may read as a git log that got it wrong." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Dates already appear in each entry's detail view, so the column partly duplicates." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Softening a joke is how it stops being memorable, which is the whole point of a signature element." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "realrefs", "title": "Put something real and checkable in the slot" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The slot carries a genuine identifier where one exists: a DOI fragment for the preprint, an arXiv id, a real commit from a public repository, and a plain marker where nothing real exists." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Turns the device from decoration into navigation, because some of those identifiers can be links to real things." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Strongest version for an academic reader: every mark on the page resolves to something." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It is the rare move that makes the concept both more honest and more interesting at once." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Most entries are degrees and internships with no identifier of any kind, so the column would be mostly empty or padded." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Mixed content in one column reads as inconsistent rather than rigorous." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Most work of the three, for a column seven characters wide." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-15 · the machine-readable file", "heading": "llms.txt, now that the page set is known" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "What llms.txt is, and whether anything reads it",
+            "sub": "the evidence I gathered while round 1 was open",
+            "citations": [
+              { "authors": "Jeremy Howard", "year": 2024, "title": "The /llms.txt file", "venue": "llmstxt.org", "url": "https://llmstxt.org/" },
+              { "authors": "Ahrefs", "year": 2026, "title": "We studied 137,210 domains to see if AI bots fetch llms.txt", "venue": "Ahrefs Blog", "url": "https://ahrefs.com/blog/llmstxt-study/" },
+              { "authors": "Google", "year": 2026, "title": "Optimizing for generative AI features on Google Search", "venue": "Google Search Central documentation", "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The proposal, from September 2024 and revised this month, asks for one markdown file: an H1, a blockquote summary, then H2 sections whose every list item is a markdown link with optional notes. Its purpose is to give an agent cheap, clean markdown instead of a page full of navigation and scripts." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The evidence on whether that works is not encouraging. Ahrefs checked 137,210 domains in May 2026: 28 percent publish a valid `llms.txt`, and 97 percent of those files received no requests at all that month. Of the roughly 1,100 that got any traffic, 96 percent of requests came from bots, mostly not AI ones, with SEO audit tools the largest single category. No AI bot ever probed for the file on a domain that did not have one. Google states in its own documentation that you do not need such files to appear in Search including its generative features, because Search does not use them, and that keeping one will neither help nor harm your visibility." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "One finding cuts the other way, and it is the reason this is a real question rather than a formality: in the same Ahrefs breakdown, Claude-Code fetched these files more than every AI retrieval bot and assistant combined. The audience that actually reads `llms.txt` is coding agents, not search engines. Which happens to include the tool writing your site." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Two facts about your current file. Its `## Contact` section does not conform, because its three items are a bare email address and two bare URLs rather than markdown links. And until D-03, every link in it pointed at an anchor on the same single page, so there was nothing cheaper for an agent to fetch than the page itself. Three real pages changes that part." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-15",
+            "chip": "D-15",
+            "title": "What happens to llms.txt?",
+            "state": "Needs your ruling",
+            "context": "D-10 and D-12 already require it to be corrected and generated from the bio source, so it is being touched either way. This card decides whether it survives at all, and if so whether it is maintained as a real artefact or kept minimal. The evidence above says almost nothing reads it, and that the exception is coding agents.",
+            "need": "whether a file that measurably almost nothing fetches is worth generating and keeping correct.",
+            "ballot": [
+              { "value": "generate", "label": "generate — keep it, generated from the content at build time" },
+              { "value": "minimal", "label": "minimal — keep a short conformant stub only" },
+              { "value": "drop", "label": "drop — delete it" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "generate", "title": "Keep it and generate it from the site's own content" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The build writes `llms.txt` from the same sources as the pages, so it lists the three pages and every publication and talk, and cannot go stale." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Generation removes the only failure this file has ever actually had here, which is drifting out of date." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It costs nothing per change once written, and D-12 is already building a generation step for the bio." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Coding agents demonstrably do fetch these, and an open-science position argues for machine-readable self-description on principle." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Building a generator for a file that 97 percent of the time nothing requests." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The JSON-LD `Person` record already does machine-readable self-description, and search engines actually use that." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The convention may not survive; the IETF is standardising something else for adjacent purposes." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "minimal", "title": "Keep a short, conformant stub" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "An H1, a one-paragraph summary and three links, one per page. Correct by the spec, small enough to fix by hand, no generator." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Cheapest thing that is not wrong, and small enough that it will not silently rot." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Fixes the non-conformant Contact section by simply not having one." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps a foot in the convention without betting on it." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A three-link file adds nothing over the site's own navigation, so it is a gesture rather than a service." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Still a hand-maintained file, which is exactly the category that went stale before." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Half-measures on a convention are the worst of both: some upkeep, little benefit." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "drop", "title": "Delete it" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The file goes. Machine-readable self-description is carried by the JSON-LD `Person` record and good semantic HTML instead." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The measured evidence says it does essentially nothing, and Google says so in its own words." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Removes a whole class of drift permanently, including the one that produced two wrong claims about you." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "One fewer thing to keep correct on a site you maintain between research commitments." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "It costs almost nothing to keep once generated, and adoption could still change." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Coding agents are the one population that does fetch it, and they read your site more than most humans do." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Deleting a file because a study says few read it is an argument that would remove a lot of good practice." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-16 · the largest lever left", "heading": "Typography inside the preserved identity" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "Why one typeface choice carries so much of the impression",
+            "sub": "and what \"preserve\" leaves genuinely open",
+            "citations": [
+              { "authors": "Matthew Butterick", "year": 2026, "title": "Practical Typography", "venue": "practicaltypography.com", "url": "https://practicaltypography.com/" },
+              { "authors": "Rasmus Andersson", "year": 2026, "title": "Inter: a typeface for user interfaces", "venue": "rsms.me/inter", "url": "https://rsms.me/inter/" },
+              { "authors": "Mozilla Contributors", "year": 2026, "title": "font-display", "venue": "MDN Web Docs", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "A page has two distinct typographic jobs. Body text has to be read for minutes without fatigue, which rewards a neutral, highly legible face. Display text, the headings and the hero, is read in one glance and is most of what someone means when they say a site looks good or looks generic. The same face can do both, but it is not obliged to, and pairing a characterful display face with a neutral body face is the standard way to buy personality without costing legibility." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Inter was designed specifically for user interfaces, and it is excellent at the body job. It is also, by a wide margin, the most used typeface of its kind on the modern web, which is why your own design skill discourages reaching for it by default. Preserving it as the body face is uncontroversial. Whether it should also be the face of your headings is the open question, and D-05 did not answer it, because preserving an identity and choosing a display voice inside it are different decisions." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Your existing pairing already has a third role: JetBrains Mono for the monospace slots, which the git-log timeline leans on heavily. That stays under D-05 regardless of what happens here." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-16",
+            "chip": "D-16",
+            "title": "Inter throughout, or a display face for headings?",
+            "state": "Needs your ruling",
+            "context": "D-05 preserved teal, Inter and JetBrains Mono, and D-04 chose a general reader, so the design cannot lean on spectacle. That leaves typography and spacing as the levers that decide whether the result looks striking or looks careful. Adding a display face is the single largest of those, and it does not conflict with D-05, because Inter would remain the body face either way.",
+            "need": "whether preserving the identity means Inter everywhere, or Inter as the body voice with a distinct face for headings.",
+            "ballot": [
+              { "value": "interall", "label": "interall — Inter everywhere, as now" },
+              { "value": "display", "label": "display — add one display face for headings only" },
+              { "value": "monodisplay", "label": "monodisplay — JetBrains Mono takes the display role" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "interall", "title": "Inter for everything, with hierarchy from weight and scale" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "One sans face across the whole site. Distinction comes from a deliberate type scale, weight contrast and spacing rather than from a second typeface." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The truest reading of preserve, and the safest: nothing about the current identity shifts." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "One fewer font to load, which serves the performance side of D-07." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A single face executed with real precision is a legitimate and quietly confident look." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Inter set large is the single most recognisable look on the modern web, so the hero will read as a default." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Gives up the biggest available lever while the other levers are already constrained by D-04, D-05 and D-07." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Least likely of the three to produce the impression on arrival that you asked for." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "display", "title": "Inter for body, one distinct display face for headings" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Inter keeps every paragraph. Headings and the hero take a face chosen deliberately for this site, used with restraint. I would bring you the specific candidates as rendered specimens in round 3 rather than picking one here." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The largest visual lift available, and the one that best answers the impress-on-sight half of your brief." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Costs nothing in legibility, because the face people read for minutes does not change." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Consistent with preserve as most designers would read it: same identity, sharper voice." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A second webfont to load and self-host, against a floor that cares about performance." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A display face is the easiest way to make a page look dated in three years, or wrong for a research context." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Stretches preserve further than a strict reading allows, since the most visible type on the site would change." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "monodisplay", "title": "JetBrains Mono becomes the display voice" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "No new typeface at all. The monospace face you already load moves up into the headings, and Inter carries the body. The site's voice becomes explicitly technical." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Adds a display voice without adding a font, so it costs nothing in loading." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Ties the whole page to the git-log device you kept in D-06, making the identity coherent rather than decorative." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Strictly inside D-05, since both faces are already yours." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Monospace headings are their own strong cliché, the developer-terminal look, and D-04 chose a general reader." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Monospace sets poorly at large sizes, with awkward spacing in long headings." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Leans the whole site towards the developer half of your identity, which the pharmacist half may not want." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "What comes next", "heading": "Round 3, and what I will build to make it decidable" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "view", "heading": "The visual direction, with real specimens" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Round 3 carries the layout language and the signature element as two or three complete directions, rendered as real pages you can look at rather than described in adjectives, all inside the identity D-05 preserved and the floor D-07 set. If D-16 opens the display role, it also carries typeface specimens set in your actual headings rather than font names." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "One more card waits for D-13: how your global code-generation standards apply here. A roughly 100-line file budget, a comment on every line and Google-style docstrings on every function were written for Python, and what they mean for a component or a template depends entirely on which stack you pick above." }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

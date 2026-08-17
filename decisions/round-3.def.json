@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0",
+  "id": "9911f9f7-fc4c-4d50-a520-c48b137a5349",
+  "kind": "round",
+  "meta": {
+    "eyebrow": "sofk.ch · Round 3 · 2026-08-17",
+    "title": "The look, and how it gets built",
+    "dek": [
+      { "type": "text", "text": "Astro, three pages, teal and Inter preserved, the git-log timeline kept with its hashes, and every word readable with JavaScript off. Inside those constraints there is exactly one big question left, and adjectives are the wrong way to ask it, so I built three complete home pages with your real content and photographed them. They are below, full size. " },
+      { "type": "text", "text": "All three use the identical palette and the identical typeface", "marks": [{ "type": "strong" }] },
+      { "type": "text", "text": ", because D-05 and D-16 fixed both. What differs is density, layout and rhythm, which is the whole of what is left to choose." }
+    ],
+    "chips": ["4 decisions · D-17 to D-20", "3 rendered directions", "live pages on :8099", "blank whys welcome"]
+  },
+  "content": [
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-17 · the direction", "heading": "Three home pages, same palette, same typeface" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "info", "heading": "You can click these, not just look at them" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The three pages are live while this round is open, so hover states and real text selection work: `http://127.0.0.1:8099/decisions/figures/direction-a-ledger.html`, then `direction-b-titlepage.html` and `direction-c-index.html`. The stills below are the same pages at 1440px wide. All three are throwaway HTML, not Astro; they exist to make this decision on evidence and nothing more." }] }
+          ]
+        },
+        {
+          "type": "figure",
+          "attrs": {
+            "src": "/asset/figures/direction-a-ledger.png",
+            "alt": "Direction A: a sticky left rail holding the name, role, navigation and contact details, with the bio and git-log timeline scrolling in a wider right column, separated by a single hairline.",
+            "label": "Direction A, Ledger.",
+            "caption": "Identity fixed in a left rail, content scrolling beside it. Medium density, hairlines instead of cards, the timeline as the spine of the page."
+          }
+        },
+        {
+          "type": "figure",
+          "attrs": {
+            "src": "/asset/figures/direction-b-titlepage.png",
+            "alt": "Direction B: the name set very large across the top of the page, a teal role line beneath it, then the bio offset into the right half of the page, then a generously spaced git-log timeline.",
+            "label": "Direction B, Title page.",
+            "caption": "The name at display scale, the bio deliberately offset right, wide vertical gaps. Low density, slowest to scan, strongest first impression."
+          }
+        },
+        {
+          "type": "figure",
+          "attrs": {
+            "src": "/asset/figures/direction-c-index.png",
+            "alt": "Direction C: name and role on a single line with the navigation, two short bio paragraphs, then a tightly spaced git-log timeline with dates right-aligned, then compact publication and talk rows, all within roughly one and a half screens.",
+            "label": "Direction C, Index.",
+            "caption": "Everything on one narrow column at tight rhythm, with publications and talks previewed inline. High density, fastest to read, least ceremony."
+          }
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-17",
+            "chip": "D-17",
+            "title": "Which direction?",
+            "state": "Needs your ruling",
+            "context": "Your brief asked for two things that pull apart: impress on arrival, and let people get what they need quickly. These three are honest attempts at different points on that line. B leans on the first, C on the second, A tries to hold both. Nothing here is final: whichever you pick, the details get refined properly in Astro afterwards.",
+            "need": "which of the two halves of your brief wins when they genuinely conflict.",
+            "ballot": [
+              { "value": "a", "label": "a — Ledger, sticky rail, medium density" },
+              { "value": "b", "label": "b — Title page, display scale, low density" },
+              { "value": "c", "label": "c — Index, tight rhythm, high density" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "a", "title": "A, Ledger" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Your name, role, navigation and contact details stay fixed in a left rail while the content scrolls past. The timeline becomes the spine of the right column." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Your identity and contact details are permanently on screen, which is the single most useful property for a professional page." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The asymmetry does the work that colour and motion cannot do here, so it looks composed without decoration." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Scales best of the three as Publications and Talks grow, because the rail never gets longer." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Holds both halves of the brief rather than picking one." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The sticky rail is the most common layout on developer personal sites, so it is the least surprising of the three." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It needs the most care on mobile, where the rail has to become a normal header." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The rail sits mostly empty on a tall viewport, which is space spent on very little." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "b", "title": "B, Title page" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Your name at display scale opens the page like the title page of a monograph. The bio is offset right, the timeline is spaced generously, and everything breathes." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Unambiguously the strongest first impression, which is the half of the brief the other two serve less well." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Proves that Inter alone can carry a page, which matters because D-16 ruled out a second typeface." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The lead sentence gives you one line to say what you do, which no other direction offers." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing on it depends on motion, so it fully satisfies D-07 with no compromise." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Slowest to read by a wide margin. A visitor scrolls twice before reaching a single fact about your work." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A very large name is the closest of the three to the portfolio register you said you did not want." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The empty left column beside the bio is deliberate but reads as unused space to many people." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "D-04 chose a general professional reader, and this direction implicitly addresses a design-conscious one." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "c", "title": "C, Index" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "One narrow column, tight vertical rhythm, name and role on a single line. The timeline compresses to a row per entry with dates right-aligned, and publications and talks are previewed inline." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Answers the quickly half of your brief better than anything else: essentially the whole site in a screen and a half." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The only direction that shows your publication and your talk on the landing page, so a visitor sees the work without clicking." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Density is itself a statement, and a well-set dense page reads as confident and unusually substantial." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Simplest to build, to keep accessible, and to make work on a phone." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Weakest first impression. Nobody will describe this page as striking." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It reads as a CV, and a CV is a document rather than a site." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It shows content from the other two pages, which partly undoes the point of having separated them in D-03." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Tight rhythm is unforgiving: once Publications holds ten entries the landing page needs rethinking." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-18 · motion", "heading": "How much the page moves" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "Why D-07 already capped this, and what is left",
+            "sub": "motion as enhancement rather than as reveal",
+            "citations": [
+              { "authors": "Mozilla Contributors", "year": 2026, "title": "prefers-reduced-motion", "venue": "MDN Web Docs", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion" },
+              { "authors": "W3C Web Accessibility Initiative", "year": 2023, "title": "Understanding Success Criterion 2.3.3: Animation from Interactions", "venue": "Understanding WCAG 2.2", "url": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The current site animates by hiding things and then revealing them, which is why it breaks with JavaScript off. D-07 forbids that pattern outright: content must already be visible, so animation can only ever change how something that is already there arrives. That rules out the scroll-reveal cascade the site uses today, and it is the reason this card has a low ceiling before you even choose." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "What remains available is genuine but modest: transitions on hover and focus, which cost nothing and need no script; CSS view transitions between pages, which Astro supports natively and which degrade to an instant navigation where unsupported; and scroll-driven CSS animation, which can move an element that is already visible. All of it collapses under `prefers-reduced-motion`, which is not a preference but an accessibility need for people with vestibular disorders." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-18",
+            "chip": "D-18",
+            "title": "What is the motion level?",
+            "state": "Needs your ruling",
+            "context": "Your design skill wants an explicit motion setting rather than a default, and D-07 already caps how high it can go. This decides whether the site feels still, quietly alive, or deliberately choreographed, and it also decides how much JavaScript ships on an Astro build where the answer could otherwise be none at all.",
+            "need": "whether movement is part of how the site should feel, or an absence you would not notice.",
+            "ballot": [
+              { "value": "still", "label": "still — hover and focus transitions only, no script" },
+              { "value": "quiet", "label": "quiet — the above plus page view transitions" },
+              { "value": "choreo", "label": "choreo — the above plus scroll-driven motion on the timeline" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "still", "title": "Still: transitions on interaction only" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Links, rows and buttons respond to hover and keyboard focus. Nothing moves on its own, and the site can ship with no JavaScript whatsoever." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Zero JavaScript is achievable, which is the strongest possible reading of D-07." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing to break, nothing to test in two motion modes, nothing to maintain." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Stillness suits a research page, and restraint is itself a design position." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Gives up a lever on a site that has already given up palette, typeface and spectacle." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Page navigation will flash white between pages, which feels cheaper than the rest of the design." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your animation-related skills go unused entirely." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "quiet", "title": "Quiet: interaction transitions plus view transitions between pages" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "As above, and moving between the three pages cross-fades rather than flashing. Astro provides this natively, and it degrades to instant navigation in browsers without support." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Fixes the one thing that makes a multi-page site feel older than a single-page one, which matters now that D-03 chose three pages." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Degrades safely by design, so it cannot violate D-07." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The best ratio of perceived quality to code of anything available here." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Requires a small amount of client JavaScript on every page, so zero-JS is off the table." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Browser support and behaviour still vary, so it needs checking in more than one browser." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "An effect most visitors will never consciously notice." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "choreo", "title": "Choreographed: plus scroll-driven motion on the timeline" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "As above, and the timeline's vertical line draws itself as you scroll, with the commit nodes settling as it reaches them. This is the effect the current Cursor rule describes but the site never implemented." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Finally delivers the behaviour that was documented and never built, on the element D-06 kept as the signature." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It is motivated rather than decorative: a history drawing itself in order is the content, not an effect on top of it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Can be done in pure CSS with scroll-driven animation, so the content stays visible throughout and D-07 holds." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Scroll-driven CSS animation is the least widely supported thing in this round, so it needs a careful fallback." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The most likely of the three to look like an effect for its own sake if it is even slightly overdone." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Most work, most to test, and it must be built twice because reduced motion needs a static version." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-19 · the Talks section", "heading": "What a talk becomes when it stops being slides" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "note", "heading": "One constraint worth knowing before you choose" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The Summer School deck is about 790 MB as it stands, and that will exceed most static hosting. Two video clips account for 124 MB of it and are genuinely used by slides, and roughly 160 MB is full-resolution source art that no slide references. So whichever format you pick, some of the deck cannot travel to the web unchanged. The options below differ sharply in how much of that problem they inherit." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-19",
+            "chip": "D-19",
+            "title": "How does a talk become a post?",
+            "state": "Needs your ruling",
+            "context": "You described these as blog-post-style entries showing the content of the talk. That leaves the crucial part open: whether the post is prose that happens to come from a talk, or the deck itself made readable. This decides how much work each future talk costs you, and how well the Talks section works for someone who was not in the room.",
+            "need": "whether a talk post should read as a written piece, or as a faithful record of what was presented.",
+            "ballot": [
+              { "value": "prose", "label": "prose — rewritten as an article, figures only where needed" },
+              { "value": "slides", "label": "slides — every slide as an image with its presenter note" },
+              { "value": "hybrid", "label": "hybrid — written walkthrough around the slides that matter" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "prose", "title": "Rewrite the talk as an article" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The post is written prose making the talk's argument, pulling in only the figures that genuinely carry information. The deck is offered as a separate download." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Best for a reader who was not there, which is everyone who will ever visit the page." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Sidesteps the hosting problem almost entirely, because most of the deck never needs to be uploaded." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Real writing on your own site is worth more professionally than a slide dump, and it is indexable text." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Fits D-07 naturally: prose and a few images need no JavaScript at all." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "By far the most work per talk, and the work is writing, which is the thing most likely to not get done." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Loses the visual design of the deck, which for the Summer School talk is a large part of its value." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You have one talk today, so the section could stay empty for months while a rewrite waits." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "slides", "title": "Every slide as an image with its presenter note beneath" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The post is the deck, in order, each slide rendered as an image with the presenter note as the caption. Close to mechanical to produce, since both already exist." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Cheapest by far to publish, so a talk goes up while it is still fresh rather than never." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Preserves the deck's design, which you spent real effort on." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your presenter notes already exist and already explain each slide, so the writing is done." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Reads as a deck dump, which is exactly the thing people scroll past." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Inherits the whole media problem: 26 slide images per talk, plus the video clips, on a repository that already carries the built site." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Almost none of it is real text, so it is invisible to search and to anything reading the page." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Slides are designed to support a speaker, so without you they are often unintelligible on their own." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "hybrid", "title": "A written walkthrough built around the slides that matter" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A short written introduction saying what the talk argued, then the six or eight slides that genuinely carry the argument, each with a paragraph of real commentary. The rest of the deck is not published." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Cuts the media problem down to the slides worth keeping, which is also the only version that fits comfortably in a repository." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Enough real text to be readable and indexable, without demanding a full rewrite each time." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The selection is itself editorial: choosing eight slides out of twenty-six is the argument in miniature." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Repeatable at a cost you will plausibly pay for every future talk." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Requires a judgement call per talk about which slides matter, and that judgement takes time." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Neither a proper article nor a faithful record, so it may satisfy neither kind of reader." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A partial deck can misrepresent a talk by omission." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-20 · the code rules", "heading": "Your global standards, applied to Astro" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "Why the rules cannot transfer unchanged",
+            "sub": "what an Astro file is, and where a Python convention stops making sense",
+            "citations": [
+              { "authors": "Astro", "year": 2026, "title": "Astro components", "venue": "Astro documentation", "url": "https://docs.astro.build/en/basics/astro-components/" },
+              { "authors": "Astro", "year": 2026, "title": "Content collections", "venue": "Astro documentation", "url": "https://docs.astro.build/en/guides/content-collections/" },
+              { "authors": "Microsoft", "year": 2026, "title": "TSDoc", "venue": "tsdoc.org", "url": "https://tsdoc.org/" },
+              { "authors": "Google", "year": 2026, "title": "Google JavaScript Style Guide", "venue": "Google Style Guides", "url": "https://google.github.io/styleguide/jsguide.html" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Your global standards ask for roughly 100 lines of code per file and never more than 200, a comment on the line before every single line of code giving what it does and why, and detailed Google-style docstrings on every module, class and function. They were written for Python, and they work there because a Python file is a sequence of statements each of which does something." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "An Astro component is two things in one file: a frontmatter script between fences, which is TypeScript and behaves like Python in this respect, and a template below it, which is markup. A comment before every line of markup would mean a comment before every `<div>`, and with Tailwind the class attribute is often the longest thing on the line. That does not clarify anything for a reader, it buries the structure. Google does publish a JavaScript style guide, but the docstring convention for TypeScript is TSDoc rather than the Google Python docstring format, so the requirement needs a named equivalent rather than a literal transfer." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The line budget is the one part that transfers well and arguably improves things, because a 100-line ceiling on a component is a strong push towards small composable components, which is good practice independently of your rule." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-20",
+            "chip": "D-20",
+            "title": "How do your code-generation standards apply in this repository?",
+            "state": "Needs your ruling",
+            "context": "This is the last thing standing between the round-1 rulings and me writing the instruction file, because the file has to state the answer. Whatever you choose applies to every future edit here, including ones you make yourself.",
+            "need": "whether consistency with your other repositories matters more than the rules fitting the language they are applied to.",
+            "ballot": [
+              { "value": "asis", "label": "asis — apply all three rules literally, markup included" },
+              { "value": "carve", "label": "carve — line budget everywhere, comments and docs where they inform" },
+              { "value": "split", "label": "split — full rules in TypeScript, exempt markup only" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "asis", "title": "Apply all three literally" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A comment before every line including markup, a hard 100 to 200 line budget, and a full docstring on every component and function." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "One rule everywhere, so nothing has to be remembered per repository and no exception can be argued into existence later." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You wrote these rules deliberately, and a website is not obviously the place to start weakening them." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Guarantees you can read every line of this site a year from now." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Roughly doubles the length of every template, which pushes files over the same line budget the rule imposes." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Comments on markup restate the markup, and your own standard says comments are for a beginner's clarity, not coverage." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Comments that add nothing are the ones that rot first, and a stale comment is worse than none." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "carve", "title": "Keep the line budget, make comments and docs purposeful" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The 100 to 200 line budget applies to every file. Comments are required wherever a line has a non-obvious why, and not where they would restate the code. TSDoc goes on every exported component's props and every exported function." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps the part of the rule that genuinely improves the code and drops the part that fights the language." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Preserves the actual intent of your standard, which is that a human can follow the code." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The line budget becomes a real design pressure towards small components rather than an obstacle." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "\"Non-obvious\" is a judgement, and judgement is exactly what a hard rule exists to remove." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It is a weakening, and weakenings spread to other repositories by precedent." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Comment density will drift downwards over time with nothing to stop it." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "split", "title": "Full rules in TypeScript, markup exempt by name" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Inside frontmatter scripts, `.ts` files and config, the comment-every-line rule applies exactly as written. Template markup and Tailwind class lists are exempt explicitly, and carry a comment per block rather than per line." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A bright line rather than a judgement: the rule is defined by file region, so there is nothing to argue about." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps the rule in full force exactly where logic lives, which is where a comment earns its place." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Preserves consistency with your Python work in the parts that resemble Python." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Most of a website is markup, so the rule ends up governing the minority of the code." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The boundary blurs in practice, because template expressions contain real logic." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Per-line comments on frontmatter scripts that are often five lines long is ceremony with little return." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "After this round", "heading": "What happens once you hand back" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "view", "heading": "No further rounds needed to start building" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "These four are the last things I need. With them ruled I can scaffold the Astro project, write the `CLAUDE.md` and the path-scoped rule from the twenty decisions, delete the two legacy instruction files, build the three pages in the chosen direction, generate `llms.txt` and the profile README from the single bio source, and correct the dates and the freelance claim." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "New gated choices will certainly appear while building, and those will reach you as further rounds rather than being settled in code. Two I can already predict: the exact scale steps of the type system, and how the Publications page handles a list that is currently one item long." }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

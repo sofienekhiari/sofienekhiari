@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Direction B - Title page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fcfcfb; --ink:#141518; --muted:#585c63; --faint:#9ba1a9;
+    --line:#e8e8e4; --accent:#008080; --amber:#b7791f;
+    --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 56px}
+
+  /* ── nav ───────────────────────────────────── */
+  nav.top{padding:30px 0 0;display:flex;justify-content:flex-end;gap:30px}
+  nav.top a{font-size:.855rem;color:var(--muted);letter-spacing:-.005em}
+  nav.top a:hover{color:var(--accent)}
+  nav.top a.on{color:var(--ink);font-weight:500}
+
+  /* ── title band ────────────────────────────── */
+  .title{padding:104px 0 0}
+  .title h1{font-size:clamp(3.2rem,7.2vw,5.6rem);font-weight:600;letter-spacing:-.045em;
+            line-height:.94}
+  .title .role{margin-top:22px;font-size:1.14rem;color:var(--accent);font-weight:450;
+               letter-spacing:-.012em}
+  .title .meta{margin-top:16px;font-family:var(--mono);font-size:.75rem;color:var(--faint)}
+  .titlerule{height:1px;background:var(--line);margin-top:76px}
+
+  /* ── bio, offset right ─────────────────────── */
+  .biozone{display:grid;grid-template-columns:1fr 1.62fr;gap:52px;padding:60px 0 0}
+  /* the bio sits in the second column so it reads as deliberately offset right,
+     against the full-bleed title above it */
+  .biozone .bio{grid-column:2}
+  .bio p{color:var(--muted);font-size:1.075rem;line-height:1.82;margin-bottom:1.35rem;
+         max-width:56ch;font-weight:400}
+  .bio p:last-child{margin-bottom:0}
+  .bio a{color:var(--accent);border-bottom:1px solid rgba(0,128,128,.22)}
+  .bio a:hover{border-color:var(--accent)}
+  .bio .lead{font-size:1.34rem;line-height:1.55;color:var(--ink);font-weight:400;
+             letter-spacing:-.016em;max-width:44ch;margin-bottom:1.9rem}
+
+  /* ── experience ────────────────────────────── */
+  .exp{padding:112px 0 0}
+  .exp .h{display:flex;align-items:baseline;gap:18px}
+  .exp h2{font-size:2.1rem;font-weight:600;letter-spacing:-.032em}
+  .exp .cmd{font-family:var(--mono);font-size:.73rem;color:var(--faint)}
+  .wipbox{margin-top:34px;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+  .wipbox b{color:var(--accent);font-weight:500}
+
+  .log{margin-top:34px;position:relative;padding-left:38px}
+  .spine{position:absolute;left:5px;top:16px;bottom:20px;width:1px;background:var(--line)}
+  .spine-b{position:absolute;left:25px;top:0;bottom:0;width:1px;background:var(--line)}
+  .row{position:relative;display:grid;grid-template-columns:78px 1fr;gap:20px;
+       padding:16px 0;align-items:baseline}
+  .node{position:absolute;left:-38px;top:24px;width:11px;height:11px;border-radius:50%;
+        background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+  .row.acad .node{background:var(--amber)}
+  .row.b1{padding-left:40px}
+  .row.b1 .node{left:-18px}
+  .row.wip .node{background:transparent;border:2px solid var(--accent);width:13px;height:13px;
+                 left:-39px;top:23px}
+  .hash{font-family:var(--mono);font-size:.755rem;color:var(--faint)}
+  .msg{font-size:1.055rem;letter-spacing:-.014em;font-weight:450}
+  .pre{color:var(--accent);font-weight:600}
+  .row.acad .pre{color:var(--amber)}
+  .org{display:block;font-size:.845rem;color:var(--faint);font-weight:400;margin-top:3px;
+       letter-spacing:0}
+  .branchlab{font-family:var(--mono);font-size:.7rem;color:var(--faint);padding:20px 0 6px 40px}
+  .row:hover .msg{color:var(--accent)}
+
+  /* ── onward ────────────────────────────────── */
+  .onward{border-top:1px solid var(--line);margin-top:104px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding:44px 0 120px}
+  .cards a .t{display:block;font-size:1.62rem;font-weight:600;letter-spacing:-.028em}
+  .cards a .s{display:block;font-size:.9rem;color:var(--muted);margin-top:8px;max-width:32ch}
+  .cards a:hover .t{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="top">
+    <a class="on" href="#">About</a>
+    <a href="#">Publications</a>
+    <a href="#">Talks</a>
+  </nav>
+
+  <header class="title">
+    <h1>Sofiene<br>Khiari</h1>
+    <div class="role">Pharmacist &amp; Software Developer</div>
+    <div class="meta">Computational Pharmacy Group · University of Basel</div>
+  </header>
+  <div class="titlerule"></div>
+
+  <section class="biozone">
+    <div class="bio">
+      <p class="lead">I work where pharmaceutical science meets computation, on drug discovery that stays affordable enough to reach people.</p>
+      <p>I'm a pharmacist pursuing a PhD in the <a href="#">Computational Pharmacy Group</a> at the <a href="#">University of Basel</a>, building LLM-based agentic systems for computer-aided drug design.</p>
+      <p>As an advocate of Open Source Software and Open Science, I believe the future of pharmaceutical innovation lies at the intersection of computational methods and traditional pharmaceutical expertise, a space where I thrive.</p>
+    </div>
+  </section>
+
+  <section class="exp">
+    <div class="h">
+      <h2>Experience</h2>
+      <span class="cmd">git log --oneline --graph --all</span>
+    </div>
+    <div class="wipbox">Changes not yet committed: <b>(working)</b> build: Obtain Doctor of Philosophy diploma</div>
+
+    <div class="log">
+      <div class="spine"></div>
+
+      <div class="row wip">
+        <div class="node"></div>
+        <span class="hash">·······</span>
+        <span class="msg"><span class="pre">build:</span> Obtain Doctor of Philosophy diploma
+          <span class="org">University of Basel · from January 2025</span></span>
+      </div>
+
+      <div class="row acad">
+        <div class="node"></div>
+        <span class="hash">8b2e4f1</span>
+        <span class="msg"><span class="pre">build:</span> Obtain MSc Drug Sciences diploma
+          <span class="org">University of Basel · September 2021 to December 2024</span></span>
+      </div>
+
+      <div class="row acad">
+        <div class="node"></div>
+        <span class="hash">5c9a3d2</span>
+        <span class="msg"><span class="pre">build:</span> Obtain Pharmaciae Doctor diploma
+          <span class="org">University of Monastir · 2010 to 2019</span></span>
+      </div>
+
+      <div class="branchlab">└─ branch: professional</div>
+      <div style="position:relative">
+        <div class="spine-b"></div>
+        <div class="row b1">
+          <div class="node"></div>
+          <span class="hash">7f1b8e3</span>
+          <span class="msg"><span class="pre">feat:</span> Complete internship at Bone Marrow Transplantation Center
+            <span class="org">National Center, Tunisia · March to August 2018</span></span>
+        </div>
+        <div class="row b1">
+          <div class="node"></div>
+          <span class="hash">2d6c4a9</span>
+          <span class="msg"><span class="pre">feat:</span> Complete internship at a local pharmacy
+            <span class="org">Tunisia · December 2017 to February 2018</span></span>
+        </div>
+        <div class="row b1">
+          <div class="node"></div>
+          <span class="hash">9e3f7b1</span>
+          <span class="msg"><span class="pre">feat:</span> Complete internship at Saïd pharmaceutical industry
+            <span class="org">Tunisia · September to November 2017</span></span>
+        </div>
+      </div>
+
+      <div class="row acad">
+        <div class="node"></div>
+        <span class="hash">3f7b2e5</span>
+        <span class="msg"><span class="pre">init:</span> Obtain Baccalauréat diploma
+          <span class="org">Lycée pilote Bourguiba de Tunis · 2006 to 2010</span></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="onward"></div>
+  <section class="cards">
+    <a href="#">
+      <span class="t">Publications</span>
+      <span class="s">Preprints and papers in computational pharmacy and molecular docking.</span>
+    </a>
+    <a href="#">
+      <span class="t">Talks</span>
+      <span class="s">Slides rewritten as readable posts, so the content outlives the room.</span>
+    </a>
+  </section>
+
+</div>
+</body>
+</html>

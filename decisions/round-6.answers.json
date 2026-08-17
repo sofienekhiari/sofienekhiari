@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "round": "round-6",
+  "revision": 1,
+  "updated": "2026-08-17T13:11:31.223Z",
+  "handedBack": true,
+  "handedBackAt": "2026-08-17T13:11:31.223Z",
+  "answers": {
+    "D-26": {
+      "question": "Does my copy stay, or do you write it?",
+      "choice": "keep",
+      "label": "keep — they are accurate enough, leave them",
+      "other": "",
+      "why": "",
+      "casesOpened": [],
+      "endorsed": true
+    },
+    "D-27": {
+      "question": "The favicon I drew",
+      "choice": "initials",
+      "label": "initials — an SK monogram instead",
+      "other": "",
+      "why": "",
+      "casesOpened": [],
+      "endorsed": true
+    },
+    "D-28": {
+      "question": "Font delivery: npm packages, vendored files, or the CDN?",
+      "choice": "cdn",
+      "label": "cdn — back to the Google Fonts CDN",
+      "other": "",
+      "why": "",
+      "casesOpened": [],
+      "endorsed": true
+    }
+  },
+  "readback": {},
+  "claims": {},
+  "codeReview": {},
+  "outputReview": {},
+  "finalComments": ""
+}

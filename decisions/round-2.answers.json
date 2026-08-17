@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0",
+  "round": "round-2",
+  "revision": 1,
+  "updated": "2026-08-17T11:01:40.711Z",
+  "handedBack": true,
+  "handedBackAt": "2026-08-17T11:01:40.711Z",
+  "answers": {
+    "D-13": {
+      "question": "Which framework and build stack? (asked again, with the skills answer)",
+      "choice": "astro",
+      "label": "astro — Astro, React islands only where needed",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-14": {
+      "question": "In the rebuilt timeline, what happens to the commit hashes?",
+      "choice": "keephashes",
+      "label": "keephashes — invented hashes stay, they are the charm",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-15": {
+      "question": "What happens to llms.txt?",
+      "choice": "generate",
+      "label": "generate — keep it, generated from the content at build time",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-16": {
+      "question": "Inter throughout, or a display face for headings?",
+      "choice": "interall",
+      "label": "interall — Inter everywhere, as now",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    }
+  },
+  "readback": {},
+  "claims": {},
+  "codeReview": {},
+  "outputReview": {},
+  "finalComments": ""
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "round": "round-5",
+  "revision": 1,
+  "updated": "2026-08-17T12:49:43.781Z",
+  "handedBack": true,
+  "handedBackAt": "2026-08-17T12:49:43.781Z",
+  "answers": {
+    "D-23": {
+      "question": "How much of the old README's character should survive?",
+      "choice": "plain",
+      "label": "plain — keep it as generated, no emoji",
+      "other": "",
+      "why": "",
+      "casesOpened": [],
+      "endorsed": true
+    },
+    "D-24": {
+      "question": "Clean directory URLs, or explicit .html files?",
+      "choice": "directory",
+      "label": "directory — sofk.ch/publications/",
+      "other": "",
+      "why": "",
+      "casesOpened": [],
+      "endorsed": true
+    },
+    "D-25": {
+      "question": "How is the publication list stored?",
+      "choice": "collection",
+      "label": "collection — an Astro content collection like talks",
+      "other": "",
+      "why": "",
+      "casesOpened": [],
+      "endorsed": true
+    }
+  },
+  "readback": {},
+  "claims": {},
+  "codeReview": {},
+  "outputReview": {},
+  "finalComments": ""
+}

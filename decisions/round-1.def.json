@@ -1,0 +1,949 @@
+{
+  "schemaVersion": "1.0",
+  "id": "a487b720-9f9b-4921-b8bd-9a0d4c63cacb",
+  "kind": "round",
+  "meta": {
+    "eyebrow": "sofk.ch · Round 1 · 2026-08-17",
+    "title": "Foundations for the redesign",
+    "dek": [
+      { "type": "text", "text": "You asked for a redesign that impresses on sight but hands a reader what they need fast, and you named four content changes coming after it: no Skills section, multiple pages instead of one, another publication, and a new " },
+      { "type": "text", "text": "Talks", "marks": [{ "type": "strong" }] },
+      { "type": "text", "text": " section holding slide decks rewritten as posts. You have also lifted the no-framework, no-build-tools rule. Between them those retire the entire architecture the current site and its instruction files are built on, so this round settles the ground the design stands on. The visual direction itself is deliberately not here: it comes next, with real mockups to look at, because three of its questions cannot be framed until you have ruled below." }
+    ],
+    "chips": ["12 decisions · D-01 to D-12", "foundations, not visuals", "blank whys welcome", "round 2 carries the mockups"]
+  },
+  "content": [
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "Before you start", "heading": "What I found, and what I have not touched" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "info", "heading": "Nothing has been changed" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "No file in the repository has been written or deleted. The audit below is read-only, and the local preview is still serving the current site unchanged." }] }
+          ]
+        },
+        {
+          "type": "box",
+          "attrs": { "variant": "note", "heading": "Three things the audit turned up that you may not know" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "First, the repository is `sofienekhiari/sofienekhiari`, so it is also your GitHub profile-README repo. `README.md` is a published bio, not documentation, and your bio is therefore published from three places that can drift: the profile README, the page hero, and `llms.txt`." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Second, the site does not survive with JavaScript off. Twelve `.reveal`, nine `.git-commit` and sixteen `.skill-tag` elements sit at `opacity: 0` in CSS and are only revealed by a `classList.add` in `script.js`, and there is no `<noscript>`. With JS disabled a visitor gets the nav and the hero, then nothing. The Cursor rule claims the opposite." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Third, `.github/copilot-instructions.md` is stale end to end. It still describes the Quarto build, `_quarto.yml`, four `.qmd` files and a `lux` theme, all removed in `ea0e847`, and it instructs an agent never to edit `docs/`, which is now the only place the site lives." }] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-01 · the stack", "heading": "What the site is built with" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "Why a build step changes the answer",
+            "sub": "shared chrome, and what \"static\" means once a framework is involved",
+            "citations": [
+              { "authors": "Vercel", "year": 2026, "title": "Next.js: Static Exports", "venue": "Next.js documentation", "url": "https://nextjs.org/docs/app/guides/static-exports" },
+              { "authors": "Astro", "year": 2026, "title": "Astro documentation", "venue": "docs.astro.build", "url": "https://docs.astro.build/en/guides/upgrade-to/v5/" },
+              { "authors": "Eleventy", "year": 2026, "title": "Eleventy documentation", "venue": "11ty.dev", "url": "https://www.11ty.dev/docs/" },
+              { "authors": "GitHub", "year": 2026, "title": "Configuring a publishing source for your GitHub Pages site", "venue": "GitHub Docs", "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The moment the site is more than one page, the navigation, the header and the footer exist on every page. Hand-written HTML has no way to share them, so they get copied, and they drift. A build step exists to solve exactly that, and the Talks section makes it sharper still: a talk written as a post wants a content file and a template, not a hand-built page each time." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "All three options below still produce plain static files that GitHub Pages can serve. The difference is not whether the output is static, it is how much JavaScript reaches the visitor, and how much machinery you carry to get there. Next.js with `output: 'export'` writes static HTML but keeps the React runtime in the page. Astro renders components away at build time and ships no JavaScript unless a component is explicitly marked as interactive. Eleventy has no component runtime at all." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-01",
+            "chip": "D-01",
+            "title": "Which framework and build stack?",
+            "state": "Needs your ruling",
+            "context": "You have lifted the no-framework, no-build-tools rule and said React, Next, Tailwind and Motion are fine, so this card is not about whether a build step is allowed. It is about which one, and the answer sets how the Talks pipeline works, how much JavaScript a visitor downloads, and how much of your design skill's default guidance applies without translation.",
+            "need": "whether you want the stack your design skill assumes by default, the one that ships least to the visitor, or the smallest amount of machinery that can do the job.",
+            "ballot": [
+              { "value": "next", "label": "next — Next.js App Router, static export" },
+              { "value": "astro", "label": "astro — Astro with React islands" },
+              { "value": "eleventy", "label": "eleventy — Eleventy, minimal JavaScript" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "next", "title": "Next.js App Router with output: 'export'" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "React Server Components, `next/font`, Tailwind v4 and Motion, exported to static HTML at build time. Talks become MDX routes." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "It is exactly the stack your `design-taste-frontend` skill defaults to, so every directive in it applies verbatim with nothing to translate." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The largest ecosystem of the three, and the one you already list among your skills, so it stays maintainable by you and not only by me." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "`next/font` self-hosts the typefaces, which removes the render-blocking Google Fonts `@import` the current site has." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Heaviest of the three for the visitor: the React runtime ships even on a page that is entirely text." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Static export disables a large part of what Next.js is for, so you carry the framework's complexity without most of its benefit." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Most machinery to keep working over years on a site you will touch a few times a year." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "astro", "title": "Astro, with React only where something is interactive" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Components render to HTML at build time and ship zero JavaScript by default. React, Tailwind and Motion are available as opt-in islands. Talks become Markdown or MDX content collections." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Built for content sites, which is what this is: a bio, a publication list and a set of talk write-ups." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Lightest result. A text page ships as text, and only the theme toggle or an animated element carries JavaScript." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Content collections give the Talks section typed frontmatter and a schema, so a malformed talk fails at build rather than rendering wrong." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Your design skill's guidance is written against React and Next, so some of it needs translating to Astro's model." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The islands boundary is a real concept to learn, and getting it wrong silently ships more JavaScript than intended." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Smaller ecosystem than Next, and one more tool in your stack that is not already on your CV." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "eleventy", "title": "Eleventy with Tailwind and hand-written JavaScript" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A templating and Markdown build tool with no component runtime. It solves the shared-nav and Talks-as-posts problems and nothing else." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Closest to what you have now: the output is still hand-shaped HTML and CSS, just with the duplication removed." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The least to maintain and the least to break. Almost nothing between your source and the served file." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "No framework runtime reaches the visitor at all." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "You gave up the no-build rule in order to reach for a richer stack, and this option spends that permission on the smallest possible step." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Motion and the component patterns your design skill assumes are not available, so richer interaction is hand-rolled." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nunjucks or Liquid templating is a dead-end skill compared with React, which you use elsewhere." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-02 · deployment", "heading": "How the built site reaches GitHub Pages" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-02",
+            "chip": "D-02",
+            "title": "Commit the build output, or build in CI?",
+            "state": "Needs your ruling",
+            "context": "Today `docs/` is both the source and the served site, and Pages serves it directly from `main`. Once there is a build step, the built files are generated artefacts and something has to decide whether they live in git. The repository is also your profile-README repo, so whatever lands here is visible on your GitHub profile page.",
+            "need": "whether you want the served files under version control where you can see and revert them, or a clean repository where only source is tracked.",
+            "ballot": [
+              { "value": "commit", "label": "commit — build locally, commit the output to docs/" },
+              { "value": "actions", "label": "actions — GitHub Actions builds and deploys" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "commit", "title": "Build locally and commit docs/ as today" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Keeps the current Pages configuration exactly as it is. You run the build, the output lands in `docs/`, you commit it." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing about the hosting changes, so there is no way to break deployment while changing the site." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "What is served is exactly what is in git, so a bad deploy is reverted with `git revert` and no CI knowledge." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The site keeps working even if a CI provider or an action changes under you." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Every content change produces a large diff of generated files, which makes the history hard to read on a repo that is also your public profile." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Forgetting to rebuild before committing ships a site that does not match its source, silently." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The repository carries both source and output, roughly doubling what is tracked." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "actions", "title": "GitHub Actions builds on push and deploys to Pages" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Only source is tracked. A workflow builds on every push to `main` and publishes the result to Pages through the official deploy action." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The repository holds only what you wrote, so diffs are readable and the profile repo stays tidy." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The built site cannot drift from its source, because it is rebuilt from source every time." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A failed build fails visibly in CI instead of publishing a broken page." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "One more moving part, and a deployment that can break for reasons unrelated to your content." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The Pages source setting has to change from the `docs/` folder to the Actions source, a one-off manual step in repository settings." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You can no longer read the exact served HTML out of the repository." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-03 · structure", "heading": "What pages exist" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-03",
+            "chip": "D-03",
+            "title": "The page set",
+            "state": "Needs your ruling",
+            "context": "You are going multi-page, dropping Skills, and adding Talks as post-style entries. That leaves the bio, the experience timeline, publications and talks to distribute. This card decides the navigation and the URL structure, and it is the one thing your visitor feels most directly, because it decides how many clicks stand between landing and the thing they came for.",
+            "need": "whether the landing page is a full front page that answers most questions on its own, or a short door into dedicated pages.",
+            "ballot": [
+              { "value": "four", "label": "four — Home, Publications, Talks, Experience" },
+              { "value": "three", "label": "three — Home (with experience), Publications, Talks" },
+              { "value": "two", "label": "two — Home, and a merged Work page" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "four", "title": "Home · Publications · Talks · Experience" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The landing page is short: who you are, and three or four highlights pulled from the other pages. Everything else has its own page and its own URL." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Every section gets room to grow. Publications and Talks will both get longer, and neither crowds the other." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Each page is a link you can send on its own, which matters for a talk write-up or a publication list." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The landing page stays fast and impressive because it carries very little." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Four pages of very unequal weight. Experience is one timeline and may look thin alone." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A visitor who wants the whole picture has to click three times to get it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Most work to design, because four page templates need to feel like one site." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "three", "title": "Home carries bio and experience · Publications · Talks" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The landing page tells your whole story, bio and career timeline together, and the two growing lists live on their own pages." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The bio and the timeline are one narrative, and splitting them separates a claim from its evidence." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A recruiter or a collaborator gets the full picture of who you are without leaving the first page." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Only the two things that genuinely accumulate get their own pages, so the structure matches the content." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A longer landing page, which works against the first impression the redesign is for." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "No standalone URL for the timeline, so you cannot link someone straight to your career history." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The timeline is the most visually expensive element, and putting it on the landing page competes with the hero." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "two", "title": "Home · Work (publications and talks together)" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "One page for you, one page for output. Publications and talks appear as a single reverse-chronological stream, tagged by kind." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The smallest structure that holds the content, and the fewest templates to design well." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "One combined stream reads as a fuller body of work than two short lists sitting side by side." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing looks empty while the lists are still short, which they are today." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A peer-reviewed publication and a talk write-up are different currencies, and merging them can read as padding a thin list." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Academic readers expect a publications page and will look for one by name." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It will need splitting later anyway if either list grows, and that means changing URLs twice." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-04 and D-05 · the design read", "heading": "Who it is for, and how far the look moves" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "Why these two cards come before any pixel",
+            "sub": "the audience picks the aesthetic, and the preserve-or-overhaul answer sets everything downstream",
+            "citations": [
+              { "authors": "Mozilla Contributors", "year": 2026, "title": "Progressive enhancement", "venue": "MDN Web Docs Glossary", "url": "https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement" },
+              { "authors": "W3C Web Accessibility Initiative", "year": 2023, "title": "Understanding Success Criterion 2.3.3: Animation from Interactions", "venue": "Understanding WCAG 2.2", "url": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Your design skill sets three dials before anything is drawn: how far the layout departs from symmetry, how much the page moves, and how densely it is packed. It reads those dials off the audience and off whether a redesign preserves or overhauls, which is why it insists both are settled first. A portfolio for a design studio and a research page for a hiring committee get different numbers on all three, and the same skill will produce a different site from each." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "This is also where your brief pulls in two directions, and that tension is real rather than a problem to solve away. You asked to impress on sight, which pushes the dials up, and to hand people what they need quickly and explicitly not to look like a graphic designer's portfolio, which pushes them down. Naming the audience is how that gets resolved honestly rather than by taste." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-04",
+            "chip": "D-04",
+            "title": "Who is this site primarily for?",
+            "state": "Needs your ruling",
+            "context": "Not who visits, but who the page is optimised for when two audiences would want different things. This single answer sets the design dials, the reading level of the copy, and what goes above the fold.",
+            "need": "which reader you would rather impress if you can only fully satisfy one.",
+            "ballot": [
+              { "value": "academic", "label": "academic — researchers, collaborators, PIs, committees" },
+              { "value": "industry", "label": "industry — recruiters and hiring managers in pharma and tech" },
+              { "value": "both", "label": "both — a general professional reader, neither optimised for" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "academic", "title": "Academic peers and committees" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The page is read by people who will judge the work: collaborators, group leaders, reviewers, funding and hiring panels in research." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Matches what you actually do now and what the site already contains: a preprint, a PhD, a research group." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "This audience rewards clarity and substance over polish, which makes restraint a feature rather than a compromise." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Talks-as-posts fit this reader exactly, because they are content, not portfolio pieces." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Pulls the dials down, which sits in tension with wanting visitors to be impressed on arrival." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Underserves the half of your identity that is a software developer, which is the half most likely to open career doors outside research." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Academic personal sites are a low bar, so matching the genre is not itself distinctive." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "industry", "title": "Industry recruiters and hiring managers" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The page is read by people deciding whether to talk to you about a role, in pharma, biotech or software." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "This reader scans, so the design work goes into fast comprehension, which is exactly what you asked for." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Justifies a higher polish level, because visible craft is itself evidence for a developer role." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Your combination of pharmacist and developer is unusual and reads as a strength fastest to this audience." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "You are mid-PhD and not job hunting, so it optimises for a reader you may not have for years." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Risks the site reading as a job-seeking page to the colleagues who actually visit it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Pushes towards the portfolio look you explicitly said you do not want." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "both", "title": "A general professional reader" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "No single audience is optimised for. The page aims to be legible and credible to anyone professional who lands on it." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Honest about reality: your visitors genuinely are a mix, and you cannot predict who arrives." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing has to be rebuilt when your situation changes, which over a PhD it will." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps both halves of your identity equally visible." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Designing for everyone is how sites end up generic, which is the specific failure this redesign is meant to avoid." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Gives me no basis for setting the dials, so I would be choosing the aesthetic by taste rather than from the brief." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Every hard layout call later has no tiebreaker." }] }
+                ]}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-05",
+            "chip": "D-05",
+            "title": "Preserve the current visual identity, or overhaul it?",
+            "state": "Needs your ruling",
+            "context": "Your design skill requires this question before a redesign starts, because it decides whether the existing teal accent, the Inter and JetBrains Mono pairing and the general look are starting material or history. Worth knowing: that skill discourages Inter as a default choice, so preserving it is a decision rather than an absence of one.",
+            "need": "whether sofk.ch should still look recognisably like itself afterwards.",
+            "ballot": [
+              { "value": "preserve", "label": "preserve — keep teal and the type, modernise around them" },
+              { "value": "overhaul", "label": "overhaul — new visual language, keep only the content" },
+              { "value": "keepaccent", "label": "keepaccent — keep the teal only, everything else open" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "preserve", "title": "Preserve: teal, Inter and JetBrains Mono stay" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The redesign is a modernisation. Typography, spacing and motion improve; the identity a returning visitor recognises does not change." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Continuity for anyone who has seen the site, and consistency with anywhere else you already use teal." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Lowest risk of ending up with something that does not feel like you." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Teal is a genuinely uncommon accent and already avoids the generic blue and purple defaults." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Constrains the design before it starts, and you are replacing the architecture wholesale anyway." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Inter is the single most common typeface on the modern web and reads as a default rather than a choice." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Least likely of the three to produce something that impresses on sight, which is your stated goal." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "overhaul", "title": "Overhaul: a new visual language from scratch" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Content and structure are preserved; palette, typography and layout language are chosen fresh for the brief." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Gives the design the most room, which is where a genuinely striking result comes from." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You are already changing the stack and the structure, so there is no half-measure to protect." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Lets the typography be a deliberate choice rather than an inherited one." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Discards a recognisable identity that has nothing wrong with it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Most opportunity to produce something you do not like, and the most iteration to converge." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "If you use teal elsewhere in your professional presence, this breaks that consistency." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "keepaccent", "title": "Keep the teal, open everything else" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The accent colour is fixed as your identity. Typography, layout language, neutrals and motion are all chosen fresh around it." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps the one element people actually remember while freeing the parts doing the least work." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A fixed accent is a useful constraint for a designer rather than a limiting one." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Lets the typeface change, which is the single biggest visual lift available." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A colour alone may be too thin a thread to call continuity." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Teal constrains the neutrals and any secondary colour that has to sit beside it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "If the strongest direction wants a different accent, this rules it out before it is seen." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-06 · the signature", "heading": "The git-log timeline" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-06",
+            "chip": "D-06",
+            "title": "Keep the git-log experience timeline, evolve it, or retire it?",
+            "state": "Needs your ruling",
+            "context": "Your career rendered as `git log --oneline --graph --all`, with commit hashes, conventional-commit prefixes, a branch for the internships and the PhD as an uncommitted change. Both of your design skills call this the signature element: the one thing a page is remembered by. That makes it the highest-leverage single decision about how the site is perceived, and it is entirely a matter of taste, which makes it yours.",
+            "need": "whether this is the thing people should remember about your site, or a joke that wears thin on a page meant to be read quickly.",
+            "ballot": [
+              { "value": "keep", "label": "keep — it stays the signature, and the design is built around it" },
+              { "value": "evolve", "label": "evolve — keep the idea, redesign the execution" },
+              { "value": "retire", "label": "retire — a conventional timeline, signature found elsewhere" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "keep", "title": "Keep it, and design the site around it" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The timeline stays essentially as it is, and the rest of the design is deliberately quiet so it carries the page." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "It is genuinely distinctive and nobody else's academic page looks like this." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The metaphor is true rather than decorative: a career really does branch and merge, and the PhD really is uncommitted." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It signals developer fluency without a Skills section, which you are removing." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "It reads instantly only to people who use git, and a pharmacology professor is not guaranteed to be one." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Fake commit hashes are decoration pretending to be data, which is the kind of detail that undercuts credibility on a page about research." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It works against reading quickly, because the reader decodes a metaphor before getting the fact." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "evolve", "title": "Keep the idea, rebuild the execution" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The branching-history concept survives, but it is redrawn in the new visual language, and the parts that are pure costume are reconsidered." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps what is genuinely good, the branching structure, and drops what is only a costume." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Lets dates be dates instead of invented hashes, so the thing stays readable to non-developers." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The current execution has real defects to fix anyway: the scroll-drawn line was never implemented and the entries are unreachable by keyboard." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Softening a joke usually kills it, and a half-git timeline may be neither striking nor clear." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Leaves the actual look unresolved, so it is really a decision to decide later." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The commit prefixes and hashes are most of the charm, and they are what this option questions." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "retire", "title": "Retire it for a conventional timeline" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Experience becomes a clear, well-typeset chronology, and the memorable element of the site is found somewhere else in the new design." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Fastest to read, which is half of what you asked for, and works for every visitor regardless of background." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Frees the signature slot for something tied to your actual work, molecules, docking, structures, rather than to your tooling." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A conventional timeline executed beautifully is not a boring timeline." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Throws away the only genuinely original thing the site currently has." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Puts the burden on finding a new signature, and there is no guarantee the replacement is as good." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Career timelines are the most templated component on the personal-site web." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-07 · the floor", "heading": "Motion and accessibility" },
+      "content": [
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-07",
+            "chip": "D-07",
+            "title": "What is the non-negotiable floor for the new site?",
+            "state": "Needs your ruling",
+            "context": "The current site fails its own stated rule: content below the hero is invisible without JavaScript, the timeline entries cannot be reached by keyboard, and there is no reduced-motion handling anywhere. A build step fixes the first almost for free. This card sets what I hold myself to from the start rather than retrofitting later, and it constrains how far the motion dial can go.",
+            "need": "how much you are willing to constrain the design in exchange for the site working for everyone.",
+            "ballot": [
+              { "value": "full", "label": "full — content readable with no JS, keyboard parity, reduced motion honoured" },
+              { "value": "standard", "label": "standard — keyboard parity and reduced motion, JS assumed present" },
+              { "value": "wcag", "label": "wcag — the above plus a WCAG 2.2 AA pass as a release gate" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "full", "title": "Progressive enhancement: every word readable with JavaScript off" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Animation only ever enhances content that is already there. Nothing is hidden until a script reveals it." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nearly free with a build step, because the HTML is generated with the content already in it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Fixes the exact failure the audit found, and makes the site robust to a script that fails to load." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Consistent with the open-science, open-source position you state in your own bio." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Rules out entrance animations built as reveal-from-hidden, which is the common and easy pattern." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Real visitors with JavaScript disabled are close to nonexistent for a site like this." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Adds a constraint to check on every component for a benefit almost nobody will experience." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "standard", "title": "Keyboard parity and reduced motion, JavaScript assumed" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Everything clickable is reachable and operable by keyboard with a visible focus state, and all motion collapses under `prefers-reduced-motion`. JavaScript is assumed to run." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Covers the accessibility failures that affect real people, rather than a hypothetical one." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Leaves the motion design unconstrained, which matters if you want the site to impress." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Reduced motion is a genuine medical need, not a preference, and this covers it fully." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps the site dependent on a script for its content, which is the current defect made official." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A failed script or a slow connection can still show a blank page." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Chooses the weaker floor when the stronger one is nearly free with the stack you are adopting." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "wcag", "title": "The full floor, plus a WCAG 2.2 AA check before anything ships" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Progressive enhancement and keyboard parity as above, and in addition a WCAG 2.2 AA audit that must pass before a change goes live." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A named, checkable standard rather than a promise, so it cannot quietly erode." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You already have a review skill for this, so the gate costs a command rather than expertise." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Defensible: an accessible site is a claim you can make and support if it ever comes up professionally." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "AA includes contrast minima that will veto some palettes, including possibly a teal you like." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Adds a step to every change, on a personal site with no legal obligation." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Strictest option, and the most likely to slow small edits later." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-08 and D-09 · the instruction files", "heading": "How this repository tells an agent what to do" },
+      "content": [
+        {
+          "type": "learn",
+          "attrs": {
+            "tag": "Learn",
+            "heading": "The four mechanisms, and what each costs",
+            "sub": "verified against the current Claude Code documentation",
+            "citations": [
+              { "authors": "Anthropic", "year": 2026, "title": "Manage Claude's memory", "venue": "Claude Code documentation", "url": "https://code.claude.com/docs/en/memory.md" },
+              { "authors": "Anthropic", "year": 2026, "title": "Skills", "venue": "Claude Code documentation", "url": "https://code.claude.com/docs/en/skills.md" }
+            ]
+          },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "A `CLAUDE.md` at the repository root loads in full at the start of every session, and the documentation asks you to target under 200 lines because a longer file both costs context and reduces adherence. `.claude/rules/*.md` files load the same way, unless they carry a `paths` field, in which case they load only when a matching file is read. A skill's body loads only when the skill is invoked or judged relevant, so long reference material there is nearly free until needed." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "One point is worth stating because it is counter-intuitive: the `@path/to/file` import syntax does not save context. Imported files are expanded and loaded at launch alongside the file that references them, so splitting a long `CLAUDE.md` into imports is organisation only. The documentation's own division is that `CLAUDE.md` holds facts needed in every session, while anything that is a multi-step procedure or only matters for part of the codebase belongs in a skill or a path-scoped rule." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Your existing Cursor rule already declares `globs: docs/**` and `alwaysApply: false`, which is precisely the semantics of a path-scoped rule. The translation is closer to exact than it looks." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-08",
+            "chip": "D-08",
+            "title": "Where do the project instructions live?",
+            "state": "Needs your ruling",
+            "context": "This decides what I read at the start of every session in this repository, and therefore how reliably the design rules are actually followed months from now. The content of those instructions is a separate question and comes in round 2, once the stack and structure below are settled.",
+            "need": "whether you want the rules always in front of me at a permanent context cost, or loaded only when they are relevant at the risk of being missed.",
+            "ballot": [
+              { "value": "single", "label": "single — one CLAUDE.md at the root, everything in it" },
+              { "value": "rules", "label": "rules — short CLAUDE.md plus path-scoped .claude/rules/" },
+              { "value": "skill", "label": "skill — short CLAUDE.md plus a project skill" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "single", "title": "One CLAUDE.md at the repository root" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Every rule in one file, loaded in full at the start of every session in this repository." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "One file to read, edit and review, and no question about where a rule belongs." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing can fail to load, so a rule is never missed because a trigger did not fire." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The conventional layout, so it is what any other agent or collaborator expects to find." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The architecture detail is long, and the documentation warns that a file over 200 lines reduces adherence." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Pays the full context cost in every session, including ones that never touch the site." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Mixes rules that always apply with detail that only matters when editing pages." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "rules", "title": "A short CLAUDE.md plus path-scoped rules" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "`CLAUDE.md` holds the few always-true facts. The design and architecture detail sits in `.claude/rules/` with a `paths` field, loading only when a matching file is read." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "A direct translation of what your Cursor rule already declares, so the intent carries over exactly." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Detail arrives precisely when a page is being edited, which is the only time it matters." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Scales cleanly: a separate rule per concern as the site grows, each loading independently." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Rules split across files can contradict each other, and the documentation notes the resolution order is not formally defined." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A path-scoped rule fires on reading a matching file, so a design discussion that touches no file gets none of the detail." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "More structure than a five-file repository obviously needs." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "skill", "title": "A short CLAUDE.md plus a project skill" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The detail becomes `.claude/skills/<name>/SKILL.md`, invoked by name or pulled in when judged relevant. Only its description carries an always-on cost." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Cheapest in context: the body costs nothing until used, however long it grows." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Suits procedures well, and adding a talk will be a procedure with steps." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You can invoke it deliberately by name when you want it applied." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Loading depends on a relevance judgement, so an architectural rule can be missed exactly when it is being broken." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Weakest fit for standing constraints, which is most of what these instructions are." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The heaviest structure of the three for a small repository." }] }
+                ]}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-09",
+            "chip": "D-09",
+            "title": "What happens to the Cursor rule and the Copilot instructions?",
+            "state": "Needs your ruling",
+            "context": "`.cursor/rules/website-architecture.mdc` describes the current single-page architecture accurately, but that architecture is being replaced, so it is about to be wrong. `.github/copilot-instructions.md` has already been wrong since ea0e847. Your own tool list includes Cursor, VS Code and GitHub Copilot, so this turns on whether you still drive this repository from any of them.",
+            "need": "whether other agents still need instructions here, or whether Claude Code is now the only one that reads this repository.",
+            "ballot": [
+              { "value": "delete", "label": "delete — remove both, Claude Code only" },
+              { "value": "keepcursor", "label": "keepcursor — delete Copilot's, keep Cursor's in sync" },
+              { "value": "stubs", "label": "stubs — replace both with pointers to the Claude Code file" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "delete", "title": "Delete both" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "One set of instructions, for Claude Code, and nothing else in the repository claiming to describe it." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "One source of truth, so nothing can be stale, which is precisely how the Copilot file became actively misleading." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeping three copies of an architecture description in sync by hand does not work, as this repository already demonstrates." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Both are recoverable from git if you ever want them back." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "If you do open this repository in Cursor, it loses its guidance entirely." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Locks the repository to one assistant, which is a bet on a tool rather than on the work." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Copilot may act on GitHub itself, outside whichever editor you happen to use." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "keepcursor", "title": "Delete the Copilot file, keep the Cursor rule current" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The Copilot file goes, since nothing in it is salvageable. The Cursor rule is rewritten for the new architecture and maintained alongside the Claude Code instructions." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Cursor is your listed editor, and its rule format maps almost exactly onto path-scoped rules, so the two stay close." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Removes the file that is definitely harmful while keeping the one that is currently accurate." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps a second option open at a small cost." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Two files describing one architecture is exactly the drift that produced this problem." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The duplicate will fall behind, because keeping it current depends on remembering to." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Pays a permanent maintenance cost for an editor you may not use on this repository." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "stubs", "title": "Replace both with one-line pointers" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Each file is reduced to a single line telling whatever reads it to follow the Claude Code instructions instead." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Nothing can go stale, because neither file states any fact about the architecture." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Another agent opening the repository is redirected rather than left with nothing." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps one source of truth while still answering the tools that look in those locations." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Depends on the other tool actually following a pointer, which is not guaranteed for either." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Leaves two near-empty files whose only job is to explain their own emptiness." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Cursor's own format supports globs and frontmatter, so a stub wastes what it can do." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "D-10 to D-12 · the content record", "heading": "Three things the site currently says that disagree with each other" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "note", "heading": "Why these are on a ballot rather than in chat" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Two of them are facts only you have, and the third is how you present yourself. All three affect what the redesigned site says about you, so they need settling before content moves into a new structure rather than after." }] }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-10",
+            "chip": "D-10",
+            "title": "The freelance full-stack developer role",
+            "state": "Needs your ruling",
+            "context": "`docs/llms.txt` advertises a freelance full-stack developer role from 2020 to 2023. No such entry exists anywhere on the site. Git shows it was dropped in d09ac1b, the single-page rebuild, and llms.txt was never updated to match. So the machine-readable file describing you claims experience the human-readable site does not.",
+            "need": "whether that role belongs in your professional history as presented, or was deliberately dropped.",
+            "ballot": [
+              { "value": "restore", "label": "restore — put it back into the experience timeline" },
+              { "value": "drop", "label": "drop — remove the claim from llms.txt, it stays off the site" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "restore", "title": "Restore it to the timeline" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The role returns as an entry alongside the internships and the degrees, and llms.txt becomes accurate by the site catching up to it." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "It is the only paid software work in your history, and you present yourself as a software developer in your own tagline." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You are removing the Skills section, so the timeline becomes the only evidence that the developer half is real." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It fills a 2020 to 2023 span that otherwise shows only study." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "You may have dropped it deliberately, and freelance work can read as filler next to degrees and a preprint." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "It overlaps your MSc, which invites a question about how the two were balanced." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Needs detail I do not have: clients, what was built, and dates you can stand behind." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "drop", "title": "Drop the claim from llms.txt" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The removal in d09ac1b was intended. llms.txt is corrected to match the site, and the role stays off both." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Restores agreement between the two files, and a claim no page supports is the worse failure of the two." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Keeps the history focused on the pharmacy and research line, which is where you are heading." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A shorter, sharper timeline reads better than a complete one." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Removes the only professional evidence for half of what your own tagline claims." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Leaves an unexplained gap between the Pharm.D. and the MSc." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Real paid experience is hard to earn and easy to regret discarding." }] }
+                ]}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-11",
+            "chip": "D-11",
+            "title": "Which set of dates is correct?",
+            "state": "Needs your ruling",
+            "context": "The page and llms.txt tell two different careers. The page says the PhD started January 2025 and the MSc ran September 2021 to December 2024, conferred 12 December 2024. llms.txt says the PhD has run since 2023 and the MSc from 2021 to 2023. Both are internally consistent, so I cannot tell which is right, and these dates appear in a JSON-LD Person record that search engines and AI systems read as fact about you.",
+            "need": "which source is telling the truth, or the real dates if neither is.",
+            "ballot": [
+              { "value": "page", "label": "page — PhD from January 2025, MSc to December 2024" },
+              { "value": "llms", "label": "llms — PhD from 2023, MSc 2021 to 2023" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "page", "title": "The page is right, llms.txt is stale" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The PhD began January 2025, immediately after the MSc was conferred on 12 December 2024. llms.txt carries dates left over from the old Quarto site." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The page carries a specific conferral date, and that level of detail usually indicates the maintained source." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "llms.txt is demonstrably stale on another point in the same file, the freelance role in D-10." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The two dates fit together without a gap, which is what an uninterrupted path looks like." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The dialog text was rewritten during the redesign, so it could have been reconstructed rather than checked." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A three-year MSc is long, which is the kind of thing that gets miscopied." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "llms", "title": "llms.txt is right, the page is wrong" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The MSc finished in 2023 and the PhD has been running since then. The page's dates were introduced during the rebuild and are wrong." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "llms.txt predates the rebuild, so it may preserve dates from when they were fresh." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A PhD running since 2023 fits a preprint published in September 2025 more comfortably than one begun in January 2025." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "It contradicts the specific 12 December 2024 conferral date on the page." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The same file is already proven wrong about the freelance role." }] }
+                ]}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "attrs": {
+            "id": "D-12",
+            "chip": "D-12",
+            "title": "How does the bio stay consistent across three published places?",
+            "state": "Needs your ruling",
+            "context": "Your bio is published from the profile README, the page hero and llms.txt. They agree today only because they were written together, and nothing keeps them that way. The freelance role and the date conflict are both this failure having already happened once. Note that GitHub renders README.md on your profile from raw markdown, so it cannot read a shared source at build time.",
+            "need": "whether you want one authored source that the others are generated from, or three files you accept as independent.",
+            "ballot": [
+              { "value": "generate", "label": "generate — one source file, the others built from it" },
+              { "value": "independent", "label": "independent — three separate texts, each written for its place" },
+              { "value": "shorten", "label": "shorten — the README becomes a pointer, leaving two" }
+            ]
+          },
+          "content": [
+            {
+              "type": "option",
+              "attrs": { "key": "generate", "title": "One bio source, the rest generated at build time" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The bio lives in one content file. The build writes the page hero, regenerates llms.txt, and writes README.md from it, so all three change together." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Drift becomes impossible rather than merely discouraged, which is the only thing that has actually failed here." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "You already have a build step, so this is a small addition to it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Editing your bio in one place and having your GitHub profile follow is a genuine convenience." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "The same words rarely work in all three contexts: a profile README, a hero, and a machine summary want different registers." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Requires committing generated files, which interacts with D-02." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Build machinery for a paragraph you change once a year." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "independent", "title": "Three independent texts, checked by hand" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Each surface gets a bio written for it, and the instruction file carries a rule to update all three when facts change." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Each can be written well for its own context and length." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "No machinery, and nothing new to break." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The facts that must match are few: dates, role, affiliation." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "This is what you have now, and it has already failed twice in this repository." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A rule in an instruction file is not a mechanism, it is a reminder." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "The stale copy is the machine-readable one, which is the one you are least likely to reread." }] }
+                ]}
+              ]
+            },
+            {
+              "type": "option",
+              "attrs": { "key": "shorten", "title": "Cut the README to a pointer, leaving two surfaces" },
+              "content": [
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The GitHub profile README becomes a short line and a link to sofk.ch rather than a full bio, so only the site and llms.txt carry the text." }] },
+                { "type": "casesFor", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Removes one surface entirely, which is a real fix rather than a process." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Drives traffic to the site you are about to spend effort on." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Short profile READMEs are normal and read as confident rather than sparse." }] }
+                ]},
+                { "type": "casesAgainst", "content": [
+                  { "type": "item", "content": [{ "type": "text", "text": "Your GitHub profile is seen by developers who may never click through, and it is prime space to give up." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "Two surfaces can still drift; it reduces the problem rather than removing it." }] },
+                  { "type": "item", "content": [{ "type": "text", "text": "A bio on the profile does work for you passively that a link does not." }] }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "attrs": { "eyebrow": "What comes next", "heading": "Deliberately held back for round 2" },
+      "content": [
+        {
+          "type": "box",
+          "attrs": { "variant": "view", "heading": "Four questions I could not frame yet" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "Each of these genuinely depends on an answer above, so posing them now would mean writing options I would have to withdraw." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The visual direction: palette, typefaces, layout language and the signature element, presented as two or three complete directions with real rendered mockups rather than adjectives. This depends on D-04, D-05 and D-06, and on knowing the page set from D-03." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "How your global code-generation standards apply here. Your ~100-line file budget, the comment-on-every-line rule and the Google-style docstring requirement were written for Python. What they mean for React components or Astro templates depends entirely on D-01." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "What to do about llms.txt. Multi-page changes this materially, because the file finally has distinct pages to point at instead of anchors on one document. Evidence is gathered and waiting: Ahrefs measured 137,210 domains in May 2026 and found 97 percent of published llms.txt files received no requests at all, and Google states plainly that Search ignores them. That case is ready to put to you once D-03 is settled." }] },
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The actual content of the instruction file, once D-08 has decided what kind of file it is." }] }
+          ]
+        },
+        {
+          "type": "box",
+          "attrs": { "variant": "info", "heading": "One thing I am not asking, because there is no choice in it" },
+          "content": [
+            { "type": "paragraph", "content": [{ "type": "text", "text": "The em-dash. Your writing-style rules ban it, and your design skill bans it outright as the single most recognisable machine-writing tell. The current site uses it in the page title, the hero bio and several dialogs. It comes out during the rebuild regardless of how you rule above, so it is a consequence rather than a question." }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

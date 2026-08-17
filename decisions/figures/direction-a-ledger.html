@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Direction A - Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfbfa; --surface:#ffffff; --ink:#16171a; --muted:#5f636b; --faint:#9aa0a8;
+    --line:#e6e6e3; --line-soft:#f0f0ed;
+    --accent:#008080; --accent-soft:rgba(0,128,128,.09); --amber:#b7791f;
+    --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;
+       -webkit-font-smoothing:antialiased;line-height:1.65}
+  a{color:inherit;text-decoration:none}
+
+  .shell{display:grid;grid-template-columns:308px 1fr;max-width:1180px;margin:0 auto;
+         gap:0;align-items:start;position:relative}
+  /* the divider belongs to the page, not to the sticky rail, or it stops
+     at the rail's own height partway down a long page */
+  .shell::before{content:"";position:absolute;left:308px;top:0;bottom:0;width:1px;
+                 background:var(--line)}
+
+  /* ── left rail ─────────────────────────────── */
+  .rail{position:sticky;top:0;height:100vh;padding:64px 44px 40px 32px;
+        display:flex;flex-direction:column}
+  .avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;
+          background:var(--line);margin-bottom:28px}
+  .rail h1{font-size:1.6rem;font-weight:600;letter-spacing:-.028em;line-height:1.15}
+  .rail .role{font-size:.86rem;color:var(--accent);font-weight:500;margin-top:7px;
+              letter-spacing:-.006em}
+  .rail nav{margin-top:38px;display:flex;flex-direction:column;gap:1px}
+  .rail nav a{font-size:.88rem;color:var(--muted);padding:6px 0;position:relative;
+              transition:color .15s}
+  .rail nav a.on{color:var(--ink);font-weight:500}
+  .rail nav a.on::before{content:"";position:absolute;left:-32px;top:50%;width:20px;height:1px;
+                         background:var(--accent)}
+  .rail nav a:hover{color:var(--ink)}
+  .rail .foot{margin-top:auto;display:flex;flex-direction:column;gap:5px}
+  .rail .foot a{font-size:.78rem;color:var(--faint);font-family:var(--mono)}
+  .rail .foot a:hover{color:var(--accent)}
+
+  /* ── content column ────────────────────────── */
+  .col{padding:64px 0 96px 56px;max-width:660px}
+  .bio p{color:var(--muted);font-size:1.005rem;line-height:1.78;margin-bottom:1.05rem;
+         max-width:60ch}
+  .bio p:last-child{margin-bottom:0}
+  .bio a{color:var(--accent);border-bottom:1px solid var(--accent-soft);
+         transition:border-color .15s}
+  .bio a:hover{border-color:var(--accent)}
+  .bio strong{color:var(--ink);font-weight:550}
+
+  .rule{height:1px;background:var(--line);margin:56px 0 0}
+
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;
+           margin:38px 0 4px}
+  .sechead h2{font-size:1.06rem;font-weight:600;letter-spacing:-.018em}
+  .sechead .cmd{font-family:var(--mono);font-size:.7rem;color:var(--faint)}
+
+  /* ── git log ───────────────────────────────── */
+  .log{margin-top:26px;position:relative;padding-left:30px}
+  .spine{position:absolute;left:4px;top:11px;bottom:14px;width:1px;background:var(--line)}
+  .spine-b{position:absolute;left:20px;top:0;bottom:0;width:1px;background:var(--line)}
+
+  .wip,.entry{position:relative;display:grid;grid-template-columns:62px 1fr;
+              gap:12px;padding:7px 0;align-items:baseline}
+  .node{position:absolute;left:-30px;top:14px;width:9px;height:9px;border-radius:50%;
+        background:var(--accent);box-shadow:0 0 0 3px var(--bg)}
+  .entry.b1 .node{left:-14px}
+  .entry.acad .node{background:var(--amber)}
+  .wip .node{background:transparent;border:1.5px solid var(--accent);width:11px;height:11px;
+             left:-31px;top:13px}
+  .hash{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:-.02em}
+  .msg{font-size:.925rem;letter-spacing:-.008em}
+  .pre{font-weight:600;color:var(--accent)}
+  .entry.acad .pre{color:var(--amber)}
+  .org{color:var(--faint);font-size:.8rem;margin-left:0}
+  .entry.b1{padding-left:32px}
+  .branchlab{font-family:var(--mono);font-size:.66rem;color:var(--faint);
+             padding:12px 0 4px 32px}
+  .entry:hover .msg{color:var(--accent)}
+
+  .wipbox{font-family:var(--mono);font-size:.72rem;color:var(--muted);
+          background:var(--surface);border:1px solid var(--line);border-radius:7px;
+          padding:9px 13px;margin-bottom:22px}
+  .wipbox b{color:var(--accent);font-weight:500}
+
+  /* ── onward links ──────────────────────────── */
+  .onward{margin-top:52px;display:grid;gap:0;border-top:1px solid var(--line)}
+  .onward a{display:flex;align-items:baseline;justify-content:space-between;
+            padding:17px 0;border-bottom:1px solid var(--line-soft)}
+  .onward .t{font-size:.97rem;font-weight:500;letter-spacing:-.012em}
+  .onward .d{font-size:.8rem;color:var(--faint)}
+  .onward a:hover .t{color:var(--accent)}
+  .arrow{color:var(--faint);font-family:var(--mono);font-size:.8rem}
+  .onward a:hover .arrow{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <img class="avatar" src="../../docs/images/profile_picture.jpg" alt="Sofiene Khiari">
+    <h1>Sofiene<br>Khiari</h1>
+    <div class="role">Pharmacist &amp; Software Developer</div>
+    <nav>
+      <a class="on" href="#">About</a>
+      <a href="#">Publications</a>
+      <a href="#">Talks</a>
+    </nav>
+    <div class="foot">
+      <a href="#">research@sofk.ch</a>
+      <a href="#">github.com/sofienekhiari</a>
+      <a href="#">linkedin</a>
+    </div>
+  </aside>
+
+  <main class="col">
+    <div class="bio">
+      <p>I'm a driven pharmacist currently pursuing a PhD in the <a href="#">Computational Pharmacy Group</a> at the <a href="#">University of Basel</a>, where I blend my passion for Pharmaceutical Sciences and Computer Sciences to push the boundaries of what's possible in drug discovery.</p>
+      <p>As a staunch advocate of Open Source Software and Open Science, I'm committed to contributing to the community and fostering a spirit of collaboration. I believe the future of pharmaceutical innovation lies at the intersection of cutting-edge computational methods and traditional pharmaceutical expertise, a space where I thrive.</p>
+      <p>My work is guided by a simple principle: <strong>transformative solutions should be within reach for those who need them most.</strong></p>
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="sechead">
+      <h2>Experience</h2>
+      <span class="cmd">git log --oneline --graph --all</span>
+    </div>
+
+    <div class="log">
+      <div class="spine"></div>
+
+      <div class="wipbox">Changes not yet committed:<br><b>(working)</b> build: Obtain Doctor of Philosophy diploma</div>
+
+      <div class="wip">
+        <div class="node"></div>
+        <span class="hash">·······</span>
+        <span class="msg"><span class="pre">build:</span> Obtain Doctor of Philosophy diploma <span class="org">· University of Basel · from Jan 2025</span></span>
+      </div>
+
+      <div class="entry acad">
+        <div class="node"></div>
+        <span class="hash">8b2e4f1</span>
+        <span class="msg"><span class="pre">build:</span> Obtain MSc Drug Sciences diploma <span class="org">· Basel · 2021 to 2024</span></span>
+      </div>
+
+      <div class="entry acad">
+        <div class="node"></div>
+        <span class="hash">5c9a3d2</span>
+        <span class="msg"><span class="pre">build:</span> Obtain Pharmaciae Doctor diploma <span class="org">· Monastir · 2010 to 2019</span></span>
+      </div>
+
+      <div class="branchlab">└─ branch: professional</div>
+      <div style="position:relative">
+        <div class="spine-b"></div>
+        <div class="entry b1">
+          <div class="node"></div>
+          <span class="hash">7f1b8e3</span>
+          <span class="msg"><span class="pre">feat:</span> Internship, Bone Marrow Transplantation Center <span class="org">· 2018</span></span>
+        </div>
+        <div class="entry b1">
+          <div class="node"></div>
+          <span class="hash">2d6c4a9</span>
+          <span class="msg"><span class="pre">feat:</span> Internship, local pharmacy <span class="org">· 2017 to 2018</span></span>
+        </div>
+        <div class="entry b1">
+          <div class="node"></div>
+          <span class="hash">9e3f7b1</span>
+          <span class="msg"><span class="pre">feat:</span> Internship, Saïd pharmaceutical industry <span class="org">· 2017</span></span>
+        </div>
+        <div class="entry b1">
+          <div class="node"></div>
+          <span class="hash">4a8d2c6</span>
+          <span class="msg"><span class="pre">spike:</span> Training, Mongi-Slim Hospital <span class="org">· 2016</span></span>
+        </div>
+      </div>
+
+      <div class="entry acad">
+        <div class="node"></div>
+        <span class="hash">3f7b2e5</span>
+        <span class="msg"><span class="pre">init:</span> Obtain Baccalauréat diploma <span class="org">· Tunis · 2006 to 2010</span></span>
+      </div>
+    </div>
+
+    <div class="onward">
+      <a href="#">
+        <span class="t">Publications</span>
+        <span class="d">2 items <span class="arrow">→</span></span>
+      </a>
+      <a href="#">
+        <span class="t">Talks</span>
+        <span class="d">1 item <span class="arrow">→</span></span>
+      </a>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0",
+  "round": "round-4",
+  "revision": 1,
+  "updated": "2026-08-17T12:42:10.846Z",
+  "handedBack": true,
+  "handedBackAt": "2026-08-17T12:42:10.846Z",
+  "answers": {
+    "D-21": {
+      "question": "Tailwind, or plain CSS with your existing tokens?",
+      "choice": "tailwind",
+      "label": "tailwind — Tailwind v4, tokens as its theme",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    },
+    "D-22": {
+      "question": "What happens to the six PDFs?",
+      "choice": "link",
+      "label": "link — carry them over and actually link them",
+      "other": "",
+      "why": "",
+      "endorsed": true
+    }
+  },
+  "readback": {},
+  "claims": {},
+  "codeReview": {},
+  "outputReview": {},
+  "finalComments": ""
+}
