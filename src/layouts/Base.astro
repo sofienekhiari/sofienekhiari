@@ -1,0 +1,176 @@
+---
+/**
+ * The shell every page renders inside: head metadata, the sticky identity rail,
+ * and the scrolling content column.
+ *
+ * Layout is direction A, "Ledger" (D-17): identity, navigation and contact
+ * details stay fixed in a left rail while content scrolls beside it. On narrow
+ * viewports the rail stops being sticky and becomes an ordinary header, because
+ * a fixed rail on a phone would eat the screen.
+ *
+ * Two rulings constrain what happens here. D-07 requires every word to be
+ * readable with JavaScript off, so nothing in this file hides content pending a
+ * script. D-18 asked for view transitions between pages, which Astro provides
+ * natively and which degrade to an ordinary navigation where unsupported.
+ */
+
+// The single bio source, which supplies the name, role and contact links (D-12).
+import { profile } from "../data/profile.ts";
+// Astro's view transition support, for the cross-fade D-18 asked for.
+import { ClientRouter } from "astro:transitions";
+// Tailwind and the design tokens.
+import "../styles/global.css";
+
+/** Props accepted by the layout. */
+interface Props {
+  /** Page title, shown in the browser tab before the site name. */
+  title: string;
+  /** Meta description for search engines and link previews. */
+  description: string;
+  /** Which nav item to mark as current, or undefined on a nested page. */
+  current?: "about" | "publications" | "talks";
+}
+
+// Destructure with a default so a nested page need not pass `current`.
+const { title, description, current } = Astro.props;
+
+// The navigation, defined once. Kept to three entries so it fits one line at
+// every width, which is a hard rule in the design guidance.
+const nav = [
+  { key: "about", label: "About", href: "/" },
+  { key: "publications", label: "Publications", href: "/publications/" },
+  { key: "talks", label: "Talks", href: "/talks/" },
+] as const;
+
+// The canonical URL for this page, used for the canonical tag and og:url.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Fonts from the Google Fonts CDN (D-28). The two preconnects open the
+        connections early: fonts.googleapis.com serves the stylesheet and
+        fonts.gstatic.com serves the font files themselves, and the second is
+        cross-origin so it needs the crossorigin attribute to be reused.
+        `display=swap` means text renders in the fallback immediately rather
+        than being invisible while the download completes. */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <ClientRouter />
+  </head>
+
+  <body class="min-h-screen">
+    <a
+      href="#content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"
+      >Skip to content</a
+    >
+
+    <div class="shell relative mx-auto grid max-w-[1180px] lg:grid-cols-[308px_1fr]">
+      <aside
+        class="px-6 py-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:py-16 lg:pr-11"
+      >
+        <img
+          src="/images/profile_picture.jpg"
+          alt=""
+          width="64"
+          height="64"
+          class="mb-7 hidden size-16 rounded-full object-cover lg:block"
+        />
+
+        <a href="/" class="block text-2xl font-semibold leading-tight tracking-tight">
+          <span class="lg:block">Sofiene</span> <span class="lg:block">Khiari</span>
+        </a>
+        <p class="mt-2 text-sm font-medium text-accent">{profile.tagline}</p>
+
+        <nav class="mt-8 flex gap-5 lg:mt-10 lg:flex-col lg:gap-0" aria-label="Main">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                aria-current={current === item.key ? "page" : undefined}
+                class:list={[
+                  "relative py-1.5 text-sm transition-colors hover:text-ink",
+                  current === item.key ? "font-medium text-ink" : "text-muted",
+                ]}
+              >
+                {current === item.key && (
+                  <span
+                    aria-hidden="true"
+                    class="absolute -left-8 top-1/2 hidden h-px w-5 bg-accent lg:block"
+                  />
+                )}
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+
+        <div class="mt-8 hidden lg:mt-auto lg:flex lg:flex-col lg:gap-1.5">
+          {
+            profile.links.map((link) => (
+              <a
+                href={link.href}
+                class="font-mono text-xs text-faint transition-colors hover:text-accent"
+              >
+                {link.display}
+              </a>
+            ))
+          }
+        </div>
+      </aside>
+
+      <main id="content" class="max-w-[660px] px-6 py-10 lg:py-16 lg:pl-14 lg:pr-0">
+        <slot />
+
+        <footer class="mt-16 border-t border-line pt-6 lg:hidden">
+          <div class="flex flex-col gap-1.5">
+            {
+              profile.links.map((link) => (
+                <a href={link.href} class="font-mono text-xs text-faint">
+                  {link.display}
+                </a>
+              ))
+            }
+          </div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
+
+<style>
+  /* The rail's divider is drawn by the page grid rather than as a border on the
+   * rail itself. The rail is `h-screen` and sticky, so a border on it stops at
+   * the fold and leaves the line hanging in mid-page on anything longer than one
+   * viewport. Painting it here makes it span the full document height. */
+  @media (min-width: 1024px) {
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      /* Matches the first grid column width. */
+      left: 308px;
+      width: 1px;
+      background: var(--color-line);
+    }
+  }
+</style>

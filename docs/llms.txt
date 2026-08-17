@@ -1,22 +1,23 @@
 # Sofiene Khiari
 
-> Personal website of Sofiene Khiari — Pharmacist & Software Developer. PhD researcher in the Computational Pharmacy Group at the University of Basel. Specialises in deep learning for drug discovery, molecular docking, and full-stack web development.
+> Pharmacist and software developer, pursuing a PhD in the Computational Pharmacy Group at the University of Basel. Works on deep learning and agentic AI for molecular docking and drug discovery, and advocates for open source software and open science.
 
-## About
+## Pages
 
-- [Sofiene Khiari — Homepage](https://sofk.ch): Personal website with bio, experience timeline, publications, and technical skills. Sofiene is a pharmacist pursuing a PhD at the University of Basel, working on deep learning methods for molecular docking and drug discovery. Advocate for open source software and open science.
+- [Home](https://sofk.ch/): Biography and the full academic and professional history, presented as a git commit log.
+- [Publications](https://sofk.ch/publications/): Peer-reviewed publications and preprints in computational pharmacy, molecular docking and drug discovery.
+- [Talks](https://sofk.ch/talks/): Talks given, each rewritten as a readable article rather than published as slides.
 
-## Research
+## Publications
 
-- [Publications](https://sofk.ch#publications): Research publications and preprints in computational pharmacy, molecular docking, deep learning, and drug discovery.
+- [Synthetic Protein-Ligand Complex Generation for Deep Molecular Docking](https://doi.org/10.48550/arXiv.2509.12915): Sofiene Khiari, Matthew R. Masters, Amr H. Mahmoud, Markus A. Lill. arXiv, 2025, preprint.
 
-## Professional
+## Talks
 
-- [Experience](https://sofk.ch#experience): Full professional and academic timeline. PhD researcher in Computational Pharmacy at the University of Basel (2023–present), MSc Drug Sciences at the University of Basel (2021–2023), freelance full-stack developer (2020–2023), Pharmaciae Doctor from the University of Monastir, Tunisia (2010–2019), with pharmacy internships at the National Center for Bone Marrow Transplantation and pharmaceutical industry.
-- [Skills & Tools](https://sofk.ch#skills): Technical skills including Python, PyTorch, React, Next.js, TypeScript, Node.js, FastAPI, PostgreSQL, Docker, and many more.
+- No talk write-ups are published yet.
 
 ## Contact
 
-- Email: research@sofk.ch
-- GitHub: https://github.com/sofienekhiari
-- LinkedIn: https://www.linkedin.com/in/khiarisofiene
+- [Email](mailto:research@sofk.ch): research@sofk.ch
+- [GitHub](https://github.com/sofienekhiari): github.com/sofienekhiari
+- [LinkedIn](https://www.linkedin.com/in/khiarisofiene): linkedin.com/in/khiarisofiene

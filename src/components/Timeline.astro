@@ -1,0 +1,241 @@
+---
+/**
+ * The experience timeline, drawn as a git commit graph.
+ *
+ * This is the site's signature element. D-06 kept the idea and asked for the
+ * execution to be rebuilt, and D-14 kept the invented commit hashes. Three
+ * defects in the old version are fixed here.
+ *
+ * First, keyboard access. The old entries were clickable `<article>` elements
+ * with no tabindex and no key handler, so all nine detail views were unreachable
+ * without a mouse. Each entry is now a native `<details>`, which is focusable,
+ * operable with Enter and Space, and announced correctly by screen readers, at
+ * the cost of no JavaScript whatsoever.
+ *
+ * Second, the no-JS failure. The old entries sat at `opacity: 0` until a script
+ * added a class, so with scripting off the whole section was invisible. Nothing
+ * here is hidden pending a script, which is what D-07 requires.
+ *
+ * Third, the line. The old CSS described a progressively drawn spine but nothing
+ * ever drew it. D-18 asked for it, so it is a CSS scroll-driven animation: it
+ * animates a line that is already there, degrades to a fully drawn line where
+ * `animation-timeline` is unsupported, and is switched off entirely by the
+ * reduced-motion rule in global.css.
+ */
+
+// The timeline data, newest first.
+import { experience } from "../data/experience.ts";
+
+// The branch entries are contiguous in the data, so the group can be found by
+// its first and last index rather than by restructuring the array. Computing it
+// here keeps the markup a single pass.
+const firstBranch = experience.findIndex((e) => e.lane === "branch");
+// `findLastIndex` gives the closing edge of the same contiguous run.
+const lastBranch = experience.findLastIndex((e) => e.lane === "branch");
+---
+
+<section aria-labelledby="experience-heading">
+  <div class="flex items-baseline justify-between gap-4">
+    <h2 id="experience-heading" class="text-lg font-semibold tracking-tight">Experience</h2>
+    <code class="font-mono text-xs text-faint">git log --oneline --graph --all</code>
+  </div>
+
+  <p class="mt-5 rounded-lg border border-line bg-surface px-4 py-3 font-mono text-xs leading-relaxed text-muted">
+    Changes not yet committed:<br />
+    <span class="text-accent">(working)</span> build: Obtain Doctor of Philosophy diploma
+  </p>
+
+  <ol class="git-log relative mt-6 list-none" role="list">
+    <span aria-hidden="true" class="git-spine absolute bottom-3 top-3 w-px bg-line"></span>
+
+    {
+      experience.map((entry, index) => (
+        <li
+          class:list={[
+            "git-entry relative",
+            entry.lane === "branch" && "is-branch",
+            index === firstBranch && "mt-6",
+            index === lastBranch && "mb-2",
+          ]}
+        >
+          {index === firstBranch && (
+            <span aria-hidden="true" class="branch-label absolute -top-5 font-mono text-[0.65rem] text-faint">
+              └─ branch: professional
+            </span>
+          )}
+          {entry.lane === "branch" && <span aria-hidden="true" class="branch-spine absolute bottom-0 top-0 w-px bg-line" />}
+
+          <details class="group">
+            <summary
+              class="flex cursor-pointer list-none items-baseline gap-3 py-2 marker:content-none"
+            >
+              <span
+                aria-hidden="true"
+                class:list={[
+                  "git-node absolute rounded-full",
+                  entry.kind === "academic" ? "bg-academic" : "bg-accent",
+                  entry.kind === "working" && "is-working",
+                ]}
+              />
+              <code class="w-[4.25rem] shrink-0 font-mono text-[0.7rem] text-faint">
+                {entry.hash ?? "·······"}
+              </code>
+              <span class="text-[0.925rem] leading-snug transition-colors group-hover:text-accent group-open:text-accent">
+                <span
+                  class:list={[
+                    "font-semibold",
+                    entry.kind === "academic" ? "text-academic" : "text-accent",
+                  ]}
+                >
+                  {entry.prefix}:
+                </span>{" "}
+                {entry.message}
+                <span class="ml-1 text-xs text-faint">· {entry.period}</span>
+              </span>
+            </summary>
+
+            <div class="ml-[4.25rem] border-l border-line-soft pb-3 pl-4 pt-1">
+              <p class="text-sm font-medium">{entry.org}</p>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">{entry.detail}</p>
+
+              {entry.documents && (
+                <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 list-none">
+                  {entry.documents.map((doc) => (
+                    <li>
+                      <a
+                        href={doc.href}
+                        class="font-mono text-xs text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent"
+                      >
+                        {doc.label} (PDF)
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </details>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  /* ── Graph geometry ──────────────────────────────────────────────
+   *
+   * One variable drives everything, so the spine, the nodes and the text can
+   * never drift apart. The first attempt positioned nodes with utility classes
+   * against the list item and the node's opaque ring painted over the first two
+   * characters of every commit hash: 8b2e4f1 rendered as 2e4f1. Deriving every
+   * offset from a single centre line is what stops that recurring.
+   */
+  .git-log {
+    /* Horizontal centre of the main graph line, measured from the list edge. */
+    --lane-main: 5px;
+    /* Centre of the branch line, indented to read as a fork off the main line. */
+    --lane-branch: 27px;
+    /* Diameter of a commit node. */
+    --node: 9px;
+    /* Where entry text begins. Comfortably clear of the widest node plus its
+     * ring, which is the clearance the clipped-hash bug was missing. */
+    padding-left: 46px;
+  }
+
+  .git-spine {
+    left: var(--lane-main);
+  }
+
+  .branch-spine,
+  .branch-label {
+    /* Both hang off the branch lane, so indenting the branch moves them together. */
+    left: calc(var(--lane-branch) - var(--lane-main) - 46px);
+  }
+
+  .git-node {
+    /* Vertically aligned with the first line of the summary text. */
+    top: 1.05rem;
+    width: var(--node);
+    height: var(--node);
+    /* The ring hides the spine behind the node so the line appears to pass
+     * under it. It is drawn in the page background colour, which is exactly why
+     * it must never sit over text. */
+    box-shadow: 0 0 0 3px var(--color-canvas);
+    /* Negative because the node sits in the list's left padding, outside the
+     * list item's own box. */
+    left: calc(var(--lane-main) - 46px - (var(--node) / 2));
+  }
+
+  .is-branch .git-node {
+    left: calc(var(--lane-branch) - 46px - (var(--node) / 2));
+  }
+
+  .is-branch summary,
+  .is-branch > details > div {
+    /* Branch entries are indented so the fork is legible at a glance. */
+    margin-left: 22px;
+  }
+
+  /* The uncommitted PhD entry is drawn as an outline rather than a filled dot,
+   * the same way a git client distinguishes a working change from a commit. */
+  .git-node.is-working {
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    box-shadow: none;
+  }
+
+  /* D-18: the spine draws itself as the section scrolls past.
+   *
+   * `scale-y` is animated rather than height, so it stays on the compositor.
+   * The line exists at full length in the markup and is only scaled, which means
+   * a browser without `animation-timeline` support simply shows the finished
+   * line: the content is never dependent on the animation running. The
+   * reduced-motion block in global.css collapses it to its end state. */
+  .git-spine {
+    transform-origin: top;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .git-spine {
+        animation: draw-spine linear both;
+        animation-timeline: view();
+        /* Start as the section enters and finish before it leaves, so the line
+         * is complete while the reader is still looking at the entries. */
+        animation-range: entry 10% cover 55%;
+      }
+    }
+  }
+
+  @keyframes draw-spine {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  /* The pulsing node on the uncommitted PhD entry, matching the old site.
+   * Gated on reduced-motion here as well as globally, because an infinite loop
+   * is the animation most worth stopping for a vestibular condition. */
+  @media (prefers-reduced-motion: no-preference) {
+    .git-node.is-working {
+      animation: pulse-node 2.4s var(--ease-out-quart) infinite;
+    }
+  }
+
+  @keyframes pulse-node {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-accent) 45%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 7px transparent;
+    }
+  }
+
+  /* Safari still shows the default disclosure triangle without this. */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

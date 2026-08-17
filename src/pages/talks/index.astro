@@ -1,0 +1,75 @@
+---
+/**
+ * The talks index.
+ *
+ * D-19 ruled that a talk is rewritten as an article rather than published as
+ * slides, which makes each entry real prose and makes writing one the slow part.
+ * Nothing is published yet, so this page has to handle being empty well rather
+ * than looking broken: an empty state that says what the section is for is more
+ * use to a visitor than a blank page, and more honest than a placeholder entry.
+ */
+
+// The shell.
+import Base from "../../layouts/Base.astro";
+// Reads the collection at build time.
+import { getCollection } from "astro:content";
+// For the page description.
+import { profile } from "../../data/profile.ts";
+
+// Published talks only, newest first. A draft write-up stays invisible.
+const talks = (await getCollection("talks"))
+  .filter((talk) => !talk.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+/**
+ * Formats a talk date as a month and year.
+ *
+ * @param date - The date the talk was delivered.
+ * @returns For example "August 2026".
+ */
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-GB", { year: "numeric", month: "long", timeZone: "UTC" });
+}
+---
+
+<Base
+  title={`Talks · ${profile.name}`}
+  description="Talks given on computational pharmacy and AI for drug discovery, each written up as a readable article rather than published as slides."
+  current="talks"
+>
+  <h1 class="text-lg font-semibold tracking-tight">Talks</h1>
+  <p class="mt-2 text-sm text-muted">
+    Each talk is rewritten here as an article, so the argument survives without the room.
+  </p>
+
+  {
+    talks.length === 0 ? (
+      <div class="mt-8 rounded-lg border border-dashed border-line px-5 py-8">
+        <p class="text-sm text-muted">
+          Nothing published yet. Write-ups appear here after a talk is given, starting with the
+          2026 PhD Summer School.
+        </p>
+      </div>
+    ) : (
+      <ol class="mt-8 list-none space-y-8" role="list">
+        {talks.map((talk) => (
+          <li class="border-t border-line pt-5">
+            <h2 class="text-base font-medium leading-snug tracking-tight">
+              <a href={`/talks/${talk.id}/`} class="transition-colors hover:text-accent">
+                {talk.data.title}
+              </a>
+            </h2>
+            <p class="mt-1.5 text-sm text-faint">
+              {talk.data.venue}
+              {" · "}
+              <time datetime={talk.data.date.toISOString().slice(0, 10)}>
+                {formatDate(talk.data.date)}
+              </time>
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{talk.data.description}</p>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</Base>

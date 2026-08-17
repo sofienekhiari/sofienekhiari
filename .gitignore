@@ -3,3 +3,18 @@
 
 # Editor
 .vscode/
+
+# Node / Astro build
+node_modules/
+.astro/
+dist/
+
+# Run logs are scratch and are never committed
+*.log
+
+# Atomic-write backups left by the decision-round program. Transient by design:
+# the record is the .def.json and .answers.json pair, never these.
+*.bak
+
+# Per-folder lock held by a running decision-round server.
+.ldo-serve.lock

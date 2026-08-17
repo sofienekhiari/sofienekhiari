@@ -1,0 +1,134 @@
+---
+/**
+ * A single talk write-up.
+ *
+ * D-19 ruled these are articles rather than slide dumps, so the body of each
+ * markdown file is real prose and this template's job is to set it well: a
+ * comfortable measure, clear heading hierarchy, and nothing between the reader
+ * and the text.
+ *
+ * The route is a rest parameter so a talk can later be nested, for example
+ * /talks/2026/summer-school/, without changing this file.
+ */
+
+// The shell.
+import Base from "../../layouts/Base.astro";
+// `render` turns a collection entry's markdown body into a component.
+import { getCollection, render } from "astro:content";
+// The type of the generated static paths, so the signature is checked.
+import type { GetStaticPaths } from "astro";
+
+/**
+ * Tells Astro which talk pages to build.
+ *
+ * Drafts are excluded here rather than hidden at render time, so an unfinished
+ * write-up produces no page at all and cannot be found by guessing its URL.
+ */
+export const getStaticPaths: GetStaticPaths = async () => {
+  // Every talk in the collection.
+  const talks = await getCollection("talks");
+  // One route per published talk, with the entry passed through as a prop.
+  return talks
+    .filter((talk) => !talk.data.draft)
+    .map((talk) => ({ params: { slug: talk.id }, props: { talk } }));
+};
+
+// The entry for this route, supplied by getStaticPaths above.
+const { talk } = Astro.props;
+// Render the markdown body into a component we can place in the template.
+const { Content } = await render(talk);
+
+/**
+ * Formats the delivery date in full.
+ *
+ * @param date - The date the talk was given.
+ * @returns For example "14 August 2026".
+ */
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+---
+
+<Base title={`${talk.data.title} · Talks`} description={talk.data.description} current="talks">
+  <article>
+    <header>
+      <p class="font-mono text-xs text-faint">
+        <a href="/talks/" class="transition-colors hover:text-accent">talks</a>
+        <span> / </span>
+        <time datetime={talk.data.date.toISOString().slice(0, 10)}>
+          {formatDate(talk.data.date)}
+        </time>
+      </p>
+
+      <h1 class="mt-3 text-2xl font-semibold leading-tight tracking-tight">{talk.data.title}</h1>
+      <p class="mt-2 text-sm text-muted">{talk.data.venue}</p>
+    </header>
+
+    <div class="talk-body mt-8">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  /* Typography for rendered markdown. Written here rather than with utilities
+   * because the elements come from markdown and carry no classes to hang them
+   * on, and because D-20 keeps styling reasoning out of exempt markup where it
+   * can be commented. */
+  .talk-body :global(p) {
+    margin-block: 0 1.15rem;
+    line-height: 1.78;
+    color: var(--color-muted);
+  }
+
+  .talk-body :global(h2) {
+    margin-block: 2.25rem 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+
+  .talk-body :global(h3) {
+    margin-block: 1.75rem 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .talk-body :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-accent) 30%, transparent);
+    text-underline-offset: 3px;
+  }
+
+  .talk-body :global(a:hover) {
+    text-decoration-color: var(--color-accent);
+  }
+
+  /* Figures carry the weight in a talk write-up, so they are given room and a
+   * caption style that reads as explanation rather than as decoration. */
+  .talk-body :global(img) {
+    margin-block: 1.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-line);
+  }
+
+  .talk-body :global(blockquote) {
+    margin-block: 1.5rem;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1rem;
+    color: var(--color-muted);
+  }
+
+  .talk-body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+</style>

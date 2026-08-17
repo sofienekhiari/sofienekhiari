@@ -1,0 +1,61 @@
+---
+/**
+ * The home page: bio and the experience timeline together.
+ *
+ * D-03 ruled three pages, with the landing page carrying both the bio and the
+ * career history, on the grounds that the bio makes a claim and the timeline is
+ * its evidence, so separating them separates the two halves of one argument.
+ *
+ * The Skills section that used to sit here is gone, at Sofiene's instruction:
+ * the work is meant to show the skills instead.
+ */
+
+// The shell, which supplies the sticky identity rail and page metadata.
+import Base from "../layouts/Base.astro";
+// The signature element, rebuilt per D-06, D-14 and D-18.
+import Timeline from "../components/Timeline.astro";
+// The single bio source (D-12).
+import { profile } from "../data/profile.ts";
+
+// JSON-LD describing the person, which is the machine-readable channel search
+// engines actually consume, unlike llms.txt. Built from the same single source
+// as the visible page so the two cannot disagree.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: "https://sofk.ch",
+  jobTitle: "PhD Researcher and Software Developer",
+  description: profile.summary,
+  image: "https://sofk.ch/images/profile_picture.jpg",
+  email: "research@sofk.ch",
+  affiliation: {
+    "@type": "Organization",
+    name: profile.affiliation,
+    url: profile.groupUrl,
+  },
+  sameAs: profile.links
+    .filter((link) => !link.href.startsWith("mailto:"))
+    .map((link) => link.href),
+};
+---
+
+<Base
+  title={`${profile.name} · ${profile.tagline}`}
+  description={profile.summary}
+  current="about"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+
+  <div class="space-y-4">
+    {
+      profile.bio.map((paragraph) => (
+        <p class="text-[1.005rem] leading-[1.78] text-muted">{paragraph}</p>
+      ))
+    }
+  </div>
+
+  <hr class="my-14 border-line" />
+
+  <Timeline />
+</Base>

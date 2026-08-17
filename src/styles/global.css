@@ -1,0 +1,119 @@
+/* Global stylesheet: Tailwind plus the site's design tokens.
+ *
+ * D-21 chose Tailwind, and D-05 preserved the existing identity, so the palette
+ * and typefaces below are the ones the previous site used rather than anything
+ * new. Registering them inside @theme is what keeps them named: they become
+ * real Tailwind utilities (bg-surface, text-accent) instead of arbitrary hex
+ * values scattered through the markup, which is the failure mode D-05 was
+ * guarding against.
+ *
+ * D-16 ruled Inter carries every role, so there is no display face here. The
+ * monospace face is used only for hashes, dates and command-line fragments.
+ */
+
+@import "tailwindcss";
+
+/* Fonts come from the Google Fonts CDN (D-28).
+ *
+ * Deliberately NOT an @import here. The previous site imported the fonts from
+ * inside its stylesheet, which makes the browser download the CSS, parse it,
+ * and only then start fetching the fonts. The stylesheet link and its preconnect
+ * live in the <head> of Base.astro instead, so the font request starts in
+ * parallel with the CSS rather than behind it. Same CDN, one less round trip. */
+
+@theme {
+  /* Typefaces. Inter does display, body and UI alike (D-16). The fallbacks
+   * matter more than usual here: with the fonts on a third-party CDN, a blocked
+   * or slow request means the system stack is what a visitor actually reads. */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Light palette, carried over unchanged from the previous site (D-05). */
+  --color-canvas: #fbfbfa;
+  --color-surface: #ffffff;
+  --color-ink: #16171a;
+  --color-muted: #5f636b;
+  --color-faint: #9aa0a8;
+  --color-line: #e6e6e3;
+  --color-line-soft: #f0f0ed;
+
+  /* The teal accent, the one element of the identity people actually remember. */
+  --color-accent: #008080;
+  --color-accent-strong: #006666;
+
+  /* Amber marks academic entries in the timeline, teal marks professional ones. */
+  --color-academic: #b7791f;
+
+  /* Timing shared by every transition, so motion feels like one system. */
+  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark palette. The previous site supported both a system preference and a
+ * manual toggle, and D-05 preserves that, so the same variables are redefined
+ * in three places: the media query for system preference, and both explicit
+ * data-theme values so the toggle can override the system in either direction. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-canvas: #0c0c14;
+    --color-surface: #13131f;
+    --color-ink: #e4e4e7;
+    --color-muted: #9ca3af;
+    --color-faint: #6b7280;
+    --color-line: #2a2a40;
+    --color-line-soft: #1d1d2e;
+    --color-accent: #4dd0d0;
+    --color-accent-strong: #7adedb;
+    --color-academic: #fbbf24;
+  }
+}
+:root[data-theme="dark"] {
+  --color-canvas: #0c0c14;
+  --color-surface: #13131f;
+  --color-ink: #e4e4e7;
+  --color-muted: #9ca3af;
+  --color-faint: #6b7280;
+  --color-line: #2a2a40;
+  --color-line-soft: #1d1d2e;
+  --color-accent: #4dd0d0;
+  --color-accent-strong: #7adedb;
+  --color-academic: #fbbf24;
+}
+
+/* Base element styling. Kept minimal: everything else is a utility. */
+@layer base {
+  html {
+    /* Anchor links land below the header rather than under it. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* A visible, high-contrast focus ring on every interactive element.
+   * D-07 requires keyboard parity, and the previous site had no focus styling
+   * at all, which is the defect that ruling exists to fix. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* D-07 and D-18: the site is choreographed, but every animation collapses to
+ * nothing for a reader who has asked for reduced motion. This is an
+ * accessibility need rather than a preference, so it is a blanket override
+ * rather than something each component opts into and might forget. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
