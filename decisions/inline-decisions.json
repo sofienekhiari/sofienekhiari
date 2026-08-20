@@ -860,7 +860,59 @@
       "label": "Image, one line, one link home",
       "why": "",
       "endorsed": true,
-      "note": "Image subject chosen by him from two offered prompts: a single ball-and-stick molecule adrift in empty space, over an empty petri dish. Generated with the OpenArt connector, alt deliberately empty since it duplicates the heading. OPEN: he then asked that the molecule be chemically realistic, and none of the five images generated so far is correct caffeine. The one shipped here carries a fourth methyl on N9, which caffeine does not have. Not yet published; awaiting his ruling on whether to keep iterating, switch subject, or accept it."
+      "note": "Image subject chosen by him from two offered prompts: a single ball-and-stick molecule adrift in empty space, over an empty petri dish. Alt deliberately empty since it duplicates the heading."
+    },
+    "D-50": {
+      "question": "How is the 404 molecule made chemically correct?",
+      "asked": "2026-08-20",
+      "context": "He asked that the molecule look realistic. Five text-to-image generations across three attempts all produced structures that are not caffeine: one chemically incoherent, one with an apparent N-oxide and a methyl on the imidazole carbon, and two Nano Banana Pro outputs that made the identical error of a fourth methyl on N9. The failure was systematic, not unlucky, so more attempts at the same prompt were not the answer.",
+      "options": {
+        "reference": {
+          "label": "Build the structure with RDKit, then restyle it through OpenArt image2image.",
+          "casesFor": [
+            "Correctness comes from the structure file, not from the model",
+            "Still generated through OpenArt, which is what he originally asked for",
+            "The checks can be asserted in code rather than eyeballed"
+          ],
+          "casesAgainst": [
+            "The restyle can still alter the structure, so the output has to be re-checked",
+            "Needs an RDKit environment"
+          ]
+        },
+        "reroll": {
+          "label": "Keep generating from text until one comes out right.",
+          "casesFor": [
+            "No new tooling"
+          ],
+          "casesAgainst": [
+            "Both prior jobs failed identically",
+            "Spends credits on a coin flip"
+          ]
+        },
+        "switch": {
+          "label": "Switch to the empty petri dish, which has no structure to get wrong.",
+          "casesFor": [
+            "Sidesteps the problem entirely"
+          ],
+          "casesAgainst": [
+            "Abandons the subject he picked"
+          ]
+        },
+        "accept": {
+          "label": "Ship it as decoration.",
+          "casesFor": [
+            "Done immediately"
+          ],
+          "casesAgainst": [
+            "A wrong molecule under his own name, in his own field"
+          ]
+        }
+      },
+      "choice": "reference",
+      "label": "RDKit structure, restyled through OpenArt",
+      "why": "",
+      "endorsed": true,
+      "note": "Built from the SMILES CN1C=NC2=C1C(=O)N(C)C(=O)N2C in the existing uml4selectivity environment (RDKit 2026.03.1), so no new environment was needed. Five assertions run before the structure is used and fail the script otherwise: formula is C8H10N4O2, rings are one five and one six, exactly three methyl groups and all three on nitrogen, no nitrogen-oxygen bond anywhere, exactly two carbonyls. Geometry from ETKDGv3 with a fixed seed then MMFF94, and the molecule is rotated by principal component analysis so its flat ring system faces the camera. Rendered ball-and-stick with 3Dmol.js in a headless browser, uploaded as an image2image reference, and restyled by Nano Banana Pro into the site's muted palette. Both returned variants preserved the structure; the second was chosen because its slimmer dark bonds survive being shown at 200px, where pale bonds wash out. Structure re-checked by eye against the reference after the restyle: three N-methyls, two carbonyls, four nitrogens, and a hydrogen on the imidazole carbon."
     }
   }
 }
