@@ -272,6 +272,10 @@ because the header is centred its contents shift by half that: the name and avat
 between the home page, which scrolls, and Talks, which does not. Reserving the gutter everywhere
 costs a thin empty strip on short pages and removes the jump. Do not remove it.
 
+Confirmed as D-40, over `overflow-y: scroll` and over making the header full-bleed. It is Baseline
+only since December 2024, so a browser older than that still shows the jump; that was accepted
+knowingly rather than overlooked.
+
 Breakpoints in use: `640px` (CV list collapses) and `560px` where a row needs to stack. Do not
 introduce a new breakpoint without checking whether an existing one serves.
 

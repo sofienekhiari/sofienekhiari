@@ -6,7 +6,8 @@
  * career history, on the grounds that the bio makes a claim and the history is
  * its evidence, so separating them separates the two halves of one argument.
  * D-33 reaffirmed that after the move to a blog-shaped design, which is why
- * there is no separate About page and the nav's "About" is an anchor here.
+ * there is no separate About page. The menu does not advertise the bio either
+ * (D-39): the site name in the header is the route back here.
  *
  * The Skills section that used to sit here is gone, at Sofiene's instruction:
  * the work is meant to show the skills instead.
@@ -113,8 +114,9 @@ const personSchema = {
     </div>
   </section>
 
-  {/* The bio. The nav's "About" item resolves to this anchor. */}
-  <h2 id="about" class="mb-[24px] mt-[48px] text-[20px] font-bold tracking-[-0.025em]">About</h2>
+  {/* The bio. This heading used to carry an id, as the target of the nav's
+      "About" item; D-39 removed that item, so the id went with it. */}
+  <h2 class="mb-[24px] mt-[48px] text-[20px] font-bold tracking-[-0.025em]">About</h2>
   {
     profile.bio.map((paragraph) => (
       <p class="mb-[1.1em] text-[16.5px] text-content">{paragraph}</p>

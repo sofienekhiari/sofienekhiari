@@ -487,6 +487,47 @@
       "amends": {
         "D-35": "The menu is now Talks | Publications | Contact."
       }
+    },
+    "D-40": {
+      "question": "How should the header stop shifting horizontally between pages?",
+      "asked": "2026-08-20",
+      "context": "A scrolling page is 15px narrower than a short one, and the header is centred, so its contents moved by half that: measured at 200.5px on the home page against 208px on Talks. Claude implemented a fix before surfacing the choice, then surfaced it.",
+      "options": {
+        "gutter": {
+          "label": "scrollbar-gutter: stable on html. Reserve the width everywhere.",
+          "casesFor": [
+            "Cleanest expression of the intent",
+            "No visible scrollbar track on short pages"
+          ],
+          "casesAgainst": [
+            "Baseline only since December 2024, so older browsers still show the jump",
+            "Leaves a thin reserved strip on every short page"
+          ]
+        },
+        "overflow": {
+          "label": "overflow-y: scroll on html. Always render the scrollbar track.",
+          "casesFor": [
+            "Works in every browser ever shipped"
+          ],
+          "casesAgainst": [
+            "A permanently visible, non-functional scrollbar track reads as heavier"
+          ]
+        },
+        "layout": {
+          "label": "Stop centring the header: full-bleed background with padded contents.",
+          "casesFor": [
+            "No compatibility floor at all, since scrollbar width cannot move it"
+          ],
+          "casesAgainst": [
+            "Changes the layout the specification pins and moves away from PaperMod"
+          ]
+        }
+      },
+      "choice": "gutter",
+      "label": "scrollbar-gutter: stable",
+      "why": "",
+      "endorsed": true,
+      "note": "Already implemented when surfaced; this confirms it. Accepts that pre-2025 browsers keep the jump."
     }
   }
 }
