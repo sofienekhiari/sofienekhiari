@@ -795,6 +795,40 @@
       "why": "",
       "endorsed": true,
       "note": "Tags are no longer rendered, though the frontmatter and schema keep them: five labels per entry, mostly repeated between entries, were bulk without information. His name is matched against profile.name and set in --primary at weight 600, the only name in the list that is. Row hover puts --tertiary behind the whole row, the one row-background hover on the site, which is what makes the list read as a table. Checked in the browser at 1280px and 375px, light and dark: rules aligned, no overflow, one tab stop per row with the accent focus ring, and the column labels drop below 640px where there are no columns left to label. Leaves open whether the talks and 404 pages follow the smaller page h1."
+    },
+    "D-48": {
+      "question": "Where should a publication row link to?",
+      "asked": "2026-08-20",
+      "context": "Rows resolved through doi.org, which for an arXiv paper lands on the abstract page rather than the paper. He asked for the arXiv PDF directly.",
+      "options": {
+        "pdf": {
+          "label": "Straight to the arXiv PDF.",
+          "casesFor": [
+            "One click to the paper itself",
+            "No stop at the abstract page"
+          ],
+          "casesAgainst": [
+            "Loses the abstract, the version history and the citation export that the arXiv page carries",
+            "Opens or downloads a file rather than a page; the larger of the two is 27.7 MB",
+            "Only works for arXiv, so a journal paper needs a fallback"
+          ]
+        },
+        "doi": {
+          "label": "Keep the DOI resolver.",
+          "casesFor": [
+            "Works for every publication whatever the venue",
+            "Stable and citable"
+          ],
+          "casesAgainst": [
+            "An extra hop before the paper"
+          ]
+        }
+      },
+      "choice": "pdf",
+      "label": "Straight to the arXiv PDF",
+      "why": "",
+      "endorsed": true,
+      "note": "Derived rather than hardcoded: arXiv mints DOIs as 10.48550/arXiv.<identifier>, so the identifier is read out of the DOI and a new arXiv entry gets a PDF link for free. No version pinned, so the link follows revisions. A non-arXiv DOI falls back to doi.org, since a journal PDF sits behind a publisher URL that cannot be guessed. Both live URLs checked: 200, application/pdf. The DOI stays visible as text in the row."
     }
   }
 }

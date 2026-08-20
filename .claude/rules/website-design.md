@@ -266,6 +266,13 @@ same grey at nearly the same weight, so nothing anchored the eye.
 The whole row is still one block-level `<a>`, one click target and one tab stop, which is why the DOI
 is text rather than its own link.
 
+**Where the row points (D-48).** An arXiv paper links straight to `arxiv.org/pdf/<identifier>`,
+skipping the abstract page. The identifier is read out of the DOI, since arXiv mints them to the
+fixed pattern `10.48550/arXiv.<identifier>`, so nothing is hardcoded per paper. No version is
+pinned: `/pdf/<id>` serves the newest, and pinning `v1` would freeze the link on a superseded draft
+the moment the paper is revised. Anything that is not an arXiv DOI keeps going through
+`doi.org`, which is the only link that can be predicted for a journal paper.
+
 ```
 grid-template-columns: 150px minmax(0, 1fr)
 gap:            var(--gap)

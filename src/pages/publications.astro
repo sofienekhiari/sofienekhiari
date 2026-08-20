@@ -17,6 +17,10 @@
  * design specification requires so that the entry is one click target and one
  * tab stop. That is why the DOI appears as text rather than as its own link: a
  * link inside a link is invalid HTML and would break keyboard navigation.
+ *
+ * Where the row points is decided by `linkFor` below (D-48): straight at the
+ * arXiv PDF where the paper is on arXiv, and through the DOI resolver for
+ * anything else.
  */
 
 // The shell.
@@ -46,6 +50,41 @@ function formatDate(date: Date): string {
   // en-GB gives "September 2025" rather than the American month-first order.
   return date.toLocaleDateString("en-GB", { year: "numeric", month: "long", timeZone: "UTC" });
 }
+
+/**
+ * Works out where a publication row should point.
+ *
+ * Every entry stores a DOI, and a DOI always resolves somewhere sensible, so
+ * that is the safe fallback. But arXiv mints its DOIs to a fixed pattern,
+ * `10.48550/arXiv.<identifier>`, which means the identifier can be read
+ * straight out of the DOI and turned into a link to the PDF itself. For an
+ * arXiv paper that saves the reader a stop at the abstract page.
+ *
+ * Nothing is hardcoded per paper: a new arXiv entry gets a PDF link for free,
+ * and a journal paper, whose PDF lives behind a publisher URL nobody can guess
+ * from a DOI, keeps the resolver.
+ *
+ * @param doi - The bare DOI from frontmatter, with no resolver prefix.
+ * @returns An absolute URL to open when the row is clicked.
+ * @example
+ * ```ts
+ * linkFor("10.48550/arXiv.2509.12915"); // "https://arxiv.org/pdf/2509.12915"
+ * linkFor("10.1021/acs.jcim.4c00001");  // "https://doi.org/10.1021/acs.jcim.4c00001"
+ * ```
+ */
+function linkFor(doi: string): string {
+  // Capture whatever follows the arXiv prefix; that remainder is the arXiv
+  // identifier. Case-insensitive because the "arXiv" in a DOI is sometimes
+  // written in lower case.
+  const arxiv = doi.match(/^10\.48550\/arXiv\.(.+)$/i);
+  // No prefix match means this is not an arXiv paper, so send the reader
+  // through the DOI resolver, the one link that is guaranteed to work.
+  if (!arxiv) return `https://doi.org/${doi}`;
+  // arxiv.org/pdf/<identifier> serves the newest version of the PDF. Asking for
+  // no particular version is deliberate: pinning v1 would freeze the link on a
+  // superseded draft the moment the paper is revised.
+  return `https://arxiv.org/pdf/${arxiv[1]}`;
+}
 ---
 
 <Base
@@ -70,7 +109,7 @@ function formatDate(date: Date): string {
 
   {
     publications.map((pub) => (
-      <a href={`https://doi.org/${pub.data.doi}`} class="row entry border-b border-border py-[20px]">
+      <a href={linkFor(pub.data.doi)} class="row entry border-b border-border py-[20px]">
         {/* Left rail: when it appeared, and where. */}
         <div>
           <div class="text-[14px] font-semibold leading-[1.45]">
