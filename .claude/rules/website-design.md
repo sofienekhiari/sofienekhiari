@@ -264,8 +264,11 @@ Same `max-width` as the main column, `margin-top: calc(var(--gap)*2)`,
 `main` is `max-width: calc(var(--main-width) + var(--gap)*2)`, centred, with
 `padding: calc(var(--gap)*1.5) var(--gap)`.
 
-`html` carries `scroll-padding-top: 80px` so in-page anchors clear the header,
-`scroll-behavior: smooth`, and **`scrollbar-gutter: stable`**.
+`html` carries `scroll-behavior: smooth` and **`scrollbar-gutter: stable`**.
+
+There is **no `scroll-padding-top`** (D-41). It was carried over from the mockups, where it stopped
+anchors landing beneath a fixed header. This header is not fixed, so the reserve served nothing
+except pushing the skip link's target 80px too low.
 
 The gutter is not cosmetic. Without it a scrolling page is 15px narrower than a short one, and
 because the header is centred its contents shift by half that: the name and avatar visibly jumped

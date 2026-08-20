@@ -528,6 +528,37 @@
       "why": "",
       "endorsed": true,
       "note": "Already implemented when surfaced; this confirms it. Accepts that pre-2025 browsers keep the jump."
+    },
+    "D-41": {
+      "question": "Does scroll-padding-top stay on html?",
+      "asked": "2026-08-20",
+      "context": "The 80px reserve exists to stop in-page anchors landing under a fixed header, but the R4 header is not sticky and scrolls away. Its only remaining effect was to push the skip link's jump to #content 80px lower than necessary. Carried over from the mockups.",
+      "options": {
+        "remove": {
+          "label": "Remove it. Nothing on the page needs the reserve.",
+          "casesFor": [
+            "The header is not fixed, so there is nothing to clear",
+            "The skip link lands flush at the top of main, which is correct for a skip link"
+          ],
+          "casesAgainst": [
+            "Would need reinstating if the header ever becomes sticky"
+          ]
+        },
+        "keep": {
+          "label": "Keep it as insurance in case the header becomes sticky later.",
+          "casesFor": [
+            "Costs nothing visible today"
+          ],
+          "casesAgainst": [
+            "A value in the specification that serves nothing invites confusion"
+          ]
+        }
+      },
+      "choice": "remove",
+      "label": "Remove it",
+      "why": "",
+      "endorsed": true,
+      "note": "scroll-behavior: smooth stays; it still governs the skip link jump and he did not ask for it to go."
     }
   }
 }

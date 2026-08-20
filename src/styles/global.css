@@ -90,8 +90,14 @@
 
 @layer base {
   html {
-    /* In-page anchors land below the header rather than under it. */
-    scroll-padding-top: 80px;
+    /* Smooth scrolling for the one in-page jump the site has, the skip link.
+     * It collapses to instant under prefers-reduced-motion, via the blanket
+     * override at the bottom of this file.
+     *
+     * There is deliberately no scroll-padding-top (D-41). That reserve exists
+     * to stop anchors landing beneath a fixed header, and this header is not
+     * fixed: it scrolls away with the page. Its only effect here was to push
+     * the skip link's target 80px lower than it needed to be. */
     scroll-behavior: smooth;
 
     /* Reserve the scrollbar's width whether or not the page needs one.
