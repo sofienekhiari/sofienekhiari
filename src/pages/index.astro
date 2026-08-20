@@ -1,27 +1,38 @@
 ---
 /**
- * The home page: bio and the experience timeline together.
+ * The home page: the profile block, the bio, and the experience list.
  *
- * D-03 ruled three pages, with the landing page carrying both the bio and the
- * career history, on the grounds that the bio makes a claim and the timeline is
+ * D-03 ruled three pages with the landing page carrying both the bio and the
+ * career history, on the grounds that the bio makes a claim and the history is
  * its evidence, so separating them separates the two halves of one argument.
+ * D-33 reaffirmed that after the move to a blog-shaped design, which is why
+ * there is no separate About page and the nav's "About" is an anchor here.
  *
  * The Skills section that used to sit here is gone, at Sofiene's instruction:
  * the work is meant to show the skills instead.
  */
 
-// The shell, which supplies the sticky identity rail and page metadata.
+// The shell, which supplies the header, the reading column and the footer.
 import Base from "../layouts/Base.astro";
-// The signature element, rebuilt per D-06, D-14 and D-18.
-import Timeline from "../components/Timeline.astro";
+// The experience and education list, rebuilt as a plain chronology (D-30).
+import CareerList from "../components/CareerList.astro";
 // The single bio source (D-12).
 import { profile } from "../data/profile.ts";
 
-// The contact address, taken from the one mailto link in the profile rather
-// than written out again here. It was previously hardcoded in the schema below,
-// which meant changing the address silently left the machine-readable copy
-// pointing at the old one. That is the drift D-12 exists to prevent.
+// The contact address, taken from the one mailto link rather than written out
+// again here. It was previously hardcoded in the schema below, which meant
+// changing the address silently left the machine-readable copy pointing at the
+// old one. That is the drift D-12 exists to prevent.
 const mailto = profile.links.find((link) => link.href.startsWith("mailto:"));
+
+// Everything in the profile links except the email, which gets its own button.
+const socials = profile.links.filter((link) => !link.href.startsWith("mailto:"));
+
+// The design calls for one emphasised span in the subtitle (specification
+// section 4). His tagline is his copy under D-26, so rather than rewriting it,
+// it is split at the ampersand and the second half carries the emphasis. That
+// changes the presentation without changing a single word.
+const [taglineLead, taglineEmphasis] = profile.tagline.split("&").map((part) => part.trim());
 
 // JSON-LD describing the person, which is the machine-readable channel search
 // engines actually consume, unlike llms.txt. Built from the same single source
@@ -40,28 +51,78 @@ const personSchema = {
     name: profile.affiliation,
     url: profile.groupUrl,
   },
-  sameAs: profile.links
-    .filter((link) => !link.href.startsWith("mailto:"))
-    .map((link) => link.href),
+  sameAs: socials.map((link) => link.href),
 };
 ---
 
-<Base
-  title={`${profile.name} · ${profile.tagline}`}
-  description={profile.summary}
-  current="about"
->
+<Base title={`${profile.name} · ${profile.tagline}`} description={profile.summary}>
   <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
 
-  <div class="space-y-4">
-    {
-      profile.bio.map((paragraph) => (
-        <p class="text-[1.005rem] leading-[1.78] text-muted">{paragraph}</p>
-      ))
-    }
-  </div>
+  {/* Profile block. 74vh rather than a full viewport is deliberate: it leaves
+      the first section heading visible at the fold, so a visitor can see there
+      is content below rather than having to guess. */}
+  <section
+    class="flex min-h-[74vh] flex-col items-center justify-center pb-[40px] text-center"
+  >
+    <img
+      src="/images/profile_picture.jpg"
+      alt={profile.name}
+      width="150"
+      height="150"
+      class="mb-[24px] size-[150px] rounded-full object-cover"
+    />
 
-  <hr class="my-14 border-line" />
+    <h1 class="m-0 mb-[6px] text-[42px] font-extrabold leading-[1.14] tracking-[-0.04em]">
+      {profile.name}
+    </h1>
 
-  <Timeline />
+    <p class="m-0 text-[18px] font-medium text-secondary">
+      {taglineLead} &amp; <b class="font-semibold text-accent">{taglineEmphasis}</b>
+    </p>
+
+    <p class="m-0 mt-[16px] max-w-[56ch] text-[16px] leading-[1.6] text-secondary">
+      {profile.summary}
+    </p>
+
+    <div class="mt-[29px] flex flex-wrap justify-center gap-[12px]">
+      <a
+        href="/talks/"
+        class="rounded-full bg-tertiary px-[16px] py-[7px] text-[14.5px] font-medium transition-colors hover:bg-accent hover:text-on-accent active:scale-[0.96]"
+        >Talks</a
+      >
+      <a
+        href="/publications/"
+        class="rounded-full bg-tertiary px-[16px] py-[7px] text-[14.5px] font-medium transition-colors hover:bg-accent hover:text-on-accent active:scale-[0.96]"
+        >Publications</a
+      >
+      {
+        socials.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-full bg-tertiary px-[16px] py-[7px] text-[14.5px] font-medium transition-colors hover:bg-accent hover:text-on-accent active:scale-[0.96]"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={mailto?.href}
+        class="rounded-full bg-tertiary px-[16px] py-[7px] text-[14.5px] font-medium transition-colors hover:bg-accent hover:text-on-accent active:scale-[0.96]"
+        >Email</a
+      >
+    </div>
+  </section>
+
+  {/* The bio. The nav's "About" item resolves to this anchor. */}
+  <h2 id="about" class="mb-[24px] mt-[48px] text-[20px] font-bold tracking-[-0.025em]">About</h2>
+  {
+    profile.bio.map((paragraph) => (
+      <p class="mb-[1.1em] text-[16.5px] text-content">{paragraph}</p>
+    ))
+  }
+
+  <h2 class="mb-[24px] mt-[48px] text-[20px] font-bold tracking-[-0.025em]">
+    Experience and education
+  </h2>
+  <CareerList />
 </Base>

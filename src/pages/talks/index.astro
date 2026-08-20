@@ -13,7 +13,7 @@
 import Base from "../../layouts/Base.astro";
 // Reads the collection at build time.
 import { getCollection } from "astro:content";
-// For the page description.
+// For the page title.
 import { profile } from "../../data/profile.ts";
 
 // Published talks only, newest first. A draft write-up stays invisible.
@@ -26,6 +26,10 @@ const talks = (await getCollection("talks"))
  *
  * @param date - The date the talk was delivered.
  * @returns For example "August 2026".
+ * @example
+ * ```ts
+ * formatDate(new Date("2026-08-14")); // "August 2026"
+ * ```
  */
 function formatDate(date: Date): string {
   return date.toLocaleDateString("en-GB", { year: "numeric", month: "long", timeZone: "UTC" });
@@ -37,39 +41,40 @@ function formatDate(date: Date): string {
   description="Talks given on computational pharmacy and AI for drug discovery, each written up as a readable article rather than published as slides."
   current="talks"
 >
-  <h1 class="text-lg font-semibold tracking-tight">Talks</h1>
-  <p class="mt-2 text-sm text-muted">
+  <h1 class="m-0 text-[30px] font-extrabold leading-[1.2] tracking-[-0.035em]">Talks</h1>
+  <p class="mb-[36px] mt-[10px] text-[16px] text-secondary">
     Each talk is rewritten here as an article, so the argument survives without the room.
   </p>
 
   {
     talks.length === 0 ? (
-      <div class="mt-8 rounded-lg border border-dashed border-line px-5 py-8">
-        <p class="text-sm text-muted">
-          Nothing published yet. Write-ups appear here after a talk is given, starting with the
-          2026 PhD Summer School.
+      <div class="rounded-[8px] border border-dashed border-border px-[24px] py-[32px]">
+        <p class="m-0 text-[16px] leading-[1.62] text-secondary">
+          Nothing published yet. Write-ups appear here after a talk is given, starting with the 2026
+          PhD Summer School.
         </p>
       </div>
     ) : (
-      <ol class="mt-8 list-none space-y-8" role="list">
-        {talks.map((talk) => (
-          <li class="border-t border-line pt-5">
-            <h2 class="text-base font-medium leading-snug tracking-tight">
-              <a href={`/talks/${talk.id}/`} class="transition-colors hover:text-accent">
-                {talk.data.title}
-              </a>
-            </h2>
-            <p class="mt-1.5 text-sm text-faint">
-              {talk.data.venue}
-              {" · "}
-              <time datetime={talk.data.date.toISOString().slice(0, 10)}>
-                {formatDate(talk.data.date)}
-              </time>
-            </p>
-            <p class="mt-2 text-sm leading-relaxed text-muted">{talk.data.description}</p>
-          </li>
-        ))}
-      </ol>
+      talks.map((talk) => (
+        <a
+          href={`/talks/${talk.id}/`}
+          class="group mb-[36px] block border-b border-border pb-[27.6px] last-of-type:mb-0 last-of-type:border-b-0"
+        >
+          <h2 class="m-0 mb-[7px] text-[23px] font-bold leading-[1.32] tracking-[-0.03em] transition-colors group-hover:text-accent">
+            {talk.data.title}
+          </h2>
+
+          {/* The meta line: facts separated by a middle dot, never a dash. */}
+          <p class="m-0 mb-[9px] text-[14px] font-medium text-secondary">
+            <time datetime={talk.data.date.toISOString().slice(0, 10)}>
+              {formatDate(talk.data.date)}
+            </time>
+            <span>&nbsp;·&nbsp;{talk.data.venue}</span>
+          </p>
+
+          <p class="m-0 text-[16px] leading-[1.62] text-secondary">{talk.data.description}</p>
+        </a>
+      ))
     )
   }
 </Base>

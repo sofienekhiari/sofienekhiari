@@ -1,112 +1,135 @@
-/* Global stylesheet: Tailwind plus the site's design tokens.
+/* Global stylesheet: Tailwind plus the design tokens.
  *
- * D-21 chose Tailwind, and D-05 preserved the existing identity, so the palette
- * and typefaces below are the ones the previous site used rather than anything
- * new. Registering them inside @theme is what keeps them named: they become
- * real Tailwind utilities (bg-surface, text-accent) instead of arbitrary hex
- * values scattered through the markup, which is the failure mode D-05 was
- * guarding against.
+ * The design is R4 "Typed" (D-32): Hugo PaperMod's structure and layout,
+ * carrying Manrope instead of PaperMod's system font stack, on a warm
+ * off-white ground.
  *
- * D-16 ruled Inter carries every role, so there is no display face here. The
- * monospace face is used only for hashes, dates and command-line fragments.
+ * Every value below is specified in `.claude/rules/website-design.md`. D-34
+ * ruled that the specification wins: if a value here disagrees with that file,
+ * this file is wrong. Do not change a token here without changing it there.
+ *
+ * NAMING. The specification calls the tokens `--theme`, `--primary`, `--border`
+ * and so on. Tailwind only generates colour utilities from names in its
+ * `--color-*` namespace, so each one is registered here with that prefix:
+ * `--border` in the specification is `--color-border` here, and the utility is
+ * `border-border`. The prefix is a Tailwind requirement, not a design decision.
  */
 
 @import "tailwindcss";
 
-/* Fonts come from the Google Fonts CDN (D-28).
+/* Manrope comes from the Google Fonts CDN. D-28 ruled the delivery method and
+ * D-32 changed which font it delivers; the method is unchanged.
  *
- * Deliberately NOT an @import here. The previous site imported the fonts from
- * inside its stylesheet, which makes the browser download the CSS, parse it,
- * and only then start fetching the fonts. The stylesheet link and its preconnect
- * live in the <head> of Base.astro instead, so the font request starts in
- * parallel with the CSS rather than behind it. Same CDN, one less round trip. */
+ * Deliberately NOT an @import here. An import makes the browser download this
+ * stylesheet, parse it, and only then start fetching the font. The stylesheet
+ * link and its two preconnects live in the <head> of Base.astro instead, so the
+ * font request starts in parallel with the CSS rather than behind it. */
 
 @theme {
-  /* Typefaces. Inter does display, body and UI alike (D-16). The fallbacks
-   * matter more than usual here: with the fonts on a third-party CDN, a blocked
-   * or slow request means the system stack is what a visitor actually reads. */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  /* Manrope carries every role: display, body and UI alike (D-32). There is no
+   * second family. The fallback stack is load-bearing rather than decorative,
+   * because a blocked or slow CDN means the system face is what is actually
+   * read. */
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
 
-  /* Light palette, carried over unchanged from the previous site (D-05). */
-  --color-canvas: #fbfbfa;
-  --color-surface: #ffffff;
-  --color-ink: #16171a;
-  --color-muted: #5f636b;
-  --color-faint: #9aa0a8;
-  --color-line: #e6e6e3;
-  --color-line-soft: #f0f0ed;
+  /* Light palette. The ground is a warm off-white rather than pure white,
+   * which is what separates this from stock PaperMod. */
+  --color-theme: #fdfdfb;
+  --color-entry: #ffffff;
+  --color-primary: #1b1d1f;
+  --color-secondary: #697077;
+  --color-tertiary: #eaeae5;
+  --color-content: #25282a;
+  --color-border: #eaeae4;
 
-  /* The teal accent, the one element of the identity people actually remember. */
-  --color-accent: #008080;
-  --color-accent-strong: #006666;
+  /* One accent, used for links on hover, the active nav item, the draft badge
+   * and the current role. There is deliberately no second accent anywhere. */
+  --color-accent: #00706b;
+  /* Backs the draft badge only. Nothing else uses it. */
+  --color-tint: rgb(0 112 107 / 0.09);
 
-  /* Amber marks academic entries in the timeline, teal marks professional ones. */
-  --color-academic: #b7791f;
-
-  /* Timing shared by every transition, so motion feels like one system. */
-  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Text colour to place ON a filled accent surface. White in light mode,
+   * near-black in dark, because white on the dark-mode accent fails contrast.
+   * Registered as a token so no component has to remember the rule. */
+  --color-on-accent: #ffffff;
 }
 
-/* Dark palette. The previous site supported both a system preference and a
- * manual toggle, and D-05 preserves that, so the same variables are redefined
- * in three places: the media query for system preference, and both explicit
- * data-theme values so the toggle can override the system in either direction. */
+/* Layout metrics, inherited from PaperMod. Kept as plain custom properties
+ * rather than Tailwind namespaces because they are one-off structural values,
+ * not scales that need a utility each.
+ *
+ * The nav is wider than the content column on purpose: the header spans
+ * --nav-width while the reading column stays at --main-width. */
+:root {
+  --gap: 24px;
+  --content-gap: 20px;
+  --nav-width: 1024px;
+  --main-width: 720px;
+  --header-height: 60px;
+  --radius: 8px;
+}
+
+/* Dark palette, delivered by system preference only. There is no theme toggle:
+ * a toggle needs JavaScript, and D-07 requires every word to be readable
+ * without it. Adding one is a new decision, not an implementation detail. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-canvas: #0c0c14;
-    --color-surface: #13131f;
-    --color-ink: #e4e4e7;
-    --color-muted: #9ca3af;
-    --color-faint: #6b7280;
-    --color-line: #2a2a40;
-    --color-line-soft: #1d1d2e;
-    --color-accent: #4dd0d0;
-    --color-accent-strong: #7adedb;
-    --color-academic: #fbbf24;
+  :root {
+    --color-theme: #15171a;
+    --color-entry: #1d2023;
+    --color-primary: #e6e8ea;
+    --color-secondary: #959ba1;
+    --color-tertiary: #282c30;
+    --color-content: #c5c9cc;
+    --color-border: #252a2e;
+    --color-accent: #4fd6ca;
+    --color-tint: rgb(79 214 202 / 0.11);
+    /* Near-black on the light dark-mode accent. White here would fail AA. */
+    --color-on-accent: #062421;
   }
 }
-:root[data-theme="dark"] {
-  --color-canvas: #0c0c14;
-  --color-surface: #13131f;
-  --color-ink: #e4e4e7;
-  --color-muted: #9ca3af;
-  --color-faint: #6b7280;
-  --color-line: #2a2a40;
-  --color-line-soft: #1d1d2e;
-  --color-accent: #4dd0d0;
-  --color-accent-strong: #7adedb;
-  --color-academic: #fbbf24;
-}
 
-/* Base element styling. Kept minimal: everything else is a utility. */
 @layer base {
   html {
-    /* Anchor links land below the header rather than under it. */
-    scroll-padding-top: 5rem;
+    /* In-page anchors land below the header rather than under it. */
+    scroll-padding-top: 80px;
+    scroll-behavior: smooth;
+
+    /* Reserve the scrollbar's width whether or not the page needs one.
+     *
+     * Without this, a page long enough to scroll is 15px narrower than a short
+     * one, and because the header is centred, its contents move by half that.
+     * The name and avatar visibly jumped sideways going from the home page,
+     * which scrolls, to Talks, which does not. Reserving the gutter everywhere
+     * costs a thin empty strip on short pages and removes the jump entirely. */
+    scrollbar-gutter: stable;
   }
 
   body {
-    background-color: var(--color-canvas);
-    color: var(--color-ink);
+    background-color: var(--color-theme);
+    color: var(--color-primary);
     font-family: var(--font-sans);
+    /* Sizes stay in pixels because they are inherited from PaperMod, which is
+     * built that way, and because it keeps them directly checkable against the
+     * type scale table in the specification. */
+    font-size: 17.5px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* A visible, high-contrast focus ring on every interactive element.
-   * D-07 requires keyboard parity, and the previous site had no focus styling
+  /* A visible, high-contrast focus ring on every interactive element. D-07
+   * requires keyboard parity, and the site this replaced had no focus styling
    * at all, which is the defect that ruling exists to fix. */
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 3px;
   }
 }
 
-/* D-07 and D-18: the site is choreographed, but every animation collapses to
- * nothing for a reader who has asked for reduced motion. This is an
- * accessibility need rather than a preference, so it is a blanket override
- * rather than something each component opts into and might forget. */
+/* Every animation collapses to nothing for a reader who has asked for reduced
+ * motion. This is an accessibility need rather than a preference, so it is a
+ * blanket override rather than something each component opts into and might
+ * forget to. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

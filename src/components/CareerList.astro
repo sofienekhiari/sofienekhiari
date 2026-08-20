@@ -1,0 +1,126 @@
+---
+/**
+ * The experience and education list.
+ *
+ * This replaces the git commit graph the previous site used. D-30 retired that
+ * metaphor, so the shape is now the plain chronological list the design
+ * specification describes: a period in a left column, the role and organisation
+ * in a right column, hairlines between.
+ *
+ * Each entry is a native `<details>`. That is not incidental: D-07 requires
+ * every word to be readable with JavaScript off, so the detail has to open by
+ * keyboard with no script, and `<details>` is the only element that gives that
+ * for free. The version of this list before the rebuild used clickable
+ * `<article>` elements with no tabindex, which made every detail view
+ * unreachable by keyboard; this is the fix for that defect.
+ *
+ * The degree documents are deliberately NOT rendered (D-37, superseding D-22).
+ * Sofiene is undecided about how safe it is to publish his diplomas and a full
+ * transcript, so the site no longer links them. The `documents` data stays in
+ * experience.ts so restoring the links is one block of markup rather than a
+ * research exercise, and he will ask if he wants that.
+ *
+ * Note that unlinking is not unpublishing: the files still sit in public/ and
+ * are copied into docs/, so they remain fetchable at their original URLs.
+ */
+
+// The history itself, newest first.
+import { experience } from "../data/experience.ts";
+---
+
+<ul class="m-0 list-none p-0">
+  {
+    experience.map((entry) => (
+      <li class="border-b border-border last:border-b-0">
+        <details class="entry" open={entry.current}>
+          {/* The summary is the row: period, then role over organisation, then
+              the plus marker that rotates when the entry is open. */}
+          <summary class="row">
+            <span
+              class:list={[
+                "text-[13.5px] font-medium",
+                entry.current ? "text-accent" : "text-secondary",
+              ]}
+            >
+              {entry.period}
+            </span>
+
+            <span>
+              <span class="block text-[16px] font-semibold tracking-[-0.015em]">{entry.role}</span>
+              <small class="mt-[2px] block text-[14px] font-normal tracking-normal text-secondary">
+                {entry.org}
+              </small>
+            </span>
+
+            <span class="marker" aria-hidden="true">+</span>
+          </summary>
+
+          {/* The detail. Document links used to sit here and were removed by
+              D-37; see the note at the top of this file before adding them back. */}
+          <div class="detail">
+            <p class="m-0 text-[15.5px] text-secondary">{entry.detail}</p>
+          </div>
+        </details>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  /* The row geometry from the specification: a fixed period column, the role
+   * column taking the rest, and the marker sized to its own content. All three
+   * offsets derive from these two values so a change lands in one place. */
+  .row {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr) auto;
+    gap: var(--gap);
+    align-items: baseline;
+    padding: 11px 0;
+    cursor: pointer;
+    /* Removes the native disclosure triangle so the plus marker is the only
+     * affordance. Both properties are needed to cover every engine. */
+    list-style: none;
+  }
+
+  .row::-webkit-details-marker {
+    display: none;
+  }
+
+  .marker {
+    justify-self: end;
+    color: var(--color-secondary);
+    transition: transform 0.22s, color 0.22s;
+  }
+
+  /* The plus becomes a cross when the entry is open, which reads as "close"
+   * without needing a second glyph or a label change. */
+  .entry[open] .marker {
+    transform: rotate(45deg);
+    color: var(--color-accent);
+  }
+
+  /* The detail is indented to sit under the role column rather than under the
+   * period, so the reading column stays continuous down the page. */
+  .detail {
+    padding: 0 0 16px calc(180px + var(--gap));
+    max-width: 78ch;
+  }
+
+  /* Below the collapse point the grid becomes one column, so the indent that
+   * aligned the detail with the role column would leave it stranded. */
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2px 16px;
+      align-items: start;
+    }
+
+    .row > :first-child {
+      grid-column: 1 / -1;
+    }
+
+    .detail {
+      padding-left: 0;
+    }
+  }
+</style>

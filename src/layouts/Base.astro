@@ -1,49 +1,62 @@
 ---
 /**
- * The shell every page renders inside: head metadata, the sticky identity rail,
- * and the scrolling content column.
+ * The shell every page renders inside: head metadata, the header, and the
+ * centred reading column.
  *
- * Layout is direction A, "Ledger" (D-17): identity, navigation and contact
- * details stay fixed in a left rail while content scrolls beside it. On narrow
- * viewports the rail stops being sticky and becomes an ordinary header, because
- * a fixed rail on a phone would eat the screen.
+ * The design is R4 "Typed" (D-32), which takes Hugo PaperMod's structure: the
+ * site name on the left of the header, the menu on the right, a content column
+ * narrower than the header above it, and a quiet centred footer. Exact values
+ * live in `.claude/rules/website-design.md`, which wins over this file (D-34).
  *
  * Two rulings constrain what happens here. D-07 requires every word to be
- * readable with JavaScript off, so nothing in this file hides content pending a
- * script. D-18 asked for view transitions between pages, which Astro provides
- * natively and which degrade to an ordinary navigation where unsupported.
+ * readable with JavaScript off, so nothing hides pending a script, and there is
+ * no theme toggle. The spec permits Astro view transitions, which degrade to an
+ * ordinary navigation where unsupported.
  */
 
-// The single bio source, which supplies the name, role and contact links (D-12).
+// The single bio source, which supplies the name and the contact links (D-12).
 import { profile } from "../data/profile.ts";
-// Astro's view transition support, for the cross-fade D-18 asked for.
+// Astro's view transition support, permitted by the motion rules.
 import { ClientRouter } from "astro:transitions";
 // Tailwind and the design tokens.
 import "../styles/global.css";
 
 /** Props accepted by the layout. */
 interface Props {
-  /** Page title, shown in the browser tab before the site name. */
+  /** Page title, shown in the browser tab. */
   title: string;
   /** Meta description for search engines and link previews. */
   description: string;
-  /** Which nav item to mark as current, or undefined on a nested page. */
-  current?: "about" | "publications" | "talks";
+  /** Which nav item to mark as current. Omitted on the home page, which is
+   *  reached through the site name rather than through a menu item, and on
+   *  nested pages that inherit their section's highlight. */
+  current?: "publications" | "talks";
 }
 
 // Destructure with a default so a nested page need not pass `current`.
 const { title, description, current } = Astro.props;
 
-// The navigation, defined once. Kept to three entries so it fits one line at
-// every width, which is a hard rule in the design guidance.
+// The contact address, taken from the one mailto link in the profile rather
+// than written out again here, so changing it in one place changes it here too.
+const mailto = profile.links.find((link) => link.href.startsWith("mailto:"));
+
+// The navigation, defined once. D-35 ruled the labels: "Talks" rather than a
+// generic "Posts", because the section holds talk write-ups. D-39 then removed
+// "About", because it pointed at an anchor on the home page rather than a real
+// destination, and the site name in the header already goes there. The bio
+// lives on the home page and is not advertised separately.
 const nav = [
-  { key: "about", label: "About", href: "/" },
-  { key: "publications", label: "Publications", href: "/publications/" },
   { key: "talks", label: "Talks", href: "/talks/" },
+  { key: "publications", label: "Publications", href: "/publications/" },
+  { key: "contact", label: "Contact", href: mailto?.href ?? "#" },
 ] as const;
 
 // The canonical URL for this page, used for the canonical tag and og:url.
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// The year shown in the footer, taken from the build clock rather than hardcoded
+// so it cannot go stale silently.
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -52,18 +65,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    {/* Fonts from the Google Fonts CDN (D-28). The two preconnects open the
+    {/* Manrope from the Google Fonts CDN. D-28 ruled the delivery method and
+        D-32 changed which font it delivers. The two preconnects open the
         connections early: fonts.googleapis.com serves the stylesheet and
-        fonts.gstatic.com serves the font files themselves, and the second is
-        cross-origin so it needs the crossorigin attribute to be reused.
-        `display=swap` means text renders in the fallback immediately rather
-        than being invisible while the download completes. */}
+        fonts.gstatic.com serves the font files, and the second is cross-origin
+        so it needs the crossorigin attribute to be reused. `display=swap` means
+        text renders in the fallback immediately rather than being invisible
+        while the download completes. */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
     />
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -77,100 +92,72 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <ClientRouter />
   </head>
 
-  <body class="min-h-screen">
+  <body class="flex min-h-screen flex-col">
     <a
       href="#content"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-entry focus:px-4 focus:py-2 focus:text-primary"
       >Skip to content</a
     >
 
-    <div class="shell relative mx-auto grid max-w-[1180px] lg:grid-cols-[308px_1fr]">
-      <aside
-        class="px-6 py-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:py-16 lg:pr-11"
+    {/* Header. The inner width is --nav-width, deliberately wider than the
+        reading column below it, which is inherited from PaperMod. */}
+    <header class="bg-theme">
+      <nav
+        class="mx-auto flex max-w-[calc(1024px+48px)] flex-wrap items-center justify-between px-[24px] py-[10px] leading-[60px]"
+        aria-label="Main"
       >
-        <img
-          src="/images/profile_picture.jpg"
-          alt=""
-          width="64"
-          height="64"
-          class="mb-7 hidden size-16 rounded-full object-cover lg:block"
-        />
-
-        <a href="/" class="block text-2xl font-semibold leading-tight tracking-tight">
-          <span class="lg:block">Sofiene</span> <span class="lg:block">Khiari</span>
+        <a href="/" class="flex items-center gap-[9px] text-[22px] font-bold tracking-[-0.03em]">
+          <img
+            src="/images/profile_picture.jpg"
+            alt=""
+            width="34"
+            height="34"
+            class="size-[34px] rounded-full object-cover"
+          />
+          {profile.name}
         </a>
-        <p class="mt-2 text-sm font-medium text-accent">{profile.tagline}</p>
 
-        <nav class="mt-8 flex gap-5 lg:mt-10 lg:flex-col lg:gap-0" aria-label="Main">
+        <ul class="flex list-none flex-wrap">
           {
             nav.map((item) => (
-              <a
-                href={item.href}
-                aria-current={current === item.key ? "page" : undefined}
-                class:list={[
-                  "relative py-1.5 text-sm transition-colors hover:text-ink",
-                  current === item.key ? "font-medium text-ink" : "text-muted",
-                ]}
-              >
-                {current === item.key && (
+              <li class="ms-[24px] first:ms-0">
+                <a
+                  href={item.href}
+                  aria-current={current === item.key ? "page" : undefined}
+                  class:list={[
+                    "block text-[15.5px] font-medium transition-colors",
+                    current === item.key ? "text-primary" : "text-secondary hover:text-primary",
+                  ]}
+                >
                   <span
-                    aria-hidden="true"
-                    class="absolute -left-8 top-1/2 hidden h-px w-5 bg-accent lg:block"
-                  />
-                )}
-                {item.label}
-              </a>
-            ))
-          }
-        </nav>
-
-        <div class="mt-8 hidden lg:mt-auto lg:flex lg:flex-col lg:gap-1.5">
-          {
-            profile.links.map((link) => (
-              <a
-                href={link.href}
-                class="font-mono text-xs text-faint transition-colors hover:text-accent"
-              >
-                {link.display}
-              </a>
-            ))
-          }
-        </div>
-      </aside>
-
-      <main id="content" class="max-w-[660px] px-6 py-10 lg:py-16 lg:pl-14 lg:pr-0">
-        <slot />
-
-        <footer class="mt-16 border-t border-line pt-6 lg:hidden">
-          <div class="flex flex-col gap-1.5">
-            {
-              profile.links.map((link) => (
-                <a href={link.href} class="font-mono text-xs text-faint">
-                  {link.display}
+                    class:list={[
+                      "border-b-2 pb-[2px] transition-colors",
+                      current === item.key
+                        ? "border-accent"
+                        : "border-transparent hover:border-accent",
+                    ]}
+                  >
+                    {item.label}
+                  </span>
                 </a>
-              ))
-            }
-          </div>
-        </footer>
-      </main>
-    </div>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+
+    {/* The reading column, narrower than the header above it. */}
+    <main id="content" class="mx-auto w-full max-w-[calc(720px+48px)] grow px-[24px] py-[36px]">
+      <slot />
+    </main>
+
+    <footer
+      class="mx-auto mt-[48px] w-full max-w-[calc(720px+48px)] border-t border-border px-[24px] pb-[40px] pt-[20px] text-center text-[12.5px] font-medium leading-[24px] text-secondary"
+    >
+      <span>&copy; {year} {profile.name}</span>
+      <span>&nbsp;·&nbsp;</span>
+      <span>Basel, Switzerland</span>
+    </footer>
   </body>
 </html>
-
-<style>
-  /* The rail's divider is drawn by the page grid rather than as a border on the
-   * rail itself. The rail is `h-screen` and sticky, so a border on it stops at
-   * the fold and leaves the line hanging in mid-page on anything longer than one
-   * viewport. Painting it here makes it span the full document height. */
-  @media (min-width: 1024px) {
-    .shell::before {
-      content: "";
-      position: absolute;
-      inset-block: 0;
-      /* Matches the first grid column width. */
-      left: 308px;
-      width: 1px;
-      background: var(--color-line);
-    }
-  }
-</style>
