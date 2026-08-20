@@ -29,6 +29,7 @@ Three pages (D-03, reaffirmed by D-33 after the move to a blog-shaped design):
 | `/` | Profile block, the bio, and the experience and education list |
 | `/publications/` | The publications list |
 | `/talks/` | The talks list, with `/talks/<slug>/` for each written-up talk |
+| `404.html` | Not found. GitHub Pages serves it for any unresolvable path. |
 
 The home page carries the bio and the career history together, because the bio makes a claim and the
 history is its evidence. Splitting them separates the two halves of one argument.
@@ -62,7 +63,7 @@ rather than scales needing a utility each.
 | `--theme` | `#fdfdfb` | Page background. Warm off-white, not pure white. |
 | `--entry` | `#ffffff` | Raised surfaces, if any are ever introduced. |
 | `--primary` | `#1b1d1f` | Headings, entry titles, body emphasis. |
-| `--secondary` | `#697077` | Meta lines, summaries, subtitle, footer. |
+| `--secondary` | `#5c636a` | Meta lines, affiliation, footer, tag pill text. |
 | `--tertiary` | `#eaeae5` | Button and tag backgrounds. |
 | `--content` | `#25282a` | Long-form prose paragraphs. |
 | `--border` | `#eaeae4` | All hairlines and separators. |
@@ -135,7 +136,7 @@ markdown bodies only; no UI element uses a monospace.
 | Profile `h1` | `42px` | 800 | `-.04em` | `1.14` |
 | Page `h1` (inner pages) | `30px` | 800 | `-.035em` | `1.2` |
 | Profile subtitle | `18px` | 500 | normal | inherit |
-| Profile blurb | `16px` | 400 | normal | `1.6` |
+| Profile affiliation | `16px` | 400 | normal | inherit |
 | Section `h2` | `20px` | 700 | `-.025em` | inherit |
 | Entry title `h2` | `23px` | 700 | `-.03em` | `1.32` |
 | Entry meta | `14px` | 500 | normal | inherit |
@@ -176,7 +177,13 @@ centred, `padding: 10px var(--gap)`, `line-height: var(--header-height)`, flex w
 Flex column, centred, `min-height: 74vh`, `justify-content: center`, `padding-bottom: 40px`.
 
 Order: avatar `150px` circle with `margin-bottom: var(--gap)`, then `h1`, then the subtitle, then the
-blurb at `max-width: 56ch` and `margin-top: 16px`, then the button row at `margin-top: calc(var(--gap)*1.2)`.
+affiliation at `margin-top: 10px` linked to the group, then the button row at
+`margin-top: calc(var(--gap)*1.2)`.
+
+The affiliation sits here rather than `profile.summary`. The summary was authored as a machine
+summary for `llms.txt`: it opens by restating the tagline directly above it and is written in the
+third person while the bio below is in the first. It still serves `llms.txt`, which is what it is
+for.
 
 The subtitle contains exactly one emphasised span, set in `--accent` at weight 600.
 
@@ -317,8 +324,11 @@ These hold regardless of what any future edit is trying to achieve.
   `outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px` on `:focus-visible`.
 - **No em-dashes or en-dashes anywhere**, in code, content, commits or UI copy. Use a hyphen, a
   comma, or two sentences. No exceptions. The separator in meta lines is a middle dot, not a dash.
-- **Contrast:** body text meets WCAG AA (4.5:1). Check any new colour pairing before shipping it,
-  especially text on `--accent`.
+- **Contrast:** every text-on-background pair meets WCAG AA (4.5:1), measured rather than assumed.
+  The pairs that exist, light then dark: body 16.60 / 14.62, prose 14.57 / 10.78, meta 5.98 / 6.40,
+  accent on ground 5.84 / 10.09, tag pill text 5.05 / 5.01, label on accent 5.95 / 9.21, draft badge
+  5.12 / 8.17. Recompute before changing any colour: `--secondary` at its previous `#697077`
+  measured 4.16 on a tag pill and failed.
 - **One accent, used consistently.** No second accent colour anywhere on the site.
 
 ---
@@ -394,7 +404,6 @@ Do not resolve these by writing code. They need a ruling.
   bio directly below is in the first, and it opens by repeating the tagline shown immediately above
   it. It needs either a separate human-facing blurb in `profile.ts` or permission to edit the
   summary. Both are his copy under D-26, so neither was done.
-- **Four clauses in this file were added during the build, not from the approved mockup**, because
-  the mockup was a single page and could not show them: the page `h1` scale entry, the token naming
-  prefix, the `<details>` treatment of the experience list, and the monospace exception for code.
-  They are implemented and described here, but he has not ruled on them.
+*(The four clauses added during the build, the page `h1` scale entry, the token naming prefix, the
+`<details>` treatment of the experience list and the monospace exception for code, are settled under
+D-42: implementation detail of an agreed design is Claude's to decide. They are no longer open.)*

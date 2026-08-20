@@ -37,7 +37,10 @@
   --color-theme: #fdfdfb;
   --color-entry: #ffffff;
   --color-primary: #1b1d1f;
-  --color-secondary: #697077;
+  /* Darkened from #697077, which failed WCAG AA on --color-tertiary: tag pill text
+   * measured 4.16 against a 4.5 floor. This value measures 5.98 on the page ground
+   * and 5.05 on a pill, so it passes in both places it is used. */
+  --color-secondary: #5c636a;
   --color-tertiary: #eaeae5;
   --color-content: #25282a;
   --color-border: #eaeae4;

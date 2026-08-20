@@ -559,6 +559,57 @@
       "why": "",
       "endorsed": true,
       "note": "scroll-behavior: smooth stays; it still governs the skip link jump and he did not ask for it to go."
+    },
+    "D-42": {
+      "question": "Where does the decision-ownership boundary sit for front-end work in this repository?",
+      "asked": "2026-08-20",
+      "context": "Claude had been surfacing implementation-level front-end choices one at a time: the CSS mechanism for a layout fix, browser-support tradeoffs, orphan cleanup, spec clauses forced by a build. He said these are details he does not care about and asked for them to be implemented on judgement instead. His global boundary is explicitly his to tune.",
+      "options": {
+        "tune": {
+          "label": "Technical implementation detail is Claude's to decide. He specifies effects.",
+          "casesFor": [
+            "He is not the audience for a scrollbar-gutter versus overflow-y argument",
+            "Surfacing everything made the gate noise rather than signal, which weakens it",
+            "He keeps every choice he could actually be asked to defend"
+          ],
+          "casesAgainst": [
+            "Risks Claude reading the delegation too widely and deciding things that are his"
+          ]
+        },
+        "keep": {
+          "label": "Keep surfacing every choice with a defensible why.",
+          "casesFor": [
+            "Maximally conservative"
+          ],
+          "casesAgainst": [
+            "He explicitly said this is not what he wants here"
+          ]
+        }
+      },
+      "choice": "tune",
+      "label": "Technical implementation detail is Claude's; he specifies effects",
+      "why": "These are all details I don't care about. I will focus mostly on the effects I want to see; for the details of that, implement what you think would work best.",
+      "endorsed": false,
+      "scope": {
+        "claude_decides": [
+          "CSS technique and layout mechanism",
+          "browser-support tradeoffs",
+          "accessibility implementation",
+          "dead code and orphan cleanup",
+          "file and component structure",
+          "build and tooling detail",
+          "spec clauses that only describe how an agreed design is realised"
+        ],
+        "still_his": [
+          "what the site says, all copy (D-26)",
+          "the visual design direction and register",
+          "what content exists and what is published",
+          "privacy and what is exposed (D-37)",
+          "anything he could be asked to justify to a person",
+          "anything that changes an effect he would notice and did not ask for"
+        ]
+      },
+      "note": "This tunes the boundary for THIS repository's front-end work only. It does not touch the research-side gate, where methodology choices stay his."
     }
   }
 }

@@ -1,0 +1,54 @@
+---
+/**
+ * The not-found page.
+ *
+ * GitHub Pages serves the published folder's `404.html` for any path it cannot
+ * resolve, and there was no such file, so a mistyped or dead URL fell through to
+ * GitHub's own generic page. That page carries none of this site's design and
+ * offers no route back, which is a poor place to strand someone who followed a
+ * stale link.
+ *
+ * Astro builds `src/pages/404.astro` to `404.html` at the root of the output
+ * regardless of the directory URL format, which is exactly what Pages looks for.
+ *
+ * The routes are listed rather than merely linked home, because the commonest
+ * reason to land here is a shared link to a page that moved, and naming the
+ * three real destinations is more use than a single "go home".
+ */
+
+// The shell.
+import Base from "../layouts/Base.astro";
+// For the page title.
+import { profile } from "../data/profile.ts";
+
+// The three real destinations, matching the page set D-33 kept.
+const routes = [
+  { label: "Home", href: "/", note: "Profile, bio, experience and education" },
+  { label: "Publications", href: "/publications/", note: "Preprints and papers" },
+  { label: "Talks", href: "/talks/", note: "Talks, written up as articles" },
+] as const;
+---
+
+<Base
+  title={`Page not found · ${profile.name}`}
+  description="That page does not exist. Links to the rest of the site."
+>
+  <h1 class="m-0 text-[30px] font-extrabold leading-[1.2] tracking-[-0.035em]">Page not found</h1>
+  <p class="mb-[36px] mt-[10px] text-[16px] text-secondary">
+    That address does not point at anything. It may have moved, or the link may have been mistyped.
+  </p>
+
+  {
+    routes.map((route) => (
+      <a
+        href={route.href}
+        class="group mb-[36px] block border-b border-border pb-[27.6px] last-of-type:mb-0 last-of-type:border-b-0"
+      >
+        <h2 class="m-0 mb-[7px] text-[23px] font-bold leading-[1.32] tracking-[-0.03em] transition-colors group-hover:text-accent">
+          {route.label}
+        </h2>
+        <p class="m-0 text-[16px] leading-[1.62] text-secondary">{route.note}</p>
+      </a>
+    ))
+  }
+</Base>

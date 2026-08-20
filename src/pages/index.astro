@@ -81,8 +81,18 @@ const personSchema = {
       {taglineLead} &amp; <b class="font-semibold text-accent">{taglineEmphasis}</b>
     </p>
 
-    <p class="m-0 mt-[16px] max-w-[56ch] text-[16px] leading-[1.6] text-secondary">
-      {profile.summary}
+    {/* The affiliation, not the summary.
+        `profile.summary` used to sit here, but it was authored as a machine
+        summary for llms.txt: it opens by restating the tagline shown directly
+        above it, and it is in the third person while the bio a screen below is
+        in the first. Both read badly on a page. The affiliation is the fact a
+        stranger actually wants next, it is already his own words, and it
+        introduces no repetition. The summary still serves llms.txt, which is
+        what it was written for. */}
+    <p class="m-0 mt-[10px] text-[16px] text-secondary">
+      <a href={profile.groupUrl} class="transition-colors hover:text-accent">
+        {profile.affiliation}
+      </a>
     </p>
 
     <div class="mt-[29px] flex flex-wrap justify-center gap-[12px]">

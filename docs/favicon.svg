@@ -1,12 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- D-27 = initials: an SK monogram, white on the teal accent D-05 preserved.
-       Drawn as text rather than paths so it stays crisp at any size, with a
-       system sans stack because a favicon cannot wait for a webfont to load.
-       Tightened tracking and a 15px size keep both letters legible at 16px,
-       which is the size that actually matters in a tab. -->
-  <rect width="32" height="32" rx="7" fill="#008080"/>
+  <!-- D-27 = initials: an SK monogram on the accent. The colour tracks
+       --color-accent, which changed with the design (D-32), so this is #00706b
+       rather than the previous #008080.
+
+       Drawn as text rather than paths so it stays crisp at any size. The family
+       names Manrope first for intent, but a favicon cannot wait for a webfont,
+       so in practice the system stack behind it is what renders. Tightened
+       tracking and a 15px size keep both letters legible at 16px, which is the
+       size that actually matters in a tab. -->
+  <rect width="32" height="32" rx="7" fill="#00706b"/>
   <text x="16" y="16" fill="#ffffff"
-        font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-        font-size="15" font-weight="600" letter-spacing="-0.9"
+        font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        font-size="15" font-weight="700" letter-spacing="-0.9"
         text-anchor="middle" dominant-baseline="central">SK</text>
 </svg>
