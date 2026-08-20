@@ -39,8 +39,8 @@ npm run preview  # serve the built output exactly as Pages will
 `decisions/` holds the record of every choice that settled how this site works, and it is
 authoritative. Thirty-nine decisions (D-01 to D-39) govern the current design. D-01 to D-28 are in
 the served-round files (`round-N.def.json` plus `round-N.answers.json`); D-29 onward are inline
-rulings in `inline-decisions.json`. Whether those two formats are merged is itself an open question,
-so that file is deliberately uncommitted.
+rulings in `inline-decisions.json`. The two formats coexist and both are committed (D-43): the round
+files are frozen history, and everything since D-29 goes in the inline file.
 
 Any choice with a defensible why goes through a new round before it is written into code: a
 framework or library, a data format, published URLs, what the site says about him, anything he

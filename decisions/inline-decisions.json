@@ -610,6 +610,35 @@
         ]
       },
       "note": "This tunes the boundary for THIS repository's front-end work only. It does not touch the research-side gate, where methodology choices stay his."
+    },
+    "D-43": {
+      "question": "Do the inline rulings stay in inline-decisions.json, or move into the round-file format?",
+      "asked": "2026-08-20",
+      "context": "Open since D-29 and asked twice without an answer. Settled under D-42, which makes record-keeping mechanics implementation detail rather than something he must rule on.",
+      "options": {
+        "keep": {
+          "label": "Keep inline-decisions.json. The round files stay frozen as history.",
+          "casesFor": [
+            "D-203 retired served rounds, so there is no def.json for a round-7 to describe",
+            "Both formats are greppable JSON carrying question, options, choice and why",
+            "Backfilling D-01 to D-28 would rewrite files the round program wrote"
+          ]
+        },
+        "migrate": {
+          "label": "Backfill everything into one file.",
+          "casesFor": [
+            "A single record to grep"
+          ],
+          "casesAgainst": [
+            "Most work, and it rewrites the historical artefacts for tidiness alone"
+          ]
+        }
+      },
+      "choice": "keep",
+      "label": "Keep inline-decisions.json alongside the frozen round files",
+      "why": "",
+      "endorsed": false,
+      "note": "Decided by Claude under D-42, not ruled by him. Reversible at any time; say so and it migrates."
     }
   }
 }
