@@ -1,0 +1,492 @@
+{
+  "schemaVersion": "1.0",
+  "mode": "inline",
+  "note": "Inline chat decisions (D-203 retired served rounds). Continues the D-NN sequence from round-6.",
+  "decisions": {
+    "D-29": {
+      "question": "Which redesign direction does the site take?",
+      "asked": "2026-08-20",
+      "context": "He rejected the built design as too simplistic and lifted two constraints: the experience section no longer has to use the git-commit metaphor, and the site should look as good as a designer's portfolio, reversing his earlier framing. Four directions were built as standalone mockups and served locally for him to judge.",
+      "options": {
+        "a-monograph": {
+          "label": "A, Monograph: editorial/publication register, Newsreader serif, numbered sections, bibliography",
+          "casesFor": [
+            "Treats his output as literature, which is what it is",
+            "Ages best of the four",
+            "Craft lives in typography, not effects"
+          ],
+          "casesAgainst": [
+            "Closest of the four to the 'too simplistic' complaint he just made"
+          ]
+        },
+        "b-instrument": {
+          "label": "B, Instrument: dark technical, field grid, rotating protein-ligand schematic, teal accent",
+          "casesFor": [
+            "Reads as scientific software, so it says what he does immediately",
+            "Highest information density without feeling crowded",
+            "Teal identity survives intact on a dark ground"
+          ],
+          "casesAgainst": [
+            "Dark-only as built, so a light variant is a further decision",
+            "Dark technical is a common enough idiom to risk looking generic if executed loosely"
+          ]
+        },
+        "c-bento": {
+          "label": "C, Bento: light tile grid, filled accent tile for the latest preprint",
+          "casesFor": [
+            "Fastest of the four to scan",
+            "Serves the 'quickly get the information' goal best"
+          ],
+          "casesAgainst": [
+            "Least distinctive; bento is heavily used"
+          ]
+        },
+        "d-kinetic": {
+          "label": "D, Kinetic: full-bleed teal field, Archivo at display scale, duotone portrait, keyword marquee",
+          "casesFor": [
+            "Most likely to impress on first view",
+            "Boldest use of his teal"
+          ],
+          "casesAgainst": [
+            "Most likely to date",
+            "Spectacle competes with information"
+          ]
+        }
+      },
+      "choice": "b-instrument",
+      "label": "B, Instrument",
+      "why": "",
+      "endorsed": true,
+      "supersedes": {
+        "D-17": "direction A 'Ledger' layout",
+        "D-06": "the git-log metaphor for the experience section",
+        "D-14": "the invented commit hashes, which go with the metaphor"
+      },
+      "opens": [
+        "Light variant for a dark-first design (B is dark-only as built)",
+        "Typeface set: Space Grotesk + IBM Plex Sans + IBM Plex Mono, not yet ruled (supersedes D-16 if kept)"
+      ],
+      "followUp": "Four variations on B built for a second pass before anything is written into the Astro source.",
+      "status": "retracted",
+      "retractedOn": "2026-08-20",
+      "retractionNote": "He rejected direction B and every variation on it, along with A, C and D, and redirected to a blog-shaped site modelled on Hugo PaperMod (https://adityatelange.github.io/hugo-PaperMod/). The supersessions D-29 recorded do NOT revert: the git-log metaphor (D-06) and its invented hashes (D-14) stay dropped, and direction A 'Ledger' (D-17) stays superseded. Only the choice of B itself is void. Four PaperMod-idiom candidates built as P1 to P4."
+    },
+    "D-30": {
+      "question": "How far does the retraction of D-29 reach? Does rejecting direction B reopen the git-log metaphor?",
+      "asked": "2026-08-20",
+      "context": "Claude wrote into the record that retracting D-29 voided only the choice of B while its supersessions survived. That scope was Claude's call, not his, so it was surfaced for confirmation. The metaphor was the previous site's signature element.",
+      "options": {
+        "stays": {
+          "label": "No, it stays dropped. The record is already correct.",
+          "casesFor": [
+            "The timeline reads as a timeline now, which is what he asked for",
+            "Keeps the design space narrow enough to converge"
+          ],
+          "casesAgainst": [
+            "Retires the one element the old site was recognised by"
+          ]
+        },
+        "reopens": {
+          "label": "Yes, the metaphor is back on the table.",
+          "casesFor": [
+            "He never ruled it permanently dead, only lifted the requirement to keep it"
+          ],
+          "casesAgainst": [
+            "Reopens a settled question and widens the search again"
+          ]
+        },
+        "open": {
+          "label": "Neither. Leave it unresolved until a design is chosen.",
+          "casesFor": [
+            "Defers a choice that the chosen design may make for him"
+          ],
+          "casesAgainst": [
+            "Leaves the record ambiguous while work continues"
+          ]
+        }
+      },
+      "choice": "stays",
+      "label": "No, it stays dropped",
+      "why": "",
+      "endorsed": true,
+      "confirms": "The D-29 supersessions of D-06, D-14 and D-17 all stand."
+    },
+    "D-31": {
+      "question": "Which blog-shaped design does the site take?",
+      "asked": "2026-08-20",
+      "context": "After rejecting directions A to D and the four B variations, he redirected to a blog-shaped site modelled on Hugo PaperMod. Four candidates were built in that idiom.",
+      "options": {
+        "p1-paper": {
+          "label": "P1 Paper: faithful PaperMod, its own palette and system font stack, centred profile home, 720px column",
+          "casesFor": [
+            "Closest to the reference he supplied",
+            "Cheapest path, since it is the theme rather than an interpretation",
+            "Restraint is the point of the idiom"
+          ],
+          "casesAgainst": [
+            "System font stack renders differently across platforms",
+            "No visual signature of his own"
+          ]
+        },
+        "p2-type": {
+          "label": "P2 Type: same bones, Geist typography, left-aligned masthead",
+          "casesFor": [
+            "Same structure with the typography actually chosen"
+          ],
+          "casesAgainst": [
+            "Departs from the reference for a gain he may not want"
+          ]
+        },
+        "p3-index": {
+          "label": "P3 Index: archive-first, one reverse-chronological list with year gutter",
+          "casesFor": [
+            "Reads full with only three publishable items",
+            "Solves where the CV lives"
+          ],
+          "casesAgainst": [
+            "Least like a conventional blog home"
+          ]
+        },
+        "p4-sidebar": {
+          "label": "P4 Sidebar: persistent identity rail plus the same plain lists",
+          "casesFor": [
+            "Handles four destinations better than a thin top nav"
+          ],
+          "casesAgainst": [
+            "A rail is not part of the PaperMod idiom"
+          ]
+        }
+      },
+      "choice": "p1-paper",
+      "label": "P1 Paper",
+      "why": "",
+      "endorsed": true,
+      "supersedes": {
+        "D-16": "Inter everywhere, pending confirmation of the font stack"
+      },
+      "followUp": "Four refinements of P1 built, each isolating one variable, before anything reaches the Astro source.",
+      "opens": [
+        "D-03 (three pages: home with bio and timeline, Publications, Talks). A blog shape implies a different page set (home/posts index, post pages, publications, about, tags), but he ruled on a design, not on the page set. NOT superseded until he says so.",
+        "Theme toggle: PaperMod has one, it needs JavaScript, all candidates follow the system preference only.",
+        "Reading-time meta: omitted rather than invented; populates from real content."
+      ]
+    },
+    "D-32": {
+      "question": "Which refinement of P1 does the site take?",
+      "asked": "2026-08-20",
+      "context": "Four refinements of P1 were built, each isolating one variable: entry style (R1 Cards), home mode (R2 Direct), column width (R3 Wide) and typography (R4 Typed).",
+      "options": {
+        "p1": {
+          "label": "P1 Paper, the unchanged baseline: system font stack, plain rows, 720px, full-viewport profile",
+          "casesFor": [
+            "Stock PaperMod, no webfont request"
+          ],
+          "casesAgainst": [
+            "Renders differently on every platform, since the system stack resolves to SF, Segoe or something else"
+          ]
+        },
+        "r1-cards": {
+          "label": "R1 Cards: PaperMod card entries on a tinted page",
+          "casesFor": [
+            "Entries read as discrete objects",
+            "Also a stock PaperMod list style"
+          ],
+          "casesAgainst": [
+            "Needs a tinted page or cards vanish on white",
+            "Heavier than the plain list"
+          ]
+        },
+        "r2-direct": {
+          "label": "R2 Direct: compact intro block, posts above the fold",
+          "casesFor": [
+            "Puts content on screen immediately",
+            "Real usability gain, not a taste call"
+          ],
+          "casesAgainst": [
+            "Loses the full-viewport profile moment"
+          ]
+        },
+        "r3-wide": {
+          "label": "R3 Wide: 1024px column with right-aligned per-entry meta",
+          "casesFor": [
+            "More on screen at once"
+          ],
+          "casesAgainst": [
+            "Long measure hurts reading unless the width is spent on meta"
+          ]
+        },
+        "r4-typed": {
+          "label": "R4 Typed: Manrope instead of the system stack, warmer ground, pill tags",
+          "casesFor": [
+            "Renders identically for every visitor",
+            "Keeps P1's structure exactly, so only the type changes",
+            "Warmer ground and pill tags give it an identity of its own"
+          ],
+          "casesAgainst": [
+            "A webfont request",
+            "No longer stock PaperMod"
+          ]
+        }
+      },
+      "choice": "r4-typed",
+      "label": "R4 Typed",
+      "why": "",
+      "endorsed": true,
+      "supersedes": {
+        "D-16": "Inter everywhere. Manrope carries every role now, and there is no monospace face."
+      },
+      "followUp": "Full design specification written to .claude/rules/website-design.md.",
+      "inherits": {
+        "D-28": "Font delivery stays the Google Fonts CDN via a <link> plus preconnects, never a CSS @import and never self-hosted. That ruling was made for Inter and JetBrains Mono and is unchanged; only the font it applies to has changed."
+      }
+    },
+    "D-33": {
+      "question": "Does choosing a blog-shaped design retire D-03, the three-page structure?",
+      "asked": "2026-08-20",
+      "context": "Claude had recorded D-31 as superseding D-03, then corrected it: he ruled on a design, not on a page set, so the supersession was an inference. Surfaced for a real answer.",
+      "options": {
+        "retire": {
+          "label": "Yes, retire it. Take a blog page set: posts index, post pages, publications, about, tags.",
+          "casesFor": [
+            "Matches the idiom the design comes from"
+          ],
+          "casesAgainst": [
+            "More pages to build and maintain for three items of content"
+          ]
+        },
+        "keep": {
+          "label": "No, keep the three pages, rendered in the PaperMod idiom.",
+          "casesFor": [
+            "D-03's reasoning still holds: the bio makes a claim and the timeline is its evidence",
+            "Fewer pages suits the amount of content he actually has"
+          ],
+          "casesAgainst": [
+            "Slightly unusual for a blog-shaped site to have no posts index"
+          ]
+        },
+        "later": {
+          "label": "Decide once a refinement is picked.",
+          "casesFor": [
+            "The real page set may become obvious"
+          ],
+          "casesAgainst": [
+            "Blocks the Astro routes"
+          ]
+        }
+      },
+      "choice": "keep",
+      "label": "No, keep the three pages",
+      "why": "",
+      "endorsed": true,
+      "note": "For now, per his wording. D-03 stands."
+    },
+    "D-34": {
+      "question": "When the code and the design specification disagree, which one is wrong?",
+      "asked": "2026-08-20",
+      "context": "Claude wrote a precedence rule into CLAUDE.md without balloting it, then surfaced it. It has teeth: it decides which side gets edited when a mismatch is found.",
+      "options": {
+        "spec": {
+          "label": "The spec wins. Code is corrected to match .claude/rules/website-design.md.",
+          "casesFor": [
+            "Directly serves the reason he asked for the file: the design is kept across edits",
+            "A drifting value gets pulled back automatically instead of quietly becoming the new design"
+          ],
+          "casesAgainst": [
+            "A deliberate code change that was never written into the spec gets reverted"
+          ]
+        },
+        "code": {
+          "label": "The code wins. The spec is descriptive and gets updated to match reality.",
+          "casesFor": [
+            "Never reverts real work"
+          ],
+          "casesAgainst": [
+            "The spec stops being a guard and becomes a changelog, which is what he was trying to avoid"
+          ]
+        },
+        "stop": {
+          "label": "Neither. A mismatch stops work and is surfaced to him.",
+          "casesFor": [
+            "Safest, no silent edit in either direction"
+          ],
+          "casesAgainst": [
+            "Slowest; interrupts him for what is usually a typo"
+          ]
+        }
+      },
+      "choice": "spec",
+      "label": "The spec wins",
+      "why": "",
+      "endorsed": true
+    },
+    "D-35": {
+      "question": "What do the navigation items read, now that the three-page set stands?",
+      "asked": "2026-08-20",
+      "context": "The R4 mockup's nav read 'Posts | Publications | About | Contact', but D-33 keeps three pages where the posts section is Talks and the bio lives on the home page.",
+      "options": {
+        "talks": {
+          "label": "Talks | Publications | About | Contact. Replace 'Posts' with 'Talks', leave the rest.",
+          "casesFor": [
+            "Names the real destination rather than a generic blog label",
+            "Minimal change from the mockup he approved"
+          ],
+          "casesAgainst": [
+            "'About' points at an anchor on the home page rather than a page of its own"
+          ]
+        },
+        "posts": {
+          "label": "Keep 'Posts' as the generic blog label.",
+          "casesFor": [
+            "Conventional for the idiom"
+          ],
+          "casesAgainst": [
+            "Misleading: the section holds talk write-ups, not posts in general"
+          ]
+        }
+      },
+      "choice": "talks",
+      "label": "Talks | Publications | About | Contact",
+      "why": "",
+      "endorsed": true,
+      "note": "About resolves to the bio anchor on the home page. Contact is a mailto."
+    },
+    "D-36": {
+      "question": "Should the academic vs professional distinction return to the experience list?",
+      "asked": "2026-08-20",
+      "context": "The old list coloured academic entries amber and professional ones teal (D-05). The rebuild dropped it because the R4 spec permits one accent. Surfaced because the consequence was never put to him: nine entries now read as one flat list.",
+      "options": {
+        "flat": {
+          "label": "No, leave it flat. One accent, one list, chronology is the only structure.",
+          "casesFor": [
+            "Keeps the one-accent invariant intact",
+            "Simplest, and chronology already carries the story"
+          ],
+          "casesAgainst": [
+            "Degrees no longer look different from short internships"
+          ]
+        },
+        "label": {
+          "label": "Yes, without a second colour: a text label or weight change per entry.",
+          "casesFor": [
+            "Restores the distinction without amending the spec"
+          ],
+          "casesAgainst": [
+            "Adds a element to every row for a distinction the dates mostly imply"
+          ]
+        },
+        "colour": {
+          "label": "Yes, with a second colour. Amber returns for academic entries.",
+          "casesFor": [
+            "Closest to the previous site"
+          ],
+          "casesAgainst": [
+            "Requires amending the one-accent invariant"
+          ]
+        }
+      },
+      "choice": "flat",
+      "label": "No, leave it flat",
+      "why": "",
+      "endorsed": true,
+      "note": "For now, per his wording."
+    },
+    "D-37": {
+      "question": "Should the degree documents stay linked from the site?",
+      "asked": "2026-08-20",
+      "context": "D-22 ruled the six PDFs published and linked from their timeline entry rather than left reachable but unlinked. He has since raised a privacy concern about sharing diplomas and a full MSc transcript online.",
+      "options": {
+        "unlink": {
+          "label": "Remove the links, keep the files.",
+          "casesFor": [
+            "Stops the site advertising them while he thinks it over",
+            "Fully reversible: the document data stays in experience.ts"
+          ],
+          "casesAgainst": [
+            "Does NOT stop the files being downloadable, since they remain in public/ and are copied into docs/"
+          ]
+        },
+        "keep": {
+          "label": "Keep them linked, as D-22 ruled.",
+          "casesFor": [
+            "Verifiable credentials are useful to an academic reader"
+          ],
+          "casesAgainst": [
+            "Publishes a full transcript he is not sure he wants public"
+          ]
+        }
+      },
+      "choice": "unlink",
+      "label": "Remove the links, keep the files",
+      "why": "Still not sure how safe it is to share diplomas and documents online; wants to think about it separately, and will ask to restore them if he decides to.",
+      "endorsed": false,
+      "supersedes": {
+        "D-22": "The publish-and-link ruling. The files are no longer linked from any page."
+      },
+      "openRisk": "Unlinking is not unpublishing. The PDFs remain in public/ and are copied into docs/, so they stay fetchable at their original URLs, which were live on the previous site. Surfaced to him separately."
+    },
+    "D-38": {
+      "question": "How often should work in this repository be committed?",
+      "asked": "2026-08-20",
+      "context": "The project CLAUDE.md said 'commit only when asked', which left a whole rebuild sitting uncommitted in the working tree.",
+      "options": {
+        "often": {
+          "label": "Commit every time a small amount of work is done. Never push.",
+          "casesFor": [
+            "Restore points as work proceeds instead of one sprawling change",
+            "Publishing stays a separate, explicit act, so cadence costs nothing"
+          ],
+          "casesAgainst": [
+            "More commits to curate later, though he squashes locally if he wants"
+          ]
+        },
+        "onask": {
+          "label": "Keep committing reactive, only when he asks.",
+          "casesFor": [
+            "He controls the history exactly"
+          ],
+          "casesAgainst": [
+            "Large changes accumulate uncommitted, which is what just happened"
+          ]
+        }
+      },
+      "choice": "often",
+      "label": "Commit every time a small amount of work is done, never push",
+      "why": "",
+      "endorsed": true,
+      "note": "Supersedes the 'commit only when asked' line in CLAUDE.md. The never-push rule is UNCHANGED and absolute."
+    },
+    "D-39": {
+      "question": "Does 'About' stay in the navigation menu?",
+      "asked": "2026-08-20",
+      "context": "D-35 set the menu to Talks | Publications | About | Contact, with About resolving to an anchor on the home page rather than a page of its own.",
+      "options": {
+        "remove": {
+          "label": "Remove it. The bio lives on the home page and that is enough.",
+          "casesFor": [
+            "An anchor masquerading as a destination is misleading",
+            "The site name already links home, where the bio is"
+          ],
+          "casesAgainst": [
+            "A visitor on /talks/ has no labelled route back to the bio"
+          ]
+        },
+        "keep": {
+          "label": "Keep it as an anchor to the home page bio.",
+          "casesFor": [
+            "Names the bio explicitly from any page"
+          ],
+          "casesAgainst": [
+            "Behaves differently from the other menu items"
+          ]
+        }
+      },
+      "choice": "remove",
+      "label": "Remove About from the menu",
+      "why": "",
+      "endorsed": true,
+      "amends": {
+        "D-35": "The menu is now Talks | Publications | Contact."
+      }
+    }
+  }
+}
