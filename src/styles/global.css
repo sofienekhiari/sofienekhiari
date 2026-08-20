@@ -184,10 +184,24 @@
   display: block;
 }
 
-/* The label names the theme the button switches TO, so it shows "Dark" while
- * light is active and "Light" while dark is. Which one is showing follows the
- * same three-way logic as the palette itself: system preference unless the
- * visitor has overridden it. */
+/* Which half of the toggle is showing. D-46 made the visible half a moon and a
+ * sun rather than the words "Dark" and "Light", but the rule is unchanged: what
+ * is shown names the theme the button switches TO, so the moon offers dark
+ * while light is active and the sun offers light while dark is.
+ *
+ * Both the icon and the sr-only word that speaks it carry the same class, so a
+ * screen reader and the screen can never end up describing different things.
+ *
+ * `block` rather than `inline` because these are now SVG elements: an inline
+ * SVG sits on the text baseline and leaves a few pixels of descender space
+ * under it, which knocks the icon off centre in the header row.
+ *
+ * Which one shows follows the same three-way logic as the palette itself:
+ * system preference unless the visitor has overridden it. */
+.to-dark {
+  display: block;
+}
+
 .to-light {
   display: none;
 }
@@ -197,7 +211,7 @@
     display: none;
   }
   :root:not([data-theme="light"]) .to-light {
-    display: inline;
+    display: block;
   }
 }
 
@@ -206,12 +220,12 @@
 }
 
 :root[data-theme="dark"] .to-light {
-  display: inline;
+  display: block;
 }
 
 /* A light choice on a dark system has to win back over the media query above. */
 :root[data-theme="light"] .to-dark {
-  display: inline;
+  display: block;
 }
 
 :root[data-theme="light"] .to-light {

@@ -9,9 +9,11 @@
  * live in `.claude/rules/website-design.md`, which wins over this file (D-34).
  *
  * Two rulings constrain what happens here. D-07 requires every word to be
- * readable with JavaScript off, so nothing hides pending a script, and there is
- * no theme toggle. The spec permits Astro view transitions, which degrade to an
- * ordinary navigation where unsupported.
+ * readable with JavaScript off, so nothing hides pending a script; the one
+ * thing a script does add, the theme toggle (D-45), is a control rather than
+ * content, and it stays hidden entirely when there is no script to run it. The
+ * spec permits Astro view transitions, which degrade to an ordinary navigation
+ * where unsupported.
  */
 
 // The single bio source, which supplies the name and the contact links (D-12).
@@ -185,21 +187,71 @@ const year = new Date().getFullYear();
               </li>
             ))
           }
-          <li class="ms-[24px]">
-            {/* Theme toggle. Text rather than an icon, because the rest of the
-                menu is text and one sun glyph would be the only icon on the
-                site. The label names the theme it switches TO. Hidden until
-                the head script marks JavaScript as present. */}
+          {/* The list item centres the toggle against the menu's text, which
+              sits on a 60px line box while the icon is only 19px tall. */}
+          <li class="ms-[24px] flex items-center">
+            {/* Theme toggle (D-45, restyled by D-46). A sun and moon pair
+                rather than a word: the glyph is read at a glance where a label
+                has to be parsed, and it is the control people already look for
+                in this corner. Whichever icon is showing names the theme the
+                button switches TO, so the moon offers dark and the sun offers
+                light.
+
+                The icons are marked aria-hidden and the button's spoken name
+                is built from the sr-only words beside them, because an icon on
+                its own tells a screen reader nothing. Those words follow the
+                same show-and-hide rule as the icons, so what is announced and
+                what is drawn can never disagree.
+
+                Hidden entirely until the head script marks JavaScript as
+                present, so a visitor without it never meets a dead control. */}
             <button
               id="theme-toggle"
               type="button"
-              class="block text-[15.5px] font-medium text-secondary transition-colors hover:text-primary"
+              class="text-secondary transition-colors hover:text-accent"
             >
-              <span class="border-b-2 border-transparent pb-[2px] transition-colors hover:border-accent">
-                <span class="sr-only">Switch to</span>
-                <span class="to-dark">Dark</span><span class="to-light">Light</span>
-                <span class="sr-only">theme</span>
-              </span>
+              <span class="sr-only">Switch to</span>
+              <span class="sr-only to-dark">dark</span>
+              <span class="sr-only to-light">light</span>
+              <span class="sr-only">theme</span>
+
+              {/* Moon: shown while the light theme is active. */}
+              <svg
+                class="to-dark"
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+
+              {/* Sun: shown while the dark theme is active. The circle is the
+                  disc and the eight short strokes are its rays. */}
+              <svg
+                class="to-light"
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="5"></circle>
+                <path
+                  d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                ></path>
+              </svg>
             </button>
           </li>
         </ul>

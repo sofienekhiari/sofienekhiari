@@ -701,6 +701,42 @@
       "why": "",
       "endorsed": true,
       "note": "Text label rather than an icon, to match the all-text menu. Hidden entirely without JavaScript so no dead control is shown. Content stays readable with JS off, so D-07 holds."
+    },
+    "D-46": {
+      "question": "Should the theme toggle read as a word or as an icon?",
+      "asked": "2026-08-20",
+      "context": "D-45 shipped the toggle with a text label, Dark or Light, on the reasoning that the rest of the menu is text and a single glyph would be the only icon on the site. He asked for an icon instead.",
+      "options": {
+        "icon": {
+          "label": "A sun and moon pair.",
+          "casesFor": [
+            "Read at a glance rather than parsed",
+            "It is the control people already look for in that corner",
+            "Needs no translation"
+          ],
+          "casesAgainst": [
+            "The only icon on an otherwise all-text site",
+            "An icon alone says nothing to a screen reader, so it needs a hidden label"
+          ]
+        },
+        "word": {
+          "label": "Keep the text label.",
+          "casesFor": [
+            "Matches the all-text menu",
+            "Names itself with no hidden label needed"
+          ],
+          "casesAgainst": [
+            "Slower to spot",
+            "Unusual for this control"
+          ]
+        }
+      },
+      "choice": "icon",
+      "label": "A sun and moon pair",
+      "why": "",
+      "endorsed": true,
+      "supersedes": "The presentation clause of D-45 only. D-45 itself, that the toggle exists at all, stands.",
+      "note": "Feather-style outline glyphs at 19px, drawn inline rather than pulled from an icon library, since one pair of paths does not justify a dependency. The showing glyph names the theme it switches to. The spoken name stays in words, carried by sr-only spans that follow the same show-and-hide rule as the glyphs, so what is announced and what is drawn cannot diverge. Verified in the browser: correct glyph in each theme, accessible name reads 'Switch to dark theme', icon centred with the menu text and coloured identically to it, choice survives a view-transition navigation."
     }
   }
 }

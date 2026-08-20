@@ -84,9 +84,16 @@ rather than scales needing a utility each.
 | `--accent` | `#4fd6ca` |
 | `--tint` | `rgb(79 214 202 / .11)` |
 
-Dark is delivered by `@media (prefers-color-scheme: dark)` only. There is **no theme toggle**,
-because a toggle needs JavaScript and the no-JS floor in section 7 comes first. Adding one is a new
-decision, not an implementation detail.
+Dark is delivered three ways, in this order (D-45):
+
+1. `@media (prefers-color-scheme: dark)` scoped to `:root:not([data-theme="light"])`, so the system
+   preference applies unless the visitor has chosen light.
+2. `:root[data-theme="dark"]`, so an explicit choice of dark wins on a light system.
+3. Light needs no third block: the light values already sit on `:root` in `@theme`, and the
+   `:not([data-theme="light"])` guard in the first rule is what lets a light choice win back.
+
+The two dark blocks repeat the same declarations because CSS cannot reuse a block. Change one,
+change the other.
 
 **On a filled accent surface, text is `#ffffff` in light and `#062421` in dark.** Never white on the
 dark-mode accent; it fails contrast.
@@ -171,6 +178,18 @@ centred, `padding: 10px var(--gap)`, `line-height: var(--header-height)`, flex w
 - Menu links sit at `--secondary` and go to `--primary` on hover.
 - Each link's label is wrapped in a `<span>` carrying `border-bottom: 2px solid transparent`, which
   becomes `--accent` on hover. The current page's item keeps that border permanently.
+- **The theme toggle** is the last item in the menu (D-45). It is an icon, not a word (D-46): a
+  `19px` outline moon or sun at `stroke-width: 1.8`, drawn in `currentColor`, sitting at
+  `--secondary` and going to `--accent` on hover. It carries no underline, since there is no label
+  to underline. Its list item is `display: flex; align-items: center`, because the icon is 19px
+  tall inside a 60px line box and would otherwise sit high.
+- Whichever glyph is showing names the theme the button switches TO: **moon offers dark, sun offers
+  light**. Both glyphs and both spoken words carry `.to-dark` / `.to-light` and are shown or hidden
+  by the same three-way rule as the palette, so the screen and a screen reader cannot disagree.
+- The glyphs are `aria-hidden`; the button's name comes from `sr-only` words beside them and reads
+  "Switch to dark theme" or "Switch to light theme".
+- The whole control is `display: none` until the head script sets `data-has-js` on `<html>`, so
+  nobody without JavaScript meets a control that cannot work.
 
 ### Profile block (home only)
 
@@ -319,7 +338,9 @@ Every stylesheet ends with the blanket override:
 These hold regardless of what any future edit is trying to achieve.
 
 - **Every word is readable with JavaScript disabled** (D-07). Never hide content behind a class a
-  script adds later. This is why there is no theme toggle and why disclosure uses native `<details>`.
+  script adds later. This is why disclosure uses native `<details>`. The theme toggle is the one
+  thing a script adds, and it is allowed because it is a control rather than content: with no
+  script it is hidden outright and the site still follows the system preference.
 - **Everything interactive works from the keyboard**, with a visible focus ring:
   `outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px` on `:focus-visible`.
 - **No em-dashes or en-dashes anywhere**, in code, content, commits or UI copy. Use a hyphen, a
@@ -393,7 +414,6 @@ Do not resolve these by writing code. They need a ruling.
 - **The favicon** is still the old teal SK monogram (D-27), chosen before Manrope and before the
   `--accent` value changed. Whether it is restyled is open.
 - **Reading-time meta**, per section 4: currently absent by choice.
-- **A theme toggle**, per section 2: currently absent because of the no-JS floor.
 - **Whether the degree PDFs stop being served at all.** D-37 removed the links, which ends
   discoverability but not access: the files are still built into `docs/` and reachable by anyone
   with the URL. Making them genuinely private means moving them out of `public/`, and separately
