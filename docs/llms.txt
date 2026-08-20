@@ -15,7 +15,7 @@
 
 ## Talks
 
-- No talk write-ups are published yet.
+- [You are already living in an agentic world](https://sofk.ch/talks/already-living-in-an-agentic-world/): FuturAIma Summer School, Neuchâtel, 2026. What agentic systems actually are, why this change already happened once in computational science, and five things to try when one of them is not doing a good enough job.
 
 ## Contact
 

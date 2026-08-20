@@ -1,0 +1,491 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"><title>You are already living in an agentic world · Talks</title><meta name="description" content="What agentic systems actually are, why this change already happened once in computational science, and five things to try when one of them is not doing a good enough job."><link rel="canonical" href="https://sofk.ch/talks/already-living-in-an-agentic-world/"><meta property="og:type" content="website"><meta property="og:title" content="You are already living in an agentic world · Talks"><meta property="og:description" content="What agentic systems actually are, why this change already happened once in computational science, and five things to try when one of them is not doing a good enough job."><meta property="og:url" content="https://sofk.ch/talks/already-living-in-an-agentic-world/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
+      (() => {
+        // Both attributes live on <html>, and a view transition replaces that
+        // element's attributes on every navigation. Without re-applying them
+        // after each swap, a chosen theme reverts to the system preference on
+        // the next page and the toggle itself goes invisible, because the CSS
+        // that reveals it keys off data-has-js.
+        const apply = () => {
+          const saved = localStorage.getItem("theme");
+          if (saved === "light" || saved === "dark") {
+            document.documentElement.dataset.theme = saved;
+          }
+          document.documentElement.dataset.hasJs = "true";
+        };
+        apply();
+        // Fires after the new document is swapped in but before it paints.
+        document.addEventListener("astro:after-swap", apply);
+
+        // Delegated, and bound to the document rather than the button, because
+        // view transitions replace the header on every navigation. The document
+        // survives, so one listener added here outlives all of them.
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest("#theme-toggle")) return;
+          const root = document.documentElement;
+          // The effective theme, which is the explicit choice if one exists and
+          // the system preference otherwise.
+          const current =
+            root.dataset.theme ||
+            (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          const next = current === "dark" ? "light" : "dark";
+          root.dataset.theme = next;
+          localStorage.setItem("theme", next);
+        });
+      })();
+    </script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.Sx5bM3k1.js"></script><style>.talk-body[data-astro-cid-egw2bmzs] p{color:var(--color-content);margin-block:0 1.15em;font-size:16.5px;line-height:1.78}.talk-body[data-astro-cid-egw2bmzs] h2{letter-spacing:-.025em;color:var(--color-primary);margin-block:2rem .75rem;font-size:20px;font-weight:700}.talk-body[data-astro-cid-egw2bmzs] h3{letter-spacing:-.015em;color:var(--color-primary);margin-block:1.6rem .5rem;font-size:17px;font-weight:600}.talk-body[data-astro-cid-egw2bmzs] a{color:var(--color-accent);text-decoration:underline;text-decoration-color:color-mix(in oklab, var(--color-accent) 30%, transparent);text-underline-offset:3px}.talk-body[data-astro-cid-egw2bmzs] a:hover{text-decoration-color:var(--color-accent)}.talk-body[data-astro-cid-egw2bmzs] ul:not([class]),.talk-body[data-astro-cid-egw2bmzs] ol:not([class]){color:var(--color-content);margin-block:0 1.15em;padding-inline-start:1.35em;font-size:16.5px;line-height:1.78}.talk-body[data-astro-cid-egw2bmzs] ul:not([class]){list-style:outside}.talk-body[data-astro-cid-egw2bmzs] ol:not([class]){list-style:decimal}.talk-body[data-astro-cid-egw2bmzs] li:not([class]){margin-block:.3em;padding-inline-start:.25em}.talk-body[data-astro-cid-egw2bmzs] li:not([class])::marker{color:var(--color-secondary)}.talk-body[data-astro-cid-egw2bmzs] p>img{border-radius:var(--radius);border:1px solid var(--color-border);margin-block:1.75rem}.talk-body[data-astro-cid-egw2bmzs] blockquote{border-left:2px solid var(--color-accent);margin-block:1.75rem;padding-left:1.1rem}.talk-body[data-astro-cid-egw2bmzs] blockquote p{color:var(--color-primary);margin-block:0;font-size:17.5px;line-height:1.6}.talk-body[data-astro-cid-egw2bmzs] code{font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,monospace;font-size:.86em}.talk-body[data-astro-cid-egw2bmzs] pre{border-radius:var(--radius);border:1px solid var(--color-border);background:var(--color-entry);margin-block:1.5rem;padding:1rem;overflow-x:auto}
+</style><link rel="stylesheet" href="/_astro/Base.CilB0WQy.css"><link rel="stylesheet" href="/_astro/already-living-in-an-agentic-world.BiiohwBk.css"></head><body class="flex min-h-screen flex-col"><a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-entry focus:px-4 focus:py-2 focus:text-primary">Skip to content</a><header class="bg-theme"><nav class="mx-auto flex max-w-[calc(1024px+48px)] flex-wrap items-center justify-between px-[24px] py-[10px] leading-[60px]" aria-label="Main"><a href="/" class="flex items-center gap-[9px] text-[22px] font-bold tracking-[-0.03em]"><img src="/images/profile_picture.jpg" alt="" width="34" height="34" class="size-[34px] rounded-full object-cover">Sofiene Khiari</a><ul class="flex list-none flex-wrap"><li class="ms-[24px] first:ms-0"><a href="/talks/" aria-current="page" class="block text-[15.5px] font-medium transition-colors text-primary"><span class="border-b-2 pb-[2px] transition-colors border-accent">Talks</span></a></li><li class="ms-[24px] first:ms-0"><a href="/publications/" class="block text-[15.5px] font-medium transition-colors text-secondary hover:text-primary"><span class="border-b-2 pb-[2px] transition-colors border-transparent hover:border-accent">Publications</span></a></li><li class="ms-[24px] first:ms-0"><a href="mailto:sofiene.khiari@unibas.ch" class="block text-[15.5px] font-medium transition-colors text-secondary hover:text-primary"><span class="border-b-2 pb-[2px] transition-colors border-transparent hover:border-accent">Contact</span></a></li><li class="ms-[24px] flex items-center"><button id="theme-toggle" type="button" class="text-secondary transition-colors hover:text-accent"><span class="sr-only">Switch to</span><span class="sr-only to-dark">dark</span><span class="sr-only to-light">light</span><span class="sr-only">theme</span><svg class="to-dark" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg><svg class="to-light" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></button></li></ul></nav></header><main id="content" class="mx-auto w-full max-w-[calc(720px+48px)] grow px-[24px] py-[36px]"><article data-astro-cid-egw2bmzs><header class="mb-[36px]" data-astro-cid-egw2bmzs><p class="m-0 text-[14px] font-medium text-secondary" data-astro-cid-egw2bmzs><a href="/talks/" class="transition-colors hover:text-accent" data-astro-cid-egw2bmzs>Talks</a><span data-astro-cid-egw2bmzs>&nbsp;·&nbsp;</span><time datetime="2026-08-14" data-astro-cid-egw2bmzs>14 August 2026</time><span data-astro-cid-egw2bmzs>&nbsp;·&nbsp;FuturAIma Summer School, Neuchâtel</span></p><h1 class="m-0 mt-[10px] text-[30px] font-extrabold leading-[1.2] tracking-[-0.035em]" data-astro-cid-egw2bmzs>You are already living in an agentic world</h1></header><div class="talk-body" data-astro-cid-egw2bmzs><p>You are already living in an agentic world, you just do not know it yet. That was the title of the
+last talk of the summer school, and this is that talk written out.</p>
+<p>I had three goals for the hour. First, to put a name on systems you already know and have already
+used, and to explain briefly how they work. Second, to describe how those systems have changed the
+daily professional lives of computational scientists, and how they are likely to change other
+scientists’ lives too. Third, to give you a concrete mindset change, some pieces of advice, and
+enough understanding of the tooling to improve your own work with these systems, starting today.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" style="max-width:460px;margin-inline:auto" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/desk-above-the-machine-room.webp" alt="A person works at an ordinary desk. Beneath the floor, unseen, a vast machine room descends level after level, staffed entirely by small robots." width="1000" height="1491" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<h2 id="a-language-model-on-its-own-one-prompt-one-answer">A language model on its own: one prompt, one answer</h2>
+<p>Before talking about agentic systems, I want to say that these systems are built on <strong>large language
+models</strong>. I think everyone knows by now what a large language model is, but as a quick reminder: it
+is a model you give a <strong>prompt</strong> and a <strong>context</strong>, so in the end some text, and it gives you back
+an answer, also as text.</p>
+<p>To show that, and to explain what an agentic system is later, I am going to draw the language model
+as a robot. His name is Clank, after my favourite childhood robot.</p>
+<p>You can imagine that you, the human, go to him with some context, which is the block of papers here,
+you hand it over with a prompt, which is the speech bubble, and he gives you back an answer that you
+can keep. Once he has done that, <strong>he stops, and nothing happens.</strong> That is really what an
+interaction with a large language model is like.</p>
+<p>You can repeat it, once, twice, and it is the same thing every time. You give a prompt with context,
+you get an answer. Nothing is carried over from the time before.</p>
+<figure class="scene-sequence" data-poster="10" data-astro-cid-26xlu6by><div class="scene-frame" data-astro-cid-26xlu6by><img class="scene-still" src="/assets/talks/already-living-in-an-agentic-world/figures/scene-the-llm.webp" alt="A man walks up to a counter, and behind it stands a small robot. He lifts a bundle of papers onto the counter and asks a question, and a thin page comes back. He does it three times. The bundle goes up and comes down again each time, unchanged, and the pages pile up on his side of the counter while the machine's side of it stays exactly as it was." width="720" height="400" loading="lazy" data-astro-cid-26xlu6by><div class="scene-panel" hidden data-astro-cid-26xlu6by><div class="compose" data-scene="s1" data-astro-cid-26xlu6by><div class="compose-stage" style="position:absolute;left:0;top:0;transform-origin:0 0" data-astro-cid-26xlu6by></div></div></div></div><figcaption data-astro-cid-26xlu6by><div class="scene-controls" hidden data-astro-cid-26xlu6by><button class="scene-toggle" type="button" aria-pressed="false" data-astro-cid-26xlu6by><span class="scene-toggle-label" data-astro-cid-26xlu6by>Play</span></button><span class="scene-count" data-astro-cid-26xlu6by></span><span class="scene-rail" data-astro-cid-26xlu6by><span class="scene-rail-fill" data-astro-cid-26xlu6by></span></span></div><span class="scene-caption" data-astro-cid-26xlu6by>The same ask, three times over. Each time the whole bundle goes in, and one page comes back.</span></figcaption></figure>
+<h2 id="one-word-autonomy">One word: autonomy</h2>
+<p>That brings us to <strong>agentic systems</strong>. To show what an agent is, take the example of watering
+plants.</p>
+<p>Take our language model, Clank. He is standing in the room, not doing anything. The human comes in
+and asks him to water the plants. Clank works out what the request means, then goes to each plant
+and waters it. When he is finished, he goes back to the human, says it is done, and the human
+leaves, because the task is over.</p>
+<p>That is what agentic systems are. They are systems built on a large language model that <strong>receive a
+task</strong>, <strong>decide on their own workflow</strong> and how they are going to get the task done, <strong>interact
+with their environment</strong>, and <strong>come back to you</strong> when they are finished. The word I want you to
+remember is <strong>autonomy</strong>. They are able to decide by themselves <em>how</em> they are going to finish the
+task, and <em>how they know</em> the task is done.</p>
+<figure class="scene-sequence" data-poster="6" data-astro-cid-26xlu6by><div class="scene-frame" data-astro-cid-26xlu6by><img class="scene-still" src="/assets/talks/already-living-in-an-agentic-world/figures/scene-the-agent.webp" alt="A small robot stands alone in a room with three plants. A man walks in and asks him to water them. A watering can appears in the robot's hands, and he walks to each plant in turn, tips the can over it and leaves the soil dark. Then he walks back, sets the can down, tells the man it is done, and the man leaves." width="720" height="400" loading="lazy" data-astro-cid-26xlu6by><div class="scene-panel" hidden data-astro-cid-26xlu6by><div class="compose" data-scene="s2" data-astro-cid-26xlu6by><div class="compose-stage" style="position:absolute;left:0;top:0;transform-origin:0 0" data-astro-cid-26xlu6by></div></div></div></div><figcaption data-astro-cid-26xlu6by><div class="scene-controls" hidden data-astro-cid-26xlu6by><button class="scene-toggle" type="button" aria-pressed="false" data-astro-cid-26xlu6by><span class="scene-toggle-label" data-astro-cid-26xlu6by>Play</span></button><span class="scene-count" data-astro-cid-26xlu6by></span><span class="scene-rail" data-astro-cid-26xlu6by><span class="scene-rail-fill" data-astro-cid-26xlu6by></span></span></div><span class="scene-caption" data-astro-cid-26xlu6by>One task, given once. He decides the route, does the work, and comes back when it is finished.</span></figcaption></figure>
+<p>They follow a loop, which we call <strong>the agentic loop</strong>:</p>
+<ul>
+<li>First they <strong>get the task</strong> from you, understand it, and then <strong>observe their environment</strong>.</li>
+<li>They <strong>think</strong> about what to do.</li>
+<li>They <strong>use their tools</strong> to carry the action out.</li>
+<li>They <strong>observe</strong> what happened when they used the tools.</li>
+<li>They <strong>check whether the job is done</strong>. If it is, they leave the loop. If it is not, they go back
+to the thinking part and round again.</li>
+</ul>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/agentic-loop.svg" alt="The agentic loop, drawn as four boxes going clockwise: a task arrives at Think, what to do next; Think leads to Act, use a tool; Act leads to Observe, what happened; Observe leads to Done, check against the goal, which either returns to Think or hands the result back to you." width="672" height="536" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>You can read Clank the same way:</p>
+<ul>
+<li>He got the task from me, understood it, and then observed his environment to find the plants.</li>
+<li>He thought about what to do to water them.</li>
+<li>He walked to the plants and used the tool to water them.</li>
+<li>He observed that all the plants had been watered, decided that was a good enough job, reported
+back to me, and went on standby.</li>
+</ul>
+<p>That is the basis of how agentic systems work.</p>
+<p>And here is what you may not have realised: systems like <strong>ChatGPT and Claude are agentic systems
+now, not simple language models.</strong> When you give them a task, they understand it, they look at the
+set of tools they have, and they decide which of those tools would be best for the job.</p>
+<p>Say the task is to pull some data off the internet and show it in a figure. The tools would be <strong>web
+search</strong> and <strong>coding</strong>. ChatGPT looks the data up online, gets the result of its search, looks at
+it, and decides whether it did a good job. Maybe it did not search properly, so it tries other
+keywords. Then it gets the data back, looks at it, decides it is good, and checks its plan. There is
+still the figure to make, so it uses the programming tool to generate the plot, looks at the result
+and thinks about it, notices that it did not use the right colours or the right bin sizes, updates
+the code, generates the plot again, looks at it, decides it has now done a good enough job, leaves
+the loop and shows you the output.</p>
+<p>That is conceptually how ChatGPT works, and that is what agentic systems are.</p>
+<h2 id="it-already-happened-in-computational-science">It already happened, in computational science</h2>
+<p>Even though it may not look like it to some people, agentic systems are getting bigger by the day,
+they are being put to work in more and more fields, and they are set to change the way we work
+fundamentally.</p>
+<p>That change has already happened in software development and in computational science. We used to
+write all the code ourselves, including looking up how to use a particular library. We did all the
+<strong>debugging</strong> when the code did not work, and on a big codebase that could take days. All of that is
+gone now. AI agents write the code, write tests for it to make sure it works properly, and debug it
+when it does not. It generally goes much faster than a human, because the agent has constant
+knowledge of the whole codebase.</p>
+<p>Because all of that is now done by the agents, <strong>our role converted</strong> from doing those things to
+focusing on research, decision making and validation. It also means that most of the time we can
+work on several things at once: take a decision, let the agent work on it, make sure the code and
+the results are right, and meanwhile move to another project, going back and forth between two or
+more.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/dev-cycle.svg" alt="The same cycle of computational work at two dates. In 2021 all six steps are the person's own: research, decide, write, test, debug, validate, and round again. In 2026 the middle three, write, test and debug, are one block belonging to the agent, and research, decide and validate are still the person's." width="1136" height="372" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<blockquote>
+<p>And you run <strong>several of these at once.</strong></p>
+</blockquote>
+<p>So the role of the computational scientist changed quite drastically, and it happened quite quickly.
+In <strong>2021</strong> the first AI pair programmer shipped as a preview. It was buggy, it made mistakes, and
+it still helped a little. Now, five years later, we have agentic systems that are technically
+capable of doing complete projects and complete sets of experiments on their own, from start to
+finish, testing everything and logging their work properly. That is true across many fields of
+computational science, not only ours.</p>
+<h2 id="self-driving-labs-already-being-built">Self-driving labs, already being built</h2>
+<p>I do not know how much you have heard about <strong>self-driving labs</strong>. These are labs where everything
+is done by robots, with only minimal human intervention. There have been efforts to build them for
+quite some time, mostly driven by academic labs, but we are seeing more and more examples from
+academic labs and from industry.</p>
+<ul class="talk-papers" data-astro-cid-dctirh3d><li class="talk-paper" data-astro-cid-hdydikal><p class="talk-paper-head" data-astro-cid-hdydikal><strong data-astro-cid-hdydikal>MicroCycle</strong><span class="talk-paper-org" data-astro-cid-hdydikal>Novartis, Basel</span></p><p class="talk-paper-what" data-astro-cid-hdydikal><p>Plate-based micro-scale chemistry of compounds chosen with active learning, automated
+purification and in-situ quantification.</p></p><p class="talk-paper-meta" data-astro-cid-hdydikal><span data-astro-cid-hdydikal>J. Med. Chem.</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;2024</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;</span><a href="https://doi.org/10.1021/acs.jmedchem.3c02029" rel="noopener" data-astro-cid-hdydikal>10.1021/acs.jmedchem.3c02029</a></p></li><li class="talk-paper" data-astro-cid-hdydikal><p class="talk-paper-head" data-astro-cid-hdydikal><strong data-astro-cid-hdydikal>Minerva</strong><span class="talk-paper-org" data-astro-cid-hdydikal>Roche Basel and EPFL</span></p><p class="talk-paper-what" data-astro-cid-hdydikal><p>A machine learning framework that designs highly parallel 96-well experiments against several
+objectives at once, validated and then deployed in real process development.</p></p><p class="talk-paper-meta" data-astro-cid-hdydikal><span data-astro-cid-hdydikal>Nature Communications</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;2025</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;</span><a href="https://doi.org/10.1038/s41467-025-61803-0" rel="noopener" data-astro-cid-hdydikal>10.1038/s41467-025-61803-0</a></p></li><li class="talk-paper" data-astro-cid-hdydikal><p class="talk-paper-head" data-astro-cid-hdydikal><strong data-astro-cid-hdydikal>Two mobile robots</strong><span class="talk-paper-org" data-astro-cid-hdydikal>Cooper Group, University of Liverpool</span></p><p class="talk-paper-what" data-astro-cid-hdydikal><p>An automated synthesis platform, a liquid-chromatography mass spectrometer and a benchtop NMR,
+with the robots deciding what to synthesise next from the measurements.</p></p><p class="talk-paper-meta" data-astro-cid-hdydikal><span data-astro-cid-hdydikal>Nature</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;2024</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;</span><a href="https://doi.org/10.1038/s41586-024-08173-7" rel="noopener" data-astro-cid-hdydikal>10.1038/s41586-024-08173-7</a></p></li><li class="talk-paper" data-astro-cid-hdydikal><p class="talk-paper-head" data-astro-cid-hdydikal><strong data-astro-cid-hdydikal>One planner, five labs</strong><span class="talk-paper-org" data-astro-cid-hdydikal>Acceleration Consortium, Toronto</span></p><p class="talk-paper-what" data-astro-cid-hdydikal><p>A cloud-based experiment planner drove five geographically separate robotic platforms as
+independent asynchronous workers across the world, and produced 21 new best-in-class gain
+materials for organic solid-state lasers.</p></p><p class="talk-paper-meta" data-astro-cid-hdydikal><span data-astro-cid-hdydikal>Science</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;2024</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;</span><a href="https://doi.org/10.1126/science.adk9227" rel="noopener" data-astro-cid-hdydikal>10.1126/science.adk9227</a></p></li><li class="talk-paper" data-astro-cid-hdydikal><p class="talk-paper-head" data-astro-cid-hdydikal><strong data-astro-cid-hdydikal>SAMPLE</strong><span class="talk-paper-org" data-astro-cid-hdydikal>University of Wisconsin-Madison</span></p><p class="talk-paper-what" data-astro-cid-hdydikal><p>Software agents each learned their own sequence-to-function model and each designed enzyme
+variants, and a robotic system built, expressed and assayed them.</p></p><p class="talk-paper-meta" data-astro-cid-hdydikal><span data-astro-cid-hdydikal>Nature Chemical Engineering</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;2024</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;</span><a href="https://doi.org/10.1038/s44286-023-00002-4" rel="noopener" data-astro-cid-hdydikal>10.1038/s44286-023-00002-4</a></p></li><li class="talk-paper" data-astro-cid-hdydikal><p class="talk-paper-head" data-astro-cid-hdydikal><strong data-astro-cid-hdydikal>Tableting data factory</strong><span class="talk-paper-org" data-astro-cid-hdydikal>CMAC Strathclyde, AstraZeneca and UCB</span></p><p class="talk-paper-what" data-astro-cid-hdydikal><p>A predictive model picks the formulation, then a robotic line doses, blends with in-line
+monitoring, compacts, and tests every single tablet for weight, thickness, diameter and breaking
+force.</p></p><p class="talk-paper-meta" data-astro-cid-hdydikal><span data-astro-cid-hdydikal>Nature Communications</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;2026</span><span data-astro-cid-hdydikal>&nbsp;·&nbsp;</span><a href="https://doi.org/10.1038/s41467-026-71204-6" rel="noopener" data-astro-cid-hdydikal>10.1038/s41467-026-71204-6</a></p></li></ul>
+<p>Several of these are teams describing their own systems, which is worth saying out loud rather than
+leaving out.</p>
+<p>And while this sounds futuristic, it is to be taken with a grain of salt, because when you read the
+publications they all say these are proofs of concept at best, and they each have their own caveats.
+Roche wrote, about their own high-throughput chemistry, that “in productive use, humans continue to
+design the overwhelming majority of HTE plates”.</p>
+<p>So the reason I am showing them is <strong>not</strong> to say that we have reached a time where self-driving
+labs exist. Not at all. What I want to show is the <strong>direction the field is moving in</strong>, because
+that direction is becoming more and more concrete, and I think you should be aware of it.</p>
+<h2 id="self-driving-labs-are-not-here-autonomous-ones-are-close">Self-driving labs are not here. Autonomous ones are close.</h2>
+<p>The section above was honest: self-driving labs are proofs of concept, and the papers say so
+themselves. But that is a claim about labs that <strong>decide</strong> what to run next. It is not a claim about
+labs that <strong>run</strong> things without hands, and those are a different thing, and those are already here.</p>
+<p>So, plainly: self-driving labs are not here yet. Autonomous labs are. One is a research question.
+The other is a product you could buy time on this afternoon.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-bare" style="max-width:520px;margin-inline:auto" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/ginkgo-automation-carts.webp" alt="A row of enclosed automation carts in a Ginkgo Bioworks laboratory, each a glass-fronted cabinet holding instruments and tubing, with nobody working at them." width="1000" height="1000" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>Rows of enclosed automation carts, each one a self-contained bench, running protocols with nobody standing at them. I played about a minute of this in the room.</span><a class="talk-figure-source" href="https://www.ginkgo.bio/" rel="noopener" data-astro-cid-axp6py46>Still and clip from the company&#39;s website, ginkgo.bio</a></figcaption></figure>
+<p>Now look at what is actually in there. Fixed, purpose-built machines doing one job each, in a cage,
+on a floor plan somebody designed around them. <strong>They cannot adapt.</strong> If a tube is in the wrong
+place, or a cap is stiff, or something spills, the whole thing stops and waits for a person. That is
+a fair criticism and I would rather make it myself, because it is what a room of bench scientists is
+already thinking.</p>
+<p>But it is an argument about today’s hardware, not about the direction. The robotics field is moving
+quickly too, and the hands are the part moving fastest. So the honest position is this: the software
+layer is here, the coordination layer is here, and the part that still cannot cope with a surprise
+is the part with the most improvement left in it.</p>
+<h2 id="the-companies-they-list-as-customers">The companies they list as customers</h2>
+<p>This is Ginkgo’s own website. These are the companies <strong>they list</strong> as customers, and the “over 130”
+is their number, not one anybody has checked. What we know is that the company puts these names up
+in public. What we do not know is what any one of those relationships actually amounts to.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/ginkgo-customer-logos.webp" alt="A row of company logos under the words trusted by over 130 customers: Sumitomo Chemical, Corteva Agriscience, Novartis, Novo Nordisk, Pfizer, Bayer and Boehringer Ingelheim." width="1440" height="176" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><a class="talk-figure-source" href="https://www.ginkgo.bio/" rel="noopener" data-astro-cid-axp6py46>Image from the company&#39;s website, ginkgo.bio</a></figcaption></figure>
+<p>Then the inference, offered as an inference, because it is a fair one. A company does not put
+Pfizer, Bayer, Novartis, Novo Nordisk and Boehringer Ingelheim on its front page casually. Those are
+marks with lawyers attached. So this is at least a claim somebody was willing to make in public with
+those companies’ names on it, which is a different thing from a press release about a pilot.</p>
+<p>The one to slow down on is Novartis, thirty minutes up the road from Basel, where most of the people
+in that room work. Whatever that relationship is, it is not something happening only in California
+to somebody else. And Novartis appears twice here: once building its own automated chemistry, as
+MicroCycle in Basel, and once on somebody else’s customer page.</p>
+<p>If you want to push back on this: yes, it is a marketing page, and no, I have not audited it.
+Nothing here claims otherwise.</p>
+<h2 id="the-hands-are-getting-good-fast-and-cheap">The hands are getting good, fast, and cheap</h2>
+<p>When it comes to the software, we are already very close. People often think this transition will
+never reach the physical world, because the hardware is not ready. That is true, but there is
+significant progress in robotics that should not be ignored. The thing I find quite cool is the
+<strong>ORCA hand project from ETH Zürich</strong>.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/orca-hand.webp" alt="The ORCA robotic hand, white fingers on a black chassis marked orca v1, lit against a plain black background." width="1280" height="720" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>I played a short clip of this in the room. The link below goes to where it came from.</span><a class="talk-figure-source" href="https://www.youtube.com/shorts/0qJwuyDf8rc" rel="noopener" data-astro-cid-axp6py46>Extract from “Anyone can build one of these robot hands”, The Rundown AI on YouTube. The ORCA hand is ETH Zürich&#39;s Soft Robotics Lab, open source.</a></figcaption></figure>
+<p>Robots are not only improving dramatically in capability and speed, they are also getting cheaper
+and more accessible to labs, which I believe is a key indicator of the direction the world is
+heading in.</p>
+<h2 id="what-is-left-and-what-stays-ours">What is left, and what stays ours</h2>
+<p>This is the good part, so let me frame it as the opportunity it is. The dull, repetitive “just
+implementing” moments go to the machine, and your time goes to the parts you came into research for:
+the ideas, the judgement, the calls. The work changes shape and concentrates into judgement.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/what-stays.svg" alt="A run down the page: deciding what is worth doing, then a quiet band saying the machine does this part, then deciding whether to trust the result, then owning what ships. Below a rule, set apart and picked out in teal, a fourth role: coordinator, running a bench of agents and instruments." width="552" height="420" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>Read it top to bottom. The three on the run are not three separate jobs, they are the three places a
+person touches one piece of work: before it, on the way back, and at the end. The band between them
+is the machine’s part, and it is deliberately the quietest thing on the picture, because the doing
+is no longer the interesting part.</p>
+<p>Then the one below the rule, which is the one to slow down on. The first three are the ones
+everybody expects. The fourth is the one that is actually new: it is not that you work harder at
+staying sharp, it is that a different job appears, and it is a job worth having. The people who
+understand how these systems actually work will be the ones <strong>coordinating</strong> them. Not only
+brainstorming and validating, but fixing what breaks, with a technician beside them, and buying in
+the capability the building has not got by connecting to somewhere that has it. Nobody is hiring for
+that job by that name yet, which is exactly why starting now is worth something.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/hands-free.webp" alt="A small mint-green robot at the left staggers along under a tall stack of boxes, binders and tools, while a man at the right stands with his hands free, holding three glowing cards." width="1440" height="611" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>Then the turn, and I want to be careful and honest here. I will <strong>not</strong> tell you that understanding
+is the one thing a machine never does. Nobody can show you a “never”, and an AI has already caught
+another AI’s mistakes. Here is the better version: however advanced it gets, an AI is still a tool
+like any other, and a tool never carries responsibility. Responsibility always returns to the person
+using it.</p>
+<blockquote>
+<p>A tool never carries responsibility. <strong>You do.</strong></p>
+</blockquote>
+<p>What to point it at, whether to trust what it hands back, and <strong>who answers when it ships</strong>. The
+last one is yours to keep, not because a better model cannot reach it, but because being answerable
+is a status a person carries, not a skill a model gets better at.</p>
+<p>Your field already runs on this. The Qualified Person certifies each batch for release. And since 2
+August 2026, human oversight of high-risk AI is a live legal duty in the EU, under Article 14 of the
+AI Act.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/signing-it-off.webp" alt="A small mint-green robot at the left holds a sheet of paper out across a desk, and a man at the right leans in and signs it with a pen; the mark he draws glows warm amber." width="1440" height="611" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<h2 id="i-cannot-teach-you-the-tools-they-change-too-fast">I cannot teach you the tools. They change too fast.</h2>
+<p>So the honest question is what to do about all this on Monday.</p>
+<p>The reason first: because of the direction all of this is going, <strong>you need to know how to use these
+tools.</strong> Not eventually. Now, while the gap between the people who do and the people who do not is
+still small.</p>
+<p>Then let me be honest about what one hour can be. I cannot possibly teach you everything in one
+session, and anyone who tells you they can is selling something. What I can do is three things, and
+they are worth very different amounts.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/what-lasts.svg" alt="A timeline with three tracks, all starting today. What is possible today ends before a dashed marker for the next summer school. A few habits run well past it. A way of thinking and working fades out towards the right of the frame, because it has no end in sight." width="1120" height="464" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>All three start today, and the only question is how far each of them gets.</p>
+<p><strong>What is possible today</strong> runs out first, and the reason is plain: it is out of date before you
+have finished learning it. The dashed line is that room, a year from now, at the next summer school.
+That track has already ended by then.</p>
+<p><strong>A few habits</strong> run well past it, because a habit does not belong to the tool it was learned on.</p>
+<p><strong>A way of thinking and working</strong> has no end in sight, which is why that track does not stop, it
+just fades out. There is no point on the picture where it ends, because there is no point where it
+ends. That third track is the reason I was up there. If you forget the rest, that is fine.</p>
+<h2 id="treat-it-like-someone-you-have-just-hired">Treat it like someone you have just hired</h2>
+<p>This is the first of two mindset changes, and it is the part I actually came to say. Everything else
+was tools and habits, and tools and habits go out of date. These two do not.</p>
+<p>Think of the agent you are working with as an employee. Somebody you have just hired, who is fast
+and well read and knows nothing about how your lab works.</p>
+<p>Now the part that matters. <strong>If they are not doing a good job, you do not just accept it.</strong> Nobody
+would accept it from a person. You would work out why, and you would fix it. Either they are missing
+something they need, so you give them the tools, or they do not know how you want it done, so you
+teach them.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/the-new-colleague.webp" alt="Two researchers at a laboratory bench in window light. The one nearer the camera, in a knitted jumper, is speaking with an open hand towards a small instrument between them; the newer colleague beside her, in a lab coat, is looking down at the instrument rather than at her." width="1440" height="803" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<blockquote>
+<p>If it is doing a bad job, that is a problem to fix. <strong>Never a verdict to accept.</strong></p>
+</blockquote>
+<p>So never, ever accept that it is failing. The commonest thing I see is somebody trying an agent
+once, getting something mediocre, deciding these things are overrated, and going back to doing it by
+hand. That is the equivalent of hiring somebody, watching them get one thing wrong on their first
+morning, and never speaking to them again.</p>
+<p>It is a bad tool right up until you make it a good one, and making it a good one is your job, not
+the vendor’s.</p>
+<h2 id="when-you-hit-a-wall-ask-what-could-be-done-about-it">When you hit a wall, ask what could be done about it</h2>
+<p>This is the second mindset change, and it is the one I would keep if I could only keep one.</p>
+<p>Develop this reflex: whenever you feel a barrier in your work, ask an agentic model what could be
+done about it. Not later, not when you have time. At the moment you feel the friction.</p>
+<p>The reason is that you are almost certainly wrong about what is possible. All of us are. We each
+decided once what our tools could and could not do, and then we stopped checking, and meanwhile the
+answer changed. So do not stay inside your own estimate of what is achievable, because there is far
+more available than any of us assumes.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/asking-at-the-bench.webp" alt="A researcher alone at a laboratory bench, one gloved hand still holding the glassware he was working with, has raised his phone in the other and stopped mid-task to read it." width="1440" height="803" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>Be honest about what happens when you do this, because it goes one of two ways and both are wins.
+Either you are surprised, and there is a workflow that solves the thing outright. Or there is not,
+and you come away understanding your own problem better and knowing how to make it a bit less bad.
+There is no third outcome where you wasted your time.</p>
+<p>Now the part people get wrong. This is <strong>not</strong> about finding the perfect workflow that dissolves
+your problem. That is rare. It is about improving one tiny part of how you work, every day. One tiny
+part a day compounds into something you would not recognise in a year, and waiting for the big
+solution gets you nothing at all.</p>
+<blockquote>
+<p>Not to solve everything. To make <strong>one small part</strong> of next week better than this one.</p>
+</blockquote>
+<p>So never accept a situation you find suboptimal. Everything can always get better, and the only
+question is whether you asked.</p>
+<h2 id="start-with-how-you-ask">Start with how you ask</h2>
+<p>The rest of the talk was five things to try when an agent is not doing a good enough job, cheapest
+first. You only climb when the one below did not work.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/advice-outline-1.svg" alt="Three stacked bands read from the bottom up, with an arrow up the side marked still not right, go up. How you ask, holding give it a finish line it can check and brief it like a colleague. Reach for the right tool, holding use the tool that already has it and plug in what it needs to reach. And at the top, teach it, either with one instruction or with a written skill. How you ask is picked out in teal." width="1000" height="448" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>The band in colour is where we start, and it is the cheapest of the lot, because it needs nothing
+plugged in and nothing installed. It is just how you ask. Both of the first two work this afternoon,
+on whatever you already have open.</p>
+<h3 id="one-give-it-a-finish-line-it-can-check">One: give it a finish line it can check</h3>
+<p>Say how you will know the job is done, and give it a way to test its own work against that line.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/agentic-loop-habits.svg" alt="The same agentic loop shown earlier, with a numbered disc marked one against the check step, which is filled solid to mark it as the step that decides the job is finished, and a disc marked two against the task going in." width="672" height="536" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>This is why the loop comes back. Look at the disc marked one, on the check step: <strong>that box is the
+only reason the loop ever stops.</strong> With no finish line it exits on its own judgement of good enough,
+and its judgement of good enough is not yours. Give it the line and it keeps going round until the
+line is met.</p>
+<p>Your field already runs on exactly this. A docked pose is trusted once it passes a physical-validity
+check. A chromatography result is trusted once the instrument passes system suitability. A synthetic
+route is trusted once every building block is purchasable.</p>
+<p>And the honest other half: knowing where no such line exists is the judgement that stays with you.</p>
+<h3 id="two-brief-it-like-a-colleague">Two: brief it like a colleague</h3>
+<p>Unlearn Google. Asking an agent is not a keyword search, and that reflex is exactly why people get
+poor results out of it. Full sentences, the context it cannot see, an example of what good looks
+like. On the diagram that is the disc marked two, which is the task going in, so briefing well is a
+change to what enters the loop.</p>
+<p>If you would not send that message to a new colleague and expect a useful answer back, do not send
+it here either.</p>
+<p>The objection to this is always the same: that is a lot of typing. It is not, and in the room I
+demonstrated it rather than argued about it. I had been dictating the whole time I was explaining
+these two habits, using a tool called Whisper Flow, and I pasted the transcript onto the wall. I did
+not write a word of it. I briefed it the way I would brief a person, and it took me no longer than
+saying it out loud, because saying it out loud is all I did.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" style="max-width:280px;margin-inline:auto" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/whisper-flow-wordmark.webp" alt="The Whisper Flow wordmark: four vertical bars like a sound level meter, then the word Flow." width="400" height="109" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>Wanting to type less is not a reason to ask badly.</p>
+<h2 id="then-reach-for-the-right-tool">Then reach for the right tool</h2>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/advice-outline-2.svg" alt="Three stacked bands read from the bottom up, with an arrow up the side marked still not right, go up. How you ask, holding give it a finish line it can check and brief it like a colleague. Reach for the right tool, holding use the tool that already has it and plug in what it needs to reach. And at the top, teach it, either with one instruction or with a written skill. Reach for the right tool is picked out in teal." width="1000" height="448" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>There are two ways up here, and they are different axes. Either somebody has already built a tool
+around the job, so you go and use that one instead of a general chat. Or the tool you have is right
+and it simply cannot reach something, so you plug that in.</p>
+<h3 id="three-use-the-tool-that-already-has-the-capability">Three: use the tool that already has the capability</h3>
+<p>You do not plug anything in. Somebody has already wired an agent to one job and given it the right
+hands for that job. This is the easy route, and most people will use it before they ever touch a
+connector.</p>
+<p>Everything you are about to see comes from something I actually made. Nothing is a mock-up.</p>
+<p>The example is Claude Design. It is not a chat window and it is not an image generator. It is a
+design tool with a model inside it, and what comes out is an editable design rather than a picture
+of one. It does slides, documents, posters, diagrams, wireframes and a CV. You describe what you
+want, you pick a design system, you choose the model, and it starts.</p>
+<figure class="talk-clip" data-astro-cid-tfja4qem><video src="/assets/talks/already-living-in-an-agentic-world/media/claude-design-prompting.mp4" poster="/assets/talks/already-living-in-an-agentic-world/figures/claude-design-start-screen.webp" width="888" height="582" controls playsinline preload="none" data-astro-cid-tfja4qem></video><figcaption data-astro-cid-tfja4qem>Twenty seconds of the start screen and the prompt going in. This is my own recording.</figcaption></figure>
+<p>What I asked it for was a flier for an industry day at a pharma company down the road. Here is the
+whole thing as it came out. It set the type, the grid and the colour, kept both institutions’ marks
+and placed them properly, sized and cropped the photographs into the layout, and put the details
+where they belong. Nothing on it was drawn by hand.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" style="max-width:440px;margin-inline:auto" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/claude-design-flier.webp" alt="A flier for an Industry Day at Idorsia, carrying the University of Basel and Idorsia marks, a headline, a short description, a spots-available badge, a registration QR code, two photographs of a laboratory tour and a networking lunch, and the address and date." width="700" height="995" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>A demonstration, not a real event. The flier was generated for this talk.</span></figcaption></figure>
+<p>This next part is the beat that separates it from asking a chatbot for a picture. I selected one
+block, the top of the flier, and left a comment on it, exactly the way you would comment on a
+colleague’s draft. The comment is in plain language and it is not even spelled correctly:</p>
+<blockquote>
+<p>Can you please lower the position of the spots vailable box here so that it fills the space
+better?
+Can you also please align “30” and “spots available” in a better way?</p>
+</blockquote>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/claude-design-comment.webp" alt="The top block of the flier is selected, with a comment box open on it asking for the spots-available badge to be lowered so it fills the space, and for its number and its words to be aligned better." width="700" height="538" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>One comment on one block. Spelling mistake included.</span></figcaption></figure>
+<p>It did that, and only that. I checked it from the pixels rather than by eye: the only thing that
+differs anywhere on the page is a box 281 by 101 pixels, which is the badge. Everything else, down
+to the photographs, is identical.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/claude-design-result.webp" alt="The same block with the badge lowered, taller and set on two lines, and everything else on the page unchanged." width="700" height="538" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>It changed that block, and nothing else moved. Checked against the pixels, not by eye.</span></figcaption></figure>
+<p>Read that against the loop: this is the agent given one instruction about one part. I was in that
+loop for about ten seconds and I changed the outcome. I did not start over, and I did not have to
+describe the whole flier again. That is what working with one of these actually feels like on a good
+day. You point at the one thing that is wrong.</p>
+<p>The other thing to believe is that this is not an image. A word in the body copy, the words inside
+the badge, and the date at the foot of the flier typed into a different format, each with an
+ordinary formatting toolbar open above it.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/claude-design-edit-word.webp" alt="The body text of the flier selected, with a rich text toolbar open above it and one letter highlighted mid-word." width="1169" height="190" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>A word in the body copy.</span></figcaption></figure>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/claude-design-edit-badge.webp" alt="The spots-available badge selected, with the same toolbar open above it and an exclamation mark added to its text." width="1169" height="139" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>The words inside the badge.</span></figcaption></figure>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/claude-design-edit-date.webp" alt="The date at the foot of the flier selected, with the toolbar open above it and the date typed in a different format." width="1169" height="240" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>The date, typed in another format.</span></figcaption></figure>
+<blockquote>
+<p>The text is live text. So are the colours, the type and the spacing. Nothing is baked into a
+picture.</p>
+</blockquote>
+<p>That matters for a reason you will feel immediately: a poster you cannot edit is a poster you have
+to regenerate, and regenerating means everything else moves too. A date changes. One always does.</p>
+<blockquote>
+<p>And it remembers your other projects, which is how a group ends up with a house style it actually
+keeps to, without anyone policing it.</p>
+</blockquote>
+<p>You spend the effort once, on the design, and after that a new poster is “make this one, in the
+design of that one”.</p>
+<p>The honest caveat: it is very good at layout and typography, and it is not a designer. You are still
+the one who decides it is finished. And the general lesson under all of this is the third piece of
+advice: <strong>before you try to make a general chat do a job, look for the tool that was built for it.</strong></p>
+<h2 id="it-plugs-into-other-systems-and-there-are-hundreds">It plugs into other systems, and there are hundreds</h2>
+<p>That is the second way, and it is the one that matters most for your actual work. There will never
+be a purpose-built tool for your particular corner of pharmacy. So the other route is to take the
+ordinary chat you already use, and plug into it exactly the capabilities your work needs.</p>
+<p>The name matters, because the name is what you have to search for. In ChatGPT these are called
+<strong>apps</strong>. In Claude they are called <strong>connectors</strong>. Underneath both is one open standard, <strong>MCP</strong>,
+now under the Linux Foundation, with OpenAI and Microsoft supporting it too. Write the connector
+once and every agent can use it, which is why there are already hundreds.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/connectors-hub.svg" alt="The agent as a tall column in the middle. Five kinds of connector feed into it from the left: the published record, structured databases, computation, model hubs, and your own files. Three lead out of it to the right: your record, what it makes, and the outside world." width="1136" height="472" loading="lazy" decoding="async" data-astro-cid-axp6py46></div><figcaption data-astro-cid-axp6py46><span class="talk-figure-caption" data-astro-cid-axp6py46>Apps in ChatGPT, connectors in Claude. Eight kinds, so you can map your own tools onto them.</span></figcaption></figure>
+<p>The left and right of this picture is the whole point. Everything on the left only ever <strong>informs</strong>
+it: after the query, the world is exactly as it was. Everything on the right lets it <strong>act</strong>: after
+one of those, something out there is different. That is not a category, it is an observable fact
+about what got left behind.</p>
+<p>Everything on the left makes it better informed. Everything on the right makes it accountable, to
+you.</p>
+<p>One thing to say out loud: the chemistry connectors are community-built wrappers around the public
+APIs, not official products of the databases. They work, and you check what you plug in, the same as
+any tool. Business connectors exist too, and they are the same eight shapes pointed at different
+systems rather than new kinds.</p>
+<h3 id="four-before-you-struggle-check-whether-a-connector-already-exists">Four: before you struggle, check whether a connector already exists</h3>
+<p>The mistake is not that people fail to use connectors. It is that they struggle through the job by
+hand first, pasting tables in, copying numbers out, describing a paper they could have handed over,
+and only afterwards find out that the thing they needed already existed and took two minutes to
+switch on.</p>
+<p>So make it a reflex, before the struggle rather than after it. Three places to look:</p>
+<ul>
+<li><strong>In the app.</strong> Both ChatGPT and Claude have a directory you can browse.</li>
+<li><strong>In a registry.</strong> There is a public list of MCP servers, and most vendors keep their own.</li>
+<li><strong>Ask it.</strong> It knows its own tool list, so this answer is one you can trust in a way that asking
+it for facts is not.</li>
+</ul>
+<p>Then the honest limit: what you plug in is yours to check, the same as any other tool you would put
+in a method.</p>
+<h2 id="today-a-connector-is-a-website-it-does-not-have-to-be">Today a connector is a website. It does not have to be.</h2>
+<p>Today a connector is a website. A database, a search engine, a notebook, a repository. There is
+nothing in the idea that says it has to be.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/connectors-future.svg" alt="The same agent column, with four laboratory instruments plugged into it inside a dashed outline marked your building: the plate reader, a purification station, the synthesiser and the freezer inventory. One two-way line crosses the outline to a laboratory somewhere else, marked pay by the run." width="1136" height="460" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>Picture your own building. One connector per instrument. One per assay. One per part of the lab. The
+plate reader. The purification station. The synthesiser. The freezer inventory. The agent stops
+being a thing you chat to and becomes the one place that coordinates the whole of it.</p>
+<p>Then the line that leaves the building, which is the genuinely new part. What your building has not
+got, you connect to a building that has. You do not own the instrument. You reach it, and you pay by
+the run.</p>
+<p>This is not a thought experiment. The same Ginkgo Bioworks whose lab is further up this page opened
+exactly this to outside groups in March 2026: over seventy instruments reachable from a browser,
+where you submit a protocol in plain language and get back a price for running it. Emerald Cloud Lab
+has worked this way for years. There are people building the business model right now.</p>
+<p>And one more line for the design tool: you can plug those same connectors into it, so a poster or a
+figure is built from your real numbers rather than from numbers you typed in again.</p>
+<p>None of that needs a new idea. It needs the connectors to be written.</p>
+<h2 id="the-same-loop-around-a-whole-project">The same loop, around a whole project</h2>
+<p>This is the one to slow down on. Everything so far has been pieces: how to ask, which tool, what to
+plug in. This is what a whole project looks like when all of it is connected, and it is the same
+loop you saw at the very beginning, drawn around a project instead of around a single task.</p>
+<p>This is the finished version. Not a demo, not next year’s roadmap. The way this works end to end.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/project-loop.svg" alt="Four stations in a row, joined left to right, with a return running back underneath them. What is known, drawn from every run you have done including the failures and from the literature. The protocol to try, marked options you pick one, holding options drawn from both with the case for and against each. Make and measure, holding automated synthesis, purification and characterisation. And the result, read, analysed and written into your notebook. From there a fork asks whether it is good enough: you choose to stop, or to go round again with one more run in it." width="1136" height="432" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<ul>
+<li><strong>What is known.</strong> Not what you remember: every run you have ever done, including the ones that
+failed, which are the ones nobody ever goes back and reads. Plus the literature, searched properly,
+as a corpus.</li>
+<li><strong>The protocol to try.</strong> This is the teal box, and it is the important one. It does not hand you
+one protocol. It looks at your own past trials and at the literature and gives you options, each
+with the case for it and the case against it. And you pick the one to run.</li>
+<li><strong>Make and measure.</strong> Automated synthesis, purification, characterisation. In this picture that is
+a connector like any other: the platform does it and hands the numbers back.</li>
+<li><strong>The result</strong>, read and analysed, and written into your electronic notebook as it happens rather
+than three weeks later from memory.</li>
+</ul>
+<p>Then the fork, which is the point of the whole picture. Is it good enough? You choose. Either you
+stop, or you go round again, back to what is known, now with one more run in it.</p>
+<p>So there are exactly two places on that diagram where a person acts, and they are the two teal
+marks: which option to run, and when to stop. Everything else the system does.</p>
+<p>And now the aside. Look at that loop again and count what you cannot do this afternoon. <strong>One box.</strong>
+Make and measure. Everything else on that picture works today with the things I have shown you. You
+just walk to the bench yourself in the middle of it.</p>
+<p>So start now, and here is the honest reason why. Not because it saves you a morning, though it will.
+Because the day that box goes too, and you have seen how close it is, the jump will be nothing to
+you. You will already know how to brief one of these, how to give it a finish line, what to plug
+into it, and how to tell when it is wrong. The people who start when the platform arrives will be
+learning both at once. You get to learn the hard half now, on the part that already works.</p>
+<h2 id="five-and-if-none-of-that-fixes-it-teach-it">Five: and if none of that fixes it, teach it</h2>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame is-plate" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/advice-outline-3.svg" alt="Three stacked bands read from the bottom up, with an arrow up the side marked still not right, go up. How you ask, holding give it a finish line it can check and brief it like a colleague. Reach for the right tool, holding use the tool that already has it and plug in what it needs to reach. And at the top, picked out in teal, teach it, either with one instruction or with a written skill." width="1000" height="448" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>Up the ladder from the bottom: give it a finish line, brief it properly, use the tool that already
+has the capability, plug in what it needs to reach. Then the new one, at the top. If none of that
+fixes it, teach it.</p>
+<p>The easy version, and everybody can do this today. Whenever you notice it getting the same thing
+wrong, do not correct it again in the next message, because that correction dies with the
+conversation. Write the rule into its instructions, once, and it stops. Mine says things like which
+spelling to use, and never to invent a citation.</p>
+<p>The bigger version, for something that is a procedure rather than a preference: write it a skill. A
+skill is a page of instructions it opens only when the job needs it, so you can teach it something
+long and detailed without that sitting in every conversation you ever have. If your group has a way
+of doing a particular analysis, that is a skill, and once it is written everybody in the group has
+it.</p>
+<p>None of the five is technical. They are all about being clear with it, and about not accepting a bad
+job.</p>
+<h2 id="the-two-that-do-not-go-out-of-date">The two that do not go out of date</h2>
+<p>Everything between the mindset changes and here was the ladder: how you ask, reaching for the right
+tool, teaching it. All five of those only matter if you refuse to accept a bad job in the first
+place. It is a bad tool right up until you make it a good one, and making it a good one is your job.</p>
+<p>And the one I would keep if I could only keep one. Everything in that hour goes out of date. This
+does not. Whenever you feel a barrier, ask an agentic model what could be done about it, at the
+moment you feel it. Either you are surprised, or you understand your own problem better. There is no
+third outcome.</p>
+<p>Never accept a situation you find suboptimal. Everything can always get better, and the only
+question is whether you asked.</p>
+<h2 id="come-and-talk-to-me-about-it">Come and talk to me about it</h2>
+<p>These questions are a daily part of my life. I think about them, I argue about them, and I am
+genuinely happy to talk about them with anybody who wants to.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/talking-afterwards.webp" alt="Sofiene standing with two colleagues over coffee in the bright glass atrium of a university building, talking with an open hand while they listen." width="1440" height="804" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<p>So come and find me, in person or by mail, whenever you like. If you want to work out what this
+would mean for your particular project, that conversation is far more useful than anything I could
+have put on a slide, because it can be about your actual work. And the specific offer, because a
+general invitation gets taken up by nobody and a specific one gets taken up: if you want to sit down
+and set one of these up properly for your own work, ask me. That is an hour, and it is an hour that
+changes your next year.</p>
+<h2 id="now-you-do">Now you do</h2>
+<p>You are already living in an agentic world. That was the title, and the title said you just do not
+know it yet. Now you do. That is the whole talk.</p>
+<p>The tools will keep changing and the mindset will not, so start now, on something small, this week.</p>
+<figure class="talk-figure" data-astro-cid-axp6py46><div class="talk-figure-frame" data-astro-cid-axp6py46><img src="/assets/talks/already-living-in-an-agentic-world/figures/hands-free-close.webp" alt="Four small mint-green robots work together on the left of an office, carrying boxes, sorting folders and working at a computer; on the right a man stands with his hands free, holding three glowing cards." width="1440" height="611" loading="lazy" decoding="async" data-astro-cid-axp6py46></div></figure>
+<script>window.SCENE_ART_ROOT = "/assets/talks/already-living-in-an-agentic-world/scene/art/";</script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/motion.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/layers.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/cycler.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/assets.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/rooms.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/beat.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/stage.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/s1.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/s2.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/compose.js"></script><script defer src="/assets/talks/already-living-in-an-agentic-world/scene/js/play.js"></script></div></article></main><footer class="mx-auto mt-[48px] w-full max-w-[calc(720px+48px)] border-t border-border px-[24px] pb-[40px] pt-[20px] text-center text-[12.5px] font-medium leading-[24px] text-secondary"><span>&copy; 2026 Sofiene Khiari</span><span>&nbsp;·&nbsp;</span><span>Basel, Switzerland</span></footer></body></html>
