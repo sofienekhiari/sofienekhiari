@@ -490,6 +490,17 @@ there is no redirect facility on this host, so a published URL is effectively pe
 
 ---
 
+**`public/.nojekyll` must never be deleted (D-51).** GitHub Pages runs the published folder through
+Jekyll by default, and Jekyll silently drops every file and directory whose name starts with an
+underscore. Astro emits its CSS and its client script into `docs/_astro/`, so without that file the
+site is published with no stylesheet and no view transitions: every page renders as unstyled HTML
+while still returning 200. The empty `public/.nojekyll` is copied into `docs/` on every build and
+turns Jekyll off.
+
+**After any deploy, fetch the stylesheet, not just the pages.** A page returning 200 proves nothing,
+because that is exactly the failure mode here: the HTML was served correctly and only the asset it
+references was missing. Pull the `/_astro/*.css` URL out of the live HTML and check it returns 200.
+
 ## 11. Open, not yet settled
 
 Do not resolve these by writing code. They need a ruling.

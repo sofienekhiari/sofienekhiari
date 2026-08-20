@@ -913,6 +913,39 @@
       "why": "",
       "endorsed": true,
       "note": "Built from the SMILES CN1C=NC2=C1C(=O)N(C)C(=O)N2C in the existing uml4selectivity environment (RDKit 2026.03.1), so no new environment was needed. Five assertions run before the structure is used and fail the script otherwise: formula is C8H10N4O2, rings are one five and one six, exactly three methyl groups and all three on nitrogen, no nitrogen-oxygen bond anywhere, exactly two carbonyls. Geometry from ETKDGv3 with a fixed seed then MMFF94, and the molecule is rotated by principal component analysis so its flat ring system faces the camera. Rendered ball-and-stick with 3Dmol.js in a headless browser, uploaded as an image2image reference, and restyled by Nano Banana Pro into the site's muted palette. Both returned variants preserved the structure; the second was chosen because its slimmer dark bonds survive being shown at 200px, where pale bonds wash out. Structure re-checked by eye against the reference after the restyle: three N-methyls, two carbonyls, four nitrogens, and a hydrogen on the imidazole carbon."
+    },
+    "D-51": {
+      "question": "Why did the published site have no CSS, and how is it stopped from recurring?",
+      "asked": "2026-08-20",
+      "context": "He looked at the live site straight after the first publish and found every page rendering as unstyled HTML. The stylesheet at /_astro/Base.CQVTO1Ls.css returned 404 even though the file was built, committed and pushed. Cause: GitHub Pages runs the published folder through Jekyll by default, and Jekyll excludes every path beginning with an underscore, which is exactly where Astro puts its CSS and its client script. The post-deploy check missed it because it fetched pages and an image under docs/images/, all of which returned 200; the one thing never fetched was the asset the pages depend on.",
+      "options": {
+        "nojekyll": {
+          "label": "Add an empty public/.nojekyll, copied into docs/ on every build.",
+          "casesFor": [
+            "The canonical fix, turns Jekyll off entirely",
+            "Covers any future underscore path, not just _astro",
+            "One empty file, no build configuration to drift"
+          ],
+          "casesAgainst": [
+            "A silent dependency: deleting it breaks the whole site with no error"
+          ]
+        },
+        "rename": {
+          "label": "Configure Astro to emit assets to a directory without an underscore.",
+          "casesFor": [
+            "No hidden file to lose"
+          ],
+          "casesAgainst": [
+            "Fights the framework default",
+            "Only fixes the paths thought of today"
+          ]
+        }
+      },
+      "choice": "nojekyll",
+      "label": "public/.nojekyll",
+      "why": "",
+      "endorsed": true,
+      "note": "Recorded in three places because losing the file fails silently and expensively: the design spec's build section, a hard rule in CLAUDE.md, and here. The rule now also says that after any deploy the /_astro/*.css URL must be fetched and checked for 200, since a 200 on the page proves nothing. That is precisely the check that was missing."
     }
   }
 }

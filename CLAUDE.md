@@ -25,6 +25,11 @@ npm run preview  # serve the built output exactly as Pages will
 
 - **`docs/` is build output. Never edit it by hand.** Every build empties it. Anything that must
   survive lives in `public/`.
+- **`public/.nojekyll` is load-bearing. Never delete it.** GitHub Pages runs Jekyll, which
+  drops anything starting with an underscore, and Astro puts the CSS and the client script in
+  `docs/_astro/`. Without that file the whole site publishes as unstyled HTML while still
+  returning 200, so it fails silently. After any deploy, fetch the `/_astro/*.css` URL and
+  check it returns 200; a 200 on the page itself does not prove the site is styled.
 - **`README.md` and `docs/llms.txt` are generated.** Editing them directly loses the change on the
   next build. The bio is authored in exactly one place: `src/data/profile.ts`.
 - **No em-dashes or en-dashes anywhere**, in code, content, commits or UI copy. Use a hyphen, a
