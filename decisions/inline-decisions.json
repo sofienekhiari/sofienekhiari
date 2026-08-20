@@ -639,6 +639,37 @@
       "why": "",
       "endorsed": false,
       "note": "Decided by Claude under D-42, not ruled by him. Reversible at any time; say so and it migrates."
+    },
+    "D-44": {
+      "question": "How long should Claude's chat output be, and how big should each iteration be?",
+      "asked": "2026-08-20",
+      "context": "Reports were running to many paragraphs per turn and iterations were large.",
+      "options": {
+        "short": {
+          "label": "Shortest possible output, small and frequent iterations.",
+          "casesFor": [
+            "Less to read before he can react",
+            "Small steps are cheaper to redirect when wrong"
+          ],
+          "casesAgainst": [
+            "More turns; a real problem gets one line instead of an explanation"
+          ]
+        },
+        "full": {
+          "label": "Keep full reports.",
+          "casesFor": [
+            "Everything stated once"
+          ],
+          "casesAgainst": [
+            "He said it is too much to read"
+          ]
+        }
+      },
+      "choice": "short",
+      "label": "Shortest possible output, small frequent iterations",
+      "why": "So that I have as little as possible to read before we iterate. Smaller shorter but more frequent iterations, that's the way I want to work.",
+      "endorsed": false,
+      "note": "Applies to chat output only. The decision record, commit messages and the design spec stay as detailed as they need to be, since they are read on demand rather than every turn."
     }
   }
 }

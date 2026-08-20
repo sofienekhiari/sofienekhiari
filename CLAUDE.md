@@ -15,6 +15,14 @@ npm run preview  # serve the built output exactly as Pages will
 
 ## Hard rules
 
+- **Keep chat output as short as possible** (D-44). He wants as little as possible to read before he
+  can react. One or two lines is usually right. No summaries of what he just watched happen, no
+  restating the request, no lists of everything verified. Say what changed and what needs him.
+- **Work in small, frequent iterations** (D-44). Do one thing, commit, report briefly, stop. Do not
+  batch several changes into one turn.
+- This governs chat only. Commit messages, the decision record and the design spec stay as detailed
+  as they need to be: they are read on demand, not every turn.
+
 - **`docs/` is build output. Never edit it by hand.** Every build empties it. Anything that must
   survive lives in `public/`.
 - **`README.md` and `docs/llms.txt` are generated.** Editing them directly loses the change on the
