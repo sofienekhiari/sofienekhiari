@@ -27,8 +27,10 @@ import { glob } from "astro/loaders";
 
 // Every talk that has been given, written up as prose (D-19).
 const talks = defineCollection({
-  // Read every markdown file directly inside src/content/talks.
-  loader: glob({ pattern: "**/*.md", base: "./src/content/talks" }),
+  // Read every markdown file directly inside src/content/talks. MDX counts:
+  // a write-up is prose, but it places figures, paper cards and the deck's own
+  // animated scenes, so it needs components a plain markdown file cannot carry.
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/talks" }),
   // The frontmatter contract each talk file must satisfy.
   schema: z.object({
     // Headline of the write-up, used as the H1 and in the talks index.

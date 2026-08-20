@@ -1,0 +1,37 @@
+---
+/**
+ * A short list of published work cited inside a talk write-up.
+ *
+ * It exists because a run of six papers set as ordinary prose paragraphs turns
+ * into a wall: the same four facts repeat in a different order each time and
+ * nothing lines up, so a reader scanning for the one in their own field has to
+ * read all of them. As rows, the four facts sit in the same place every time.
+ *
+ * It wraps `Paper` entries as children rather than taking a list of objects,
+ * because that keeps the entries readable in the write-up itself, where they
+ * are read far more often than they are edited.
+ *
+ * @example
+ * ```mdx
+ * <Papers>
+ *   <Paper name="MicroCycle" org="Novartis, Basel" venue="J. Med. Chem." year="2024" doi="10.1021/acs.jmedchem.3c02029">
+ *     Plate-based micro-scale chemistry, automated purification.
+ *   </Paper>
+ * </Papers>
+ * ```
+ */
+---
+
+{/* A plain list, because these are six items of one kind rather than six cards. */}
+<ul class="talk-papers">
+  <slot />
+</ul>
+
+<style>
+  .talk-papers {
+    margin-block: 1.75rem;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-primary);
+  }
+</style>

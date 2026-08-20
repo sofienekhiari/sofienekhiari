@@ -16,6 +16,11 @@ import { defineConfig } from "astro/config";
 // Tailwind v4 is a Vite plugin rather than a PostCSS plugin or an Astro
 // integration, which is why it is registered under `vite` below (D-21).
 import tailwindcss from "@tailwindcss/vite";
+// MDX is markdown that can also place components. A talk write-up is mostly
+// prose, but it carries figures with captions and sources, cards for the papers
+// it cites, and two animated scenes, and every one of those needs markup a plain
+// markdown file cannot express without a wall of raw HTML in it.
+import mdx from "@astrojs/mdx";
 
 // `defineConfig` is exported as the module default because that is what the
 // Astro CLI looks for when it loads this file.
@@ -38,6 +43,11 @@ export default defineConfig({
     // Directory format keeps the published URLs clean, for example /talks/.
     format: "directory",
   },
+
+  // MDX for the talk write-ups. It ships no client JavaScript of its own: a
+  // component placed in a page is still rendered to static HTML at build time,
+  // so D-07 holds and the pages stay readable with scripting turned off.
+  integrations: [mdx()],
 
   // Vite-level plugins. Tailwind v4 hooks in here (D-21).
   vite: {

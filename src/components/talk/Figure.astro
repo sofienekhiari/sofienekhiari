@@ -1,0 +1,161 @@
+---
+/**
+ * One picture inside a talk write-up.
+ *
+ * Every visual in a write-up comes through here, so that spacing, captions and
+ * credits are the same everywhere and a picture can never end up on the page
+ * without its dimensions.
+ *
+ * Two things it does that are worth knowing about.
+ *
+ * It reads the picture's real size off the file, so the browser can reserve the
+ * right amount of room before the picture arrives and the text below it never
+ * jumps.
+ *
+ * It offers a `plate`, which is a pale panel behind the picture. The diagrams
+ * come from the presentation, where they were drawn in dark ink on a cream
+ * slide and carry no background of their own. Dropped straight onto the site
+ * they would be invisible in dark mode, so a diagram sits on a pale panel and
+ * keeps the ground it was drawn for. Photographs need none of this and get
+ * none.
+ */
+
+// Reads the picture's own width and height off the file during the build.
+import { figureSize } from "../../lib/figure-size.ts";
+
+/** Props accepted by the component. */
+interface Props {
+  /** The picture's URL on the site, which always starts with a slash. */
+  src: string;
+  /** What the picture shows, for a reader who cannot see it. */
+  alt: string;
+  /** Optional line under the picture, saying what to notice in it. */
+  caption?: string;
+  /** Optional credit line under the caption, for anything not his own. */
+  source?: string;
+  /** Optional address the credit points at, which makes it a link. */
+  sourceHref?: string;
+  /** Puts the picture on a pale panel. Diagrams need it, photographs do not. */
+  plate?: boolean;
+  /** Caps how wide the picture is drawn, in pixels, and centres it. For a tall
+   *  portrait or a small mark, which at the full column width would either fill
+   *  the screen or be blown up past its own resolution. */
+  max?: number;
+  /** Drops the outline. For a picture that is not a rectangle, such as one
+   *  masked into a circle, where a box drawn round it outlines empty corners. */
+  bare?: boolean;
+}
+
+// Destructured with defaults, so a plain photograph needs only two props.
+const {
+  src,
+  alt,
+  caption,
+  source,
+  sourceHref,
+  plate = false,
+  max,
+  bare = false,
+} = Astro.props;
+
+// The picture's own dimensions, read from the file rather than typed here.
+const { width, height } = figureSize(src);
+---
+
+{/* The whole figure: the picture, then anything said about it. */}
+<figure class="talk-figure">
+  <div
+    class:list={["talk-figure-frame", plate && "is-plate", bare && "is-bare"]}
+    style={max ? `max-width:${max}px;margin-inline:auto` : undefined}
+  >
+    <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+  </div>
+
+  {
+    (caption || source) && (
+      <figcaption>
+        {caption && <span class="talk-figure-caption">{caption}</span>}
+        {source &&
+          (sourceHref ? (
+            <a class="talk-figure-source" href={sourceHref} rel="noopener">
+              {source}
+            </a>
+          ) : (
+            <span class="talk-figure-source">{source}</span>
+          ))}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  /* Figures carry a lot of the argument in a talk write-up, so they get room
+   * either side of them rather than sitting tight against the prose. */
+  .talk-figure {
+    margin-block: 2rem;
+  }
+
+  /* The frame is what carries the border and the corner radius, so that a
+   * picture on a plate and a picture without one are outlined identically. */
+  .talk-figure-frame {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    line-height: 0;
+  }
+
+  /* The pale panel the diagrams sit on. It is a fixed colour rather than a
+   * theme token on purpose: the drawings are dark ink with no background of
+   * their own, so the ground behind them has to stay light in both themes or
+   * they disappear. The value is the cream the slides were drawn on. */
+  .talk-figure-frame.is-plate {
+    padding: 18px;
+    background: #efeae1;
+    border-color: #ddd6c8;
+  }
+
+  /* A picture that is not a rectangle keeps neither the outline nor the corner
+   * radius, because both of them describe a box the picture does not fill. */
+  .talk-figure-frame.is-bare {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .talk-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-secondary);
+  }
+
+  /* The caption and the credit are two separate lines, and the credit is
+   * quieter, because it is bookkeeping rather than something to read. */
+  .talk-figure-caption {
+    display: block;
+  }
+
+  .talk-figure-source {
+    display: block;
+    margin-top: 3px;
+    font-size: 12.5px;
+    color: var(--color-secondary);
+  }
+
+  a.talk-figure-source {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-secondary) 35%, transparent);
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+
+  a.talk-figure-source:hover {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
+  }
+</style>

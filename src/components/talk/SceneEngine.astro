@@ -1,0 +1,52 @@
+---
+/**
+ * Loads the presentation's compositor, so the animated scenes on this page can
+ * draw themselves.
+ *
+ * Placed once, at the foot of a write-up that contains `Scene` figures. It is a
+ * component rather than something the talk layout does for every page, because
+ * only a write-up whose deck had animated scenes should be paying for this, and
+ * because a later talk will bring its own scenes under its own folder.
+ *
+ * Order is the whole point of this file, and it is the deck's order. The motion
+ * arithmetic goes first, since everything below reads its constants. The scene
+ * files come next, because they register themselves by name as they run. The
+ * compositor comes after them, because it builds every scene the moment it runs
+ * and so must find them already registered. The player goes last, because it
+ * asks the compositor for scenes that must already exist.
+ *
+ * Every tag is deferred, so all of them run after the page has been parsed and
+ * in exactly the order they appear here. Nothing on the page depends on them:
+ * with scripting off, each scene shows its still and its description instead.
+ */
+
+/** Props accepted by the component. */
+interface Props {
+  /** The talk's asset folder, for example `/assets/talks/a-talk/`. */
+  base: string;
+}
+
+const { base } = Astro.props;
+
+// The vendored engine, in dependency order, then the player written for this
+// site. Listed once here rather than as ten hand-written tags in the markup.
+const files = [
+  "motion.js",
+  "layers.js",
+  "cycler.js",
+  "assets.js",
+  "rooms.js",
+  "beat.js",
+  "stage.js",
+  "s1.js",
+  "s2.js",
+  "compose.js",
+  "play.js",
+];
+---
+
+{/* Where the sprite art lives. The vendored catalogue reads this, because it was
+    written for a page that sat beside its own art folder and this one does not. */}
+<script is:inline set:html={`window.SCENE_ART_ROOT = ${JSON.stringify(base + "scene/art/")};`} />
+
+{files.map((file) => <script is:inline defer src={`${base}scene/js/${file}`} />)}

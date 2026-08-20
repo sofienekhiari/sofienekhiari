@@ -1,0 +1,94 @@
+---
+/**
+ * One published platform or paper inside a `Papers` list.
+ *
+ * Four facts, always in the same order: what it is called, who built it, what
+ * it does, and where to read it. The DOI is printed rather than hidden behind a
+ * word, because an academic reader checks the prefix.
+ */
+
+/** Props accepted by the component. */
+interface Props {
+  /** What the platform or system is called. */
+  name: string;
+  /** Who built it, as the paper credits them. */
+  org: string;
+  /** The journal it was published in. */
+  venue: string;
+  /** The year of publication. */
+  year: string;
+  /** The bare DOI, with no resolver in front of it. */
+  doi: string;
+}
+
+// The four facts, plus the description which arrives as the entry's children.
+const { name, org, venue, year, doi } = Astro.props;
+---
+
+{/* One row. The description is the slot, so it can carry emphasis and links. */}
+<li class="talk-paper">
+  <p class="talk-paper-head">
+    <strong>{name}</strong>
+    <span class="talk-paper-org">{org}</span>
+  </p>
+  <p class="talk-paper-what"><slot /></p>
+  <p class="talk-paper-meta">
+    <span>{venue}</span>
+    <span>&nbsp;·&nbsp;{year}</span>
+    <span>&nbsp;·&nbsp;</span>
+    <a href={`https://doi.org/${doi}`} rel="noopener">{doi}</a>
+  </p>
+</li>
+
+<style>
+  .talk-paper {
+    padding-block: 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* The name and who built it share a line, since together they are the label. */
+  .talk-paper-head {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .talk-paper-head strong {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .talk-paper-org {
+    margin-left: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-secondary);
+  }
+
+  .talk-paper-what {
+    margin: 4px 0 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-content);
+  }
+
+  .talk-paper-meta {
+    margin: 7px 0 0;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--color-secondary);
+  }
+
+  .talk-paper-meta a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-secondary) 35%, transparent);
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+
+  .talk-paper-meta a:hover {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
+  }
+</style>

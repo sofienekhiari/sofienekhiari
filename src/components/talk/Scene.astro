@@ -1,0 +1,190 @@
+---
+/**
+ * One of the presentation's animated scenes, replayed inside the article.
+ *
+ * In the room these were walked a click at a time while Sofiene talked over
+ * them. Here they play themselves, one beat after another, and start again from
+ * the top when they reach the end. Each scene is its own sequence with its own
+ * clock, so the two on this page never merge into one long film.
+ *
+ * Nothing here draws anything. The picture is painted by the presentation's own
+ * compositor, vendored under `public/assets/talks/<slug>/scene/`, and this
+ * component only provides the box it paints into, the still that stands in for
+ * it before the script runs, and the controls.
+ *
+ * The still matters. With scripting off there is no animation at all, so the
+ * figure has to say something on its own: a single frame of the scene, with a
+ * description of the whole sequence as its alt text.
+ */
+
+// The picture's own size, so the still reserves the right space.
+import { figureSize } from "../../lib/figure-size.ts";
+
+/** Props accepted by the component. */
+interface Props {
+  /** Which registered scene to draw, either `s1` or `s2`. */
+  scene: string;
+  /** The still shown before the script runs, and with scripting off. */
+  still: string;
+  /** What the whole sequence shows, written for a reader who cannot see it. */
+  alt: string;
+  /** Which beat to rest on when the sequence is not playing, counting from zero. */
+  poster: number;
+  /** The line under the figure, saying what the sequence is. */
+  caption: string;
+}
+
+// Everything is required here: a scene with no description or no resting frame
+// is a figure that fails silently for somebody.
+const { scene, still, alt, poster, caption } = Astro.props;
+
+// The still's own dimensions, which are the scene's window: 720 by 400.
+const { width, height } = figureSize(still);
+---
+
+{/* One sequence. `data-poster` tells the script which beat to rest on. */}
+<figure class="scene-sequence" data-poster={poster}>
+  <div class="scene-frame">
+    {/* What a reader sees with no scripting, and what everyone sees until the
+        compositor has built the scene. Hidden by the script, never removed, so
+        its description stays in the document. */}
+    <img class="scene-still" src={still} alt={alt} width={width} height={height} loading="lazy" />
+
+    {/* Where the compositor paints. Hidden until the script has proved the
+        scene actually built, so a scene that fails leaves the still up rather
+        than an empty box. */}
+    <div class="scene-panel" hidden>
+      <div class="compose" data-scene={scene}>
+        <div class="compose-stage" style="position:absolute;left:0;top:0;transform-origin:0 0"></div>
+      </div>
+    </div>
+  </div>
+
+  <figcaption>
+    {/* Hidden in the markup: with no script these controls can do nothing, and
+        a dead button is worse than no button at all. */}
+    <div class="scene-controls" hidden>
+      <button class="scene-toggle" type="button" aria-pressed="false">
+        <span class="scene-toggle-label">Play</span>
+      </button>
+      <span class="scene-count"></span>
+      <span class="scene-rail"><span class="scene-rail-fill"></span></span>
+    </div>
+    <span class="scene-caption">{caption}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .scene-sequence {
+    margin-block: 2rem;
+  }
+
+  /* The window onto the scene. It keeps the compositor's proportions at every
+   * width, and the cream is the ground the scenes were drawn on, kept in both
+   * themes because the sprites were painted for it. */
+  .scene-frame {
+    position: relative;
+    aspect-ratio: 720 / 400;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #efeae1;
+    /* The outline is drawn as a shadow rather than as a border, because a
+     * border would take two pixels out of the width and the scene would then
+     * be drawn at 718 pixels instead of its own 720. That is a fractional
+     * scale, and a fractional scale on pixel art drops rows of pixels. */
+    box-shadow: 0 0 0 1px #ddd6c8;
+  }
+
+  /* The still is a frame of the same pixel art the scene is drawn from, so it
+   * is scaled the same way: hard edges rather than a smooth blur, which is what
+   * keeps it looking like the picture and not a photograph of one. */
+  .scene-still {
+    display: block;
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+  }
+
+  /* The live scene sits on top of the still and fills the frame. Its own inner
+   * element is a fixed 720 by 400, which the script scales to fit. */
+  .scene-panel {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.26s ease;
+  }
+
+  .scene-panel :global(.compose) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;
+  }
+
+  figcaption {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-secondary);
+  }
+
+  /* The control row: one button, the beat number, and a rail that fills as the
+   * sequence runs. It sits above the caption because it belongs to the picture. */
+  .scene-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  /* The site's pill button, at the smaller size a figure control wants. */
+  .scene-toggle {
+    flex: none;
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: var(--color-tertiary);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+
+  .scene-toggle:hover {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .scene-toggle:active {
+    transform: scale(0.96);
+  }
+
+  /* Fixed width so the row does not shuffle sideways as the number changes. */
+  .scene-count {
+    flex: none;
+    min-width: 92px;
+    font-size: 12.5px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .scene-rail {
+    flex: 1;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-border);
+  }
+
+  .scene-rail-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: 2px;
+    background: var(--color-accent);
+    transition: width 0.2s linear;
+  }
+
+  .scene-caption {
+    display: block;
+  }
+</style>

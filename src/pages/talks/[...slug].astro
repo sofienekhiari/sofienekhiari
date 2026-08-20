@@ -123,19 +123,60 @@ function formatDate(date: Date): string {
     text-decoration-color: var(--color-accent);
   }
 
-  /* Figures carry the weight in a talk write-up, so they get room and a border
-   * that separates them from the page rather than decorating them. */
-  .talk-body :global(img) {
+  /* Lists. Tailwind's reset strips the marker and the indent from every list on
+   * the site, which is right for the navigation and the entry lists and wrong
+   * here: a run of markdown bullets was rendering as unmarked lines that ran
+   * straight into the paragraph after them. Restored for prose only. */
+  .talk-body :global(ul:not([class])),
+  .talk-body :global(ol:not([class])) {
+    margin-block: 0 1.15em;
+    padding-inline-start: 1.35em;
+    font-size: 16.5px;
+    line-height: 1.78;
+    color: var(--color-content);
+  }
+
+  .talk-body :global(ul:not([class])) {
+    list-style: disc;
+  }
+
+  .talk-body :global(ol:not([class])) {
+    list-style: decimal;
+  }
+
+  .talk-body :global(li:not([class])) {
+    margin-block: 0.3em;
+    padding-inline-start: 0.25em;
+  }
+
+  /* The bullet itself, quieter than the words beside it. */
+  .talk-body :global(li:not([class]))::marker {
+    color: var(--color-secondary);
+  }
+
+  /* A figure placed by a component brings its own frame, so this rule is only
+   * for a bare markdown image. It is scoped to images that are not inside one
+   * of the figure components, which would otherwise get a second border. */
+  .talk-body :global(p > img) {
     margin-block: 1.75rem;
     border-radius: var(--radius);
     border: 1px solid var(--color-border);
   }
 
+  /* A pulled-out line, which in the deck was the one sentence left on the wall
+   * under a picture. Set larger than the prose rather than smaller, because it
+   * is the point being made rather than an aside. */
   .talk-body :global(blockquote) {
-    margin-block: 1.5rem;
+    margin-block: 1.75rem;
     border-left: 2px solid var(--color-accent);
-    padding-left: 1rem;
-    color: var(--color-secondary);
+    padding-left: 1.1rem;
+  }
+
+  .talk-body :global(blockquote p) {
+    margin-block: 0;
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--color-primary);
   }
 
   /* Code needs a monospace to be readable, and the design carries no monospace

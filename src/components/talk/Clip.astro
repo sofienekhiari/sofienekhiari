@@ -1,0 +1,68 @@
+---
+/**
+ * A short screen recording inside a talk write-up.
+ *
+ * Only footage Sofiene made himself is served from this site. Anything borrowed
+ * appears as a still with a link out to where it came from, which is an ordinary
+ * `Figure` rather than this.
+ *
+ * The clip never starts on its own. A video that plays itself while somebody is
+ * reading the paragraph above it is a nuisance, and it is also motion nobody
+ * asked for, so this ships with the browser's own controls and waits.
+ */
+
+// The poster's own size, which is also the clip's, so the box is the right
+// shape before a single frame has been fetched.
+import { figureSize } from "../../lib/figure-size.ts";
+
+/** Props accepted by the component. */
+interface Props {
+  /** The clip's URL on the site. */
+  src: string;
+  /** The still shown before it is played. */
+  poster: string;
+  /** What the clip shows, for a reader who will not play it. */
+  caption: string;
+}
+
+const { src, poster, caption } = Astro.props;
+
+// Taken from the poster, because a picture's header can be read and a video's
+// cannot without decoding it.
+const { width, height } = figureSize(poster);
+---
+
+{/* The clip, with the browser's own controls and nothing added to them. */}
+<figure class="talk-clip">
+  <video
+    src={src}
+    poster={poster}
+    width={width}
+    height={height}
+    controls
+    playsinline
+    preload="none"></video>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+  .talk-clip {
+    margin-block: 2rem;
+  }
+
+  .talk-clip video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: #efeae1;
+  }
+
+  figcaption {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-secondary);
+  }
+</style>
