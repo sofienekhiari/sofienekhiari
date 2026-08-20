@@ -308,6 +308,21 @@ makes the list read as a table.
 are not rendered: five labels per entry, mostly repeated between entries, added bulk without adding
 information. Rendering them again is a decision, not an implementation detail.
 
+### Not-found page (D-49)
+
+Deliberately the sparest page on the site: an image, a line, one link out. Nothing else. The earlier
+version listed all three routes; a single obvious way out is easier to act on, and the header already
+carries the full navigation.
+
+Centred in a `min-height: 62vh` flex column. In order: a `200px` circular image with
+`object-fit: cover`, `margin-bottom: 28px`; the page `h1`; one line of `--secondary` body text capped
+at `42ch`; then the site's pill button reading **Back to the home page** at `margin-top: 28px`.
+
+The image is `/images/404-molecule.webp`, generated with the OpenArt connector. Its `alt` is
+deliberately empty: it says nothing the heading does not, so a screen reader should skip it rather
+than stop to describe decoration. The circular mask is the same treatment as the profile photograph,
+which is what ties the two pages together.
+
 ### Tag pill
 
 `font-size: 12.5px`, weight 500, `color: var(--secondary)`, `background: var(--tertiary)`,

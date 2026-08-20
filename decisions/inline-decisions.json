@@ -829,6 +829,38 @@
       "why": "",
       "endorsed": true,
       "note": "Derived rather than hardcoded: arXiv mints DOIs as 10.48550/arXiv.<identifier>, so the identifier is read out of the DOI and a new arXiv entry gets a PDF link for free. No version pinned, so the link follows revisions. A non-arXiv DOI falls back to doi.org, since a journal PDF sits behind a publisher URL that cannot be guessed. Both live URLs checked: 200, application/pdf. The DOI stays visible as text in the row."
+    },
+    "D-49": {
+      "question": "What goes on the not-found page?",
+      "asked": "2026-08-20",
+      "context": "The page listed the three real routes under a heading and a line of explanation. He asked for it rebuilt: an image under a round mask, text saying the page does not exist, and a link home. Nothing else.",
+      "options": {
+        "sparse": {
+          "label": "Image, one line, one link home.",
+          "casesFor": [
+            "A single obvious way out is easier to act on than a menu",
+            "The header already carries the full navigation"
+          ],
+          "casesAgainst": [
+            "Loses the shortcut straight to Publications or Talks"
+          ]
+        },
+        "routes": {
+          "label": "Keep the three-route list.",
+          "casesFor": [
+            "Names every destination for someone who followed a stale link"
+          ],
+          "casesAgainst": [
+            "Three choices where one would do",
+            "Duplicates the header"
+          ]
+        }
+      },
+      "choice": "sparse",
+      "label": "Image, one line, one link home",
+      "why": "",
+      "endorsed": true,
+      "note": "Image subject chosen by him from two offered prompts: a single ball-and-stick molecule adrift in empty space, over an empty petri dish. Generated with the OpenArt connector, alt deliberately empty since it duplicates the heading. OPEN: he then asked that the molecule be chemically realistic, and none of the five images generated so far is correct caffeine. The one shipped here carries a fourth methyl on N9, which caffeine does not have. Not yet published; awaiting his ruling on whether to keep iterating, switch subject, or accept it."
     }
   }
 }
