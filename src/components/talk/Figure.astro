@@ -147,15 +147,10 @@ const { width, height } = figureSize(src);
     color: var(--color-secondary);
   }
 
+  /* A credit that points somewhere keeps the page's own link treatment, which
+   * is the accent colour and an underline, so it reads as a link rather than as
+   * more grey small print. Only the size is set here. */
   a.talk-figure-source {
-    text-decoration: underline;
-    text-decoration-color: color-mix(in oklab, var(--color-secondary) 35%, transparent);
     text-underline-offset: 3px;
-    transition: color 0.15s;
-  }
-
-  a.talk-figure-source:hover {
-    color: var(--color-accent);
-    text-decoration-color: var(--color-accent);
   }
 </style>

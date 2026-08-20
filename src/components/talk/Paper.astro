@@ -31,7 +31,12 @@ const { name, org, venue, year, doi } = Astro.props;
     <strong>{name}</strong>
     <span class="talk-paper-org">{org}</span>
   </p>
-  <p class="talk-paper-what"><slot /></p>
+  {/* A div, not a paragraph. The description arrives from MDX, which wraps
+      loose text in a paragraph of its own, and a paragraph inside a paragraph
+      is invalid: the browser closes the outer one early, so the class that
+      styles the description ends up on an empty element and the words fall
+      through to the page's ordinary prose size. */}
+  <div class="talk-paper-what"><slot /></div>
   <p class="talk-paper-meta">
     <span>{venue}</span>
     <span>&nbsp;·&nbsp;{year}</span>
@@ -46,40 +51,50 @@ const { name, org, venue, year, doi } = Astro.props;
     border-bottom: 1px solid var(--color-border);
   }
 
+  /* Every rule below is written from `.talk-paper` rather than straight off the
+   * element's own class. The page sets the type for markdown prose with rules
+   * like `.talk-body p`, and a plain `.talk-paper-head` carries exactly the same
+   * weight as that, so it lost the tie and the whole row was rendering at body
+   * size. Naming the row as well puts these ahead of it. */
+
   /* The name and who built it share a line, since together they are the label. */
-  .talk-paper-head {
+  .talk-paper .talk-paper-head {
     margin: 0;
     font-size: 16px;
     line-height: 1.4;
+    color: var(--color-primary);
   }
 
-  .talk-paper-head strong {
+  .talk-paper .talk-paper-head strong {
     font-weight: 700;
     color: var(--color-primary);
   }
 
-  .talk-paper-org {
+  .talk-paper .talk-paper-org {
     margin-left: 9px;
     font-size: 14px;
     font-weight: 500;
     color: var(--color-secondary);
   }
 
-  .talk-paper-what {
-    margin: 4px 0 0;
+  /* The size is set on the paragraph MDX puts inside the description, not on
+   * the wrapper, because that paragraph is what the page's prose rule would
+   * otherwise catch and set at the full body size. */
+  .talk-paper .talk-paper-what :global(p) {
+    margin: 5px 0 0;
     font-size: 15px;
     line-height: 1.55;
     color: var(--color-content);
   }
 
-  .talk-paper-meta {
-    margin: 7px 0 0;
+  .talk-paper .talk-paper-meta {
+    margin: 9px 0 0;
     font-size: 12.5px;
     font-weight: 500;
     color: var(--color-secondary);
   }
 
-  .talk-paper-meta a {
+  .talk-paper .talk-paper-meta a {
     color: var(--color-secondary);
     text-decoration: underline;
     text-decoration-color: color-mix(in oklab, var(--color-secondary) 35%, transparent);
@@ -87,7 +102,7 @@ const { name, org, venue, year, doi } = Astro.props;
     transition: color 0.15s;
   }
 
-  .talk-paper-meta a:hover {
+  .talk-paper .talk-paper-meta a:hover {
     color: var(--color-accent);
     text-decoration-color: var(--color-accent);
   }
