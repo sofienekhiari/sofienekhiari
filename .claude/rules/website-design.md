@@ -308,6 +308,51 @@ makes the list read as a table.
 are not rendered: five labels per entry, mostly repeated between entries, added bulk without adding
 information. Rendering them again is a decision, not an implementation detail.
 
+### Talk write-up components
+
+A talk write-up is prose (D-19) that carries the deck's own figures. The write-ups are MDX rather than
+plain markdown, because a figure with a caption and a credit, a list of cited papers, and an animated
+scene are more markup than a markdown file can hold without turning into raw HTML. Everything below
+is implementation detail of that under D-42; none of it is a new design direction, and none of it
+appears anywhere except inside `/talks/<slug>/`.
+
+**Every picture goes through `Figure`** (`src/components/talk/Figure.astro`), which reads the file's
+own width and height off disk at build time so nothing on a long page jumps as it loads. Figures are
+`margin-block: 2rem`, full column width, with a `1px --border` outline and `--radius` corners. Three
+options: `plate`, `max` and `bare`.
+
+**`plate` is load-bearing, not decoration.** The deck's diagrams are dark ink drawn for a cream slide
+and carry no background of their own, so on the dark theme they would be invisible. A plated figure
+sits on `#efeae1` with a `#ddd6c8` border and `18px` of padding. That is a **fixed colour in both
+themes**, deliberately not a token: the ground has to stay light or the drawing disappears. Every
+diagram is plated, and so is anything else with transparency and dark ink, such as a logo row. A
+photograph is never plated.
+
+`max` caps the drawn width in pixels and centres the figure, for a tall portrait or a small wordmark.
+`bare` drops the outline, for a picture masked into a shape that does not fill its box.
+
+**`Papers` and `Paper`** set a short list of cited work as rows, not cards: a `2px --primary` rule
+above the list, a `--border` hairline under each row, and four facts in a fixed order, being the name,
+who built it, what it does, and the venue with the year and the bare DOI. The DOI is printed rather
+than hidden behind a word, matching the publications page.
+
+**`Scene`** replays one of the deck's composited animations. The engine is the presentation's own,
+vendored under `public/assets/talks/<slug>/scene/`, and only the player and the path to the art were
+written here; see the README in that folder. The frame keeps the compositor's 720 by 400 proportions
+at every width on the same cream as a plate, and its outline is a `box-shadow` rather than a border,
+because a border takes two pixels out of the width and pixel art at a fractional scale drops rows.
+
+Each scene is its own sequence with its own clock. Beats arrive on their own and the sequence restarts
+when it reaches the end; two scenes on one page never merge into one. It plays only while it is on
+screen. Under `prefers-reduced-motion` **nothing starts on its own**: the scene rests on the beat the
+page names in `data-poster` and the reader may start it themselves. With no script the figure shows a
+still of that same beat, described in its `alt`, and the controls stay hidden, so nobody meets a dead
+button (D-07). The control row is one pill button, a beat count in tabular numerals, and a rail that
+fills in `--accent`.
+
+**`Clip`** is for footage he made himself only, with the browser's own controls, `preload="none"` and
+no autoplay. Borrowed footage is a `Figure` with a credit and a link out (D-52).
+
 ### Not-found page (D-49)
 
 Deliberately the sparest page on the site: an image, a line, one link out. Nothing else. The earlier
@@ -448,8 +493,13 @@ These hold regardless of what any future edit is trying to achieve.
   January 2025, the MSc ran to December 2024. There is no freelance developer entry (D-10).
   **The git-log metaphor and its invented commit hashes are retired** (D-30, confirming D-06 and
   D-14). This is a plain chronological list now. Do not reintroduce the hashes.
-- **Publications and talks:** content collections (D-25), one markdown file each. Adding either means
-  creating a file, never editing TypeScript.
+- **Publications and talks:** content collections (D-25), one file each. Adding either means creating
+  a file, never editing TypeScript. A publication is markdown; a talk write-up is **MDX**, so it can
+  place the figure, paper and scene components described in section 4. Both extensions are accepted
+  by the loader, so a write-up with nothing to place can still be plain markdown.
+- **A talk's own assets** live under `public/assets/talks/<slug>/`, in `figures/`, `media/` and, where
+  the deck had animated scenes, `scene/`. That is one folder per talk and it deliberately does not sit
+  under `public/talks/`, which would collide with the built route.
 - **Degree documents are not linked from anywhere** (D-37, superseding D-22). Sofiene is undecided
   about publishing his diplomas and a full transcript. The `documents` data stays in
   `experience.ts` so the links can be restored in one block of markup, but nothing renders it.

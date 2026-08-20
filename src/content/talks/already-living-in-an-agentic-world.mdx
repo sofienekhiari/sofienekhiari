@@ -1,0 +1,818 @@
+---
+title: You are already living in an agentic world
+description: What agentic systems actually are, why this change already happened once in computational science, and five things to try when one of them is not doing a good enough job.
+date: 2026-08-14
+venue: FuturAIma Summer School, Neuchâtel
+draft: false
+---
+
+import Figure from "../../components/talk/Figure.astro";
+import Scene from "../../components/talk/Scene.astro";
+import Clip from "../../components/talk/Clip.astro";
+import Papers from "../../components/talk/Papers.astro";
+import Paper from "../../components/talk/Paper.astro";
+import SceneEngine from "../../components/talk/SceneEngine.astro";
+
+export const base = "/assets/talks/already-living-in-an-agentic-world/";
+
+You are already living in an agentic world, you just do not know it yet. That was the title of the
+last talk of the summer school, and this is that talk written out.
+
+I had three goals for the hour. First, to put a name on systems you already know and have already
+used, and to explain briefly how they work. Second, to describe how those systems have changed the
+daily professional lives of computational scientists, and how they are likely to change other
+scientists' lives too. Third, to give you a concrete mindset change, some pieces of advice, and
+enough understanding of the tooling to improve your own work with these systems, starting today.
+
+<Figure
+  src={base + "figures/desk-above-the-machine-room.webp"}
+  alt="A person works at an ordinary desk. Beneath the floor, unseen, a vast machine room descends level after level, staffed entirely by small robots."
+  max={460}
+/>
+
+## A language model on its own: one prompt, one answer
+
+Before talking about agentic systems, I want to say that these systems are built on **large language
+models**. I think everyone knows by now what a large language model is, but as a quick reminder: it
+is a model you give a **prompt** and a **context**, so in the end some text, and it gives you back
+an answer, also as text.
+
+To show that, and to explain what an agentic system is later, I am going to draw the language model
+as a robot. His name is Clank, after my favourite childhood robot.
+
+You can imagine that you, the human, go to him with some context, which is the block of papers here,
+you hand it over with a prompt, which is the speech bubble, and he gives you back an answer that you
+can keep. Once he has done that, **he stops, and nothing happens.** That is really what an
+interaction with a large language model is like.
+
+You can repeat it, once, twice, and it is the same thing every time. You give a prompt with context,
+you get an answer. Nothing is carried over from the time before.
+
+<Scene
+  scene="s1"
+  still={base + "figures/scene-the-llm.webp"}
+  alt="A man walks up to a counter, and behind it stands a small robot. He lifts a bundle of papers onto the counter and asks a question, and a thin page comes back. He does it three times. The bundle goes up and comes down again each time, unchanged, and the pages pile up on his side of the counter while the machine's side of it stays exactly as it was."
+  poster={10}
+  caption="The same ask, three times over. Each time the whole bundle goes in, and one page comes back."
+/>
+
+## One word: autonomy
+
+That brings us to **agentic systems**. To show what an agent is, take the example of watering
+plants.
+
+Take our language model, Clank. He is standing in the room, not doing anything. The human comes in
+and asks him to water the plants. Clank works out what the request means, then goes to each plant
+and waters it. When he is finished, he goes back to the human, says it is done, and the human
+leaves, because the task is over.
+
+That is what agentic systems are. They are systems built on a large language model that **receive a
+task**, **decide on their own workflow** and how they are going to get the task done, **interact
+with their environment**, and **come back to you** when they are finished. The word I want you to
+remember is **autonomy**. They are able to decide by themselves *how* they are going to finish the
+task, and *how they know* the task is done.
+
+<Scene
+  scene="s2"
+  still={base + "figures/scene-the-agent.webp"}
+  alt="A small robot stands alone in a room with three plants. A man walks in and asks him to water them. A watering can appears in the robot's hands, and he walks to each plant in turn, tips the can over it and leaves the soil dark. Then he walks back, sets the can down, tells the man it is done, and the man leaves."
+  poster={6}
+  caption="One task, given once. He decides the route, does the work, and comes back when it is finished."
+/>
+
+They follow a loop, which we call **the agentic loop**:
+
+- First they **get the task** from you, understand it, and then **observe their environment**.
+- They **think** about what to do.
+- They **use their tools** to carry the action out.
+- They **observe** what happened when they used the tools.
+- They **check whether the job is done**. If it is, they leave the loop. If it is not, they go back
+  to the thinking part and round again.
+
+<Figure
+  src={base + "figures/agentic-loop.svg"}
+  alt="The agentic loop, drawn as four boxes going clockwise: a task arrives at Think, what to do next; Think leads to Act, use a tool; Act leads to Observe, what happened; Observe leads to Done, check against the goal, which either returns to Think or hands the result back to you."
+  plate
+/>
+
+You can read Clank the same way:
+
+- He got the task from me, understood it, and then observed his environment to find the plants.
+- He thought about what to do to water them.
+- He walked to the plants and used the tool to water them.
+- He observed that all the plants had been watered, decided that was a good enough job, reported
+  back to me, and went on standby.
+
+That is the basis of how agentic systems work.
+
+And here is what you may not have realised: systems like **ChatGPT and Claude are agentic systems
+now, not simple language models.** When you give them a task, they understand it, they look at the
+set of tools they have, and they decide which of those tools would be best for the job.
+
+Say the task is to pull some data off the internet and show it in a figure. The tools would be **web
+search** and **coding**. ChatGPT looks the data up online, gets the result of its search, looks at
+it, and decides whether it did a good job. Maybe it did not search properly, so it tries other
+keywords. Then it gets the data back, looks at it, decides it is good, and checks its plan. There is
+still the figure to make, so it uses the programming tool to generate the plot, looks at the result
+and thinks about it, notices that it did not use the right colours or the right bin sizes, updates
+the code, generates the plot again, looks at it, decides it has now done a good enough job, leaves
+the loop and shows you the output.
+
+That is conceptually how ChatGPT works, and that is what agentic systems are.
+
+## It already happened, in computational science
+
+Even though it may not look like it to some people, agentic systems are getting bigger by the day,
+they are being put to work in more and more fields, and they are set to change the way we work
+fundamentally.
+
+That change has already happened in software development and in computational science. We used to
+write all the code ourselves, including looking up how to use a particular library. We did all the
+**debugging** when the code did not work, and on a big codebase that could take days. All of that is
+gone now. AI agents write the code, write tests for it to make sure it works properly, and debug it
+when it does not. It generally goes much faster than a human, because the agent has constant
+knowledge of the whole codebase.
+
+Because all of that is now done by the agents, **our role converted** from doing those things to
+focusing on research, decision making and validation. It also means that most of the time we can
+work on several things at once: take a decision, let the agent work on it, make sure the code and
+the results are right, and meanwhile move to another project, going back and forth between two or
+more.
+
+<Figure
+  src={base + "figures/dev-cycle.svg"}
+  alt="The same cycle of computational work at two dates. In 2021 all six steps are the person's own: research, decide, write, test, debug, validate, and round again. In 2026 the middle three, write, test and debug, are one block belonging to the agent, and research, decide and validate are still the person's."
+  plate
+/>
+
+> And you run **several of these at once.**
+
+So the role of the computational scientist changed quite drastically, and it happened quite quickly.
+In **2021** the first AI pair programmer shipped as a preview. It was buggy, it made mistakes, and
+it still helped a little. Now, five years later, we have agentic systems that are technically
+capable of doing complete projects and complete sets of experiments on their own, from start to
+finish, testing everything and logging their work properly. That is true across many fields of
+computational science, not only ours.
+
+## Self-driving labs, already being built
+
+I do not know how much you have heard about **self-driving labs**. These are labs where everything
+is done by robots, with only minimal human intervention. There have been efforts to build them for
+quite some time, mostly driven by academic labs, but we are seeing more and more examples from
+academic labs and from industry.
+
+<Papers>
+  <Paper
+    name="MicroCycle"
+    org="Novartis, Basel"
+    venue="J. Med. Chem."
+    year="2024"
+    doi="10.1021/acs.jmedchem.3c02029"
+  >
+    Plate-based micro-scale chemistry of compounds chosen with active learning, automated
+    purification and in-situ quantification.
+  </Paper>
+  <Paper
+    name="Minerva"
+    org="Roche Basel and EPFL"
+    venue="Nature Communications"
+    year="2025"
+    doi="10.1038/s41467-025-61803-0"
+  >
+    A machine learning framework that designs highly parallel 96-well experiments against several
+    objectives at once, validated and then deployed in real process development.
+  </Paper>
+  <Paper
+    name="Two mobile robots"
+    org="Cooper Group, University of Liverpool"
+    venue="Nature"
+    year="2024"
+    doi="10.1038/s41586-024-08173-7"
+  >
+    An automated synthesis platform, a liquid-chromatography mass spectrometer and a benchtop NMR,
+    with the robots deciding what to synthesise next from the measurements.
+  </Paper>
+  <Paper
+    name="One planner, five labs"
+    org="Acceleration Consortium, Toronto"
+    venue="Science"
+    year="2024"
+    doi="10.1126/science.adk9227"
+  >
+    A cloud-based experiment planner drove five geographically separate robotic platforms as
+    independent asynchronous workers across the world, and produced 21 new best-in-class gain
+    materials for organic solid-state lasers.
+  </Paper>
+  <Paper
+    name="SAMPLE"
+    org="University of Wisconsin-Madison"
+    venue="Nature Chemical Engineering"
+    year="2024"
+    doi="10.1038/s44286-023-00002-4"
+  >
+    Software agents each learned their own sequence-to-function model and each designed enzyme
+    variants, and a robotic system built, expressed and assayed them.
+  </Paper>
+  <Paper
+    name="Tableting data factory"
+    org="CMAC Strathclyde, AstraZeneca and UCB"
+    venue="Nature Communications"
+    year="2026"
+    doi="10.1038/s41467-026-71204-6"
+  >
+    A predictive model picks the formulation, then a robotic line doses, blends with in-line
+    monitoring, compacts, and tests every single tablet for weight, thickness, diameter and breaking
+    force.
+  </Paper>
+</Papers>
+
+Several of these are teams describing their own systems, which is worth saying out loud rather than
+leaving out.
+
+And while this sounds futuristic, it is to be taken with a grain of salt, because when you read the
+publications they all say these are proofs of concept at best, and they each have their own caveats.
+Roche wrote, about their own high-throughput chemistry, that "in productive use, humans continue to
+design the overwhelming majority of HTE plates".
+
+So the reason I am showing them is **not** to say that we have reached a time where self-driving
+labs exist. Not at all. What I want to show is the **direction the field is moving in**, because
+that direction is becoming more and more concrete, and I think you should be aware of it.
+
+## Self-driving labs are not here. Autonomous ones are close.
+
+The section above was honest: self-driving labs are proofs of concept, and the papers say so
+themselves. But that is a claim about labs that **decide** what to run next. It is not a claim about
+labs that **run** things without hands, and those are a different thing, and those are already here.
+
+So, plainly: self-driving labs are not here yet. Autonomous labs are. One is a research question.
+The other is a product you could buy time on this afternoon.
+
+<Figure
+  src={base + "figures/ginkgo-automation-carts.webp"}
+  alt="A row of enclosed automation carts in a Ginkgo Bioworks laboratory, each a glass-fronted cabinet holding instruments and tubing, with nobody working at them."
+  caption="Rows of enclosed automation carts, each one a self-contained bench, running protocols with nobody standing at them. I played about a minute of this in the room."
+  source="Still and clip from the company's website, ginkgo.bio"
+  sourceHref="https://www.ginkgo.bio/"
+  bare
+  max={520}
+/>
+
+Now look at what is actually in there. Fixed, purpose-built machines doing one job each, in a cage,
+on a floor plan somebody designed around them. **They cannot adapt.** If a tube is in the wrong
+place, or a cap is stiff, or something spills, the whole thing stops and waits for a person. That is
+a fair criticism and I would rather make it myself, because it is what a room of bench scientists is
+already thinking.
+
+But it is an argument about today's hardware, not about the direction. The robotics field is moving
+quickly too, and the hands are the part moving fastest. So the honest position is this: the software
+layer is here, the coordination layer is here, and the part that still cannot cope with a surprise
+is the part with the most improvement left in it.
+
+## The companies they list as customers
+
+This is Ginkgo's own website. These are the companies **they list** as customers, and the "over 130"
+is their number, not one anybody has checked. What we know is that the company puts these names up
+in public. What we do not know is what any one of those relationships actually amounts to.
+
+<Figure
+  src={base + "figures/ginkgo-customer-logos.webp"}
+  alt="A row of company logos under the words trusted by over 130 customers: Sumitomo Chemical, Corteva Agriscience, Novartis, Novo Nordisk, Pfizer, Bayer and Boehringer Ingelheim."
+  source="Image from the company's website, ginkgo.bio"
+  sourceHref="https://www.ginkgo.bio/"
+  plate
+/>
+
+Then the inference, offered as an inference, because it is a fair one. A company does not put
+Pfizer, Bayer, Novartis, Novo Nordisk and Boehringer Ingelheim on its front page casually. Those are
+marks with lawyers attached. So this is at least a claim somebody was willing to make in public with
+those companies' names on it, which is a different thing from a press release about a pilot.
+
+The one to slow down on is Novartis, thirty minutes up the road from Basel, where most of the people
+in that room work. Whatever that relationship is, it is not something happening only in California
+to somebody else. And Novartis appears twice here: once building its own automated chemistry, as
+MicroCycle in Basel, and once on somebody else's customer page.
+
+If you want to push back on this: yes, it is a marketing page, and no, I have not audited it.
+Nothing here claims otherwise.
+
+## The hands are getting good, fast, and cheap
+
+When it comes to the software, we are already very close. People often think this transition will
+never reach the physical world, because the hardware is not ready. That is true, but there is
+significant progress in robotics that should not be ignored. The thing I find quite cool is the
+**ORCA hand project from ETH Zürich**.
+
+<Figure
+  src={base + "figures/orca-hand.webp"}
+  alt="The ORCA robotic hand, white fingers on a black chassis marked orca v1, lit against a plain black background."
+  caption="I played a short clip of this in the room. The link below goes to where it came from."
+  source="Extract from “Anyone can build one of these robot hands”, The Rundown AI on YouTube. The ORCA hand is ETH Zürich's Soft Robotics Lab, open source."
+  sourceHref="https://www.youtube.com/shorts/0qJwuyDf8rc"
+/>
+
+Robots are not only improving dramatically in capability and speed, they are also getting cheaper
+and more accessible to labs, which I believe is a key indicator of the direction the world is
+heading in.
+
+## What is left, and what stays ours
+
+This is the good part, so let me frame it as the opportunity it is. The dull, repetitive "just
+implementing" moments go to the machine, and your time goes to the parts you came into research for:
+the ideas, the judgement, the calls. The work changes shape and concentrates into judgement.
+
+<Figure
+  src={base + "figures/what-stays.svg"}
+  alt="A run down the page: deciding what is worth doing, then a quiet band saying the machine does this part, then deciding whether to trust the result, then owning what ships. Below a rule, set apart and picked out in teal, a fourth role: coordinator, running a bench of agents and instruments."
+  plate
+/>
+
+Read it top to bottom. The three on the run are not three separate jobs, they are the three places a
+person touches one piece of work: before it, on the way back, and at the end. The band between them
+is the machine's part, and it is deliberately the quietest thing on the picture, because the doing
+is no longer the interesting part.
+
+Then the one below the rule, which is the one to slow down on. The first three are the ones
+everybody expects. The fourth is the one that is actually new: it is not that you work harder at
+staying sharp, it is that a different job appears, and it is a job worth having. The people who
+understand how these systems actually work will be the ones **coordinating** them. Not only
+brainstorming and validating, but fixing what breaks, with a technician beside them, and buying in
+the capability the building has not got by connecting to somewhere that has it. Nobody is hiring for
+that job by that name yet, which is exactly why starting now is worth something.
+
+<Figure
+  src={base + "figures/hands-free.webp"}
+  alt="A small mint-green robot at the left staggers along under a tall stack of boxes, binders and tools, while a man at the right stands with his hands free, holding three glowing cards."
+/>
+
+Then the turn, and I want to be careful and honest here. I will **not** tell you that understanding
+is the one thing a machine never does. Nobody can show you a "never", and an AI has already caught
+another AI's mistakes. Here is the better version: however advanced it gets, an AI is still a tool
+like any other, and a tool never carries responsibility. Responsibility always returns to the person
+using it.
+
+> A tool never carries responsibility. **You do.**
+
+What to point it at, whether to trust what it hands back, and **who answers when it ships**. The
+last one is yours to keep, not because a better model cannot reach it, but because being answerable
+is a status a person carries, not a skill a model gets better at.
+
+Your field already runs on this. The Qualified Person certifies each batch for release. And since 2
+August 2026, human oversight of high-risk AI is a live legal duty in the EU, under Article 14 of the
+AI Act.
+
+<Figure
+  src={base + "figures/signing-it-off.webp"}
+  alt="A small mint-green robot at the left holds a sheet of paper out across a desk, and a man at the right leans in and signs it with a pen; the mark he draws glows warm amber."
+/>
+
+## I cannot teach you the tools. They change too fast.
+
+So the honest question is what to do about all this on Monday.
+
+The reason first: because of the direction all of this is going, **you need to know how to use these
+tools.** Not eventually. Now, while the gap between the people who do and the people who do not is
+still small.
+
+Then let me be honest about what one hour can be. I cannot possibly teach you everything in one
+session, and anyone who tells you they can is selling something. What I can do is three things, and
+they are worth very different amounts.
+
+<Figure
+  src={base + "figures/what-lasts.svg"}
+  alt="A timeline with three tracks, all starting today. What is possible today ends before a dashed marker for the next summer school. A few habits run well past it. A way of thinking and working fades out towards the right of the frame, because it has no end in sight."
+  plate
+/>
+
+All three start today, and the only question is how far each of them gets.
+
+**What is possible today** runs out first, and the reason is plain: it is out of date before you
+have finished learning it. The dashed line is that room, a year from now, at the next summer school.
+That track has already ended by then.
+
+**A few habits** run well past it, because a habit does not belong to the tool it was learned on.
+
+**A way of thinking and working** has no end in sight, which is why that track does not stop, it
+just fades out. There is no point on the picture where it ends, because there is no point where it
+ends. That third track is the reason I was up there. If you forget the rest, that is fine.
+
+## Treat it like someone you have just hired
+
+This is the first of two mindset changes, and it is the part I actually came to say. Everything else
+was tools and habits, and tools and habits go out of date. These two do not.
+
+Think of the agent you are working with as an employee. Somebody you have just hired, who is fast
+and well read and knows nothing about how your lab works.
+
+Now the part that matters. **If they are not doing a good job, you do not just accept it.** Nobody
+would accept it from a person. You would work out why, and you would fix it. Either they are missing
+something they need, so you give them the tools, or they do not know how you want it done, so you
+teach them.
+
+<Figure
+  src={base + "figures/the-new-colleague.webp"}
+  alt="Two researchers at a laboratory bench in window light. The one nearer the camera, in a knitted jumper, is speaking with an open hand towards a small instrument between them; the newer colleague beside her, in a lab coat, is looking down at the instrument rather than at her."
+/>
+
+> If it is doing a bad job, that is a problem to fix. **Never a verdict to accept.**
+
+So never, ever accept that it is failing. The commonest thing I see is somebody trying an agent
+once, getting something mediocre, deciding these things are overrated, and going back to doing it by
+hand. That is the equivalent of hiring somebody, watching them get one thing wrong on their first
+morning, and never speaking to them again.
+
+It is a bad tool right up until you make it a good one, and making it a good one is your job, not
+the vendor's.
+
+## When you hit a wall, ask what could be done about it
+
+This is the second mindset change, and it is the one I would keep if I could only keep one.
+
+Develop this reflex: whenever you feel a barrier in your work, ask an agentic model what could be
+done about it. Not later, not when you have time. At the moment you feel the friction.
+
+The reason is that you are almost certainly wrong about what is possible. All of us are. We each
+decided once what our tools could and could not do, and then we stopped checking, and meanwhile the
+answer changed. So do not stay inside your own estimate of what is achievable, because there is far
+more available than any of us assumes.
+
+<Figure
+  src={base + "figures/asking-at-the-bench.webp"}
+  alt="A researcher alone at a laboratory bench, one gloved hand still holding the glassware he was working with, has raised his phone in the other and stopped mid-task to read it."
+/>
+
+Be honest about what happens when you do this, because it goes one of two ways and both are wins.
+Either you are surprised, and there is a workflow that solves the thing outright. Or there is not,
+and you come away understanding your own problem better and knowing how to make it a bit less bad.
+There is no third outcome where you wasted your time.
+
+Now the part people get wrong. This is **not** about finding the perfect workflow that dissolves
+your problem. That is rare. It is about improving one tiny part of how you work, every day. One tiny
+part a day compounds into something you would not recognise in a year, and waiting for the big
+solution gets you nothing at all.
+
+> Not to solve everything. To make **one small part** of next week better than this one.
+
+So never accept a situation you find suboptimal. Everything can always get better, and the only
+question is whether you asked.
+
+## Start with how you ask
+
+The rest of the talk was five things to try when an agent is not doing a good enough job, cheapest
+first. You only climb when the one below did not work.
+
+<Figure
+  src={base + "figures/advice-outline-1.svg"}
+  alt="Three stacked bands read from the bottom up, with an arrow up the side marked still not right, go up. How you ask, holding give it a finish line it can check and brief it like a colleague. Reach for the right tool, holding use the tool that already has it and plug in what it needs to reach. And at the top, teach it, either with one instruction or with a written skill. How you ask is picked out in teal."
+  plate
+/>
+
+The band in colour is where we start, and it is the cheapest of the lot, because it needs nothing
+plugged in and nothing installed. It is just how you ask. Both of the first two work this afternoon,
+on whatever you already have open.
+
+### One: give it a finish line it can check
+
+Say how you will know the job is done, and give it a way to test its own work against that line.
+
+<Figure
+  src={base + "figures/agentic-loop-habits.svg"}
+  alt="The same agentic loop shown earlier, with a numbered disc marked one against the check step, which is filled solid to mark it as the step that decides the job is finished, and a disc marked two against the task going in."
+  plate
+/>
+
+This is why the loop comes back. Look at the disc marked one, on the check step: **that box is the
+only reason the loop ever stops.** With no finish line it exits on its own judgement of good enough,
+and its judgement of good enough is not yours. Give it the line and it keeps going round until the
+line is met.
+
+Your field already runs on exactly this. A docked pose is trusted once it passes a physical-validity
+check. A chromatography result is trusted once the instrument passes system suitability. A synthetic
+route is trusted once every building block is purchasable.
+
+And the honest other half: knowing where no such line exists is the judgement that stays with you.
+
+### Two: brief it like a colleague
+
+Unlearn Google. Asking an agent is not a keyword search, and that reflex is exactly why people get
+poor results out of it. Full sentences, the context it cannot see, an example of what good looks
+like. On the diagram that is the disc marked two, which is the task going in, so briefing well is a
+change to what enters the loop.
+
+If you would not send that message to a new colleague and expect a useful answer back, do not send
+it here either.
+
+The objection to this is always the same: that is a lot of typing. It is not, and in the room I
+demonstrated it rather than argued about it. I had been dictating the whole time I was explaining
+these two habits, using a tool called Whisper Flow, and I pasted the transcript onto the wall. I did
+not write a word of it. I briefed it the way I would brief a person, and it took me no longer than
+saying it out loud, because saying it out loud is all I did.
+
+<Figure
+  src={base + "figures/whisper-flow-wordmark.webp"}
+  alt="The Whisper Flow wordmark: four vertical bars like a sound level meter, then the word Flow."
+  plate
+  max={280}
+/>
+
+Wanting to type less is not a reason to ask badly.
+
+## Then reach for the right tool
+
+<Figure
+  src={base + "figures/advice-outline-2.svg"}
+  alt="Three stacked bands read from the bottom up, with an arrow up the side marked still not right, go up. How you ask, holding give it a finish line it can check and brief it like a colleague. Reach for the right tool, holding use the tool that already has it and plug in what it needs to reach. And at the top, teach it, either with one instruction or with a written skill. Reach for the right tool is picked out in teal."
+  plate
+/>
+
+There are two ways up here, and they are different axes. Either somebody has already built a tool
+around the job, so you go and use that one instead of a general chat. Or the tool you have is right
+and it simply cannot reach something, so you plug that in.
+
+### Three: use the tool that already has the capability
+
+You do not plug anything in. Somebody has already wired an agent to one job and given it the right
+hands for that job. This is the easy route, and most people will use it before they ever touch a
+connector.
+
+Everything you are about to see comes from something I actually made. Nothing is a mock-up.
+
+The example is Claude Design. It is not a chat window and it is not an image generator. It is a
+design tool with a model inside it, and what comes out is an editable design rather than a picture
+of one. It does slides, documents, posters, diagrams, wireframes and a CV. You describe what you
+want, you pick a design system, you choose the model, and it starts.
+
+<Clip
+  src={base + "media/claude-design-prompting.mp4"}
+  poster={base + "figures/claude-design-start-screen.webp"}
+  caption="Twenty seconds of the start screen and the prompt going in. This is my own recording."
+/>
+
+What I asked it for was a flier for an industry day at a pharma company down the road. Here is the
+whole thing as it came out. It set the type, the grid and the colour, kept both institutions' marks
+and placed them properly, sized and cropped the photographs into the layout, and put the details
+where they belong. Nothing on it was drawn by hand.
+
+<Figure
+  src={base + "figures/claude-design-flier.webp"}
+  alt="A flier for an Industry Day at Idorsia, carrying the University of Basel and Idorsia marks, a headline, a short description, a spots-available badge, a registration QR code, two photographs of a laboratory tour and a networking lunch, and the address and date."
+  caption="A demonstration, not a real event. The flier was generated for this talk."
+  max={440}
+/>
+
+This next part is the beat that separates it from asking a chatbot for a picture. I selected one
+block, the top of the flier, and left a comment on it, exactly the way you would comment on a
+colleague's draft. The comment is in plain language and it is not even spelled correctly:
+
+> Can you please lower the position of the spots vailable box here so that it fills the space
+> better?
+> Can you also please align "30" and "spots available" in a better way?
+
+<Figure
+  src={base + "figures/claude-design-comment.webp"}
+  alt="The top block of the flier is selected, with a comment box open on it asking for the spots-available badge to be lowered so it fills the space, and for its number and its words to be aligned better."
+  caption="One comment on one block. Spelling mistake included."
+/>
+
+It did that, and only that. I checked it from the pixels rather than by eye: the only thing that
+differs anywhere on the page is a box 281 by 101 pixels, which is the badge. Everything else, down
+to the photographs, is identical.
+
+<Figure
+  src={base + "figures/claude-design-result.webp"}
+  alt="The same block with the badge lowered, taller and set on two lines, and everything else on the page unchanged."
+  caption="It changed that block, and nothing else moved. Checked against the pixels, not by eye."
+/>
+
+Read that against the loop: this is the agent given one instruction about one part. I was in that
+loop for about ten seconds and I changed the outcome. I did not start over, and I did not have to
+describe the whole flier again. That is what working with one of these actually feels like on a good
+day. You point at the one thing that is wrong.
+
+The other thing to believe is that this is not an image. A word in the body copy, the words inside
+the badge, and the date at the foot of the flier typed into a different format, each with an
+ordinary formatting toolbar open above it.
+
+<Figure
+  src={base + "figures/claude-design-edit-word.webp"}
+  alt="The body text of the flier selected, with a rich text toolbar open above it and one letter highlighted mid-word."
+  caption="A word in the body copy."
+/>
+
+<Figure
+  src={base + "figures/claude-design-edit-badge.webp"}
+  alt="The spots-available badge selected, with the same toolbar open above it and an exclamation mark added to its text."
+  caption="The words inside the badge."
+/>
+
+<Figure
+  src={base + "figures/claude-design-edit-date.webp"}
+  alt="The date at the foot of the flier selected, with the toolbar open above it and the date typed in a different format."
+  caption="The date, typed in another format."
+/>
+
+> The text is live text. So are the colours, the type and the spacing. Nothing is baked into a
+> picture.
+
+That matters for a reason you will feel immediately: a poster you cannot edit is a poster you have
+to regenerate, and regenerating means everything else moves too. A date changes. One always does.
+
+> And it remembers your other projects, which is how a group ends up with a house style it actually
+> keeps to, without anyone policing it.
+
+You spend the effort once, on the design, and after that a new poster is "make this one, in the
+design of that one".
+
+The honest caveat: it is very good at layout and typography, and it is not a designer. You are still
+the one who decides it is finished. And the general lesson under all of this is the third piece of
+advice: **before you try to make a general chat do a job, look for the tool that was built for it.**
+
+## It plugs into other systems, and there are hundreds
+
+That is the second way, and it is the one that matters most for your actual work. There will never
+be a purpose-built tool for your particular corner of pharmacy. So the other route is to take the
+ordinary chat you already use, and plug into it exactly the capabilities your work needs.
+
+The name matters, because the name is what you have to search for. In ChatGPT these are called
+**apps**. In Claude they are called **connectors**. Underneath both is one open standard, **MCP**,
+now under the Linux Foundation, with OpenAI and Microsoft supporting it too. Write the connector
+once and every agent can use it, which is why there are already hundreds.
+
+<Figure
+  src={base + "figures/connectors-hub.svg"}
+  alt="The agent as a tall column in the middle. Five kinds of connector feed into it from the left: the published record, structured databases, computation, model hubs, and your own files. Three lead out of it to the right: your record, what it makes, and the outside world."
+  plate
+  caption="Apps in ChatGPT, connectors in Claude. Eight kinds, so you can map your own tools onto them."
+/>
+
+The left and right of this picture is the whole point. Everything on the left only ever **informs**
+it: after the query, the world is exactly as it was. Everything on the right lets it **act**: after
+one of those, something out there is different. That is not a category, it is an observable fact
+about what got left behind.
+
+Everything on the left makes it better informed. Everything on the right makes it accountable, to
+you.
+
+One thing to say out loud: the chemistry connectors are community-built wrappers around the public
+APIs, not official products of the databases. They work, and you check what you plug in, the same as
+any tool. Business connectors exist too, and they are the same eight shapes pointed at different
+systems rather than new kinds.
+
+### Four: before you struggle, check whether a connector already exists
+
+The mistake is not that people fail to use connectors. It is that they struggle through the job by
+hand first, pasting tables in, copying numbers out, describing a paper they could have handed over,
+and only afterwards find out that the thing they needed already existed and took two minutes to
+switch on.
+
+So make it a reflex, before the struggle rather than after it. Three places to look:
+
+- **In the app.** Both ChatGPT and Claude have a directory you can browse.
+- **In a registry.** There is a public list of MCP servers, and most vendors keep their own.
+- **Ask it.** It knows its own tool list, so this answer is one you can trust in a way that asking
+  it for facts is not.
+
+Then the honest limit: what you plug in is yours to check, the same as any other tool you would put
+in a method.
+
+## Today a connector is a website. It does not have to be.
+
+Today a connector is a website. A database, a search engine, a notebook, a repository. There is
+nothing in the idea that says it has to be.
+
+<Figure
+  src={base + "figures/connectors-future.svg"}
+  alt="The same agent column, with four laboratory instruments plugged into it inside a dashed outline marked your building: the plate reader, a purification station, the synthesiser and the freezer inventory. One two-way line crosses the outline to a laboratory somewhere else, marked pay by the run."
+  plate
+/>
+
+Picture your own building. One connector per instrument. One per assay. One per part of the lab. The
+plate reader. The purification station. The synthesiser. The freezer inventory. The agent stops
+being a thing you chat to and becomes the one place that coordinates the whole of it.
+
+Then the line that leaves the building, which is the genuinely new part. What your building has not
+got, you connect to a building that has. You do not own the instrument. You reach it, and you pay by
+the run.
+
+This is not a thought experiment. The same Ginkgo Bioworks whose lab is further up this page opened
+exactly this to outside groups in March 2026: over seventy instruments reachable from a browser,
+where you submit a protocol in plain language and get back a price for running it. Emerald Cloud Lab
+has worked this way for years. There are people building the business model right now.
+
+And one more line for the design tool: you can plug those same connectors into it, so a poster or a
+figure is built from your real numbers rather than from numbers you typed in again.
+
+None of that needs a new idea. It needs the connectors to be written.
+
+## The same loop, around a whole project
+
+This is the one to slow down on. Everything so far has been pieces: how to ask, which tool, what to
+plug in. This is what a whole project looks like when all of it is connected, and it is the same
+loop you saw at the very beginning, drawn around a project instead of around a single task.
+
+This is the finished version. Not a demo, not next year's roadmap. The way this works end to end.
+
+<Figure
+  src={base + "figures/project-loop.svg"}
+  alt="Four stations in a row, joined left to right, with a return running back underneath them. What is known, drawn from every run you have done including the failures and from the literature. The protocol to try, marked options you pick one, holding options drawn from both with the case for and against each. Make and measure, holding automated synthesis, purification and characterisation. And the result, read, analysed and written into your notebook. From there a fork asks whether it is good enough: you choose to stop, or to go round again with one more run in it."
+  plate
+/>
+
+- **What is known.** Not what you remember: every run you have ever done, including the ones that
+failed, which are the ones nobody ever goes back and reads. Plus the literature, searched properly,
+as a corpus.
+- **The protocol to try.** This is the teal box, and it is the important one. It does not hand you
+  one protocol. It looks at your own past trials and at the literature and gives you options, each
+  with the case for it and the case against it. And you pick the one to run.
+- **Make and measure.** Automated synthesis, purification, characterisation. In this picture that is
+  a connector like any other: the platform does it and hands the numbers back.
+- **The result**, read and analysed, and written into your electronic notebook as it happens rather
+than three weeks later from memory.
+
+Then the fork, which is the point of the whole picture. Is it good enough? You choose. Either you
+stop, or you go round again, back to what is known, now with one more run in it.
+
+So there are exactly two places on that diagram where a person acts, and they are the two teal
+marks: which option to run, and when to stop. Everything else the system does.
+
+And now the aside. Look at that loop again and count what you cannot do this afternoon. **One box.**
+Make and measure. Everything else on that picture works today with the things I have shown you. You
+just walk to the bench yourself in the middle of it.
+
+So start now, and here is the honest reason why. Not because it saves you a morning, though it will.
+Because the day that box goes too, and you have seen how close it is, the jump will be nothing to
+you. You will already know how to brief one of these, how to give it a finish line, what to plug
+into it, and how to tell when it is wrong. The people who start when the platform arrives will be
+learning both at once. You get to learn the hard half now, on the part that already works.
+
+## Five: and if none of that fixes it, teach it
+
+<Figure
+  src={base + "figures/advice-outline-3.svg"}
+  alt="Three stacked bands read from the bottom up, with an arrow up the side marked still not right, go up. How you ask, holding give it a finish line it can check and brief it like a colleague. Reach for the right tool, holding use the tool that already has it and plug in what it needs to reach. And at the top, picked out in teal, teach it, either with one instruction or with a written skill."
+  plate
+/>
+
+Up the ladder from the bottom: give it a finish line, brief it properly, use the tool that already
+has the capability, plug in what it needs to reach. Then the new one, at the top. If none of that
+fixes it, teach it.
+
+The easy version, and everybody can do this today. Whenever you notice it getting the same thing
+wrong, do not correct it again in the next message, because that correction dies with the
+conversation. Write the rule into its instructions, once, and it stops. Mine says things like which
+spelling to use, and never to invent a citation.
+
+The bigger version, for something that is a procedure rather than a preference: write it a skill. A
+skill is a page of instructions it opens only when the job needs it, so you can teach it something
+long and detailed without that sitting in every conversation you ever have. If your group has a way
+of doing a particular analysis, that is a skill, and once it is written everybody in the group has
+it.
+
+None of the five is technical. They are all about being clear with it, and about not accepting a bad
+job.
+
+## The two that do not go out of date
+
+Everything between the mindset changes and here was the ladder: how you ask, reaching for the right
+tool, teaching it. All five of those only matter if you refuse to accept a bad job in the first
+place. It is a bad tool right up until you make it a good one, and making it a good one is your job.
+
+And the one I would keep if I could only keep one. Everything in that hour goes out of date. This
+does not. Whenever you feel a barrier, ask an agentic model what could be done about it, at the
+moment you feel it. Either you are surprised, or you understand your own problem better. There is no
+third outcome.
+
+Never accept a situation you find suboptimal. Everything can always get better, and the only
+question is whether you asked.
+
+## Come and talk to me about it
+
+These questions are a daily part of my life. I think about them, I argue about them, and I am
+genuinely happy to talk about them with anybody who wants to.
+
+<Figure
+  src={base + "figures/talking-afterwards.webp"}
+  alt="Sofiene standing with two colleagues over coffee in the bright glass atrium of a university building, talking with an open hand while they listen."
+/>
+
+So come and find me, in person or by mail, whenever you like. If you want to work out what this
+would mean for your particular project, that conversation is far more useful than anything I could
+have put on a slide, because it can be about your actual work. And the specific offer, because a
+general invitation gets taken up by nobody and a specific one gets taken up: if you want to sit down
+and set one of these up properly for your own work, ask me. That is an hour, and it is an hour that
+changes your next year.
+
+## Now you do
+
+You are already living in an agentic world. That was the title, and the title said you just do not
+know it yet. Now you do. That is the whole talk.
+
+The tools will keep changing and the mindset will not, so start now, on something small, this week.
+
+<Figure
+  src={base + "figures/hands-free-close.webp"}
+  alt="Four small mint-green robots work together on the left of an office, carrying boxes, sorting folders and working at a computer; on the right a man stands with his hands free, holding three glowing cards."
+/>
+
+<SceneEngine
+  base={base}
+/>

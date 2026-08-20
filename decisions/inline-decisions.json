@@ -946,6 +946,120 @@
       "why": "",
       "endorsed": true,
       "note": "Recorded in three places because losing the file fails silently and expensively: the design spec's build section, a hard rule in CLAUDE.md, and here. The rule now also says that after any deploy the /_astro/*.css URL must be fetched and checked for 200, since a 200 on the page proves nothing. That is precisely the check that was missing."
+    },
+    "D-52": {
+      "question": "The deck plays three clips. How should they appear in the write-up?",
+      "asked": "2026-08-20",
+      "context": "The Summer School 2026 deck plays three video clips: a Ginkgo Bioworks lab tour taken from ginkgo.bio (111 MB, which is over GitHub's 100 MB per-file limit anyway), an extract from a YouTube short by The Rundown AI showing ETH Zurich's ORCA hand (19 MB), and his own 19-second screen recording of Claude Design (642 KB). Playing borrowed footage in a lecture theatre and hosting a copy of it on his own domain are different acts, so this was surfaced rather than defaulted.",
+      "options": {
+        "link-out": {
+          "label": "Still plus credit plus a link to the source for the two borrowed clips; embed his own recording.",
+          "casesFor": [
+            "Keeps somebody else's footage off his domain",
+            "The Ginkgo file could not be committed at all",
+            "The deck already carried both credit lines, so nothing is invented"
+          ],
+          "casesAgainst": [
+            "A reader has to leave the page to see two of the three"
+          ]
+        },
+        "self-host": {
+          "label": "Re-encode and serve all three from sofk.ch.",
+          "casesFor": [
+            "Everything plays in place"
+          ],
+          "casesAgainst": [
+            "Republishes two clips he does not own",
+            "Ginkgo would need heavy compression to fit under the file limit"
+          ]
+        },
+        "stills-only": {
+          "label": "Stills and links for all three, including his own recording.",
+          "casesFor": [
+            "One rule, no exceptions"
+          ],
+          "casesAgainst": [
+            "Costs nothing to embed footage that is his"
+          ]
+        }
+      },
+      "choice": "link-out",
+      "label": "Link out for the two borrowed ones",
+      "why": "",
+      "endorsed": true,
+      "note": "The Claude Design .mov was remuxed to MP4 with faststart so the index sits at the front of the file, and its first frame became the poster. Both link-outs were fetched and return 200."
+    },
+    "D-53": {
+      "question": "Should the Idorsia flier screenshots be published as they are?",
+      "asked": "2026-08-20",
+      "context": "The Claude Design demonstration in the deck is a flier he generated for an Industry Day at Idorsia. It carries the University of Basel and Idorsia marks, a date, an address in Allschwil, a 30 spots available badge and a scannable registration QR code. Shown in a room with him saying it is a demo it reads as a demo; indexed on a public page, a reader meeting the image out of context could take it for a real announcement.",
+      "options": {
+        "as-is": {
+          "label": "Publish as-is, with the prose saying plainly that it is a demonstration.",
+          "casesFor": [
+            "The section's whole point is that nothing was mocked up",
+            "The surrounding prose carries the context"
+          ],
+          "casesAgainst": [
+            "The QR code stays scannable",
+            "An image lifted out of the page loses its framing"
+          ]
+        },
+        "no-qr": {
+          "label": "Same screenshots with the QR code painted out.",
+          "casesFor": [
+            "Nothing on the page is scannable"
+          ],
+          "casesAgainst": [
+            "Alters an artefact presented as unaltered"
+          ]
+        },
+        "words-only": {
+          "label": "Describe the demonstration without showing the flier.",
+          "casesFor": [
+            "No artefact to misread"
+          ],
+          "casesAgainst": [
+            "Costs the section most of its force"
+          ]
+        }
+      },
+      "choice": "as-is",
+      "label": "As-is, framed as a demonstration",
+      "why": "",
+      "endorsed": true,
+      "note": "The figure carries the caption 'A demonstration, not a real event. The flier was generated for this talk.'"
+    },
+    "D-54": {
+      "question": "He told the room the whole deck would go up. Should the PDF be linked too?",
+      "asked": "2026-08-20",
+      "context": "The closing slide promised the room that the deck would go on his website within the week, with every link on it live. The write-up carries every figure and every link, and talk.pdf is an 8.9 MB file that could sit in public/ alongside it. D-19 says talks are articles rather than published slides, which the write-up satisfies either way.",
+      "options": {
+        "link-pdf": {
+          "label": "Put talk.pdf in public/ and offer it as one line at the end of the write-up.",
+          "casesFor": [
+            "Literally honours what he said from the stage"
+          ],
+          "casesAgainst": [
+            "8.9 MB in the repository for something the page already contains"
+          ]
+        },
+        "no-pdf": {
+          "label": "The write-up is the deck.",
+          "casesFor": [
+            "Every visual and every link is already on the page",
+            "Nothing to keep in step with the article"
+          ],
+          "casesAgainst": [
+            "Somebody who wanted the slides themselves does not get them"
+          ]
+        }
+      },
+      "choice": "no-pdf",
+      "label": "No PDF, the write-up is the deck",
+      "why": "",
+      "endorsed": true,
+      "note": ""
     }
   }
 }
