@@ -37,15 +37,24 @@ npm run preview  # serve the built output exactly as Pages will
 ## Decisions
 
 `decisions/` holds the record of every choice that settled how this site works, and it is
-authoritative. Thirty-nine decisions (D-01 to D-39) govern the current design. D-01 to D-28 are in
+authoritative. Forty-three decisions (D-01 to D-43) govern the current design. D-01 to D-28 are in
 the served-round files (`round-N.def.json` plus `round-N.answers.json`); D-29 onward are inline
 rulings in `inline-decisions.json`. The two formats coexist and both are committed (D-43): the round
 files are frozen history, and everything since D-29 goes in the inline file.
 
-Any choice with a defensible why goes through a new round before it is written into code: a
-framework or library, a data format, published URLs, what the site says about him, anything he
-could be asked to justify. Follow the `decision-ownership` skill. Do not settle such a choice in
-chat, and do not implement one and mention it afterwards.
+**D-42 tunes the boundary for this repository's front-end work.** Technical implementation detail is
+Claude's to decide: CSS technique, browser-support tradeoffs, accessibility implementation, orphan
+and dead-code cleanup, file structure, build tooling, and spec clauses that only describe how an
+already-agreed design is realised. He specifies the effects he wants, in his words: "These are all
+details I don't care about. I will focus mostly on the effects I want to see; for the details of
+that, implement what you think would work best."
+
+Still his, and surfaced before it is written into code: all copy (D-26), the visual design direction
+and register, what content exists and what is published, privacy and what is exposed (D-37),
+anything he could be asked to justify to a person, and anything that changes an effect he would
+notice and did not ask for. Follow the `decision-ownership` skill for those.
+
+Decisions are made inline in chat, not in served rounds; D-203 retired those.
 
 To read the record: `decisions/round-N.answers.json` carries the question, the choice and his
 reason; `round-N.def.json` is the full round.
