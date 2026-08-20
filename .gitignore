@@ -18,3 +18,9 @@ dist/
 
 # Per-folder lock held by a running decision-round server.
 .ldo-serve.lock
+
+# Local design exploration mockups, not part of the site
+design-explorations/
+
+# Playwright MCP scratch output (screenshots, snapshots)
+.playwright-mcp/

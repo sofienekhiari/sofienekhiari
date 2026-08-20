@@ -29,12 +29,18 @@ npm run preview  # serve the built output exactly as Pages will
   *is* publishing: `main` deploys straight to sofk.ch through GitHub Pages, and `README.md` is
   rendered on his public GitHub profile. There is no staging environment and no review step between
   a push and the live site. Authorization for one push never carries to the next.
-- **Commit only when asked**, and stage named files rather than everything.
+- **Commit as work reaches a coherent state** (D-38), staging named files rather than
+  everything. A small, finished piece of work is itself a standing request to commit; you need
+  not wait to be asked. This does not soften the rule above: committing is not publishing, and
+  pushing still requires explicit authorization every single time.
 
 ## Decisions
 
-`decisions/` holds the served decision rounds that settled how this site works, and it is the
-authoritative record. Twenty-five decisions (D-01 to D-25) govern the current build.
+`decisions/` holds the record of every choice that settled how this site works, and it is
+authoritative. Thirty-nine decisions (D-01 to D-39) govern the current design. D-01 to D-28 are in
+the served-round files (`round-N.def.json` plus `round-N.answers.json`); D-29 onward are inline
+rulings in `inline-decisions.json`. Whether those two formats are merged is itself an open question,
+so that file is deliberately uncommitted.
 
 Any choice with a defensible why goes through a new round before it is written into code: a
 framework or library, a data format, published URLs, what the site says about him, anything he
@@ -50,11 +56,14 @@ reason; `round-N.def.json` is the full round.
 src/data/         profile.ts (the single bio source), experience.ts (the timeline)
 src/content/      talks/ and publications/ collections, schemas in src/content.config.ts
 src/layouts/      Base.astro, the shell every page uses
-src/components/   Timeline.astro, the site's signature element
+src/components/   shared pieces used by the pages
 src/pages/        index, publications, talks/, and llms.txt.ts
 scripts/          write-profile-readme.ts, run after every build
 public/           copied verbatim into docs/: CNAME, images, favicon, assets/documents
 decisions/        the decision record, not part of the site
 ```
 
-Design and architecture detail loads from `.claude/rules/` when the relevant files are opened.
+**The design is specified in `.claude/rules/website-design.md`**, which loads automatically whenever
+`src/**`, `astro.config.mjs` or `public/**` is opened. It carries the exact tokens, type scale,
+spacing and component anatomy. Check a value there before changing it; if the code and that file
+disagree, the code is wrong unless a decision says otherwise.

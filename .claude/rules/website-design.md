@@ -5,104 +5,389 @@ paths:
   - "public/**"
 ---
 
-# Design and architecture, sofk.ch
+# sofk.ch design specification
 
-Everything here was settled in the decision rounds in `decisions/`. The decision id is given so the
-reasoning can be read rather than guessed at. **None of it may be changed without a new round.**
+**This file is the design.** It loads automatically whenever site source is opened, and it exists so
+that no edit quietly changes how the site looks. Before changing any visual value, check it here. If
+a value in the code disagrees with a value here, the code is wrong unless a decision says otherwise.
 
-## What the site is
+The design is **R4 Typed** (D-32): Hugo PaperMod's structure and layout, carrying Manrope instead of
+PaperMod's system font stack, on a slightly warm ground. The reference the design descends from is
+<https://adityatelange.github.io/hugo-PaperMod/>.
 
-Three pages (D-03). The home page carries the bio and the experience timeline together, because the
-bio makes a claim and the timeline is its evidence. Publications and Talks each have their own page.
+**Nothing here may be changed without a new decision.** Decision ids are given so the reasoning can
+be read rather than guessed at. Follow the `decision-ownership` skill.
 
-There is no Skills section, deliberately. It was removed at Sofiene's instruction: the work is meant
-to show the skills.
+---
+
+## 1. What the site is
+
+Three pages (D-03, reaffirmed by D-33 after the move to a blog-shaped design):
+
+| Route | Carries |
+|---|---|
+| `/` | Profile block, the bio, and the experience and education list |
+| `/publications/` | The publications list |
+| `/talks/` | The talks list, with `/talks/<slug>/` for each written-up talk |
+
+The home page carries the bio and the career history together, because the bio makes a claim and the
+history is its evidence. Splitting them separates the two halves of one argument.
+
+There is **no Skills section**, deliberately, at Sofiene's instruction: the work shows the skills.
 
 Written for a general professional reader (D-04), neither an academic nor a recruiter specifically.
-That is why the register stays plain and nothing assumes domain knowledge.
+The register stays plain and nothing assumes domain knowledge.
 
-## The visual identity (D-05, D-16, D-17)
+**Talks are written articles, not slides** (D-19). A talk write-up makes the talk's argument in prose
+and pulls in only figures that carry real information. Never publish a deck as images.
 
-- **Layout is direction A, "Ledger"**: a sticky left rail holding identity, navigation and contact
-  details, with content scrolling beside it. Below 1024px the rail becomes an ordinary header.
-- **Teal `#008080` light, `#4dd0d0` dark**, is the accent, preserved from the previous site. It is
-  the one element people recognise. Amber marks academic timeline entries, teal professional ones.
-- **Inter carries every role**, including headings. There is deliberately no display typeface, so
-  hierarchy comes from weight, scale and spacing. JetBrains Mono is for hashes, dates and
-  command-line fragments only.
-- Both faces come from the **Google Fonts CDN** (D-28), loaded via a `<link>` and two preconnects in
-  the head of `Base.astro`. Never move that back into a CSS `@import`: an import makes the browser
-  fetch the CSS, parse it, and only then request the fonts. Self-hosting was considered and ruled
-  against, so do not reintroduce it either. Because the fonts are third-party, the system fallback
-  stack in `--font-sans` and `--font-mono` is load-bearing rather than decorative.
-- Tokens live in `@theme` in `src/styles/global.css` (D-21). Use the named Tailwind utilities they
-  generate (`text-accent`, `bg-surface`, `border-line`). Never write a raw hex value in markup.
+---
 
-- The favicon is an **SK monogram**, white on teal (D-27), drawn as SVG text with a system font
-  stack because a favicon cannot wait for a webfont.
+## 2. Design tokens
 
-Sofiene left one thing deliberately open: whether a display typeface and a bolder register earn
-their place once the built site can be judged. If that comes up, it is a new round that supersedes
-D-16, not a reinterpretation of it.
+These are the design. They belong in `@theme` in `src/styles/global.css` (D-21) and must match this
+table exactly. Never write a raw hex value in markup; use the named Tailwind utilities the theme
+generates.
 
-## Copy
+**Naming.** Tailwind only generates colour utilities from names in its `--color-*` namespace, so each
+token below is registered in `@theme` with that prefix: `--border` here is `--color-border` in the
+code, and the utility is `border-border`. The prefix is a Tailwind requirement, not a design
+decision. The metrics further down carry no prefix, because they are one-off structural values
+rather than scales needing a utility each.
 
-The bio is his. The four shorter strings that were not in the original bio, the one-sentence
-`summary` in `profile.ts` and the three page subtitles, were drafted by Claude and he approved them
-as they stand (D-26). Treat them as his words now: change them only on his say-so.
+### Light (default)
+
+| Token | Value | Used for |
+|---|---|---|
+| `--theme` | `#fdfdfb` | Page background. Warm off-white, not pure white. |
+| `--entry` | `#ffffff` | Raised surfaces, if any are ever introduced. |
+| `--primary` | `#1b1d1f` | Headings, entry titles, body emphasis. |
+| `--secondary` | `#697077` | Meta lines, summaries, subtitle, footer. |
+| `--tertiary` | `#eaeae5` | Button and tag backgrounds. |
+| `--content` | `#25282a` | Long-form prose paragraphs. |
+| `--border` | `#eaeae4` | All hairlines and separators. |
+| `--accent` | `#00706b` | Links on hover, active nav, draft badge, current role. |
+| `--tint` | `rgb(0 112 107 / .09)` | Draft badge background only. |
+
+### Dark (system preference)
+
+| Token | Value |
+|---|---|
+| `--theme` | `#15171a` |
+| `--entry` | `#1d2023` |
+| `--primary` | `#e6e8ea` |
+| `--secondary` | `#959ba1` |
+| `--tertiary` | `#282c30` |
+| `--content` | `#c5c9cc` |
+| `--border` | `#252a2e` |
+| `--accent` | `#4fd6ca` |
+| `--tint` | `rgb(79 214 202 / .11)` |
+
+Dark is delivered by `@media (prefers-color-scheme: dark)` only. There is **no theme toggle**,
+because a toggle needs JavaScript and the no-JS floor in section 7 comes first. Adding one is a new
+decision, not an implementation detail.
+
+**On a filled accent surface, text is `#ffffff` in light and `#062421` in dark.** Never white on the
+dark-mode accent; it fails contrast.
+
+### Metrics
+
+| Token | Value |
+|---|---|
+| `--gap` | `24px` |
+| `--content-gap` | `20px` |
+| `--nav-width` | `1024px` |
+| `--main-width` | `720px` |
+| `--header-height` | `60px` |
+| `--radius` | `8px` |
+
+The nav is wider than the content column. That mismatch is deliberate and inherited from PaperMod:
+the header spans 1024px while the reading column stays at 720px.
+
+---
+
+## 3. Typography
+
+**Manrope carries every role** (D-32, superseding D-16). There is no second family in the interface,
+and the one exception for rendered code is stated below. Hierarchy comes from weight, size and
+letter-spacing.
+
+```
+--font: "Manrope", system-ui, -apple-system, sans-serif;
+```
+
+Delivered from the Google Fonts CDN (D-28, which ruled the delivery method and now applies to
+Manrope), via a `<link>` plus two preconnects in the `<head>` of `Base.astro`. Never move this into a
+CSS `@import`: an import makes the browser fetch the CSS, parse it, and only then request the font.
+Self-hosting was considered and ruled against. Because the font is third-party, the system fallback
+stack is load-bearing rather than decorative.
+
+Weights used: 400, 500, 600, 700, 800. Do not add others without checking the CDN request.
+
+**One exception to "no second family".** Rendered markdown `code` and `pre` use the system monospace
+stack (`ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace`) at `0.86em`. Code in a
+proportional face is not readable, and the system stack costs no extra font request. This applies to
+markdown bodies only; no UI element uses a monospace.
+
+| Element | Size | Weight | Tracking | Line height |
+|---|---|---|---|---|
+| `body` | `17.5px` | 400 | normal | `1.65` |
+| Profile `h1` | `42px` | 800 | `-.04em` | `1.14` |
+| Page `h1` (inner pages) | `30px` | 800 | `-.035em` | `1.2` |
+| Profile subtitle | `18px` | 500 | normal | inherit |
+| Profile blurb | `16px` | 400 | normal | `1.6` |
+| Section `h2` | `20px` | 700 | `-.025em` | inherit |
+| Entry title `h2` | `23px` | 700 | `-.03em` | `1.32` |
+| Entry meta | `14px` | 500 | normal | inherit |
+| Entry summary | `16px` | 400 | normal | `1.62` |
+| Prose `p` | `16.5px` | 400 | normal | inherit |
+| Nav logo | `22px` | 700 | `-.03em` | inherit |
+| Nav link | `15.5px` | 500 | normal | inherit |
+| Tag pill | `12.5px` | 500 | normal | inherit |
+| Draft badge | `12.5px` | 600 | `0` | inherit |
+| CV period | `13.5px` | 500 | normal | inherit |
+| CV role | `16px` | 600 | `-.015em` | inherit |
+| CV organisation | `14px` | 400 | `0` | inherit |
+| Footer | `12.5px` | 500 | normal | `24px` |
+
+Sizes are in pixels because they are inherited from PaperMod, which is built that way. Keep them in
+pixels rather than converting to `rem`, so this table stays checkable against the code.
+
+---
+
+## 4. Component anatomy
+
+### Header
+
+Full width, background `--theme`. Inner `.nav` is `max-width: calc(var(--nav-width) + var(--gap)*2)`,
+centred, `padding: 10px var(--gap)`, `line-height: var(--header-height)`, flex with
+`justify-content: space-between` and `flex-wrap: wrap`.
+
+- **Left:** avatar at `34px` circle, `object-fit: cover`, then the name. Gap `9px`.
+- **Right:** the menu, a flat `<ul>`, items separated by `margin-inline-start: var(--gap)`. It reads
+  **Talks, Publications, Contact** (D-35, amended by D-39). There is no About item: the bio lives on
+  the home page and the site name on the left already goes there.
+- Menu links sit at `--secondary` and go to `--primary` on hover.
+- Each link's label is wrapped in a `<span>` carrying `border-bottom: 2px solid transparent`, which
+  becomes `--accent` on hover. The current page's item keeps that border permanently.
+
+### Profile block (home only)
+
+Flex column, centred, `min-height: 74vh`, `justify-content: center`, `padding-bottom: 40px`.
+
+Order: avatar `150px` circle with `margin-bottom: var(--gap)`, then `h1`, then the subtitle, then the
+blurb at `max-width: 56ch` and `margin-top: 16px`, then the button row at `margin-top: calc(var(--gap)*1.2)`.
+
+The subtitle contains exactly one emphasised span, set in `--accent` at weight 600.
+
+`74vh` rather than a full viewport is deliberate: it leaves the first section heading visible at the
+fold, so a visitor sees that there is content below.
+
+### Buttons
+
+`background: var(--tertiary)`, `border-radius: 999px`, `padding: 7px 16px`, gap `12px` between them.
+On hover the background becomes `--accent` with the on-accent text colour from section 2. On
+`:active`, `transform: scale(.96)`. Full pill radius is the rule for buttons and tags; `--radius`
+(8px) is for larger surfaces. Do not mix the two on the same element class.
+
+### Section heading
+
+`h2.section`, `margin: calc(var(--gap)*2) 0 var(--gap)`. No rule, no eyebrow, no section number.
+
+### Post entry
+
+The signature element of the list. A block-level `<a>` wrapping the whole entry, so the entire row is
+one click target and one tab stop.
+
+```
+margin-bottom:  calc(var(--gap)*1.5)
+padding-bottom: calc(var(--gap)*1.15)
+border-bottom:  1px solid var(--border)   /* removed on :last-of-type */
+```
+
+Inside, in order:
+
+1. `h2` title. Turns `--accent` when the entry is hovered.
+2. `.entry-meta`, a single line of facts separated by a middle dot with non-breaking spaces either
+   side: `May 2026 · Preprint · arXiv`.
+3. `.entry-content`, the summary or the author list.
+4. `.entry-tags`, optional, `margin-top: 13px`, gap `7px`.
+
+**Entries are plain rows, never cards.** No background, no shadow, no border box. Card entries were
+built as R1 and not chosen.
+
+**No reading-time meta.** PaperMod shows `Date · N min · Author`. The slot is deliberately empty
+because a minute count must be computed from real content, never invented. If reading time is ever
+wanted, it is computed at build time from the rendered body.
+
+### Tag pill
+
+`font-size: 12.5px`, weight 500, `color: var(--secondary)`, `background: var(--tertiary)`,
+`border-radius: 999px`, `padding: 3px 10px`.
+
+### Draft badge
+
+`font-size: 12.5px`, weight 600, `color: var(--accent)`, `background: var(--tint)`,
+`border-radius: 999px`, `padding: 2px 9px`, `margin-inline-start: 9px`, `vertical-align: 3px`,
+`letter-spacing: 0`. Sits inline inside the entry title.
+
+### Experience and education list
+
+A `<ul>` with `list-style: none`. Each `<li>` is
+`grid-template-columns: 180px minmax(0, 1fr)` with `gap: var(--gap)`, `padding: 11px 0`, and a
+`--border` bottom rule that is removed on the last item.
+
+- Left column: the period, `13.5px`, weight 500, `--secondary`.
+- Right column: the role at `16px` weight 600, then the organisation in a `<small>` set to `display: block`,
+  `14px`, weight 400, `--secondary`, `margin-top: 2px`.
+- The current role carries `.now`, which sets its period to `--accent`.
+- Below `640px` the grid collapses to one column with `gap: 2px`.
+
+**Each entry is a native `<details>`.** That is not incidental: D-07 requires the detail to open with
+JavaScript off, and `<details>` is the only element giving that for free. The row above is the
+`<summary>`, plus a `+` marker at the end that rotates 45 degrees and turns `--accent` when open. The
+detail is indented by `calc(180px + var(--gap))` so it aligns under the role column, and that indent
+is removed below `640px`.
+
+**No document links.** D-37 removed them, superseding D-22. Do not render `entry.documents` without a
+new decision from Sofiene.
+
+### Footer
+
+Same `max-width` as the main column, `margin-top: calc(var(--gap)*2)`,
+`padding: 20px var(--gap) 40px`, centred text, `border-top: 1px solid var(--border)`.
+
+---
+
+## 5. Layout
+
+`main` is `max-width: calc(var(--main-width) + var(--gap)*2)`, centred, with
+`padding: calc(var(--gap)*1.5) var(--gap)`.
+
+`html` carries `scroll-padding-top: 80px` so in-page anchors clear the header,
+`scroll-behavior: smooth`, and **`scrollbar-gutter: stable`**.
+
+The gutter is not cosmetic. Without it a scrolling page is 15px narrower than a short one, and
+because the header is centred its contents shift by half that: the name and avatar visibly jumped
+between the home page, which scrolls, and Talks, which does not. Reserving the gutter everywhere
+costs a thin empty strip on short pages and removes the jump. Do not remove it.
+
+Breakpoints in use: `640px` (CV list collapses) and `560px` where a row needs to stack. Do not
+introduce a new breakpoint without checking whether an existing one serves.
+
+---
+
+## 6. Motion
+
+Restrained by design. Permitted: colour transitions on hover and focus, the `scale(.96)` press on
+buttons, and Astro view transitions between pages.
+
+Forbidden: anything that reveals hidden content, scroll-driven reveals, parallax, marquees, and any
+animation that does not collapse under `prefers-reduced-motion`.
+
+Every stylesheet ends with the blanket override:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
+
+---
+
+## 7. Invariants
+
+These hold regardless of what any future edit is trying to achieve.
+
+- **Every word is readable with JavaScript disabled** (D-07). Never hide content behind a class a
+  script adds later. This is why there is no theme toggle and why disclosure uses native `<details>`.
+- **Everything interactive works from the keyboard**, with a visible focus ring:
+  `outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px` on `:focus-visible`.
+- **No em-dashes or en-dashes anywhere**, in code, content, commits or UI copy. Use a hyphen, a
+  comma, or two sentences. No exceptions. The separator in meta lines is a middle dot, not a dash.
+- **Contrast:** body text meets WCAG AA (4.5:1). Check any new colour pairing before shipping it,
+  especially text on `--accent`.
+- **One accent, used consistently.** No second accent colour anywhere on the site.
+
+---
+
+## 8. Content sources
+
+- **Bio:** `src/data/profile.ts`, the single source (D-12). The home page, `llms.txt` and the profile
+  `README.md` all derive from it. Stored as plain text with no markup, because it serves all three.
+- **Experience:** `src/data/experience.ts`. Dates are the ones D-11 confirmed correct: the PhD begins
+  January 2025, the MSc ran to December 2024. There is no freelance developer entry (D-10).
+  **The git-log metaphor and its invented commit hashes are retired** (D-30, confirming D-06 and
+  D-14). This is a plain chronological list now. Do not reintroduce the hashes.
+- **Publications and talks:** content collections (D-25), one markdown file each. Adding either means
+  creating a file, never editing TypeScript.
+- **Degree documents are not linked from anywhere** (D-37, superseding D-22). Sofiene is undecided
+  about publishing his diplomas and a full transcript. The `documents` data stays in
+  `experience.ts` so the links can be restored in one block of markup, but nothing renders it.
+  **Unlinking is not unpublishing:** the six PDFs still sit in `public/assets/documents/` and are
+  copied into `docs/`, so they remain fetchable at their original URLs, which were live on the
+  previous site. Whether to stop serving them is a separate open question, listed in section 11.
+- **The favicon** is an SK monogram, white on teal (D-27), drawn as SVG text with a system font stack
+  because a favicon cannot wait for a webfont. Note it predates the Manrope ruling and still carries
+  the old teal.
+
+### Copy
+
+The bio is his. The one-sentence `summary` in `profile.ts` and the page subtitles were drafted by
+Claude and approved as they stand (D-26). Treat them as his words: change them only on his say-so.
 
 **One gap is deliberate.** The publications page has no closing line pointing at a full record. An
 earlier draft claimed GitHub held one, which is false, so it was removed. When he supplies an ORCID,
 Google Scholar or institutional link, that is what goes there.
 
-## The timeline is the signature element (D-06, D-14, D-18)
+---
 
-`src/components/Timeline.astro` renders the career history as a git commit graph. It is the thing
-the site is remembered by, so the rest of the design stays quiet around it.
-
-- The seven-character commit hashes are **invented and stay that way** (D-14). They are stable
-  literals in `src/data/experience.ts`, never generated, so a rebuild cannot churn them.
-- Each entry is a native `<details>`. That is not incidental: the previous version used clickable
-  `<article>` elements with no tabindex, making all nine detail views unreachable by keyboard.
-- The spine draws itself on scroll using CSS scroll-driven animation. It animates a line that is
-  already fully present, so an unsupporting browser shows the finished line and nothing is lost.
-- All graph geometry derives from the `--lane-main`, `--lane-branch` and `--node` variables in that
-  component. Positioning nodes independently is what previously made the node's opaque ring paint
-  over the first characters of every hash.
-
-## Motion (D-18)
-
-Choreographed, but within the progressive-enhancement floor. Permitted: hover and focus transitions,
-Astro view transitions between pages, and scroll-driven animation of already-visible elements.
-Forbidden: anything that reveals hidden content, and any animation that does not collapse under
-`prefers-reduced-motion`.
-
-## Content sources
-
-- **Bio**: `src/data/profile.ts`, the single source (D-12). The hero, `llms.txt` and `README.md` all
-  derive from it. Stored as plain text with no markup, because it must serve all three.
-- **Experience**: `src/data/experience.ts`. Dates are the ones D-11 confirmed correct: the PhD begins
-  January 2025, the MSc ran to December 2024. There is no freelance developer entry (D-10).
-- **Publications and talks**: content collections (D-25), one markdown file each. Adding either means
-  creating a file, never editing TypeScript.
-- **Talks are written articles, not slides** (D-19). A talk write-up is prose making the talk's
-  argument, pulling in only figures that carry real information. Never publish a deck as images.
-- **Degree documents** are published and linked from their timeline entry (D-22). Paths under
-  `/assets/documents/` are unchanged from the previous site so shared links still resolve.
-
-## Code standards here (D-20)
+## 9. Code standards here (D-20)
 
 Sofiene's global standards apply, with one boundary drawn by file region:
 
-- **Full rules inside TypeScript**: frontmatter scripts, `.ts` files and config get a comment on the
+- **Full rules inside TypeScript:** frontmatter scripts, `.ts` files and config get a comment on the
   line before every line of code, saying what it does and why, plus TSDoc on every exported symbol.
 - **Template markup and Tailwind class lists are exempt**, and carry a comment per block instead.
-  A comment before every `<div>` buries structure rather than clarifying it.
-- The roughly 100-line budget, 200 maximum, counts code lines only. Comment-only lines are free, so
-  documenting generously can never push a file over.
+- The roughly 100-line budget, 200 maximum, counts code lines only. Comment-only lines are free.
 
-## Build and deployment (D-02, D-24)
+## 10. Build and deployment (D-02, D-24)
 
-Built locally and the output committed to `docs/`. Pages serves that folder from the default branch;
-there is no CI. URLs are directory-style, so `/publications/` rather than `/publications.html`
-(D-24), and there is no redirect facility on this host, so a published URL is effectively permanent.
+Built locally, output committed to `docs/`. Pages serves that folder from the default branch; there
+is no CI. URLs are directory-style, so `/publications/` rather than `/publications.html` (D-24), and
+there is no redirect facility on this host, so a published URL is effectively permanent.
+
+**Pushing is publishing.** See `CLAUDE.md`.
+
+---
+
+## 11. Open, not yet settled
+
+Do not resolve these by writing code. They need a ruling.
+
+- **Nav labels.** The R4 mockup's nav read `Posts | Publications | About | Contact`, but D-33 keeps
+  the three-page set, where the posts section is Talks and About lives on the home page. The labels
+  therefore need deciding.
+- **The favicon** is still the old teal SK monogram (D-27), chosen before Manrope and before the
+  `--accent` value changed. Whether it is restyled is open.
+- **Reading-time meta**, per section 4: currently absent by choice.
+- **A theme toggle**, per section 2: currently absent because of the no-JS floor.
+- **Whether the degree PDFs stop being served at all.** D-37 removed the links, which ends
+  discoverability but not access: the files are still built into `docs/` and reachable by anyone
+  with the URL. Making them genuinely private means moving them out of `public/`, and separately
+  reckoning with the fact that they were already published on the live site. He asked to think
+  about this separately, so nothing has been moved.
+- **The profile blurb.** The block currently renders `profile.summary`, which was authored as a
+  machine summary for `llms.txt`. On the page it reads awkwardly: it is in the third person while the
+  bio directly below is in the first, and it opens by repeating the tagline shown immediately above
+  it. It needs either a separate human-facing blurb in `profile.ts` or permission to edit the
+  summary. Both are his copy under D-26, so neither was done.
+- **Four clauses in this file were added during the build, not from the approved mockup**, because
+  the mockup was a single page and could not show them: the page `h1` scale entry, the token naming
+  prefix, the `<details>` treatment of the experience list, and the monospace exception for code.
+  They are implemented and described here, but he has not ruled on them.
