@@ -737,6 +737,64 @@
       "endorsed": true,
       "supersedes": "The presentation clause of D-45 only. D-45 itself, that the toggle exists at all, stands.",
       "note": "Feather-style outline glyphs at 19px, drawn inline rather than pulled from an icon library, since one pair of paths does not justify a dependency. The showing glyph names the theme it switches to. The spoken name stays in words, carried by sr-only spans that follow the same show-and-hide rule as the glyphs, so what is announced and what is drawn cannot diverge. Verified in the browser: correct glyph in each theme, accessible name reads 'Switch to dark theme', icon centred with the menu text and coloured identically to it, choice survives a view-transition navigation."
+    },
+    "D-47": {
+      "question": "How should the publications page be laid out and typeset?",
+      "asked": "2026-08-20",
+      "context": "He did not like the page as built. Diagnosis: the meta line, the author list and the tag pills were all --secondary at nearly the same weight, so the entry had a title and then three interchangeable grey lines. His own name was buried in the author list, the preprint status read as just another meta fragment, and the bare DOI was the loudest string in the row. Four options were built with the real data and the real tokens and served together for comparison.",
+      "options": {
+        "journal": {
+          "label": "Journal. Citation shaped, authors promoted, accent kicker above the title.",
+          "casesFor": [
+            "Authors become the second strongest element",
+            "Reads like a bibliography"
+          ],
+          "casesAgainst": [
+            "Still a vertical feed",
+            "Least distinct from what it replaces"
+          ]
+        },
+        "editorial": {
+          "label": "Editorial. Year hanging large in the left margin, biggest titles.",
+          "casesFor": [
+            "Reads as a chronology at a glance",
+            "Most striking"
+          ],
+          "casesAgainst": [
+            "Roomy, so few entries fit a screen",
+            "Scales badly past a dozen papers"
+          ]
+        },
+        "index": {
+          "label": "Index. Two column record, date and venue in a left rail.",
+          "casesFor": [
+            "Same two column shape as the experience list, so the site gains one consistent way to present a chronology",
+            "Dense and quick to scan",
+            "Stays tidy at twenty entries",
+            "Hierarchy by weight rather than size"
+          ],
+          "casesAgainst": [
+            "Smallest titles of the four",
+            "Its page h1 is smaller than the talks and 404 h1, so those pages no longer match"
+          ]
+        },
+        "feature": {
+          "label": "Feature. Each paper on its own bordered surface, status badge, tags as outline chips.",
+          "casesFor": [
+            "Strongest visual identity",
+            "Keeps the tags"
+          ],
+          "casesAgainst": [
+            "Breaks the plain list language the rest of the site uses",
+            "Publications would stop matching talks and the home page"
+          ]
+        }
+      },
+      "choice": "index",
+      "label": "Index, the two column record",
+      "why": "",
+      "endorsed": true,
+      "note": "Tags are no longer rendered, though the frontmatter and schema keep them: five labels per entry, mostly repeated between entries, were bulk without information. His name is matched against profile.name and set in --primary at weight 600, the only name in the list that is. Row hover puts --tertiary behind the whole row, the one row-background hover on the site, which is what makes the list read as a table. Checked in the browser at 1280px and 375px, light and dark: rules aligned, no overflow, one tab stop per row with the accent focus ring, and the column labels drop below 640px where there are no columns left to label. Leaves open whether the talks and 404 pages follow the smaller page h1."
     }
   }
 }

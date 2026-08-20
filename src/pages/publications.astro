@@ -5,18 +5,26 @@
  * A content collection since D-25, so adding a paper means dropping a markdown
  * file into src/content/publications rather than editing TypeScript.
  *
+ * The layout is "Index" (D-47): a two column record rather than a feed. The
+ * date and the venue sit in a left rail and the title block sits beside them,
+ * which is the same shape the experience list on the home page already uses, so
+ * the site now has one consistent way of presenting a chronology. Hierarchy is
+ * carried by weight and colour rather than by size, which is what the previous
+ * version lacked: the meta line, the authors and the tags were all the same
+ * grey at nearly the same weight, so nothing anchored the eye.
+ *
  * Each entry is a single block-level link wrapping the whole row, which the
  * design specification requires so that the entry is one click target and one
- * tab stop. That is why the DOI appears as text in the meta line rather than as
- * its own link: a link inside a link is invalid HTML and would break keyboard
- * navigation.
+ * tab stop. That is why the DOI appears as text rather than as its own link: a
+ * link inside a link is invalid HTML and would break keyboard navigation.
  */
 
 // The shell.
 import Base from "../layouts/Base.astro";
 // Reads the collection at build time.
 import { getCollection } from "astro:content";
-// For the page title and description.
+// For the page title, the description, and to recognise his name in an author
+// list without hardcoding it in two places.
 import { profile } from "../data/profile.ts";
 
 // Newest first, which is how a reader scans a publication list.
@@ -45,42 +53,67 @@ function formatDate(date: Date): string {
   description="Preprints and papers in computational pharmacy, molecular docking and drug discovery."
   current="publications"
 >
-  <h1 class="m-0 text-[30px] font-extrabold leading-[1.2] tracking-[-0.035em]">Publications</h1>
-  <p class="mb-[36px] mt-[10px] text-[16px] text-secondary">
+  <h1 class="m-0 text-[26px] font-bold leading-[1.2] tracking-[-0.03em]">Publications</h1>
+  <p class="mb-[30px] mt-[8px] text-[15px] leading-[1.55] text-secondary">
     Preprints and papers in computational pharmacy, molecular docking and drug discovery.
   </p>
 
+  {/* The column headings. They are what makes the two columns read as a record
+      rather than as an accident of alignment, and the heavier rule under them
+      separates the headings from the rows in a way a hairline would not. */}
+  <div
+    class="row headings border-b-2 border-primary pb-[8px] text-[11px] font-extrabold uppercase tracking-[0.12em] text-secondary"
+  >
+    <span>Date</span>
+    <span>Work</span>
+  </div>
+
   {
     publications.map((pub) => (
-      <a
-        href={`https://doi.org/${pub.data.doi}`}
-        class="group mb-[36px] block border-b border-border pb-[27.6px] last-of-type:mb-0 last-of-type:border-b-0"
-      >
-        <h2 class="m-0 mb-[7px] text-[23px] font-bold leading-[1.32] tracking-[-0.03em] transition-colors group-hover:text-accent">
-          {pub.data.title}
-        </h2>
-
-        {/* The meta line: facts separated by a middle dot, never a dash. */}
-        <p class="m-0 mb-[9px] text-[14px] font-medium text-secondary">
-          <time datetime={pub.data.date.toISOString().slice(0, 7)}>
-            {formatDate(pub.data.date)}
-          </time>
-          {pub.data.preprint && <span>&nbsp;·&nbsp;Preprint</span>}
-          <span>&nbsp;·&nbsp;{pub.data.venue}</span>
-          <span>&nbsp;·&nbsp;{pub.data.doi}</span>
-        </p>
-
-        <p class="m-0 text-[16px] leading-[1.62] text-secondary">{pub.data.authors.join(", ")}</p>
-
-        {pub.data.tags.length > 0 && (
-          <div class="mt-[13px] flex flex-wrap gap-[7px]">
-            {pub.data.tags.map((tag) => (
-              <span class="rounded-full bg-tertiary px-[10px] py-[3px] text-[12.5px] font-medium text-secondary">
-                {tag}
-              </span>
-            ))}
+      <a href={`https://doi.org/${pub.data.doi}`} class="row entry border-b border-border py-[20px]">
+        {/* Left rail: when it appeared, and where. */}
+        <div>
+          <div class="text-[14px] font-semibold leading-[1.45]">
+            <time datetime={pub.data.date.toISOString().slice(0, 7)}>
+              {formatDate(pub.data.date)}
+            </time>
           </div>
-        )}
+          <div class="mt-[3px] text-[13px] font-medium text-secondary">
+            {/* Preprint status is the one thing on this page an academic reader
+                checks first, so it is the only coloured word in the rail. */}
+            {pub.data.preprint && <span class="font-bold text-accent">Preprint&nbsp;·&nbsp;</span>}
+            {pub.data.venue}
+          </div>
+        </div>
+
+        {/* Right column: the paper itself. */}
+        <div>
+          <h2 class="title m-0 text-[19px] font-bold leading-[1.4] tracking-[-0.02em] transition-colors">
+            {pub.data.title}
+          </h2>
+
+          <p class="mt-[7px] text-[14.5px] leading-[1.5] text-secondary">
+            {pub.data.authors.map((author, index) => (
+              <>
+                {index > 0 && ", "}
+                {/* His own name is the only one set in the page's main colour,
+                    so a reader scanning a list of co-authored papers can see at
+                    a glance which ones are his and where he sits in the order.
+                    Compared against the profile rather than written out again,
+                    so the two cannot drift apart. */}
+                {author === profile.name ? (
+                  <span class="font-semibold text-primary">{author}</span>
+                ) : (
+                  author
+                )}
+              </>
+            ))}
+          </p>
+
+          <p class="mt-[7px] text-[12.5px] font-medium tracking-[0.01em] text-secondary">
+            {pub.data.doi}
+          </p>
+        </div>
       </a>
     ))
   }
@@ -90,3 +123,59 @@ function formatDate(date: Date): string {
        empty until Sofiene says which, because an earlier draft claimed GitHub
        held a complete publication record, which is not something I can support. -->
 </Base>
+
+<style>
+  /* The two column shape, shared by the headings and every row so their edges
+     line up. Written here rather than as utilities because the collapse below
+     needs a media query, and this matches how the experience list on the home
+     page does the same job. */
+  .row {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: var(--gap);
+    /* The table bleeds 12px past the reading column on both sides and pulls the
+       same distance back with a negative margin, so the text still lines up
+       with the heading above while the hover band gets breathing room. Without
+       it the highlight would start exactly at the first letter, which reads as
+       a rendering fault rather than as a hover state.
+       It is on .row rather than on .entry alone so that the rule under the
+       column headings and the rules under the rows share one set of edges. */
+    margin-inline: -12px;
+    padding-inline: 12px;
+  }
+
+  .entry {
+    transition: background-color 0.15s ease;
+  }
+
+  .entry:hover {
+    background-color: var(--color-tertiary);
+  }
+
+  /* The title follows the hover of the whole row, not of itself, because the
+     row is the link. */
+  .entry:hover .title {
+    color: var(--color-accent);
+  }
+
+  /* On a narrow screen 150px of rail is most of the width, so the two columns
+     stack and the rail sits above the title instead of beside it. */
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    /* Once the columns stack there are no columns left to label, and the two
+       words would sit one above the other saying nothing. The labels go but the
+       row stays, collapsed to nothing, so its heavy rule still opens the list
+       the way it does on a wide screen. */
+    .headings span {
+      display: none;
+    }
+
+    .headings {
+      padding-bottom: 0;
+    }
+  }
+</style>

@@ -142,6 +142,7 @@ markdown bodies only; no UI element uses a monospace.
 | `body` | `17.5px` | 400 | normal | `1.65` |
 | Profile `h1` | `42px` | 800 | `-.04em` | `1.14` |
 | Page `h1` (inner pages) | `30px` | 800 | `-.035em` | `1.2` |
+| Page `h1` (publications) | `26px` | 700 | `-.03em` | `1.2` |
 | Profile subtitle | `18px` | 500 | normal | inherit |
 | Profile affiliation | `16px` | 400 | normal | inherit |
 | Section `h2` | `20px` | 700 | `-.025em` | inherit |
@@ -156,6 +157,12 @@ markdown bodies only; no UI element uses a monospace.
 | CV period | `13.5px` | 500 | normal | inherit |
 | CV role | `16px` | 600 | `-.015em` | inherit |
 | CV organisation | `14px` | 400 | `0` | inherit |
+| Column heading | `11px` | 800 | `.12em` | inherit |
+| Publication rail date | `14px` | 600 | normal | `1.45` |
+| Publication rail venue | `13px` | 500 | normal | inherit |
+| Publication title `h2` | `19px` | 700 | `-.02em` | `1.4` |
+| Publication authors | `14.5px` | 400 | normal | `1.5` |
+| Publication DOI | `12.5px` | 500 | `.01em` | inherit |
 | Footer | `12.5px` | 500 | normal | `24px` |
 
 Sizes are in pixels because they are inherited from PaperMod, which is built that way. Keep them in
@@ -240,11 +247,59 @@ Inside, in order:
 4. `.entry-tags`, optional, `margin-top: 13px`, gap `7px`.
 
 **Entries are plain rows, never cards.** No background, no shadow, no border box. Card entries were
-built as R1 and not chosen.
+built as R1 and not chosen, and offered again as the losing option 4 of D-47.
+
+**This shape is the talks list and the 404 list only.** Publications left it at D-47 and are
+specified separately below.
 
 **No reading-time meta.** PaperMod shows `Date · N min · Author`. The slot is deliberately empty
 because a minute count must be computed from real content, never invented. If reading time is ever
 wanted, it is computed at build time from the rendered body.
+
+### Publication row (D-47)
+
+The publications list is a two column record rather than a feed, which is the shape the experience
+list already uses, so the site has one way of presenting a chronology. Hierarchy is carried by weight
+and colour, not by size: the version this replaced set the meta line, the authors and the tags in the
+same grey at nearly the same weight, so nothing anchored the eye.
+
+The whole row is still one block-level `<a>`, one click target and one tab stop, which is why the DOI
+is text rather than its own link.
+
+```
+grid-template-columns: 150px minmax(0, 1fr)
+gap:            var(--gap)
+padding-block:  20px
+border-bottom:  1px solid var(--border)
+margin-inline:  -12px        /* the table bleeds past the reading column ... */
+padding-inline:  12px        /* ... and pulls back, so text stays aligned    */
+```
+
+The bleed is on the shared `.row` class, which the column headings also carry, so the heavy rule
+under the headings and the hairlines under the rows share one set of edges. Its purpose is the hover
+band: without it the highlight would start exactly at the first letter.
+
+Above the rows sit column headings reading **Date** and **Work**, `border-bottom: 2px solid
+var(--primary)`, `padding-bottom: 8px`. They are what makes the two columns read as a record rather
+than as an accident of alignment.
+
+Left rail, in order: the month and year, then the venue. `Preprint` precedes the venue in
+`--accent` at weight 700 and is the only coloured word in the rail, because it is the first thing an
+academic reader checks.
+
+Right column, in order: the title `h2`, the author list, the bare DOI.
+
+**The author's own name is the only one in `--primary` at weight 600**; the rest of the list is
+`--secondary` at 400. It is matched against `profile.name` rather than written out, so the two cannot
+drift apart.
+
+**Hover** puts `--color-tertiary` behind the whole row and turns the title `--accent`, over `0.15s`.
+This is the one row-background hover on the site and it belongs to this component only; it is what
+makes the list read as a table.
+
+**No tags here.** The frontmatter still carries them and the schema still validates them, but they
+are not rendered: five labels per entry, mostly repeated between entries, added bulk without adding
+information. Rendering them again is a decision, not an implementation detail.
 
 ### Tag pill
 
@@ -348,7 +403,7 @@ These hold regardless of what any future edit is trying to achieve.
 - **Contrast:** every text-on-background pair meets WCAG AA (4.5:1), measured rather than assumed.
   The pairs that exist, light then dark: body 16.60 / 14.62, prose 14.57 / 10.78, meta 5.98 / 6.40,
   accent on ground 5.84 / 10.09, tag pill text 5.05 / 5.01, label on accent 5.95 / 9.21, draft badge
-  5.12 / 8.17. Recompute before changing any colour: `--secondary` at its previous `#697077`
+  5.12 / 8.17, and accent on `--tertiary` 4.93 / 8.86, which is the hovered publication row. Recompute before changing any colour: `--secondary` at its previous `#697077`
   measured 4.16 on a tag pill and failed.
 - **One accent, used consistently.** No second accent colour anywhere on the site.
 
