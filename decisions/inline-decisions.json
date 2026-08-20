@@ -670,6 +670,37 @@
       "why": "So that I have as little as possible to read before we iterate. Smaller shorter but more frequent iterations, that's the way I want to work.",
       "endorsed": false,
       "note": "Applies to chat output only. The decision record, commit messages and the design spec stay as detailed as they need to be, since they are read on demand rather than every turn."
+    },
+    "D-45": {
+      "question": "Should the site offer a theme toggle?",
+      "asked": "2026-08-20",
+      "context": "The site followed the operating system setting with no way to override it.",
+      "options": {
+        "add": {
+          "label": "Add one.",
+          "casesFor": [
+            "Lets someone on a dark laptop read the site in light",
+            "Choice persists"
+          ],
+          "casesAgainst": [
+            "Needs JavaScript"
+          ]
+        },
+        "no": {
+          "label": "Keep system preference only.",
+          "casesFor": [
+            "No JavaScript at all"
+          ],
+          "casesAgainst": [
+            "No way to override the system"
+          ]
+        }
+      },
+      "choice": "add",
+      "label": "Add a theme toggle",
+      "why": "",
+      "endorsed": true,
+      "note": "Text label rather than an icon, to match the all-text menu. Hidden entirely without JavaScript so no dead control is shown. Content stays readable with JS off, so D-07 holds."
     }
   }
 }

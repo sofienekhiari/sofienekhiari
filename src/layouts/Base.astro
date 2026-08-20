@@ -89,6 +89,48 @@ const year = new Date().getFullYear();
     <meta property="og:url" content={canonical} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    {/* Theme init, D-45. Inline and in the head so it runs before the first
+        paint: applying a saved choice from a deferred script would show the
+        wrong theme for a frame and then swap it, which is worse than not
+        offering the choice at all. It also unhides the toggle, so a visitor
+        with JavaScript off never sees a control that cannot work. */}
+    <script is:inline>
+      (() => {
+        // Both attributes live on <html>, and a view transition replaces that
+        // element's attributes on every navigation. Without re-applying them
+        // after each swap, a chosen theme reverts to the system preference on
+        // the next page and the toggle itself goes invisible, because the CSS
+        // that reveals it keys off data-has-js.
+        const apply = () => {
+          const saved = localStorage.getItem("theme");
+          if (saved === "light" || saved === "dark") {
+            document.documentElement.dataset.theme = saved;
+          }
+          document.documentElement.dataset.hasJs = "true";
+        };
+        apply();
+        // Fires after the new document is swapped in but before it paints.
+        document.addEventListener("astro:after-swap", apply);
+
+        // Delegated, and bound to the document rather than the button, because
+        // view transitions replace the header on every navigation. The document
+        // survives, so one listener added here outlives all of them.
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest("#theme-toggle")) return;
+          const root = document.documentElement;
+          // The effective theme, which is the explicit choice if one exists and
+          // the system preference otherwise.
+          const current =
+            root.dataset.theme ||
+            (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          const next = current === "dark" ? "light" : "dark";
+          root.dataset.theme = next;
+          localStorage.setItem("theme", next);
+        });
+      })();
+    </script>
+
     <ClientRouter />
   </head>
 
@@ -143,6 +185,23 @@ const year = new Date().getFullYear();
               </li>
             ))
           }
+          <li class="ms-[24px]">
+            {/* Theme toggle. Text rather than an icon, because the rest of the
+                menu is text and one sun glyph would be the only icon on the
+                site. The label names the theme it switches TO. Hidden until
+                the head script marks JavaScript as present. */}
+            <button
+              id="theme-toggle"
+              type="button"
+              class="block text-[15.5px] font-medium text-secondary transition-colors hover:text-primary"
+            >
+              <span class="border-b-2 border-transparent pb-[2px] transition-colors hover:border-accent">
+                <span class="sr-only">Switch to</span>
+                <span class="to-dark">Dark</span><span class="to-light">Light</span>
+                <span class="sr-only">theme</span>
+              </span>
+            </button>
+          </li>
         </ul>
       </nav>
     </header>

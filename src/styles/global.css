@@ -72,11 +72,19 @@
   --radius: 8px;
 }
 
-/* Dark palette, delivered by system preference only. There is no theme toggle:
- * a toggle needs JavaScript, and D-07 requires every word to be readable
- * without it. Adding one is a new decision, not an implementation detail. */
+/* Dark palette (D-45).
+ *
+ * Three blocks rather than one, which is what lets a visitor override their
+ * system setting instead of merely inheriting it:
+ *
+ *   1. system preference is dark AND the visitor has not chosen light
+ *   2. the visitor has explicitly chosen dark, whatever the system says
+ *
+ * The :not([data-theme="light"]) guard in the first is what makes choosing
+ * light win on a dark system. The values are repeated because CSS has no way
+ * to reuse a declaration block; if one changes, change both. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-theme: #15171a;
     --color-entry: #1d2023;
     --color-primary: #e6e8ea;
@@ -89,6 +97,20 @@
     /* Near-black on the light dark-mode accent. White here would fail AA. */
     --color-on-accent: #062421;
   }
+}
+
+:root[data-theme="dark"] {
+    --color-theme: #15171a;
+    --color-entry: #1d2023;
+    --color-primary: #e6e8ea;
+    --color-secondary: #959ba1;
+    --color-tertiary: #282c30;
+    --color-content: #c5c9cc;
+    --color-border: #252a2e;
+    --color-accent: #4fd6ca;
+    --color-tint: rgb(79 214 202 / 0.11);
+    /* Near-black on the light dark-mode accent. White here would fail AA. */
+    --color-on-accent: #062421;
 }
 
 @layer base {
@@ -148,4 +170,50 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Theme toggle presentation (D-45).
+ *
+ * The control is hidden until the head script sets data-has-js, so a visitor
+ * with JavaScript off never meets a button that cannot do anything. */
+#theme-toggle {
+  display: none;
+}
+
+:root[data-has-js="true"] #theme-toggle {
+  display: block;
+}
+
+/* The label names the theme the button switches TO, so it shows "Dark" while
+ * light is active and "Light" while dark is. Which one is showing follows the
+ * same three-way logic as the palette itself: system preference unless the
+ * visitor has overridden it. */
+.to-light {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .to-dark {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .to-light {
+    display: inline;
+  }
+}
+
+:root[data-theme="dark"] .to-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .to-light {
+  display: inline;
+}
+
+/* A light choice on a dark system has to win back over the media query above. */
+:root[data-theme="light"] .to-dark {
+  display: inline;
+}
+
+:root[data-theme="light"] .to-light {
+  display: none;
 }
