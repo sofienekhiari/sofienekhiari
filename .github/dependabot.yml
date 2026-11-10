@@ -6,6 +6,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    # TypeScript 7 breaks npm ci: @astrojs/check accepts only TypeScript 5 or 6.
+    # Remove this once @astrojs/check lists version 7 as a peer.
+    ignore:
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
     # Group the minor and patch bumps into one pull request to keep the noise low.
     groups:
       minor-and-patch:

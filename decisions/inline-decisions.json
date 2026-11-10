@@ -1092,6 +1092,17 @@
       "why": "Robust practice: never hand-merge a lockfile; regenerate it from package.json. The five commits were unpushed, so rewriting them is safe. Result checked: npm audit 0 vulnerabilities, build passes, all pages and hashed assets return 200 locally and on sofk.ch.",
       "endorsed": false,
       "note": "Claude's decision under robust practice; not yet confirmed by him (D332)."
+    },
+    "D-56": {
+      "question": "Should a dependency update that is known to break something the site uses ever be merged?",
+      "asked": "2026-11-10",
+      "context": "Merged Dependabot pull requests raised TypeScript to 7, which made npm ci fail because @astrojs/check accepts only TypeScript 5 or 6. Claude had to pin it back to 6.0.3 afterwards (317ef24).",
+      "options": {},
+      "choice": "never-knowingly-break",
+      "label": "Never introduce a breaking change that is known to break something in use",
+      "why": "His words: \"Do not introduce a breaking change when you know it will break something we're using.\" Before any merge, check peer ranges and engines against what is installed, and skip or ignore the update when it conflicts. Dependabot now ignores TypeScript major bumps.",
+      "endorsed": true,
+      "note": "His ruling, given in chat."
     }
   }
 }
