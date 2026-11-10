@@ -1,0 +1,14 @@
+# Weekly version updates for npm. Security alerts open pull requests on their own.
+# Versions are pinned exactly in package.json, so Dependabot proposes each bump.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Group the minor and patch bumps into one pull request to keep the noise low.
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"

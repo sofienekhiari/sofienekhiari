@@ -15,8 +15,8 @@
 import Base from "../../layouts/Base.astro";
 // `render` turns a collection entry's markdown body into a component.
 import { getCollection, render } from "astro:content";
-// The type of the generated static paths, so the signature is checked.
-import type { GetStaticPaths } from "astro";
+// Turns the return type of getStaticPaths into the type of Astro.props.
+import type { InferGetStaticPropsType } from "astro";
 
 /**
  * Tells Astro which talk pages to build.
@@ -26,17 +26,19 @@ import type { GetStaticPaths } from "astro";
  *
  * @returns One route per published talk, with the entry passed through as a prop.
  */
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   // Every talk in the collection, drafts included at this point.
   const talks = await getCollection("talks");
   // Keep only the published ones, and hand each entry to the page as a prop.
   return talks
     .filter((talk) => !talk.data.draft)
     .map((talk) => ({ params: { slug: talk.id }, props: { talk } }));
-};
+}
 
+// The props type is inferred from getStaticPaths, so `talk` is fully typed.
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 // The entry for this route, supplied by getStaticPaths above.
-const { talk } = Astro.props;
+const { talk } = Astro.props as Props;
 // Render the markdown body into a component the template can place.
 const { Content } = await render(talk);
 
