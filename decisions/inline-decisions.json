@@ -1060,6 +1060,38 @@
       "why": "",
       "endorsed": true,
       "note": ""
+    },
+    "D-55": {
+      "question": "How should local commits be combined with the nine merged Dependabot pull requests, and how should the lockfile conflict be settled?",
+      "asked": "2026-11-10",
+      "context": "He merged Dependabot pull requests on GitHub for possible vulnerabilities, so origin/main held nine merges that touched only package.json and package-lock.json while five local commits (MDX, the talk write-up, two rebuilds) were unpushed. Both sides edited package-lock.json. He asked for a pull, a check of the dependency set and a working site, then a commit and push.",
+      "options": {
+        "rebase-regenerate": {
+          "label": "Rebase the local commits onto origin/main; take the remote lockfile and regenerate it with npm install",
+          "casesFor": [
+            "Keeps a linear history and the Dependabot merges intact",
+            "A lockfile is generated, so regenerating from package.json is the standard fix (npm docs on merge conflicts in package-lock.json)",
+            "npm audit and a full build then prove the result"
+          ],
+          "casesAgainst": [
+            "Rewrites five unpushed local commits, which is safe only because none were pushed"
+          ]
+        },
+        "merge": {
+          "label": "Merge origin/main into local main",
+          "casesFor": [
+            "No history rewrite"
+          ],
+          "casesAgainst": [
+            "Adds a merge commit and still needs the same lockfile fix"
+          ]
+        }
+      },
+      "choice": "rebase-regenerate",
+      "label": "Rebase, then regenerate the lockfile",
+      "why": "Robust practice: never hand-merge a lockfile; regenerate it from package.json. The five commits were unpushed, so rewriting them is safe. Result checked: npm audit 0 vulnerabilities, build passes, all pages and hashed assets return 200 locally and on sofk.ch.",
+      "endorsed": false,
+      "note": "Claude's decision under robust practice; not yet confirmed by him (D332)."
     }
   }
 }
